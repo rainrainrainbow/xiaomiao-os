@@ -318,8 +318,11 @@ esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_
     lv_display_set_flush_cb(s_disp, flush_cb);
     lv_display_set_user_data(s_disp, s_lcd_panel);
     
-    // 注册刷新完成回调
-    esp_lcd_panel_io_register_event_callbacks(s_lcd_io, flush_ready_cb, s_disp);
+    // 注册刷新完成回调 (ESP-IDF v5.5.4 uses callbacks struct)
+    esp_lcd_panel_io_callbacks_t cbs = {
+        .on_color_trans_done = flush_ready_cb,
+    };
+    esp_lcd_panel_io_register_event_callbacks(s_lcd_io, &cbs, s_disp);
     
     // 初始化按键输入
     esp_err_t ret = lvgl_port_input_init();
