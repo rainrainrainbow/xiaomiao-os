@@ -167,8 +167,8 @@ esp_err_t app_manager_scan_apps(void)
         }
         
         // 检查是否是目录
-        char app_path[256];
-        snprintf(app_path, sizeof(app_path), "%s/%s", APPS_DIR, entry->d_name);
+        char app_path[1024];  // 增大缓冲区避免截断警告
+        snprintf(app_path, sizeof(app_path), "%s/%.500s", APPS_DIR, entry->d_name);
         
         struct stat st;
         if (stat(app_path, &st) != 0 || !S_ISDIR(st.st_mode)) {
@@ -176,8 +176,8 @@ esp_err_t app_manager_scan_apps(void)
         }
         
         // 检查是否有manifest.json
-        char manifest_path[256];
-        snprintf(manifest_path, sizeof(manifest_path), "%s/manifest.json", app_path);
+        char manifest_path[1024];  // 增大缓冲区避免截断警告
+        snprintf(manifest_path, sizeof(manifest_path), "%.900s/manifest.json", app_path);
         
         if (stat(manifest_path, &st) != 0) {
             ESP_LOGW(TAG, "Skipping %s: no manifest.json", entry->d_name);
