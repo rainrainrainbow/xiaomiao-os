@@ -74,6 +74,113 @@ static sdmmc_card_t *s_sd_card = NULL;
 
 /* ── LCD Initialization ─────────────────────────────────────────────── */
 
+/* ── ST7735 Register Definitions ───────────────────────────────────── */
+
+#define ST7735_SWRESET 0x01
+#define ST7735_SLPOUT  0x11
+#define ST7735_NORON   0x13
+#define ST7735_INVOFF  0x20
+#define ST7735_DISPOFF 0x28
+#define ST7735_DISPON  0x29
+#define ST7735_CASET   0x2A
+#define ST7735_RASET   0x2B
+#define ST7735_RAMWR   0x2C
+#define ST7735_MADCTL  0x36
+#define ST7735_COLMOD  0x3A
+#define ST7735_FRMCTR1 0xB1
+#define ST7735_FRMCTR2 0xB2
+#define ST7735_FRMCTR3 0xB3
+#define ST7735_INVCTR  0xB4
+#define ST7735_PWCTR1  0xC0
+#define ST7735_PWCTR2  0xC1
+#define ST7735_PWCTR3  0xC2
+#define ST7735_PWCTR4  0xC3
+#define ST7735_PWCTR5  0xC4
+#define ST7735_VMCTR1  0xC5
+#define ST7735_GMCTRP1 0xE0
+#define ST7735_GMCTRN1 0xE1
+
+#define MADCTL_MY  0x80
+#define MADCTL_MX  0x40
+#define MADCTL_MV  0x20
+#define MADCTL_ML  0x10
+#define MADCTL_RGB 0x00
+#define MADCTL_BGR 0x08
+
+static void st7735_write_cmd(esp_lcd_panel_io_handle_t io, uint8_t cmd)
+{
+    esp_lcd_panel_io_tx_param(io, cmd, NULL, 0);
+}
+
+static void st7735_write_data(esp_lcd_panel_io_handle_t io, const void *data, size_t len)
+{
+    esp_lcd_panel_io_tx_param(io, 0x00, data, len);
+}
+
+static void st7735_init(esp_lcd_panel_io_handle_t io)
+{
+    // Software reset
+    st7735_write_cmd(io, ST7735_SWRESET);
+    vTaskDelay(pdMS_TO_TICKS(150));
+    
+    // Sleep out
+    st7735_write_cmd(io, ST7735_SLPOUT);
+    vTaskDelay(pdMS_TO_TICKS(500));
+    
+    // Frame rate control
+    uint8_t frmctr1[] = {0x01, 0x2C, 0x2D};
+    st7735_write_data(io, frmctr1, sizeof(frmctr1));
+    
+    uint8_t frmctr2[] = {0x01, 0x2C, 0x2D};
+    st7735_write_data(io, frmctr2, sizeof(frmctr2));
+    
+    uint8_t frmctr3[] = {0x01, 0x2C, 0x2D, 0x01, 0x2C, 0x2D};
+    st7735_write_data(io, frmctr3, sizeof(frmctr3));
+    
+    // Display inversion control
+    uint8_t invctr[] = {0x07};
+    st7735_write_data(io, invctr, sizeof(invctr));
+    
+    // Power control
+    uint8_t pwctr1[] = {0xA2, 0x02, 0x84};
+    st7735_write_data(io, pwctr1, sizeof(pwctr1));
+    
+    uint8_t pwctr2[] = {0xC5};
+    st7735_write_data(io, pwctr2, sizeof(pwctr2));
+    
+    uint8_t pwctr3[] = {0x0A, 0x00};
+    st7735_write_data(io, pwctr3, sizeof(pwctr3));
+    
+    uint8_t pwctr4[] = {0x8A, 0x2A};
+    st7735_write_data(io, pwctr4, sizeof(pwctr4));
+    
+    uint8_t pwctr5[] = {0x8A, 0xEE};
+    st7735_write_data(io, pwctr5, sizeof(pwctr5));
+    
+    // VCOM control
+    uint8_t vmctr1[] = {0x0E};
+    st7735_write_data(io, vmctr1, sizeof(vmctr1));
+    
+    // Display inversion off
+    st7735_write_cmd(io, ST7735_INVOFF);
+    
+    // Memory access control (rotation)
+    uint8_t madctl = MADCTL_MV | MADCTL_MY | MADCTL_RGB;
+    st7735_write_data(io, &madctl, 1);
+    
+    // Color mode (16-bit)
+    uint8_t colmod = 0x05;
+    st7735_write_data(io, &colmod, 1);
+    
+    // Normal display mode on
+    st7735_write_cmd(io, ST7735_NORON);
+    vTaskDelay(pdMS_TO_TICKS(10));
+    
+    // Display on
+    st7735_write_cmd(io, ST7735_DISPON);
+    vTaskDelay(pdMS_TO_TICKS(100));
+}
+
 static void lcd_init(void)
 {
     ESP_LOGI(TAG, "Initializing LCD (ST7735 160x128)");
@@ -101,21 +208,8 @@ static void lcd_init(void)
     };
     ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)LCD_HOST, &io_config, &s_lcd_io));
     
-    // ST7735 panel
-    esp_lcd_panel_dev_config_t panel_config = {
-        .reset_gpio_num = PIN_LCD_RST,
-        .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
-        .bits_per_pixel = 16,
-    };
-    ESP_ERROR_CHECK(esp_lcd_new_panel_st7789(s_lcd_io, &panel_config, &s_lcd_panel));
-    
-    // Initialize and configure
-    ESP_ERROR_CHECK(esp_lcd_panel_reset(s_lcd_panel));
-    ESP_ERROR_CHECK(esp_lcd_panel_init(s_lcd_panel));
-    ESP_ERROR_CHECK(esp_lcd_panel_invert_color(s_lcd_panel, true));
-    ESP_ERROR_CHECK(esp_lcd_panel_swap_xy(s_lcd_panel, true));
-    ESP_ERROR_CHECK(esp_lcd_panel_mirror(s_lcd_panel, true, false));
-    ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(s_lcd_panel, true));
+    // Initialize ST7735
+    st7735_init(s_lcd_io);
     
     ESP_LOGI(TAG, "LCD initialized successfully");
 }
