@@ -28,8 +28,7 @@ jobs:
           path: '.'
           command: |
             idf.py build
-            # 使用 idf.py 生成 merged binary
-            cd build
+            # 使用 idf.py 生成 merged binary（在项目根目录运行）
             idf.py merge-bin
       
       - name: Upload build artifacts
