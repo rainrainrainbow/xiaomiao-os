@@ -33,8 +33,6 @@ jobs:
       - name: Generate merged binary
         run: |
           cd build
-          # 确保目录可写
-          chmod 755 .
           # 使用 esptool 合并所有固件文件
           # 注意：分区表偏移是 0x9000（在 sdkconfig.defaults 中配置）
           esptool --chip esp32 merge-bin \
