@@ -370,7 +370,7 @@ static void create_task_manager_screen(void)
         lv_obj_set_style_bg_opa(item, (i == s_task_selected) ? LV_OPA_30 : LV_OPA_TRANSP, 0);
         lv_obj_set_style_bg_color(item, s_theme_primary, 0);
         lv_obj_set_style_border_width(item, 0, 0);
-        lv_obj_set_style_border_side(item, LV_BORDER_SIDE_LEFT);
+        lv_obj_set_style_border_side(item, LV_BORDER_SIDE_LEFT, 0);
         lv_obj_set_style_border_color(item, s_running_apps[i].locked ? s_theme_primary : lv_color_hex(0x000000), 0);
         lv_obj_set_style_border_width(item, s_running_apps[i].locked ? 3 : 0, 0);
         lv_obj_set_style_radius(item, 4, 0);
