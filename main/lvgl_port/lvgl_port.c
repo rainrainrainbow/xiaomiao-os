@@ -250,17 +250,26 @@ void lvgl_port_button_scan_task(void *arg)
 
 /* ── LVGL 显示驱动 ─────────────────────────────────────────────────── */
 
-// 显示刷新完成回调
+// 显示刷新完成回调 - ESP-IDF v5.5.4 签名
 static bool flush_ready_cb(esp_lcd_panel_io_handle_t panel_io, 
                            esp_lcd_panel_io_event_data_t *edata, 
                            void *user_ctx)
 {
+    (void)panel_io;
+    (void)edata;
     lv_display_t *disp = (lv_display_t *)user_ctx;
     lv_display_flush_ready(disp);
     return false;
 }
 
-// 显示刷新回调
+// LVGL tick 回调
+static void lvgl_tick_cb(void *arg)
+{
+    (void)arg;
+    lv_tick_inc(LVGL_TICK_PERIOD_MS);
+}
+
+// 显示刷新回调 - LVGL v9 签名
 static void flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map)
 {
     esp_lcd_panel_handle_t panel = (esp_lcd_panel_handle_t)lv_display_get_user_data(disp);
@@ -271,12 +280,7 @@ static void flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map)
     int32_t y2 = area->y2;
     
     esp_lcd_panel_draw_bitmap(panel, x1, y1, x2 + 1, y2 + 1, px_map);
-}
-
-// LVGL tick 回调
-static void lvgl_tick_cb(void *arg)
-{
-    lv_tick_inc(LVGL_TICK_PERIOD_MS);
+    // 注意：flush_ready 会在 draw_bitmap 完成后通过回调触发
 }
 
 esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_t lcd_panel)
