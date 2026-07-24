@@ -235,21 +235,12 @@ esp_err_t power_manager_init(void)
         return ret;
     }
     
-    // 初始化 ADC 校准
-    adc_cali_curve_fitting_config_t cali_config = {
-        .unit_id = ADC_UNIT_1,
-        .chan = BATT_ADC_CHANNEL,
-        .atten = ADC_ATTEN_DB_12,
-        .bitwidth = ADC_BITWIDTH_DEFAULT,
-    };
-    ret = adc_cali_create_scheme_curve_fitting(&cali_config, &s_pm.cali_handle);
-    if (ret == ESP_OK) {
-        s_pm.cali_enabled = true;
-        ESP_LOGI(TAG, "ADC calibration enabled");
-    } else {
-        s_pm.cali_enabled = false;
-        ESP_LOGW(TAG, "ADC calibration not available, using approximate formula");
-    }
+    // ADC 校准 - ESP-IDF v5.5.4 API 变化较大，暂时禁用
+    // 使用近似公式计算电压
+    s_pm.cali_handle = NULL;
+    s_pm.cali_enabled = false;
+    ESP_LOGW(TAG, "ADC calibration disabled, using approximate formula");
+    ret = ESP_OK;
     
     // 设置默认配置
     s_pm.low_battery_threshold = DEFAULT_LOW_BATTERY_THRESHOLD;
