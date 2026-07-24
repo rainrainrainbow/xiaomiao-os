@@ -26,25 +26,13 @@ jobs:
           esp_idf_version: v5.5.4
           target: esp32
           path: '.'
+          command: |
+            idf.py build
+            # 使用 idf.py 生成 merged binary
+            cd build
+            idf.py merge-bin
       
-      - name: Install esptool
-        run: pip install esptool
-      
-      - name: Generate merged binary
-        run: |
-          cd build
-          # 使用 esptool 合并所有固件文件
-          # 注意：分区表偏移是 0x9000（在 sdkconfig.defaults 中配置）
-          esptool --chip esp32 merge-bin \
-            --flash-mode dio \
-            --flash-freq 80m \
-            --flash-size 4MB \
-            -o merged.bin \
-            0x1000 bootloader/bootloader.bin \
-            0x9000 partition_table/partition-table.bin \
-            0x10000 xiaomiao-os.bin
-          ls -lh merged.bin
-          echo "Merged binary size: $(ls -lh merged.bin | awk '{print $5}')"
+      - name: Upload build artifacts
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
