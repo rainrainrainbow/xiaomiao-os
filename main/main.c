@@ -100,86 +100,76 @@ static sdmmc_card_t *s_sd_card = NULL;
 #define ST7735_GMCTRP1 0xE0
 #define ST7735_GMCTRN1 0xE1
 
+#define LCD_NATIVE_H_RES   128
+#define LCD_NATIVE_V_RES   160
+
 #define MADCTL_MY  0x80
 #define MADCTL_MX  0x40
 #define MADCTL_MV  0x20
 #define MADCTL_ML  0x10
 #define MADCTL_RGB 0x00
 #define MADCTL_BGR 0x08
-
-static void st7735_write_cmd(esp_lcd_panel_io_handle_t io, uint8_t cmd)
+static void st7735_tx_param(esp_lcd_panel_io_handle_t io, uint8_t cmd,
+                             const void *data, size_t len)
 {
-    esp_lcd_panel_io_tx_param(io, cmd, NULL, 0);
-}
-
-static void st7735_write_data(esp_lcd_panel_io_handle_t io, const void *data, size_t len)
-{
-    esp_lcd_panel_io_tx_param(io, 0x00, data, len);
+    ESP_ERROR_CHECK(esp_lcd_panel_io_tx_param(io, cmd, data, len));
 }
 
 static void st7735_init(esp_lcd_panel_io_handle_t io)
 {
-    // Software reset
-    st7735_write_cmd(io, ST7735_SWRESET);
+    /* This is the ST7735 "black tab" initialization used by the original
+     * xiaomiao-loader.  The command argument is essential: tx_param() sends
+     * that byte with DC low and the payload with DC high. */
+    const uint8_t frmctr[]  = {0x01, 0x2C, 0x2D};
+    const uint8_t frmctr3[] = {0x01, 0x2C, 0x2D, 0x01, 0x2C, 0x2D};
+    const uint8_t invctr[]  = {0x07};
+    const uint8_t pwctr1[]  = {0xA2, 0x02, 0x84};
+    const uint8_t pwctr2[]  = {0xC5};
+    const uint8_t pwctr3[]  = {0x0A, 0x00};
+    const uint8_t pwctr4[]  = {0x8A, 0x2A};
+    const uint8_t pwctr5[]  = {0x8A, 0xEE};
+    const uint8_t vmctr1[]  = {0x0E};
+    const uint8_t madctl_d[] = {MADCTL_MX | MADCTL_MY | MADCTL_RGB};
+    const uint8_t colmod[]   = {0x05};
+    const uint8_t caset[]    = {0x00, 0x00, 0x00, LCD_NATIVE_H_RES - 1};
+    const uint8_t raset[]    = {0x00, 0x00, 0x00, LCD_NATIVE_V_RES - 1};
+    const uint8_t gamma_p[]  = {0x02, 0x1C, 0x07, 0x12, 0x37, 0x32, 0x29, 0x2D,
+                                0x29, 0x25, 0x2B, 0x39, 0x00, 0x01, 0x03, 0x10};
+    const uint8_t gamma_n[]  = {0x03, 0x1D, 0x07, 0x06, 0x2E, 0x2C, 0x29, 0x2D,
+                                0x2E, 0x2E, 0x37, 0x3F, 0x00, 0x00, 0x02, 0x10};
+    /* 160x128 logical landscape view of the 128x160 native panel. */
+    const uint8_t madctl_r[] = {MADCTL_MX | MADCTL_MV | MADCTL_RGB};
+
+    st7735_tx_param(io, ST7735_DISPOFF, NULL, 0);
+    st7735_tx_param(io, ST7735_SWRESET, NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(150));
-    
-    // Sleep out
-    st7735_write_cmd(io, ST7735_SLPOUT);
+    st7735_tx_param(io, ST7735_SLPOUT, NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(500));
-    
-    // Frame rate control
-    uint8_t frmctr1[] = {0x01, 0x2C, 0x2D};
-    st7735_write_data(io, frmctr1, sizeof(frmctr1));
-    
-    uint8_t frmctr2[] = {0x01, 0x2C, 0x2D};
-    st7735_write_data(io, frmctr2, sizeof(frmctr2));
-    
-    uint8_t frmctr3[] = {0x01, 0x2C, 0x2D, 0x01, 0x2C, 0x2D};
-    st7735_write_data(io, frmctr3, sizeof(frmctr3));
-    
-    // Display inversion control
-    uint8_t invctr[] = {0x07};
-    st7735_write_data(io, invctr, sizeof(invctr));
-    
-    // Power control
-    uint8_t pwctr1[] = {0xA2, 0x02, 0x84};
-    st7735_write_data(io, pwctr1, sizeof(pwctr1));
-    
-    uint8_t pwctr2[] = {0xC5};
-    st7735_write_data(io, pwctr2, sizeof(pwctr2));
-    
-    uint8_t pwctr3[] = {0x0A, 0x00};
-    st7735_write_data(io, pwctr3, sizeof(pwctr3));
-    
-    uint8_t pwctr4[] = {0x8A, 0x2A};
-    st7735_write_data(io, pwctr4, sizeof(pwctr4));
-    
-    uint8_t pwctr5[] = {0x8A, 0xEE};
-    st7735_write_data(io, pwctr5, sizeof(pwctr5));
-    
-    // VCOM control
-    uint8_t vmctr1[] = {0x0E};
-    st7735_write_data(io, vmctr1, sizeof(vmctr1));
-    
-    // Display inversion off
-    st7735_write_cmd(io, ST7735_INVOFF);
-    
-    // Memory access control (rotation)
-    uint8_t madctl = MADCTL_MV | MADCTL_MY | MADCTL_RGB;
-    st7735_write_data(io, &madctl, 1);
-    
-    // Color mode (16-bit)
-    uint8_t colmod = 0x05;
-    st7735_write_data(io, &colmod, 1);
-    
-    // Normal display mode on
-    st7735_write_cmd(io, ST7735_NORON);
+
+    st7735_tx_param(io, ST7735_FRMCTR1, frmctr, sizeof(frmctr));
+    st7735_tx_param(io, ST7735_FRMCTR2, frmctr, sizeof(frmctr));
+    st7735_tx_param(io, ST7735_FRMCTR3, frmctr3, sizeof(frmctr3));
+    st7735_tx_param(io, ST7735_INVCTR,  invctr, sizeof(invctr));
+    st7735_tx_param(io, ST7735_PWCTR1,  pwctr1, sizeof(pwctr1));
+    st7735_tx_param(io, ST7735_PWCTR2,  pwctr2, sizeof(pwctr2));
+    st7735_tx_param(io, ST7735_PWCTR3,  pwctr3, sizeof(pwctr3));
+    st7735_tx_param(io, ST7735_PWCTR4,  pwctr4, sizeof(pwctr4));
+    st7735_tx_param(io, ST7735_PWCTR5,  pwctr5, sizeof(pwctr5));
+    st7735_tx_param(io, ST7735_VMCTR1,  vmctr1, sizeof(vmctr1));
+    st7735_tx_param(io, ST7735_INVOFF,  NULL, 0);
+    st7735_tx_param(io, ST7735_MADCTL,  madctl_d, sizeof(madctl_d));
+    st7735_tx_param(io, ST7735_COLMOD,  colmod, sizeof(colmod));
+    st7735_tx_param(io, ST7735_CASET,   caset, sizeof(caset));
+    st7735_tx_param(io, ST7735_RASET,   raset, sizeof(raset));
+    st7735_tx_param(io, ST7735_GMCTRP1, gamma_p, sizeof(gamma_p));
+    st7735_tx_param(io, ST7735_GMCTRN1, gamma_n, sizeof(gamma_n));
+    st7735_tx_param(io, ST7735_NORON,   NULL, 0);
     vTaskDelay(pdMS_TO_TICKS(10));
-    
-    // Display on
-    st7735_write_cmd(io, ST7735_DISPON);
-    vTaskDelay(pdMS_TO_TICKS(100));
+    st7735_tx_param(io, ST7735_MADCTL, madctl_r, sizeof(madctl_r));
+    st7735_tx_param(io, ST7735_DISPON, NULL, 0);
+    vTaskDelay(pdMS_TO_TICKS(20));
 }
+
 
 static void lcd_init(void)
 {
