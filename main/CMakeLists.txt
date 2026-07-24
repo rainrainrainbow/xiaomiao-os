@@ -23,6 +23,7 @@ idf_component_register(
         fatfs
         sdmmc
         json
+        nvs_flash
     INCLUDE_DIRS 
         "."
         "lvgl_port"
