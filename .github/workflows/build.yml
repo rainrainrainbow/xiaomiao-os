@@ -1,0 +1,87 @@
+# XiaoMiao OS - Build Pipeline
+# Builds ESP-IDF firmware for ESP32-WROVER-B
+
+name: Build Firmware
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      
+      - name: Setup ESP-IDF
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.5.4
+          target: esp32
+          path: '.'
+      
+      - name: Install dependencies
+        run: |
+          cd $IDF_PATH
+          git submodule update --init --recursive
+      
+      - name: Build firmware
+        run: |
+          . $IDF_PATH/export.sh
+          idf.py set-target esp32
+          idf.py build
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: xiaomiao-os-firmware
+          path: |
+            build/*.bin
+            build/*.elf
+            build/*.map
+            build/bootloader/*.bin
+            build/partition_table/*.bin
+          retention-days: 30
+      
+      - name: Upload merged binary
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: xiaomiao-os-merged
+          path: build/merged.bin
+          retention-days: 30
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Download firmware
+        uses: actions/download-artifact@v4
+        with:
+          name: xiaomiao-os-firmware
+      
+      - name: Get version
+        id: version
+        run: |
+          echo "version=$(date +'%Y%m%d')-${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: XiaoMiao OS ${{ steps.version.outputs.version }}
+          files: |
+            *.bin
+            *.elf
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
