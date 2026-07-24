@@ -1,0 +1,35 @@
+idf_component_register(
+    SRCS 
+        "main.c"
+        "lvgl_port/lvgl_port.c"
+        "app_manager/app_manager.c"
+        "micropython/micropython_runtime.c"
+        "config_manager/config_manager.c"
+        "power_manager/power_manager.c"
+        "ui/ui_main.c"
+    PRIV_REQUIRES 
+        esp_lcd
+        esp_timer
+        esp_driver_gpio
+        esp_driver_spi
+        esp_driver_i2c
+        esp_driver_ledc
+        esp_adc
+        esp_hw_support
+        heap
+        spi_flash
+        lvgl
+        app_update
+        fatfs
+        sdmmc
+        json
+    INCLUDE_DIRS 
+        "."
+        "lvgl_port"
+        "app_manager"
+        "micropython"
+        "config_manager"
+        "power_manager"
+        "ui"
+)
+target_link_libraries(${COMPONENT_LIB} PRIVATE m)

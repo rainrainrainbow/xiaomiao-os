@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XiaoMiao OS - UI Simulator v2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: var(--theme-primary);
+            text-shadow: 0 2px 10px rgba(246, 211, 74, 0.3);
+        }
+
+        .info-panel {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-size: 13px;
+            text-align: center;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+
+        .info-panel kbd {
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .info-panel .combo {
+            color: #F6D34A;
+            font-weight: bold;
+        }
+
+        /* Device Frame */
+        .device-frame {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border-radius: 20px;
+            padding: 20px 30px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .device-frame::before {
+            content: 'XiaoMiao';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            color: #666;
+            letter-spacing: 2px;
+        }
+
+        /* LCD Screen - Exact 160x128 pixels, scaled up 3x */
+        .screen {
+            width: 480px;  /* 160 * 3 */
+            height: 384px; /* 128 * 3 */
+            background: var(--theme-bg);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            image-rendering: pixelated;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Virtual LCD - actual 160x128, scaled via CSS */
+        .lcd {
+            width: 160px;
+            height: 128px;
+            transform: scale(3);
+            transform-origin: top left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: var(--theme-bg);
+            overflow: hidden;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: linear-gradient(180deg, var(--theme-surface) 0%, var(--theme-bg) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4px;
+            font-size: 7px;
+            color: var(--theme-primary);
+            z-index: 100;
+        }
+
+        .status-bar .time {
+            font-family: monospace;
+        }
+
+        .status-bar .battery {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .battery-icon {
+            width: 10px;
+            height: 5px;
+            border: 1px solid var(--theme-primary);
+            border-radius: 1px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 1px;
+        }
+
+        .battery-icon::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            width: 1px;
+            height: 3px;
+            background: var(--theme-primary);
+        }
+
+        .battery-level {
+            height: 100%;
+            background: #5CB85C;
+            border-radius: 0.5px;
+            transition: width 0.3s;
+        }
+
+        /* Main Content Area - No nav bar, more space */
+        .content {
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            bottom: 8px;  /* Space for page dots */
+            overflow: hidden;
+        }
+
+        /* Page Dots Indicator */
+        .page-dots {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        .page-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--theme-muted);
+            transition: all 0.2s;
+        }
+
+        .page-dot.active {
+            background: var(--theme-primary);
+            transform: scale(1.3);
+        }
+
+        /* Home Screen - 3x2 App Grid */
+        .home-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            padding: 6px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4px;
+        }
+
+        .app-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.15s;
+            padding: 4px;
+        }
+
+        .app-icon:hover {
+            background: var(--theme-hover);
+        }
+
+        .app-icon.selected {
+            background: var(--theme-selected);
+            box-shadow: 0 0 0 1px var(--theme-primary);
+        }
+
+        .app-icon .icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .app-icon .label {
+            font-size: 6px;
+            color: var(--theme-text);
+            text-align: center;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* App List Screen */
+        .app-list {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            overflow-y: auto;
+            padding: 4px;
+            display: none;
+        }
+
+        .app-list.visible {
+            display: block;
+        }
+
+        .app-list-header {
+            font-size: 8px;
+            color: var(--theme-primary);
+            padding: 2px 4px 4px;
+            font-weight: bold;
+        }
+
+        .app-list-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .app-list-item:hover,
+        .app-list-item.selected {
+            background: var(--theme-selected);
+        }
+
+        .app-list-item .icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            flex-shrink: 0;
+        }
+
+        .app-list-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .app-list-item .name {
+            font-size: 7px;
+            color: var(--theme-text);
+        }
+
+        .app-list-item .desc {
+            font-size: 5px;
+            color: var(--theme-muted);
+        }
+
+        /* Settings Screen */
+        .settings-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            display: none;
+            flex-direction: column;
+        }
+
+        .settings-screen.visible {
+            display: flex;
+        }
+
+        .settings-header {
+            padding: 4px 6px;
+            background: var(--theme-surface);
+            font-size: 8px;
+            color: var(--theme-primary);
+            font-weight: bold;
+        }
+
+        .settings-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 4px;
+            border-bottom: 1px solid var(--theme-surface);
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .settings-item:hover,
+        .settings-item.selected {
+            background: var(--theme-selected);
+        }
+
+        .settings-item .label {
+            font-size: 7px;
+            color: var(--theme-text);
+        }
+
+        .settings-item .value {
+            font-size: 6px;
+            color: var(--theme-muted);
+        }
+
+        /* Theme Picker */
+        .theme-picker {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            display: none;
+            flex-direction: column;
+        }
+
+        .theme-picker.visible {
+            display: flex;
+        }
+
+        .theme-picker-header {
+            padding: 4px 6px;
+            background: var(--theme-surface);
+            font-size: 8px;
+            color: var(--theme-primary);
+            font-weight: bold;
+        }
+
+        .theme-grid {
+            flex: 1;
+            padding: 6px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            overflow-y: auto;
+        }
+
+        .theme-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 6px;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .theme-option:hover {
+            background: var(--theme-hover);
+        }
+
+        .theme-option.selected {
+            border-color: var(--theme-primary);
+        }
+
+        .theme-preview {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-name {
+            font-size: 6px;
+            color: var(--theme-text);
+        }
+
+        /* Task Manager Screen */
+        .task-manager {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            display: none;
+            flex-direction: column;
+        }
+
+        .task-manager.visible {
+            display: flex;
+        }
+
+        .task-header {
+            padding: 4px 6px;
+            background: var(--theme-surface);
+            font-size: 8px;
+            color: var(--theme-primary);
+            font-weight: bold;
+        }
+
+        .task-list {
+            flex: 1;
+            padding: 6px;
+            overflow-y: auto;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px;
+            margin-bottom: 4px;
+            background: var(--theme-surface);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .task-item:hover,
+        .task-item.selected {
+            background: var(--theme-selected);
+        }
+
+        .task-item.locked {
+            border-left: 2px solid var(--theme-primary);
+        }
+
+        .task-item .icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+        }
+
+        .task-item .info {
+            flex: 1;
+        }
+
+        .task-item .name {
+            font-size: 7px;
+            color: var(--theme-text);
+        }
+
+        .task-item .status {
+            font-size: 5px;
+            color: var(--theme-muted);
+        }
+
+        .task-item .actions {
+            display: flex;
+            gap: 3px;
+        }
+
+        .task-action-btn {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            background: var(--theme-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .task-action-btn:hover {
+            background: var(--theme-primary);
+            transform: scale(1.1);
+        }
+
+        .task-action-btn.lock-btn.locked {
+            background: var(--theme-primary);
+            color: var(--theme-bg);
+        }
+
+        .task-empty {
+            text-align: center;
+            padding: 20px;
+            font-size: 7px;
+            color: var(--theme-muted);
+        }
+
+        .task-footer {
+            padding: 4px 6px;
+            background: var(--theme-surface);
+            text-align: center;
+        }
+
+        .task-hint {
+            font-size: 6px;
+            color: var(--theme-muted);
+        }
+
+        /* About Screen */
+        .about-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px;
+        }
+
+        .about-screen.visible {
+            display: flex;
+        }
+
+        .about-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--theme-primary), var(--theme-accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .about-title {
+            font-size: 12px;
+            color: var(--theme-primary);
+            font-weight: bold;
+        }
+
+        .about-version {
+            font-size: 7px;
+            color: var(--theme-muted);
+        }
+
+        .about-info {
+            font-size: 6px;
+            color: var(--theme-text);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* App Running Screen */
+        .app-running {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0a0a0a;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .app-running.visible {
+            display: flex;
+        }
+
+        .app-running .app-title {
+            font-size: 10px;
+            color: var(--theme-primary);
+        }
+
+        .app-running .app-content {
+            font-size: 7px;
+            color: var(--theme-text);
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--theme-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            z-index: 200;
+        }
+
+        .splash-screen.hidden {
+            display: none;
+        }
+
+        .splash-logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--theme-primary), var(--theme-accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .splash-title {
+            font-size: 14px;
+            color: var(--theme-primary);
+            font-weight: bold;
+        }
+
+        .splash-subtitle {
+            font-size: 7px;
+            color: var(--theme-muted);
+        }
+
+        .splash-loading {
+            width: 60px;
+            height: 3px;
+            background: var(--theme-surface);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .splash-loading-bar {
+            height: 100%;
+            background: var(--theme-primary);
+            border-radius: 2px;
+            animation: loading 2s ease-in-out;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Physical Buttons Display */
+        .physical-buttons {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-group-label {
+            font-size: 10px;
+            color: #888;
+        }
+
+        .dpad {
+            display: grid;
+            grid-template-columns: repeat(3, 30px);
+            grid-template-rows: repeat(3, 30px);
+            gap: 2px;
+        }
+
+        .dpad-btn {
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .dpad-btn:active, .dpad-btn.pressed {
+            background: var(--theme-primary);
+            color: var(--theme-bg);
+            transform: scale(0.95);
+        }
+
+        .dpad-btn.empty {
+            background: transparent;
+            border: none;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            border: 2px solid #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+
+        .action-btn:active, .action-btn.pressed {
+            background: var(--theme-accent);
+            border-color: var(--theme-accent);
+            color: #fff;
+            transform: scale(0.95);
+        }
+
+        /* Log Panel */
+        .log-panel {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 10px;
+            width: 480px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 11px;
+        }
+
+        /* Quick action buttons */
+        .quick-btn {
+            font-size: 16px !important;
+            background: #2a2a2a !important;
+            border-color: #666 !important;
+        }
+
+        .quick-btn:active {
+            background: var(--theme-primary) !important;
+            transform: scale(0.95);
+        }
+
+        .log-entry {
+            color: #888;
+            margin-bottom: 2px;
+        }
+
+        .log-entry.info { color: #4A90D9; }
+        .log-entry.success { color: #5CB85C; }
+        .log-entry.warning { color: #F6D34A; }
+        .log-entry.error { color: #E64B3C; }
+
+        /* Screen transition */
+        .screen-transition {
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐱 XiaoMiao OS - UI Simulator v2</h1>
+        
+        <div class="info-panel">
+            <p><strong>硬件按键：UP / DOWN / LEFT / RIGHT / A / B</strong></p>
+            <p>
+                <span class="combo">模拟器键盘映射：</span><br>
+                <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> = 方向键 |
+                <kbd>J</kbd> = A键确认 |
+                <kbd>K</kbd> = B键返回
+            </p>
+            <p>
+                <span class="combo">快捷操作：</span><br>
+                点击下方按钮或使用组合键<br>
+                <span class="combo">主页：</span>UP+B |
+                <span class="combo">多任务：</span>DOWN+B |
+                <span class="combo">翻页：</span>LEFT/RIGHT
+            </p>
+        </div>
+
+        <div class="device-frame">
+            <div class="screen" id="screen">
+                <div class="lcd" id="lcd">
+                    <!-- Status Bar -->
+                    <div class="status-bar">
+                        <span class="time" id="time">12:00</span>
+                        <div class="battery">
+                            <span id="battery-pct">85%</span>
+                            <div class="battery-icon">
+                                <div class="battery-level" id="battery-level" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Area -->
+                    <div class="content" id="content">
+                        <!-- Home Screen Pages -->
+                        <div class="home-screen" id="home-screen-page-0">
+                            <!-- Page 0: 6 apps -->
+                        </div>
+                        <div class="home-screen" id="home-screen-page-1" style="display:none;">
+                            <!-- Page 1: remaining apps -->
+                        </div>
+
+                        <!-- App List -->
+                        <div class="app-list" id="app-list">
+                            <div class="app-list-header">全部应用</div>
+                            <!-- Items will be generated by JS -->
+                        </div>
+
+                        <!-- Settings Screen -->
+                        <div class="settings-screen" id="settings-screen">
+                            <div class="settings-header">⚙ 设置</div>
+                            <div class="settings-list">
+                                <div class="settings-item selected" data-setting="wifi">
+                                    <span class="label">📶 Wi-Fi</span>
+                                    <span class="value">已连接</span>
+                                </div>
+                                <div class="settings-item" data-setting="bluetooth">
+                                    <span class="label">🔵 蓝牙</span>
+                                    <span class="value">关闭</span>
+                                </div>
+                                <div class="settings-item" data-setting="display">
+                                    <span class="label">🔆 显示</span>
+                                    <span class="value">亮度 80%</span>
+                                </div>
+                                <div class="settings-item" data-setting="sound">
+                                    <span class="label">🔊 声音</span>
+                                    <span class="value">音量 60%</span>
+                                </div>
+                                <div class="settings-item" data-setting="theme">
+                                    <span class="label">🎨 主题</span>
+                                    <span class="value" id="current-theme-name">默认</span>
+                                </div>
+                                <div class="settings-item" data-setting="battery">
+                                    <span class="label">🔋 电池</span>
+                                    <span class="value" id="settings-battery">85%</span>
+                                </div>
+                                <div class="settings-item" data-setting="storage">
+                                    <span class="label">💾 存储</span>
+                                    <span class="value">2.1GB/4GB</span>
+                                </div>
+                                <div class="settings-item" data-setting="language">
+                                    <span class="label">🌐 语言</span>
+                                    <span class="value">中文</span>
+                                </div>
+                                <div class="settings-item" data-setting="about">
+                                    <span class="label">ℹ️ 关于</span>
+                                    <span class="value">→</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Theme Picker -->
+                        <div class="theme-picker" id="theme-picker">
+                            <div class="theme-picker-header">🎨 选择主题</div>
+                            <div class="theme-grid" id="theme-grid">
+                                <!-- Themes will be generated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Task Manager -->
+                        <div class="task-manager" id="task-manager">
+                            <div class="task-header">📋 最近任务</div>
+                            <div class="task-list" id="task-list">
+                                <div class="task-empty">暂无运行中的应用</div>
+                            </div>
+                            <div class="task-footer">
+                                <span class="task-hint">↑↓:选择 A:进入 ←:锁定 →:销毁</span>
+                            </div>
+                        </div>
+
+                        <!-- About Screen -->
+                        <div class="about-screen" id="about-screen">
+                            <div class="about-logo">🐱</div>
+                            <div class="about-title">XiaoMiao OS</div>
+                            <div class="about-version">Version 1.0.0</div>
+                            <div class="about-info">
+                                MicroPython Desktop System<br>
+                                ESP32-WROVER-B<br>
+                                4MB Flash / 8MB PSRAM<br>
+                                ST7735 160×128 TFT<br>
+                                <br>
+                                © 2024 XiaoMiao Team
+                            </div>
+                        </div>
+
+                        <!-- App Running Screen -->
+                        <div class="app-running" id="app-running">
+                            <div class="app-title" id="running-app-title">应用</div>
+                            <div class="app-content" id="running-app-content">
+                                正在运行...<br><br>
+                                按 <kbd>K</kbd> 返回
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page Dots -->
+                    <div class="page-dots" id="page-dots">
+                        <div class="page-dot active" data-page="0"></div>
+                        <div class="page-dot" data-page="1"></div>
+                    </div>
+
+                    <!-- Splash Screen -->
+                    <div class="splash-screen" id="splash-screen">
+                        <div class="splash-logo">🐱</div>
+                        <div class="splash-title">XiaoMiao OS</div>
+                        <div class="splash-subtitle">MicroPython Desktop System</div>
+                        <div class="splash-loading">
+                            <div class="splash-loading-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Physical Buttons Simulation -->
+        <div class="physical-buttons">
+            <div class="btn-group">
+                <div class="btn-group-label">方向键 (WASD)</div>
+                <div class="dpad">
+                    <div class="dpad-btn empty"></div>
+                    <div class="dpad-btn" data-key="w" data-btn="up">▲</div>
+                    <div class="dpad-btn empty"></div>
+                    <div class="dpad-btn" data-key="a" data-btn="left">◄</div>
+                    <div class="dpad-btn empty"></div>
+                    <div class="dpad-btn" data-key="d" data-btn="right">►</div>
+                    <div class="dpad-btn empty"></div>
+                    <div class="dpad-btn" data-key="s" data-btn="down">▼</div>
+                    <div class="dpad-btn empty"></div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <div class="btn-group-label">功能键</div>
+                <div class="action-btns">
+                    <div class="action-btn" data-key="j" data-btn="a">A</div>
+                    <div class="action-btn" data-key="k" data-btn="b">B</div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <div class="btn-group-label">快捷操作</div>
+                <div class="action-btns">
+                    <div class="action-btn quick-btn" onclick="goHome()" title="返回主页">🏠</div>
+                    <div class="action-btn quick-btn" onclick="showTaskManager()" title="多任务">📋</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Panel -->
+        <div class="log-panel" id="log-panel">
+            <div class="log-entry info">[系统] XiaoMiao OS UI Simulator v2 启动</div>
+        </div>
+    </div>
+
+    <script>
+        // Theme System
+        const themes = {
+            default: {
+                name: '默认',
+                primary: '#F6D34A',
+                accent: '#E64B3C',
+                bg: '#1B1713',
+                surface: '#2a2520',
+                text: '#FFF3B0',
+                muted: '#8B7355',
+                hover: 'rgba(246, 211, 74, 0.1)',
+                selected: 'rgba(246, 211, 74, 0.2)'
+            },
+            blue: {
+                name: '海洋',
+                primary: '#4A90D9',
+                accent: '#3498DB',
+                bg: '#0a192f',
+                surface: '#172a45',
+                text: '#ccd6f6',
+                muted: '#8892b0',
+                hover: 'rgba(74, 144, 217, 0.1)',
+                selected: 'rgba(74, 144, 217, 0.2)'
+            },
+            green: {
+                name: '森林',
+                primary: '#5CB85C',
+                accent: '#2ECC71',
+                bg: '#0d1f0d',
+                surface: '#1a3a1a',
+                text: '#d4edda',
+                muted: '#75b798',
+                hover: 'rgba(92, 184, 92, 0.1)',
+                selected: 'rgba(92, 184, 92, 0.2)'
+            },
+            purple: {
+                name: '星空',
+                primary: '#9B59B6',
+                accent: '#8E44AD',
+                bg: '#1a0a2e',
+                surface: '#2d1b4e',
+                text: '#e8d5f5',
+                muted: '#a87fc4',
+                hover: 'rgba(155, 89, 182, 0.1)',
+                selected: 'rgba(155, 89, 182, 0.2)'
+            },
+            red: {
+                name: '火焰',
+                primary: '#E64B3C',
+                accent: '#C0392B',
+                bg: '#1f0a0a',
+                surface: '#3d1a1a',
+                text: '#f5d5d5',
+                muted: '#c47f7f',
+                hover: 'rgba(230, 75, 60, 0.1)',
+                selected: 'rgba(230, 75, 60, 0.2)'
+            },
+            cyan: {
+                name: '冰晶',
+                primary: '#1ABC9C',
+                accent: '#16A085',
+                bg: '#0a1f1f',
+                surface: '#1a3a3a',
+                text: '#d5f5f0',
+                muted: '#7fc4b8',
+                hover: 'rgba(26, 188, 156, 0.1)',
+                selected: 'rgba(26, 188, 156, 0.2)'
+            }
+        };
+
+        let currentTheme = 'default';
+
+        function applyTheme(themeName) {
+            const theme = themes[themeName];
+            if (!theme) return;
+            
+            currentTheme = themeName;
+            const root = document.documentElement;
+            root.style.setProperty('--theme-primary', theme.primary);
+            root.style.setProperty('--theme-accent', theme.accent);
+            root.style.setProperty('--theme-bg', theme.bg);
+            root.style.setProperty('--theme-surface', theme.surface);
+            root.style.setProperty('--theme-text', theme.text);
+            root.style.setProperty('--theme-muted', theme.muted);
+            root.style.setProperty('--theme-hover', theme.hover);
+            root.style.setProperty('--theme-selected', theme.selected);
+            
+            document.getElementById('current-theme-name').textContent = theme.name;
+            
+            // Update theme picker selection
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.theme === themeName);
+            });
+            
+            log(`主题切换: ${theme.name}`, 'success');
+        }
+
+        // State Management
+        const state = {
+            currentScreen: 'splash',
+            currentPage: 0,
+            totalPages: 2,
+            selectedIndex: 0,
+            taskSelectedIndex: 0,
+            selectedApp: null,
+            batteryLevel: 85,
+            history: [],
+            runningApps: [],
+            keysPressed: new Set(),
+        };
+
+        // App Data
+        const apps = [
+            { id: 'settings', name: '设置', icon: '⚙', screen: 'settings' },
+            { id: 'files', name: '文件', icon: '📁' },
+            { id: 'music', name: '音乐', icon: '🎵' },
+            { id: 'camera', name: '相机', icon: '📷' },
+            { id: 'calculator', name: '计算器', icon: '🔢' },
+            { id: 'clock', name: '时钟', icon: '⏰' },
+            { id: 'weather', name: '天气', icon: '☀' },
+            { id: 'notes', name: '笔记', icon: '📝' },
+            { id: 'store', name: '商店', icon: '🛒' },
+            { id: 'games', name: '游戏', icon: '🎮' },
+            { id: 'about', name: '关于', icon: 'ℹ', screen: 'about' },
+        ];
+
+        const APPS_PER_PAGE = 6;
+
+        // DOM Elements
+        const elements = {
+            lcd: document.getElementById('lcd'),
+            appList: document.getElementById('app-list'),
+            settingsScreen: document.getElementById('settings-screen'),
+            themePicker: document.getElementById('theme-picker'),
+            taskManager: document.getElementById('task-manager'),
+            aboutScreen: document.getElementById('about-screen'),
+            appRunning: document.getElementById('app-running'),
+            splashScreen: document.getElementById('splash-screen'),
+            time: document.getElementById('time'),
+            batteryPct: document.getElementById('battery-pct'),
+            batteryLevel: document.getElementById('battery-level'),
+            settingsBattery: document.getElementById('settings-battery'),
+            runningAppTitle: document.getElementById('running-app-title'),
+            runningAppContent: document.getElementById('running-app-content'),
+            logPanel: document.getElementById('log-panel'),
+            pageDots: document.getElementById('page-dots'),
+        };
+
+        // Initialize home screen pages
+        function initHomePages() {
+            for (let page = 0; page < state.totalPages; page++) {
+                const pageEl = document.getElementById(`home-screen-page-${page}`);
+                pageEl.innerHTML = '';
+                
+                const startIdx = page * APPS_PER_PAGE;
+                const endIdx = Math.min(startIdx + APPS_PER_PAGE, apps.length);
+                
+                for (let i = startIdx; i < endIdx; i++) {
+                    const app = apps[i];
+                    const iconEl = document.createElement('div');
+                    iconEl.className = 'app-icon' + (page === 0 && i === 0 ? ' selected' : '');
+                    iconEl.dataset.app = app.id;
+                    iconEl.dataset.index = i;
+                    iconEl.dataset.page = page;
+                    iconEl.innerHTML = `
+                        <div class="icon" style="background: linear-gradient(135deg, ${themes[currentTheme].primary}, ${themes[currentTheme].accent});">${app.icon}</div>
+                        <div class="label">${app.name}</div>
+                    `;
+                    iconEl.addEventListener('click', () => {
+                        state.selectedIndex = i;
+                        state.currentPage = page;
+                        updateHomeSelection();
+                        openApp(app.id);
+                    });
+                    pageEl.appendChild(iconEl);
+                }
+            }
+        }
+
+        // Initialize app list
+        function initAppList() {
+            const listEl = elements.appList;
+            apps.forEach((app, idx) => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'app-list-item' + (idx === 0 ? ' selected' : '');
+                itemEl.dataset.app = app.id;
+                itemEl.dataset.index = idx;
+                itemEl.innerHTML = `
+                    <div class="icon" style="background: linear-gradient(135deg, ${themes[currentTheme].primary}, ${themes[currentTheme].accent});">${app.icon}</div>
+                    <div class="info">
+                        <div class="name">${app.name}</div>
+                        <div class="desc">${app.screen === 'settings' ? '系统设置' : app.screen === 'about' ? '系统信息' : '应用程序'}</div>
+                    </div>
+                `;
+                itemEl.addEventListener('click', () => {
+                    state.selectedIndex = idx;
+                    updateAppListSelection();
+                    openApp(app.id);
+                });
+                listEl.appendChild(itemEl);
+            });
+        }
+
+        // Initialize theme picker
+        function initThemePicker() {
+            const gridEl = document.getElementById('theme-grid');
+            Object.entries(themes).forEach(([key, theme]) => {
+                const optionEl = document.createElement('div');
+                optionEl.className = 'theme-option' + (key === currentTheme ? ' selected' : '');
+                optionEl.dataset.theme = key;
+                optionEl.innerHTML = `
+                    <div class="theme-preview" style="background: linear-gradient(135deg, ${theme.primary}, ${theme.accent});">🎨</div>
+                    <div class="theme-name">${theme.name}</div>
+                `;
+                optionEl.addEventListener('click', () => {
+                    applyTheme(key);
+                    initHomePages();
+                });
+                gridEl.appendChild(optionEl);
+            });
+        }
+
+        // Logging
+        function log(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.textContent = `[${time}] ${message}`;
+            elements.logPanel.appendChild(entry);
+            elements.logPanel.scrollTop = elements.logPanel.scrollHeight;
+        }
+
+        // Update Time
+        function updateTime() {
+            const now = new Date();
+            elements.time.textContent = now.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Screen Navigation
+        function showScreen(screenName, addToHistory = true) {
+            if (addToHistory && state.currentScreen !== screenName) {
+                state.history.push(state.currentScreen);
+            }
+            
+            // Hide all screens
+            for (let i = 0; i < state.totalPages; i++) {
+                document.getElementById(`home-screen-page-${i}`).style.display = 'none';
+            }
+            elements.appList.classList.remove('visible');
+            elements.settingsScreen.classList.remove('visible');
+            elements.themePicker.classList.remove('visible');
+            elements.taskManager.classList.remove('visible');
+            elements.aboutScreen.classList.remove('visible');
+            elements.appRunning.classList.remove('visible');
+            elements.splashScreen.classList.add('hidden');
+            elements.pageDots.style.display = 'none';
+
+            // Show target screen
+            switch (screenName) {
+                case 'home':
+                    document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'grid';
+                    elements.pageDots.style.display = 'flex';
+                    updateHomeSelection();
+                    updatePageDots();
+                    break;
+                case 'appList':
+                    elements.appList.classList.add('visible');
+                    updateAppListSelection();
+                    break;
+                case 'settings':
+                    elements.settingsScreen.classList.add('visible');
+                    updateSettingsSelection();
+                    break;
+                case 'themePicker':
+                    elements.themePicker.classList.add('visible');
+                    break;
+                case 'taskManager':
+                    elements.taskManager.classList.add('visible');
+                    updateTaskList();
+                    break;
+                case 'about':
+                    elements.aboutScreen.classList.add('visible');
+                    break;
+                case 'appRunning':
+                    elements.appRunning.classList.add('visible');
+                    break;
+            }
+
+            state.currentScreen = screenName;
+            log(`切换到: ${screenName}`, 'info');
+        }
+
+        // Page Navigation
+        function updatePageDots() {
+            document.querySelectorAll('.page-dot').forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === state.currentPage);
+            });
+        }
+
+        function nextPage() {
+            if (state.currentPage < state.totalPages - 1) {
+                document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'none';
+                state.currentPage++;
+                document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'grid';
+                state.selectedIndex = state.currentPage * APPS_PER_PAGE;
+                updatePageDots();
+                updateHomeSelection();
+                log(`翻到第 ${state.currentPage + 1} 页`, 'info');
+            }
+        }
+
+        function prevPage() {
+            if (state.currentPage > 0) {
+                document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'none';
+                state.currentPage--;
+                document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'grid';
+                state.selectedIndex = state.currentPage * APPS_PER_PAGE;
+                updatePageDots();
+                updateHomeSelection();
+                log(`翻到第 ${state.currentPage + 1} 页`, 'info');
+            }
+        }
+
+        // Home Screen Navigation
+        function updateHomeSelection() {
+            const currentPageEl = document.getElementById(`home-screen-page-${state.currentPage}`);
+            const icons = currentPageEl.querySelectorAll('.app-icon');
+            const localIndex = state.selectedIndex - state.currentPage * APPS_PER_PAGE;
+            icons.forEach((icon, idx) => {
+                icon.classList.toggle('selected', idx === localIndex);
+            });
+        }
+
+        function navigateHome(direction) {
+            const pageStart = state.currentPage * APPS_PER_PAGE;
+            const pageEnd = Math.min(pageStart + APPS_PER_PAGE, apps.length);
+            const localIndex = state.selectedIndex - pageStart;
+            let newLocalIndex = localIndex;
+
+            switch (direction) {
+                case 'up':
+                    newLocalIndex = Math.max(0, localIndex - 3);
+                    break;
+                case 'down':
+                    newLocalIndex = Math.min(pageEnd - pageStart - 1, localIndex + 3);
+                    break;
+                case 'left':
+                    if (localIndex === 0 && state.currentPage > 0) {
+                        prevPage();
+                        return;
+                    }
+                    newLocalIndex = Math.max(0, localIndex - 1);
+                    break;
+                case 'right':
+                    if (localIndex === pageEnd - pageStart - 1 && state.currentPage < state.totalPages - 1) {
+                        nextPage();
+                        return;
+                    }
+                    newLocalIndex = Math.min(pageEnd - pageStart - 1, localIndex + 1);
+                    break;
+            }
+
+            state.selectedIndex = pageStart + newLocalIndex;
+            updateHomeSelection();
+        }
+
+        // App List Navigation
+        function updateAppListSelection() {
+            const items = elements.appList.querySelectorAll('.app-list-item');
+            items.forEach((item, idx) => {
+                item.classList.toggle('selected', idx === state.selectedIndex);
+                if (idx === state.selectedIndex) {
+                    item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                }
+            });
+        }
+
+        function navigateAppList(direction) {
+            switch (direction) {
+                case 'up':
+                    state.selectedIndex = Math.max(0, state.selectedIndex - 1);
+                    break;
+                case 'down':
+                    state.selectedIndex = Math.min(apps.length - 1, state.selectedIndex + 1);
+                    break;
+            }
+            updateAppListSelection();
+        }
+
+        // Settings Navigation
+        function updateSettingsSelection() {
+            const items = elements.settingsScreen.querySelectorAll('.settings-item');
+            items.forEach((item, idx) => {
+                item.classList.toggle('selected', idx === state.selectedIndex);
+                if (idx === state.selectedIndex) {
+                    item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                }
+            });
+        }
+
+        function navigateSettings(direction) {
+            const items = elements.settingsScreen.querySelectorAll('.settings-item');
+            switch (direction) {
+                case 'up':
+                    state.selectedIndex = Math.max(0, state.selectedIndex - 1);
+                    break;
+                case 'down':
+                    state.selectedIndex = Math.min(items.length - 1, state.selectedIndex + 1);
+                    break;
+            }
+            updateSettingsSelection();
+        }
+
+        // Task Manager
+        function updateTaskList() {
+            const listEl = document.getElementById('task-list');
+            if (state.runningApps.length === 0) {
+                listEl.innerHTML = '<div class="task-empty">暂无运行中的应用</div>';
+                return;
+            }
+            
+            listEl.innerHTML = '';
+            state.runningApps.forEach((app, idx) => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'task-item' + (idx === state.taskSelectedIndex ? ' selected' : '') + (app.locked ? ' locked' : '');
+                itemEl.dataset.index = idx;
+                itemEl.innerHTML = `
+                    <div class="icon" style="background: linear-gradient(135deg, ${themes[currentTheme].primary}, ${themes[currentTheme].accent});">${app.icon}</div>
+                    <div class="info">
+                        <div class="name">${app.name}</div>
+                        <div class="status">${app.locked ? '已锁定' : '运行中'}</div>
+                    </div>
+                    <div class="actions">
+                        <div class="task-action-btn enter-btn" data-action="enter" title="进入">▶</div>
+                        <div class="task-action-btn lock-btn ${app.locked ? 'locked' : ''}" data-action="lock" title="锁定">🔒</div>
+                        <div class="task-action-btn destroy-btn" data-action="destroy" title="销毁">✕</div>
+                    </div>
+                `;
+                
+                // 点击整个项目选中
+                itemEl.addEventListener('click', () => {
+                    state.taskSelectedIndex = idx;
+                    updateTaskList();
+                });
+                
+                // 点击操作按钮
+                itemEl.querySelectorAll('.task-action-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const action = btn.dataset.action;
+                        handleTaskAction(idx, action);
+                    });
+                });
+                
+                listEl.appendChild(itemEl);
+            });
+        }
+
+        function navigateTaskManager(direction) {
+            if (state.runningApps.length === 0) return;
+            
+            switch (direction) {
+                case 'up':
+                    state.taskSelectedIndex = Math.max(0, state.taskSelectedIndex - 1);
+                    break;
+                case 'down':
+                    state.taskSelectedIndex = Math.min(state.runningApps.length - 1, state.taskSelectedIndex + 1);
+                    break;
+            }
+            updateTaskList();
+            
+            // 自动滚动到选中项
+            const items = document.querySelectorAll('.task-item');
+            if (items[state.taskSelectedIndex]) {
+                items[state.taskSelectedIndex].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            }
+        }
+
+        function handleTaskAction(index, action) {
+            const app = state.runningApps[index];
+            if (!app) return;
+
+            switch (action) {
+                case 'enter':
+                    log(`进入应用: ${app.name}`, 'success');
+                    openApp(app.id);
+                    break;
+                case 'lock':
+                    app.locked = !app.locked;
+                    log(`${app.locked ? '锁定' : '解锁'}应用: ${app.name}`, 'info');
+                    updateTaskList();
+                    break;
+                case 'destroy':
+                    if (app.locked) {
+                        log(`应用已锁定，无法销毁: ${app.name}`, 'warning');
+                        return;
+                    }
+                    state.runningApps.splice(index, 1);
+                    if (state.taskSelectedIndex >= state.runningApps.length) {
+                        state.taskSelectedIndex = Math.max(0, state.runningApps.length - 1);
+                    }
+                    log(`销毁应用: ${app.name}`, 'warning');
+                    updateTaskList();
+                    break;
+            }
+        }
+
+        // Open App
+        function openApp(appId) {
+            const app = apps.find(a => a.id === appId);
+            if (!app) return;
+
+            log(`打开应用: ${app.name}`, 'success');
+            state.selectedApp = app;
+
+            // Add to running apps if not already running
+            if (!state.runningApps.find(a => a.id === appId)) {
+                state.runningApps.push(app);
+            }
+
+            if (app.screen === 'settings') {
+                state.selectedIndex = 0;
+                showScreen('settings');
+            } else if (app.screen === 'about') {
+                showScreen('about');
+            } else {
+                // Simulate app running
+                elements.runningAppTitle.textContent = app.icon + ' ' + app.name;
+                elements.runningAppContent.innerHTML = `
+                    <strong>${app.name}</strong><br><br>
+                    应用正在运行...<br><br>
+                    <span style="font-size: 5px; color: #888;">
+                        (MicroPython 沙箱模式)<br>
+                        按 K 键返回桌面
+                    </span>
+                `;
+                showScreen('appRunning');
+            }
+        }
+
+        // Go Back
+        function goBack() {
+            if (state.history.length > 0) {
+                const prevScreen = state.history.pop();
+                state.selectedIndex = 0;
+                showScreen(prevScreen, false);
+                log('返回上一页', 'info');
+            } else {
+                log('已在主页', 'warning');
+            }
+        }
+
+        // Go Home
+        function goHome() {
+            state.history = [];
+            state.selectedIndex = 0;
+            state.currentPage = 0;
+            showScreen('home', false);
+            log('返回主页', 'info');
+        }
+
+        // Show Task Manager
+        function showTaskManager() {
+            state.selectedIndex = 0;
+            showScreen('taskManager');
+            log('打开多任务管理器', 'info');
+        }
+
+        // Handle Button Press
+        function handleButton(button) {
+            // Visual feedback
+            const btnEl = document.querySelector(`[data-btn="${button}"]`);
+            if (btnEl) {
+                btnEl.classList.add('pressed');
+                setTimeout(() => btnEl.classList.remove('pressed'), 100);
+            }
+
+            // Note: Combo keys (UP+B / DOWN+B) are handled in the keyboard event listener
+            // because we need to detect simultaneous key presses at the keyboard level.
+
+            switch (button) {
+                case 'up':
+                case 'down':
+                case 'left':
+                case 'right':
+                    if (state.currentScreen === 'home') {
+                        navigateHome(button);
+                    } else if (state.currentScreen === 'appList') {
+                        navigateAppList(button);
+                    } else if (state.currentScreen === 'settings') {
+                        navigateSettings(button);
+                    } else if (state.currentScreen === 'taskManager') {
+                        if (button === 'up' || button === 'down') {
+                            navigateTaskManager(button);
+                        } else if (button === 'left') {
+                            // 左键锁定/解锁
+                            if (state.runningApps.length > 0) {
+                                handleTaskAction(state.taskSelectedIndex, 'lock');
+                            }
+                        } else if (button === 'right') {
+                            // 右键销毁
+                            if (state.runningApps.length > 0) {
+                                handleTaskAction(state.taskSelectedIndex, 'destroy');
+                            }
+                        }
+                    }
+                    break;
+
+                case 'a':  // Confirm / Open
+                    if (state.currentScreen === 'home') {
+                        const currentPageEl = document.getElementById(`home-screen-page-${state.currentPage}`);
+                        const icons = currentPageEl.querySelectorAll('.app-icon');
+                        const localIndex = state.selectedIndex - state.currentPage * APPS_PER_PAGE;
+                        const selectedIcon = icons[localIndex];
+                        if (selectedIcon) {
+                            openApp(selectedIcon.dataset.app);
+                        }
+                    } else if (state.currentScreen === 'appList') {
+                        const items = elements.appList.querySelectorAll('.app-list-item');
+                        const selectedItem = items[state.selectedIndex];
+                        if (selectedItem) {
+                            openApp(selectedItem.dataset.app);
+                        }
+                    } else if (state.currentScreen === 'settings') {
+                        const items = elements.settingsScreen.querySelectorAll('.settings-item');
+                        const selectedItem = items[state.selectedIndex];
+                        if (selectedItem) {
+                            const setting = selectedItem.dataset.setting;
+                            if (setting === 'about') {
+                                showScreen('about');
+                            } else if (setting === 'theme') {
+                                showScreen('themePicker');
+                            } else {
+                                log(`设置项: ${setting}`, 'info');
+                            }
+                        }
+                    } else if (state.currentScreen === 'taskManager') {
+                        // A键进入选中的应用
+                        if (state.runningApps.length > 0) {
+                            handleTaskAction(state.taskSelectedIndex, 'enter');
+                        }
+                    }
+                    break;
+
+                case 'b':  // Back / Cancel
+                    goBack();
+                    break;
+            }
+        }
+
+        // Keyboard Handler
+        let lastDirectionKey = null;
+        let lastDirectionTime = 0;
+        
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            state.keysPressed.add(key);
+            
+            // Track direction keys for combo detection
+            if (['w', 's', 'a', 'd'].includes(key)) {
+                lastDirectionKey = key;
+                lastDirectionTime = Date.now();
+            }
+            
+            // Check for combo keys (B + direction within 500ms)
+            if (key === 'k') {
+                const timeDiff = Date.now() - lastDirectionTime;
+                if (timeDiff < 500 && lastDirectionKey) {
+                    if (lastDirectionKey === 'w') {
+                        // UP + B = Home
+                        e.preventDefault();
+                        goHome();
+                        lastDirectionKey = null;
+                        return;
+                    } else if (lastDirectionKey === 's') {
+                        // DOWN + B = Task Manager
+                        e.preventDefault();
+                        showTaskManager();
+                        lastDirectionKey = null;
+                        return;
+                    }
+                }
+            }
+            
+            switch (key) {
+                case 'w': handleButton('up'); break;
+                case 's': handleButton('down'); break;
+                case 'a': handleButton('left'); break;
+                case 'd': handleButton('right'); break;
+                case 'j': handleButton('a'); break;
+                case 'k': handleButton('b'); break;
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            state.keysPressed.delete(e.key.toLowerCase());
+        });
+
+        // Click handlers for physical buttons
+        document.querySelectorAll('.dpad-btn, .action-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const button = btn.dataset.btn;
+                if (button) handleButton(button);
+            });
+        });
+
+        // Click handlers for page dots
+        document.querySelectorAll('.page-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                const page = parseInt(dot.dataset.page);
+                if (page !== state.currentPage) {
+                    document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'none';
+                    state.currentPage = page;
+                    state.selectedIndex = page * APPS_PER_PAGE;
+                    document.getElementById(`home-screen-page-${state.currentPage}`).style.display = 'grid';
+                    updatePageDots();
+                    updateHomeSelection();
+                    log(`跳转到第 ${page + 1} 页`, 'info');
+                }
+            });
+        });
+
+        // Battery simulation
+        function updateBattery() {
+            state.batteryLevel = Math.max(10, state.batteryLevel - Math.random() * 0.1);
+            const level = Math.round(state.batteryLevel);
+            elements.batteryPct.textContent = level + '%';
+            elements.batteryLevel.style.width = level + '%';
+            elements.settingsBattery.textContent = level + '%';
+            
+            if (level <= 20) {
+                elements.batteryLevel.style.background = '#E64B3C';
+            } else if (level <= 50) {
+                elements.batteryLevel.style.background = '#F6D34A';
+            } else {
+                elements.batteryLevel.style.background = '#5CB85C';
+            }
+        }
+        setInterval(updateBattery, 5000);
+
+        // Splash screen timeout
+        setTimeout(() => {
+            elements.splashScreen.classList.add('hidden');
+            state.currentScreen = 'home';
+            document.getElementById('home-screen-page-0').style.display = 'grid';
+            elements.pageDots.style.display = 'flex';
+            log('系统启动完成', 'success');
+        }, 2500);
+
+        // Initialize
+        applyTheme('default');
+        initHomePages();
+        initAppList();
+        initThemePicker();
+        log('按 W+K 返回主页，S+K 打开多任务', 'info');
+    </script>
+</body>
+</html>
