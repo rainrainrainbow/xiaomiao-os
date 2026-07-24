@@ -19,6 +19,10 @@ static const char *TAG = "lvgl_port";
 #define LCD_V_RES           128
 #define LVGL_TICK_PERIOD_MS 2
 
+#define ST7735_CASET 0x2A
+#define ST7735_RASET 0x2B
+#define ST7735_RAMWR 0x2C
+
 // LCD 句柄
 static esp_lcd_panel_io_handle_t s_lcd_io = NULL;
 static esp_lcd_panel_handle_t s_lcd_panel = NULL;
@@ -251,8 +255,8 @@ void lvgl_port_button_scan_task(void *arg)
 /* ── LVGL 显示驱动 ─────────────────────────────────────────────────── */
 
 // 显示刷新完成回调 - ESP-IDF v5.5.4 签名
-static bool flush_ready_cb(esp_lcd_panel_io_handle_t panel_io, 
-                           esp_lcd_panel_io_event_data_t *edata, 
+static bool flush_ready_cb(esp_lcd_panel_io_handle_t panel_io,
+                           esp_lcd_panel_io_event_data_t *edata,
                            void *user_ctx)
 {
     (void)panel_io;
@@ -272,15 +276,27 @@ static void lvgl_tick_cb(void *arg)
 // 显示刷新回调 - LVGL v9 签名
 static void flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map)
 {
-    esp_lcd_panel_handle_t panel = (esp_lcd_panel_handle_t)lv_display_get_user_data(disp);
-    
-    int32_t x1 = area->x1;
-    int32_t x2 = area->x2;
-    int32_t y1 = area->y1;
-    int32_t y2 = area->y2;
-    
-    esp_lcd_panel_draw_bitmap(panel, x1, y1, x2 + 1, y2 + 1, px_map);
-    // 注意：flush_ready 会在 draw_bitmap 完成后通过回调触发
+    /* The project targets ESP-IDF 5.5.4, where no ST7735 panel vendor
+     * constructor is available.  Drive the controller directly through the
+     * SPI panel IO, exactly like xiaomiao-loader does. */
+    esp_lcd_panel_io_handle_t io =
+        (esp_lcd_panel_io_handle_t)lv_display_get_user_data(disp);
+
+    const uint16_t x1 = (uint16_t)area->x1;
+    const uint16_t x2 = (uint16_t)area->x2;
+    const uint16_t y1 = (uint16_t)area->y1;
+    const uint16_t y2 = (uint16_t)area->y2;
+    const uint8_t caset[] = {x1 >> 8, x1 & 0xFF, x2 >> 8, x2 & 0xFF};
+    const uint8_t raset[] = {y1 >> 8, y1 & 0xFF, y2 >> 8, y2 & 0xFF};
+    const int width = area->x2 - area->x1 + 1;
+    const int height = area->y2 - area->y1 + 1;
+
+    ESP_ERROR_CHECK(esp_lcd_panel_io_tx_param(io, ST7735_CASET,
+                                               caset, sizeof(caset)));
+    ESP_ERROR_CHECK(esp_lcd_panel_io_tx_param(io, ST7735_RASET,
+                                               raset, sizeof(raset)));
+    ESP_ERROR_CHECK(esp_lcd_panel_io_tx_color(io, ST7735_RAMWR, px_map,
+                                               width * height * sizeof(uint16_t)));
 }
 
 esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_t lcd_panel)
@@ -304,8 +320,14 @@ esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_
         return ESP_FAIL;
     }
     
-    // 分配绘制缓冲区（使用 PSRAM）
-    size_t buf_size = LCD_H_RES * LCD_V_RES * sizeof(lv_color_t);
+    // LVGL v9 默认的 RGB565 内存序与 ST7735 的 SPI 字节序相反。
+    // 使用 SWAPPED 格式，让发送缓冲区直接符合 ST7735 的 high-byte-first 要求。
+    lv_display_set_color_format(s_disp, LV_COLOR_FORMAT_RGB565_SWAPPED);
+
+    // 按格式计算 stride；RGB565 与 swapped 都是 2 bytes/pixel。
+    uint32_t stride = lv_draw_buf_width_to_stride(
+        LCD_H_RES, LV_COLOR_FORMAT_RGB565_SWAPPED);
+    size_t buf_size = stride * LCD_V_RES;
     lv_color_t *buf1 = heap_caps_malloc(buf_size, MALLOC_CAP_SPIRAM);
     lv_color_t *buf2 = heap_caps_malloc(buf_size, MALLOC_CAP_SPIRAM);
     
@@ -316,7 +338,9 @@ esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_
     
     lv_display_set_buffers(s_disp, buf1, buf2, buf_size, LV_DISPLAY_RENDER_MODE_FULL);
     lv_display_set_flush_cb(s_disp, flush_cb);
-    lv_display_set_user_data(s_disp, s_lcd_panel);
+    // LVGL user data stores the SPI panel IO because this build uses direct
+    // ST7735 commands instead of an esp_lcd vendor panel object.
+    lv_display_set_user_data(s_disp, s_lcd_io);
     
     // 注册刷新完成回调 (ESP-IDF v5.5.4 uses callbacks struct)
     esp_lcd_panel_io_callbacks_t cbs = {
