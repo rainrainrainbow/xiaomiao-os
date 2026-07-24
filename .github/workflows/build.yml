@@ -48,7 +48,7 @@ jobs:
         if: success()
         with:
           name: xiaomiao-os-merged
-          path: build/merged.bin
+          path: build/merged-binary.bin
           retention-days: 30
 
   release:
