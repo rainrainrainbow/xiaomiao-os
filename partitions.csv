@@ -1,15 +1,13 @@
 # XiaoMiao OS partition table
-# Flash: 4MB QIO 80MHz, partition table at 0x9000
-#
-# Compatible with XiaoMiao ROM Loader
-# factory  - Loader firmware (persistent, never overwritten by OTA)
-# ota_0    - ROM slot (loader writes selected ROM app image here)
-# otadata  - Boot selection (loader sets to ota_0 before reboot;
-#            ROM sets back to factory on startup for return-to-loader)
+# Aligned with XiaoMiao ROM Loader (jsfaint/xiaomiao-loader)
+# - Partition table at 0x8000 (matches loader)
+# - factory  at 0x10000  (568KB)
+# - otadata  at 0x9E000
+# - ota_0    at 0xA0000  (launcher slot - our app runs here)
 
 # Name,   Type, SubType, Offset,   Size,     Flags
 nvs,      data, nvs,     0xA000,   0x5000,
 phy_init, data, phy,     0xF000,   0x1000,
-factory,  app,  factory, 0x10000,  0xAE000,
-otadata,  data, ota,     0xBE000,  0x2000,
-ota_0,    app,  ota_0,   0xC0000,  0x340000,
+factory,  app,  factory, 0x10000,  0x8E000,
+otadata,  data, ota,     0x9E000,  0x2000,
+launcher, app,  ota_0,   0xA0000,  0x220000,
