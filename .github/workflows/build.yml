@@ -33,15 +33,19 @@ jobs:
       - name: Generate merged binary
         run: |
           cd build
+          # 确保目录可写
+          chmod 755 .
           # 使用 esptool 合并所有固件文件
-          esptool.py --chip esp32 merge_bin \
-            --flash_mode dio \
-            --flash_freq 80m \
-            --flash_size 4MB \
+          # 注意：分区表偏移是 0x9000（在 sdkconfig.defaults 中配置）
+          esptool --chip esp32 merge-bin \
+            --flash-mode dio \
+            --flash-freq 80m \
+            --flash-size 4MB \
             -o merged.bin \
             0x1000 bootloader/bootloader.bin \
-            0x8000 partition_table/partition-table.bin \
+            0x9000 partition_table/partition-table.bin \
             0x10000 xiaomiao-os.bin
+          ls -lh merged.bin
           echo "Merged binary size: $(ls -lh merged.bin | awk '{print $5}')"
       
       - name: Upload build artifacts
