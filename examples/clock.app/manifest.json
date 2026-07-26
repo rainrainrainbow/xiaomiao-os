@@ -1,0 +1,9 @@
+{
+  "id": "com.xiaomiao.clock",
+  "name": "时钟",
+  "version": "1.0.0",
+  "author": "XiaoMiao Team",
+  "description": "显示当前时间和日期",
+  "icon": "icon.png",
+  "main": "main.py"
+}

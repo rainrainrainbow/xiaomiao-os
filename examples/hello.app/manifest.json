@@ -1,0 +1,9 @@
+{
+  "id": "com.xiaomiao.hello",
+  "name": "Hello World",
+  "version": "1.0.0",
+  "author": "XiaoMiao Team",
+  "description": "简单的Hello World示例应用",
+  "icon": "icon.png",
+  "main": "main.py"
+}

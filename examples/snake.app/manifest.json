@@ -1,0 +1,9 @@
+{
+  "id": "com.xiaomiao.snake",
+  "name": "贪吃蛇",
+  "version": "1.0.0",
+  "author": "XiaoMiao Team",
+  "description": "经典贪吃蛇游戏",
+  "icon": "icon.png",
+  "main": "main.py"
+}
