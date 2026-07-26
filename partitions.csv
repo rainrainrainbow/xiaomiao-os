@@ -1,1 +1,15 @@
-IyBYaWFvTWlhbyBPUyBwYXJ0aXRpb24gdGFibGUKIyBGbGFzaDogNE1CIFFJTyA4ME1IeiwgcGFydGl0aW9uIHRhYmxlIGF0IDB4OTAwMAojCiMgQ29tcGF0aWJsZSB3aXRoIFhpYW9NaWFvIFJPTSBMb2FkZXIKIyBmYWN0b3J5ICAtIExvYWRlciBmaXJtd2FyZSAocGVyc2lzdGVudCwgbmV2ZXIgb3ZlcndyaXR0ZW4gYnkgT1RBKQojIG90YV8wICAgIC0gUk9NIHNsb3QgKGxvYWRlciB3cml0ZXMgc2VsZWN0ZWQgUk9NIGFwcCBpbWFnZSBoZXJlKQojIG90YWRhdGEgIC0gQm9vdCBzZWxlY3Rpb24gKGxvYWRlciBzZXRzIHRvIG90YV8wIGJlZm9yZSByZWJvb3Q7CiMgICAgICAgICAgICBST00gc2V0cyBiYWNrIHRvIGZhY3Rvcnkgb24gc3RhcnR1cCBmb3IgcmV0dXJuLXRvLWxvYWRlcikKCiMgTmFtZSwgICBUeXBlLCBTdWJUeXBlLCBPZmZzZXQsICAgU2l6ZSwgICAgIEZsYWdzCm52cywgICAgICBkYXRhLCBudnMsICAgICAweEEwMDAsICAgMHg1MDAwLApwaHlfaW5pdCwgZGF0YSwgcGh5LCAgICAgMHhGMDAwLCAgIDB4MTAwMCwKZmFjdG9yeSwgIGFwcCwgIGZhY3RvcnksIDB4MTAwMDAsICAweEFFMDAwLApvdGFkYXRhLCAgZGF0YSwgb3RhLCAgICAgMHhCRTAwMCwgIDB4MjAwMCwKb3RhXzAsICAgIGFwcCwgIG90YV8wLCAgIDB4QzAwMDAsICAweDM0MDAwMCw=
+# XiaoMiao OS partition table
+# Flash: 4MB QIO 80MHz, partition table at 0x9000
+#
+# Compatible with XiaoMiao ROM Loader
+# factory  - Loader firmware (persistent, never overwritten by OTA)
+# ota_0    - ROM slot (loader writes selected ROM app image here)
+# otadata  - Boot selection (loader sets to ota_0 before reboot;
+#            ROM sets back to factory on startup for return-to-loader)
+
+# Name,   Type, SubType, Offset,   Size,     Flags
+nvs,      data, nvs,     0xA000,   0x5000,
+phy_init, data, phy,     0xF000,   0x1000,
+factory,  app,  factory, 0x10000,  0xAE000,
+otadata,  data, ota,     0xBE000,  0x2000,
+ota_0,    app,  ota_0,   0xC0000,  0x340000,

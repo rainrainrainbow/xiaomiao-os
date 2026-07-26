@@ -1,1 +1,95 @@
-LyoqCiAqIEBmaWxlIHVpX21haW4uaAogKiBAYnJpZWYg5Li7VUnnlYzpnaIgLSDln7rkuo5MVkdM55qE5qGM6Z2i57O757ufCiAqLwoKI2lmbmRlZiBVSV9NQUlOX0gKI2RlZmluZSBVSV9NQUlOX0gKCiNpbmNsdWRlICJsdmdsLmgiCiNpbmNsdWRlICJlc3BfZXJyLmgiCiNpbmNsdWRlIDxzdGRib29sLmg+CgojaWZkZWYgX19jcGx1c3BsdXMKZXh0ZXJuICJDIiB7CiNlbmRpZgoKLyoqCiAqIEBicmllZiDliJ3lp4vljJZVSeezu+e7nwogKiBAcmV0dXJuIEVTUF9PSyDmiJDlip8KICovCmVzcF9lcnJfdCB1aV9tYWluX2luaXQodm9pZCk7CgovKioKICogQGJyaWVmIOaYvuekuuS4u+Wxj+W5lQogKi8Kdm9pZCB1aV9zaG93X2hvbWUodm9pZCk7CgovKioKICogQGJyaWVmIOaYvuekuuW6lOeUqOWIl+ihqAogKi8Kdm9pZCB1aV9zaG93X2FwcF9saXN0KHZvaWQpOwoKLyoqCiAqIEBicmllZiDmmL7npLrorr7nva7nlYzpnaIKICovCnZvaWQgdWlfc2hvd19zZXR0aW5ncyh2b2lkKTsKCi8qKgogKiBAYnJpZWYg5pi+56S65Lu75Yqh566h55CG5ZmoCiAqLwp2b2lkIHVpX3Nob3dfdGFza19tYW5hZ2VyKHZvaWQpOwoKLyoqCiAqIEBicmllZiDov5Tlm57kuIrkuIDnlYzpnaIKICovCnZvaWQgdWlfZ29fYmFjayh2b2lkKTsKCi8qKgogKiBAYnJpZWYg5pu05paw5bqU55So5YiX6KGoCiAqLwp2b2lkIHVpX3VwZGF0ZV9hcHBfbGlzdCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg6K6+572u5b2T5YmN5Li76aKYCiAqIEBwYXJhbSB0aGVtZV9uYW1lIOS4u+mimOWQjeensAogKi8Kdm9pZCB1aV9zZXRfdGhlbWUoY29uc3QgY2hhciAqdGhlbWVfbmFtZSk7CgovKioKICogQGJyaWVmIOWkhOeQhuaMiemUrui+k+WFpQogKiBAcGFyYW0ga2V5IExWR0zplK7lgLwKICovCnZvaWQgdWlfaGFuZGxlX2tleShsdl9rZXlfdCBrZXkpOwoKLyoqCiAqIEBicmllZiDmt7vliqDov5DooYzkuK3nmoTlupTnlKgKICogQHBhcmFtIGlkIOW6lOeUqElECiAqIEBwYXJhbSBuYW1lIOW6lOeUqOWQjeensAogKi8Kdm9pZCB1aV9hZGRfcnVubmluZ19hcHAoY29uc3QgY2hhciAqaWQsIGNvbnN0IGNoYXIgKm5hbWUpOwoKLyoqCiAqIEBicmllZiDnp7vpmaTov5DooYzkuK3nmoTlupTnlKgKICogQHBhcmFtIGlkIOW6lOeUqElECiAqLwp2b2lkIHVpX3JlbW92ZV9ydW5uaW5nX2FwcChjb25zdCBjaGFyICppZCk7CgovKioKICogQGJyaWVmIOWIh+aNouW6lOeUqOmUgeWumueKtuaAgQogKiBAcGFyYW0gaWQg5bqU55SoSUQKICovCnZvaWQgdWlfdG9nZ2xlX2FwcF9sb2NrKGNvbnN0IGNoYXIgKmlkKTsKCi8qKgogKiBAYnJpZWYg5qOA5p+l5bqU55So5piv5ZCm6ZSB5a6aCiAqIEBwYXJhbSBpZCDlupTnlKhJRAogKiBAcmV0dXJuIHRydWUg5bey6ZSB5a6aCiAqLwpib29sIHVpX2lzX2FwcF9sb2NrZWQoY29uc3QgY2hhciAqaWQpOwoKI2lmZGVmIF9fY3BsdXNwbHVzCn0KI2VuZGlmCgojZW5kaWYgLyogVUlfTUFJTl9IICov
+/**
+ * @file ui_main.h
+ * @brief 主UI界面 - 基于LVGL的桌面系统
+ */
+
+#ifndef UI_MAIN_H
+#define UI_MAIN_H
+
+#include "lvgl.h"
+#include "esp_err.h"
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief 初始化UI系统
+ * @return ESP_OK 成功
+ */
+esp_err_t ui_main_init(void);
+
+/**
+ * @brief 显示主屏幕
+ */
+void ui_show_home(void);
+
+/**
+ * @brief 显示应用列表
+ */
+void ui_show_app_list(void);
+
+/**
+ * @brief 显示设置界面
+ */
+void ui_show_settings(void);
+
+/**
+ * @brief 显示任务管理器
+ */
+void ui_show_task_manager(void);
+
+/**
+ * @brief 返回上一界面
+ */
+void ui_go_back(void);
+
+/**
+ * @brief 更新应用列表
+ */
+void ui_update_app_list(void);
+
+/**
+ * @brief 设置当前主题
+ * @param theme_name 主题名称
+ */
+void ui_set_theme(const char *theme_name);
+
+/**
+ * @brief 处理按键输入
+ * @param key LVGL键值
+ */
+void ui_handle_key(lv_key_t key);
+
+/**
+ * @brief 添加运行中的应用
+ * @param id 应用ID
+ * @param name 应用名称
+ */
+void ui_add_running_app(const char *id, const char *name);
+
+/**
+ * @brief 移除运行中的应用
+ * @param id 应用ID
+ */
+void ui_remove_running_app(const char *id);
+
+/**
+ * @brief 切换应用锁定状态
+ * @param id 应用ID
+ */
+void ui_toggle_app_lock(const char *id);
+
+/**
+ * @brief 检查应用是否锁定
+ * @param id 应用ID
+ * @return true 已锁定
+ */
+bool ui_is_app_locked(const char *id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* UI_MAIN_H */

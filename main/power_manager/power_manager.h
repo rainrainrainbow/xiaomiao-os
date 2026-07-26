@@ -1,1 +1,118 @@
-LyoqCiAqIEBmaWxlIHBvd2VyX21hbmFnZXIuaAogKiBAYnJpZWYg55S15rqQ566h55CG5qih5Z2XIC0g55S15rGg55uR5rWL5LiO6Ieq5Yqo5LyR55ygCiAqLwoKI2lmbmRlZiBQT1dFUl9NQU5BR0VSX0gKI2RlZmluZSBQT1dFUl9NQU5BR0VSX0gKCiNpbmNsdWRlICJlc3BfZXJyLmgiCiNpbmNsdWRlIDxzdGRib29sLmg+CiNpbmNsdWRlIDxzdGRpbnQuaD4KCiNpZmRlZiBfX2NwbHVzcGx1cwpleHRlcm4gIkMiIHsKI2VuZGlmCgovLyDnlLXmsaDnirbmgIEKdHlwZWRlZiBlbnVtIHsKICAgIEJBVFRFUllfU1RBVFVTX1VOS05PV04gPSAwLAogICAgQkFUVEVSWV9TVEFUVVNfQ0hBUkdJTkcsCiAgICBCQVRURVJZX1NUQVRVU19ESVNDSEFSR0lORywKICAgIEJBVFRFUllfU1RBVFVTX0ZVTEwKfSBiYXR0ZXJ5X3N0YXR1c190OwoKLy8g55S15rqQ5LqL5Lu2CnR5cGVkZWYgZW51bSB7CiAgICBQT1dFUl9FVkVOVF9CQVRURVJZX0xPVywKICAgIFBPV0VSX0VWRU5UX0JBVFRFUllfQ1JJVElDQUwsCiAgICBQT1dFUl9FVkVOVF9TTEVFUF9FTlRFUiwKICAgIFBPV0VSX0VWRU5UX1NMRUVQX0VYSVQsCiAgICBQT1dFUl9FVkVOVF9XQUtFVVAKfSBwb3dlcl9ldmVudF90OwoKLy8g55S15rqQ5LqL5Lu25Zue6LCDCnR5cGVkZWYgdm9pZCAoKnBvd2VyX2V2ZW50X2NhbGxiYWNrX3QpKHBvd2VyX2V2ZW50X3QgZXZlbnQpOwoKLyoqCiAqIEBicmllZiDliJ3lp4vljJbnlLXmupDnrqHnkIblmagKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgcG93ZXJfbWFuYWdlcl9pbml0KHZvaWQpOwoKLyoqCiAqIEBicmllZiDlkK/liqjnlLXmsaDnm5HmtYvku7vliqEKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgcG93ZXJfbWFuYWdlcl9zdGFydF9tb25pdG9yKHZvaWQpOwoKLyoqCiAqIEBicmllZiDlgZzmraLnlLXmsaDnm5HmtYvku7vliqEKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgcG93ZXJfbWFuYWdlcl9zdG9wX21vbml0b3Iodm9pZCk7CgovKioKICogQGJyaWVmIOiOt+WPlueUteaxoOeUtemHj+eZvuWIhuavlAogKiBAcmV0dXJuIOeUtemHj+eZvuWIhuavlCAoMC0xMDApCiAqLwp1aW50OF90IHBvd2VyX21hbmFnZXJfZ2V0X2JhdHRlcnlfbGV2ZWwodm9pZCk7CgovKioKICogQGJyaWVmIOiOt+WPlueUteaxoOeUteWOiwogKiBAcmV0dXJuIOeUteaxoOeUteWOiyAobVYpCiAqLwp1aW50MzJfdCBwb3dlcl9tYW5hZ2VyX2dldF9iYXR0ZXJ5X3ZvbHRhZ2Uodm9pZCk7CgovKioKICogQGJyaWVmIOiOt+WPlueUteaxoOeKtuaAgQogKiBAcmV0dXJuIOeUteaxoOeKtuaAgQogKi8KYmF0dGVyeV9zdGF0dXNfdCBwb3dlcl9tYW5hZ2VyX2dldF9iYXR0ZXJ5X3N0YXR1cyh2b2lkKTsKCi8qKgogKiBAYnJpZWYg6K6+572u5L2O55S16YeP6ZiI5YC8CiAqIEBwYXJhbSB0aHJlc2hvbGQg6ZiI5YC855m+5YiG5q+UICgwLTEwMCkKICovCnZvaWQgcG93ZXJfbWFuYWdlcl9zZXRfbG93X2JhdHRlcnlfdGhyZXNob2xkKHVpbnQ4X3QgdGhyZXNob2xkKTsKCi8qKgogKiBAYnJpZWYg6K6+572u6Ieq5Yqo5LyR55yg5pe26Ze0CiAqIEBwYXJhbSBzZWNvbmRzIOenkuaVsO+8jDDooajnpLrnpoHnlKjoh6rliqjkvJHnnKAKICovCnZvaWQgcG93ZXJfbWFuYWdlcl9zZXRfYXV0b19zbGVlcF90aW1lb3V0KHVpbnQzMl90IHNlY29uZHMpOwoKLyoqCiAqIEBicmllZiDov5vlhaXkvJHnnKDmqKHlvI8KICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgcG93ZXJfbWFuYWdlcl9lbnRlcl9zbGVlcCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg6YCA5Ye65LyR55yg5qih5byPCiAqIEByZXR1cm4gRVNQX09LIOaIkOWKnwogKi8KZXNwX2Vycl90IHBvd2VyX21hbmFnZXJfZXhpdF9zbGVlcCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg5qOA5p+l5piv5ZCm5aSE5LqO5LyR55yg54q25oCBCiAqIEByZXR1cm4gdHJ1ZSDkvJHnnKDkuK0KICovCmJvb2wgcG93ZXJfbWFuYWdlcl9pc19zbGVlcGluZyh2b2lkKTsKCi8qKgogKiBAYnJpZWYg6YeN572u5LyR55yg6K6h5pe25Zmo77yI55So5oi35rS75Yqo5pe26LCD55So77yJCiAqLwp2b2lkIHBvd2VyX21hbmFnZXJfcmVzZXRfc2xlZXBfdGltZXIodm9pZCk7CgovKioKICogQGJyaWVmIOazqOWGjOeUtea6kOS6i+S7tuWbnuiwgwogKiBAcGFyYW0gY2FsbGJhY2sg5Zue6LCD5Ye95pWwCiAqLwp2b2lkIHBvd2VyX21hbmFnZXJfcmVnaXN0ZXJfY2FsbGJhY2socG93ZXJfZXZlbnRfY2FsbGJhY2tfdCBjYWxsYmFjayk7CgojaWZkZWYgX19jcGx1c3BsdXMKfQojZW5kaWYKCiNlbmRpZiAvKiBQT1dFUl9NQU5BR0VSX0ggKi8K
+/**
+ * @file power_manager.h
+ * @brief 电源管理模块 - 电池监测与自动休眠
+ */
+
+#ifndef POWER_MANAGER_H
+#define POWER_MANAGER_H
+
+#include "esp_err.h"
+#include <stdbool.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// 电池状态
+typedef enum {
+    BATTERY_STATUS_UNKNOWN = 0,
+    BATTERY_STATUS_CHARGING,
+    BATTERY_STATUS_DISCHARGING,
+    BATTERY_STATUS_FULL
+} battery_status_t;
+
+// 电源事件
+typedef enum {
+    POWER_EVENT_BATTERY_LOW,
+    POWER_EVENT_BATTERY_CRITICAL,
+    POWER_EVENT_SLEEP_ENTER,
+    POWER_EVENT_SLEEP_EXIT,
+    POWER_EVENT_WAKEUP
+} power_event_t;
+
+// 电源事件回调
+typedef void (*power_event_callback_t)(power_event_t event);
+
+/**
+ * @brief 初始化电源管理器
+ * @return ESP_OK 成功
+ */
+esp_err_t power_manager_init(void);
+
+/**
+ * @brief 启动电池监测任务
+ * @return ESP_OK 成功
+ */
+esp_err_t power_manager_start_monitor(void);
+
+/**
+ * @brief 停止电池监测任务
+ * @return ESP_OK 成功
+ */
+esp_err_t power_manager_stop_monitor(void);
+
+/**
+ * @brief 获取电池电量百分比
+ * @return 电量百分比 (0-100)
+ */
+uint8_t power_manager_get_battery_level(void);
+
+/**
+ * @brief 获取电池电压
+ * @return 电池电压 (mV)
+ */
+uint32_t power_manager_get_battery_voltage(void);
+
+/**
+ * @brief 获取电池状态
+ * @return 电池状态
+ */
+battery_status_t power_manager_get_battery_status(void);
+
+/**
+ * @brief 设置低电量阈值
+ * @param threshold 阈值百分比 (0-100)
+ */
+void power_manager_set_low_battery_threshold(uint8_t threshold);
+
+/**
+ * @brief 设置自动休眠时间
+ * @param seconds 秒数，0表示禁用自动休眠
+ */
+void power_manager_set_auto_sleep_timeout(uint32_t seconds);
+
+/**
+ * @brief 进入休眠模式
+ * @return ESP_OK 成功
+ */
+esp_err_t power_manager_enter_sleep(void);
+
+/**
+ * @brief 退出休眠模式
+ * @return ESP_OK 成功
+ */
+esp_err_t power_manager_exit_sleep(void);
+
+/**
+ * @brief 检查是否处于休眠状态
+ * @return true 休眠中
+ */
+bool power_manager_is_sleeping(void);
+
+/**
+ * @brief 重置休眠计时器（用户活动时调用）
+ */
+void power_manager_reset_sleep_timer(void);
+
+/**
+ * @brief 注册电源事件回调
+ * @param callback 回调函数
+ */
+void power_manager_register_callback(power_event_callback_t callback);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* POWER_MANAGER_H */

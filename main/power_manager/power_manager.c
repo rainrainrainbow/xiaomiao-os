@@ -1,1 +1,401 @@
-LyoqCiAqIEBmaWxlIHBvd2VyX21hbmFnZXIuYwogKiBAYnJpZWYg55S15rqQ566h55CG5qih5Z2X5a6e546wIC0g55S15rGg55uR5rWL5LiO6Ieq5Yqo5LyR55ygCiAqLwoKI2luY2x1ZGUgInBvd2VyX21hbmFnZXIuaCIKI2luY2x1ZGUgImVzcF9sb2cuaCIKI2luY2x1ZGUgImVzcF9hZGMvYWRjX29uZXNob3QuaCIKI2luY2x1ZGUgImVzcF9hZGMvYWRjX2NhbGkuaCIKI2luY2x1ZGUgImVzcF9hZGMvYWRjX2NhbGlfc2NoZW1lLmgiCiNpbmNsdWRlICJlc3BfdGltZXIuaCIKI2luY2x1ZGUgImZyZWVydG9zL0ZyZWVSVE9TLmgiCiNpbmNsdWRlICJmcmVlcnRvcy90YXNrLmgiCiNpbmNsdWRlICJkcml2ZXIvZ3Bpby5oIgojaW5jbHVkZSA8bWF0aC5oPgoKc3RhdGljIGNvbnN0IGNoYXIgKlRBRyA9ICJwb3dlcl9tYW5hZ2VyIjsKCi8vIOehrOS7tumFjee9rgojZGVmaW5lIEJBVFRfQURDX0NIQU5ORUwgICAgQURDX0NIQU5ORUxfNgojZGVmaW5lIEJBVFRfRElWSURFUl9SQVRJTyAgKCg5LjEgKyAyLjQpIC8gMi40KSAgLy8g5YiG5Y6L5q+UIDQuNzkKI2RlZmluZSBBRENfU0FNUExFX0NPVU5UICAgIDEwICAvLyDlpJrmrKHph4fmoLflj5blubPlnYcKCi8vIOeUteaxoOeUteWOi+mYiOWAvCAobVYpCiNkZWZpbmUgQkFUVEVSWV9WT0xUQUdFX0ZVTEwgICAgICAgIDQyMDAKI2RlZmluZSBCQVRURVJZX1ZPTFRBR0VfTk9NSU5BTCAgICAgMzcwMAojZGVmaW5lIEJBVFRFUllfVk9MVEFHRV9FTVBUWSAgICAgICAzMzAwCiNkZWZpbmUgQkFUVEVSWV9WT0xUQUdFX0NSSVRJQ0FMICAgIDMxMDAKCi8vIOm7mOiupOmFjee9rgojZGVmaW5lIERFRkFVTFRfTE9XX0JBVFRFUllfVEhSRVNIT0xEICAgMjAgIC8vIDIwJQojZGVmaW5lIERFRkFVTFRfQVVUT19TTEVFUF9USU1FT1VUICAgICAgMzAwIC8vIDXliIbpkp8KCi8vIOeUtea6kOeuoeeQhuWZqOeKtuaAgQpzdGF0aWMgc3RydWN0IHsKICAgIGJvb2wgaW5pdGlhbGl6ZWQ7CiAgICBib29sIG1vbml0b3Jpbmc7CiAgICBUYXNrSGFuZGxlX3QgbW9uaXRvcl90YXNrX2hhbmRsZTsKICAgIAogICAgLy8gQURDIOWPpeafhAogICAgYWRjX29uZXNob3RfdW5pdF9oYW5kbGVfdCBhZGMxX2hhbmRsZTsKICAgIGFkY19jYWxpX2hhbmRsZV90IGNhbGlfaGFuZGxlOwogICAgYm9vbCBjYWxpX2VuYWJsZWQ7CiAgICAKICAgIC8vIOeUteaxoOeKtuaAgQogICAgdWludDMyX3QgYmF0dGVyeV92b2x0YWdlOyAgLy8gbVYKICAgIHVpbnQ4X3QgYmF0dGVyeV9sZXZlbDsgICAgIC8vIDAtMTAwJQogICAgYmF0dGVyeV9zdGF0dXNfdCBzdGF0dXM7CiAgICAKICAgIC8vIOmFjee9rgogICAgdWludDhfdCBsb3dfYmF0dGVyeV90aHJlc2hvbGQ7CiAgICB1aW50MzJfdCBhdXRvX3NsZWVwX3RpbWVvdXQ7ICAvLyDnp5IKICAgIAogICAgLy8g5LyR55yg566h55CGCiAgICBib29sIHNsZWVwaW5nOwogICAgdWludDMyX3QgbGFzdF9hY3Rpdml0eV90aW1lOyAgLy8g5q+r56eS5pe26Ze05oizCiAgICAKICAgIC8vIOWbnuiwgwogICAgcG93ZXJfZXZlbnRfY2FsbGJhY2tfdCBldmVudF9jYWxsYmFjazsKfSBzX3BtID0gezB9OwoKLy8g6I635Y+W5b2T5YmN5pe26Ze05oizICjmr6vnp5IpCnN0YXRpYyB1aW50MzJfdCBnZXRfdGltZXN0YW1wX21zKHZvaWQpCnsKICAgIHJldHVybiAodWludDMyX3QpKGVzcF90aW1lcl9nZXRfdGltZSgpIC8gMTAwMCk7Cn0KCi8vIEFEQyDph4fmoLflubborqHnrpfnlLXljosKc3RhdGljIHVpbnQzMl90IHJlYWRfYmF0dGVyeV92b2x0YWdlKHZvaWQpCnsKICAgIGlmICghc19wbS5hZGMxX2hhbmRsZSkgewogICAgICAgIHJldHVybiAwOwogICAgfQogICAgCiAgICBpbnQgYWRjX3Jhd19zdW0gPSAwOwogICAgZm9yIChpbnQgaSA9IDA7IGkgPCBBRENfU0FNUExFX0NPVU5UOyBpKyspIHsKICAgICAgICBpbnQgcmF3OwogICAgICAgIGlmIChhZGNfb25lc2hvdF9yZWFkKHNfcG0uYWRjMV9oYW5kbGUsIEJBVFRfQURDX0NIQU5ORUwsICZyYXcpID09IEVTUF9PSykgewogICAgICAgICAgICBhZGNfcmF3X3N1bSArPSByYXc7CiAgICAgICAgfQogICAgICAgIHZUYXNrRGVsYXkocGRNU19UT19USUNLUygxKSk7CiAgICB9CiAgICAKICAgIGludCBhZGNfcmF3X2F2ZyA9IGFkY19yYXdfc3VtIC8gQURDX1NBTVBMRV9DT1VOVDsKICAgIAogICAgLy8g6L2s5o2i5Li655S15Y6LCiAgICBpbnQgdm9sdGFnZV9tdiA9IDA7CiAgICBpZiAoc19wbS5jYWxpX2VuYWJsZWQgJiYgc19wbS5jYWxpX2hhbmRsZSkgewogICAgICAgIGFkY19jYWxpX3Jhd190b192b2x0YWdlKHNfcG0uY2FsaV9oYW5kbGUsIGFkY19yYXdfYXZnLCAmdm9sdGFnZV9tdik7CiAgICB9IGVsc2UgewogICAgICAgIC8vIOaXoOagoeWHhuaXtuS9v+eUqOi/keS8vOWFrOW8jwogICAgICAgIC8vIEVTUDMyIEFEQzogMTLkvY0sIDExZELoobDlh48sIOWPguiAg+eUteWOi+e6pjExMDBtVgogICAgICAgIHZvbHRhZ2VfbXYgPSAoYWRjX3Jhd19hdmcgKiAxMTAwICogMikgLyA0MDk1OwogICAgfQogICAgCiAgICAvLyDogIPomZHliIbljovnlLXpmLsKICAgIHZvbHRhZ2VfbXYgPSAodWludDMyX3QpKHZvbHRhZ2VfbXYgKiBCQVRUX0RJVklERVJfUkFUSU8pOwogICAgCiAgICByZXR1cm4gdm9sdGFnZV9tdjsKfQoKLy8g5qC55o2u55S15Y6L6K6h566X55S16YeP55m+5YiG5q+UCnN0YXRpYyB1aW50OF90IHZvbHRhZ2VfdG9fcGVyY2VudGFnZSh1aW50MzJfdCB2b2x0YWdlX212KQp7CiAgICBpZiAodm9sdGFnZV9tdiA+PSBCQVRURVJZX1ZPTFRBR0VfRlVMTCkgewogICAgICAgIHJldHVybiAxMDA7CiAgICB9CiAgICBpZiAodm9sdGFnZV9tdiA8PSBCQVRURVJZX1ZPTFRBR0VfQ1JJVElDQUwpIHsKICAgICAgICByZXR1cm4gMDsKICAgIH0KICAgIAogICAgLy8g5L2/55So5YiG5q6157q/5oCn5o+S5YC8CiAgICAvLyAzLjNWIC0gMy43VjogMCUgLSAyMCUKICAgIC8vIDMuN1YgLSA0LjBWOiAyMCUgLSA2MCUKICAgIC8vIDQuMFYgLSA0LjJWOiA2MCUgLSAxMDAlCiAgICAKICAgIGlmICh2b2x0YWdlX212IDwgMzcwMCkgewogICAgICAgIC8vIDMuM1YgLSAzLjdWIOaYoOWwhOWIsCAwJSAtIDIwJQogICAgICAgIGZsb2F0IHJhdGlvID0gKGZsb2F0KSh2b2x0YWdlX212IC0gMzMwMCkgLyAoMzcwMCAtIDMzMDApOwogICAgICAgIHJldHVybiAodWludDhfdCkocmF0aW8gKiAyMCk7CiAgICB9IGVsc2UgaWYgKHZvbHRhZ2VfbXYgPCA0MDAwKSB7CiAgICAgICAgLy8gMy43ViAtIDQuMFYg5pig5bCE5YiwIDIwJSAtIDYwJQogICAgICAgIGZsb2F0IHJhdGlvID0gKGZsb2F0KSh2b2x0YWdlX212IC0gMzcwMCkgLyAoNDAwMCAtIDM3MDApOwogICAgICAgIHJldHVybiAodWludDhfdCkoMjAgKyByYXRpbyAqIDQwKTsKICAgIH0gZWxzZSB7CiAgICAgICAgLy8gNC4wViAtIDQuMlYg5pig5bCE5YiwIDYwJSAtIDEwMCUKICAgICAgICBmbG9hdCByYXRpbyA9IChmbG9hdCkodm9sdGFnZV9tdiAtIDQwMDApIC8gKDQyMDAgLSA0MDAwKTsKICAgICAgICByZXR1cm4gKHVpbnQ4X3QpKDYwICsgcmF0aW8gKiA0MCk7CiAgICB9Cn0KCi8vIOinpuWPkeeUtea6kOS6i+S7tgpzdGF0aWMgdm9pZCB0cmlnZ2VyX2V2ZW50KHBvd2VyX2V2ZW50X3QgZXZlbnQpCnsKICAgIGlmIChzX3BtLmV2ZW50X2NhbGxiYWNrKSB7CiAgICAgICAgc19wbS5ldmVudF9jYWxsYmFjayhldmVudCk7CiAgICB9Cn0KCi8vIOabtOaWsOeUteaxoOeKtuaAgQpzdGF0aWMgdm9pZCB1cGRhdGVfYmF0dGVyeV9zdGF0dXModm9pZCkKewogICAgLy8g6K+75Y+W55S15Y6LCiAgICBzX3BtLmJhdHRlcnlfdm9sdGFnZSA9IHJlYWRfYmF0dGVyeV92b2x0YWdlKCk7CiAgICAKICAgIC8vIOiuoeeul+eUtemHjwogICAgc19wbS5iYXR0ZXJ5X2xldmVsID0gdm9sdGFnZV90b19wZXJjZW50YWdlKHNfcG0uYmF0dGVyeV92b2x0YWdlKTsKICAgIAogICAgLy8g5Yik5pat54q25oCBCiAgICBpZiAoc19wbS5iYXR0ZXJ5X3ZvbHRhZ2UgPj0gQkFUVEVSWV9WT0xUQUdFX0ZVTEwpIHsKICAgICAgICBzX3BtLnN0YXR1cyA9IEJBVFRFUllfU1RBVFVTX0ZVTEw7CiAgICB9IGVsc2UgaWYgKHNfcG0uYmF0dGVyeV92b2x0YWdlID4gQkFUVEVSWV9WT0xUQUdFX05PTUlOQUwpIHsKICAgICAgICBzX3BtLnN0YXR1cyA9IEJBVFRFUllfU1RBVFVTX0RJU0NIQVJHSU5HOwogICAgfSBlbHNlIGlmIChzX3BtLmJhdHRlcnlfdm9sdGFnZSA8IEJBVFRFUllfVk9MVEFHRV9DUklUSUNBTCkgewogICAgICAgIHNfcG0uc3RhdHVzID0gQkFUVEVSWV9TVEFUVVNfVU5LTk9XTjsKICAgICAgICB0cmlnZ2VyX2V2ZW50KFBPV0VSX0VWRU5UX0JBVFRFUllfQ1JJVElDQUwpOwogICAgfSBlbHNlIHsKICAgICAgICBzX3BtLnN0YXR1cyA9IEJBVFRFUllfU1RBVFVTX0RJU0NIQVJHSU5HOwogICAgfQogICAgCiAgICAvLyDmo4Dmn6XkvY7nlLXph48KICAgIGlmIChzX3BtLmJhdHRlcnlfbGV2ZWwgPD0gc19wbS5sb3dfYmF0dGVyeV90aHJlc2hvbGQpIHsKICAgICAgICB0cmlnZ2VyX2V2ZW50KFBPV0VSX0VWRU5UX0JBVFRFUllfTE9XKTsKICAgIH0KICAgIAogICAgRVNQX0xPR0QoVEFHLCAiQmF0dGVyeTogJXVtViwgJXUlJSIsIHNfcG0uYmF0dGVyeV92b2x0YWdlLCBzX3BtLmJhdHRlcnlfbGV2ZWwpOwp9CgovLyDmo4Dmn6Xoh6rliqjkvJHnnKAKc3RhdGljIHZvaWQgY2hlY2tfYXV0b19zbGVlcCh2b2lkKQp7CiAgICBpZiAoc19wbS5hdXRvX3NsZWVwX3RpbWVvdXQgPT0gMCkgewogICAgICAgIHJldHVybjsgIC8vIOemgeeUqOiHquWKqOS8keecoAogICAgfQogICAgCiAgICBpZiAoc19wbS5zbGVlcGluZykgewogICAgICAgIHJldHVybjsgIC8vIOW3sue7j+S8keecoAogICAgfQogICAgCiAgICB1aW50MzJfdCBjdXJyZW50X3RpbWUgPSBnZXRfdGltZXN0YW1wX21zKCk7CiAgICB1aW50MzJfdCBpZGxlX3RpbWUgPSAoY3VycmVudF90aW1lIC0gc19wbS5sYXN0X2FjdGl2aXR5X3RpbWUpIC8gMTAwMDsgIC8vIOenkgogICAgCiAgICBpZiAoaWRsZV90aW1lID49IHNfcG0uYXV0b19zbGVlcF90aW1lb3V0KSB7CiAgICAgICAgRVNQX0xPR0koVEFHLCAiQXV0byBzbGVlcCB0cmlnZ2VyZWQgYWZ0ZXIgJXUgc2Vjb25kcyBpZGxlIiwgaWRsZV90aW1lKTsKICAgICAgICBwb3dlcl9tYW5hZ2VyX2VudGVyX3NsZWVwKCk7CiAgICB9Cn0KCi8vIOeUteaxoOebkea1i+S7u+WKoQpzdGF0aWMgdm9pZCBiYXR0ZXJ5X21vbml0b3JfdGFzayh2b2lkICphcmcpCnsKICAgIEVTUF9MT0dJKFRBRywgIkJhdHRlcnkgbW9uaXRvciB0YXNrIHN0YXJ0ZWQiKTsKICAgIAogICAgd2hpbGUgKHNfcG0ubW9uaXRvcmluZykgewogICAgICAgIC8vIOabtOaWsOeUteaxoOeKtuaAgQogICAgICAgIHVwZGF0ZV9iYXR0ZXJ5X3N0YXR1cygpOwogICAgICAgIAogICAgICAgIC8vIOajgOafpeiHquWKqOS8keecoAogICAgICAgIGNoZWNrX2F1dG9fc2xlZXAoKTsKICAgICAgICAKICAgICAgICAvLyDmr48156eS5qOA5rWL5LiA5qyhCiAgICAgICAgdlRhc2tEZWxheShwZE1TX1RPX1RJQ0tTKDUwMDApKTsKICAgIH0KICAgIAogICAgRVNQX0xPR0koVEFHLCAiQmF0dGVyeSBtb25pdG9yIHRhc2sgc3RvcHBlZCIpOwogICAgc19wbS5tb25pdG9yX3Rhc2tfaGFuZGxlID0gTlVMTDsKICAgIHZUYXNrRGVsZXRlKE5VTEwpOwp9Cgplc3BfZXJyX3QgcG93ZXJfbWFuYWdlcl9pbml0KHZvaWQpCnsKICAgIGlmIChzX3BtLmluaXRpYWxpemVkKSB7CiAgICAgICAgRVNQX0xPR1coVEFHLCAiQWxyZWFkeSBpbml0aWFsaXplZCIpOwogICAgICAgIHJldHVybiBFU1BfT0s7CiAgICB9CiAgICAKICAgIEVTUF9MT0dJKFRBRywgIkluaXRpYWxpemluZyBwb3dlciBtYW5hZ2VyIik7CiAgICAKICAgIC8vIOWIneWni+WMliBBREMKICAgIGFkY19vbmVzaG90X3VuaXRfaW5pdF9jZmdfdCBpbml0X2NvbmZpZyA9IHsKICAgICAgICAudW5pdF9pZCA9IEFEQ19VTklUXzEsCiAgICB9OwogICAgZXNwX2Vycl90IHJldCA9IGFkY19vbmVzaG90X25ld191bml0KCZpbml0X2NvbmZpZywgJnNfcG0uYWRjMV9oYW5kbGUpOwogICAgaWYgKHJldCAhPSBFU1BfT0spIHsKICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gaW5pdGlhbGl6ZSBBREM6ICVzIiwgZXNwX2Vycl90b19uYW1lKHJldCkpOwogICAgICAgIHJldHVybiByZXQ7CiAgICB9CiAgICAKICAgIGFkY19vbmVzaG90X2NoYW5fY2ZnX3QgY2hhbl9jb25maWcgPSB7CiAgICAgICAgLmJpdHdpZHRoID0gQURDX0JJVFdJRFRIX0RFRkFVTFQsCiAgICAgICAgLmF0dGVuID0gQURDX0FUVEVOX0RCXzEyLAogICAgfTsKICAgIHJldCA9IGFkY19vbmVzaG90X2NvbmZpZ19jaGFubmVsKHNfcG0uYWRjMV9oYW5kbGUsIEJBVFRfQURDX0NIQU5ORUwsICZjaGFuX2NvbmZpZyk7CiAgICBpZiAocmV0ICE9IEVTUF9PSykgewogICAgICAgIEVTUF9MT0dFKFRBRywgIkZhaWxlZCB0byBjb25maWcgQURDIGNoYW5uZWw6ICVzIiwgZXNwX2Vycl90b19uYW1lKHJldCkpOwogICAgICAgIHJldHVybiByZXQ7CiAgICB9CiAgICAKICAgIC8vIEFEQyDmoKHlh4YgLSBFU1AtSURGIHY1LjUuNCBBUEkg5Y+Y5YyW6L6D5aSn77yM5pqC5pe256aB55SoCiAgICAvLyDkvb/nlKjov5HkvLzlhazlvI/orqHnrpfnlLXljosKICAgIHNfcG0uY2FsaV9oYW5kbGUgPSBOVUxMOwogICAgc19wbS5jYWxpX2VuYWJsZWQgPSBmYWxzZTsKICAgIEVTUF9MT0dXKFRBRywgIkFEQyBjYWxpYnJhdGlvbiBkaXNhYmxlZCwgdXNpbmcgYXBwcm94aW1hdGUgZm9ybXVsYSIpOwogICAgcmV0ID0gRVNQX09LOwogICAgCiAgICAvLyDorr7nva7pu5jorqTphY3nva4KICAgIHNfcG0ubG93X2JhdHRlcnlfdGhyZXNob2xkID0gREVGQVVMVF9MT1dfQkFUVEVSWV9USFJFU0hPTEQ7CiAgICBzX3BtLmF1dG9fc2xlZXBfdGltZW91dCA9IERFRkFVTFRfQVVUT19TTEVFUF9USU1FT1VUOwogICAgc19wbS5sYXN0X2FjdGl2aXR5X3RpbWUgPSBnZXRfdGltZXN0YW1wX21zKCk7CiAgICAKICAgIC8vIOWIneWni+ivu+WPlueUteaxoOeKtuaAgQogICAgdXBkYXRlX2JhdHRlcnlfc3RhdHVzKCk7CiAgICAKICAgIHNfcG0uaW5pdGlhbGl6ZWQgPSB0cnVlOwogICAgRVNQX0xPR0koVEFHLCAiUG93ZXIgbWFuYWdlciBpbml0aWFsaXplZC4gQmF0dGVyeTogJXVtViwgJXUlJSIsIAogICAgICAgICAgICAgc19wbS5iYXR0ZXJ5X3ZvbHRhZ2UsIHNfcG0uYmF0dGVyeV9sZXZlbCk7CiAgICAKICAgIHJldHVybiBFU1BfT0s7Cn0KCmVzcF9lcnJfdCBwb3dlcl9tYW5hZ2VyX3N0YXJ0X21vbml0b3Iodm9pZCkKewogICAgaWYgKCFzX3BtLmluaXRpYWxpemVkKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiTm90IGluaXRpYWxpemVkIik7CiAgICAgICAgcmV0dXJuIEVTUF9FUlJfSU5WQUxJRF9TVEFURTsKICAgIH0KICAgIAogICAgaWYgKHNfcG0ubW9uaXRvcmluZykgewogICAgICAgIEVTUF9MT0dXKFRBRywgIkFscmVhZHkgbW9uaXRvcmluZyIpOwogICAgICAgIHJldHVybiBFU1BfT0s7CiAgICB9CiAgICAKICAgIEVTUF9MT0dJKFRBRywgIlN0YXJ0aW5nIGJhdHRlcnkgbW9uaXRvciIpOwogICAgCiAgICBzX3BtLm1vbml0b3JpbmcgPSB0cnVlOwogICAgQmFzZVR5cGVfdCByZXQgPSB4VGFza0NyZWF0ZSgKICAgICAgICBiYXR0ZXJ5X21vbml0b3JfdGFzaywKICAgICAgICAiYmF0dF9tb25pdG9yIiwKICAgICAgICA0MDk2LAogICAgICAgIE5VTEwsCiAgICAgICAgNSwKICAgICAgICAmc19wbS5tb25pdG9yX3Rhc2tfaGFuZGxlCiAgICApOwogICAgCiAgICBpZiAocmV0ICE9IHBkUEFTUykgewogICAgICAgIEVTUF9MT0dFKFRBRywgIkZhaWxlZCB0byBjcmVhdGUgbW9uaXRvciB0YXNrIik7CiAgICAgICAgc19wbS5tb25pdG9yaW5nID0gZmFsc2U7CiAgICAgICAgcmV0dXJuIEVTUF9GQUlMOwogICAgfQogICAgCiAgICByZXR1cm4gRVNQX09LOwp9Cgplc3BfZXJyX3QgcG93ZXJfbWFuYWdlcl9zdG9wX21vbml0b3Iodm9pZCkKewogICAgaWYgKCFzX3BtLm1vbml0b3JpbmcpIHsKICAgICAgICByZXR1cm4gRVNQX09LOwogICAgfQogICAgCiAgICBFU1BfTE9HSShUQUcsICJTdG9wcGluZyBiYXR0ZXJ5IG1vbml0b3IiKTsKICAgIAogICAgc19wbS5tb25pdG9yaW5nID0gZmFsc2U7CiAgICAKICAgIC8vIOetieW+heS7u+WKoee7k+adnwogICAgaWYgKHNfcG0ubW9uaXRvcl90YXNrX2hhbmRsZSkgewogICAgICAgIHZUYXNrRGVsYXkocGRNU19UT19USUNLUygxMDApKTsKICAgICAgICBzX3BtLm1vbml0b3JfdGFza19oYW5kbGUgPSBOVUxMOwogICAgfQogICAgCiAgICByZXR1cm4gRVNQX09LOwp9Cgp1aW50OF90IHBvd2VyX21hbmFnZXJfZ2V0X2JhdHRlcnlfbGV2ZWwodm9pZCkKewogICAgcmV0dXJuIHNfcG0uYmF0dGVyeV9sZXZlbDsKfQoKdWludDMyX3QgcG93ZXJfbWFuYWdlcl9nZXRfYmF0dGVyeV92b2x0YWdlKHZvaWQpCnsKICAgIHJldHVybiBzX3BtLmJhdHRlcnlfdm9sdGFnZTsKfQoKYmF0dGVyeV9zdGF0dXNfdCBwb3dlcl9tYW5hZ2VyX2dldF9iYXR0ZXJ5X3N0YXR1cyh2b2lkKQp7CiAgICByZXR1cm4gc19wbS5zdGF0dXM7Cn0KCnZvaWQgcG93ZXJfbWFuYWdlcl9zZXRfbG93X2JhdHRlcnlfdGhyZXNob2xkKHVpbnQ4X3QgdGhyZXNob2xkKQp7CiAgICBpZiAodGhyZXNob2xkID4gMTAwKSB7CiAgICAgICAgdGhyZXNob2xkID0gMTAwOwogICAgfQogICAgc19wbS5sb3dfYmF0dGVyeV90aHJlc2hvbGQgPSB0aHJlc2hvbGQ7CiAgICBFU1BfTE9HSShUQUcsICJMb3cgYmF0dGVyeSB0aHJlc2hvbGQgc2V0IHRvICV1JSUiLCB0aHJlc2hvbGQpOwp9Cgp2b2lkIHBvd2VyX21hbmFnZXJfc2V0X2F1dG9fc2xlZXBfdGltZW91dCh1aW50MzJfdCBzZWNvbmRzKQp7CiAgICBzX3BtLmF1dG9fc2xlZXBfdGltZW91dCA9IHNlY29uZHM7CiAgICBFU1BfTE9HSShUQUcsICJBdXRvIHNsZWVwIHRpbWVvdXQgc2V0IHRvICV1IHNlY29uZHMiLCBzZWNvbmRzKTsKfQoKZXNwX2Vycl90IHBvd2VyX21hbmFnZXJfZW50ZXJfc2xlZXAodm9pZCkKewogICAgaWYgKHNfcG0uc2xlZXBpbmcpIHsKICAgICAgICByZXR1cm4gRVNQX09LOwogICAgfQogICAgCiAgICBFU1BfTE9HSShUQUcsICJFbnRlcmluZyBzbGVlcCBtb2RlIik7CiAgICAKICAgIHNfcG0uc2xlZXBpbmcgPSB0cnVlOwogICAgdHJpZ2dlcl9ldmVudChQT1dFUl9FVkVOVF9TTEVFUF9FTlRFUik7CiAgICAKICAgIC8vIFRPRE86IOWunueOsOWunumZheeahOS8keecoOmAu+i+kQogICAgLy8gLSDlhbPpl60gTENEIOiDjOWFiQogICAgLy8gLSDpmY3kvY4gQ1BVIOmikeeOhwogICAgLy8gLSDov5vlhaUgbGlnaHQgc2xlZXAg5oiWIGRlZXAgc2xlZXAKICAgIAogICAgcmV0dXJuIEVTUF9PSzsKfQoKZXNwX2Vycl90IHBvd2VyX21hbmFnZXJfZXhpdF9zbGVlcCh2b2lkKQp7CiAgICBpZiAoIXNfcG0uc2xlZXBpbmcpIHsKICAgICAgICByZXR1cm4gRVNQX09LOwogICAgfQogICAgCiAgICBFU1BfTE9HSShUQUcsICJFeGl0aW5nIHNsZWVwIG1vZGUiKTsKICAgIAogICAgc19wbS5zbGVlcGluZyA9IGZhbHNlOwogICAgc19wbS5sYXN0X2FjdGl2aXR5X3RpbWUgPSBnZXRfdGltZXN0YW1wX21zKCk7CiAgICAKICAgIHRyaWdnZXJfZXZlbnQoUE9XRVJfRVZFTlRfU0xFRVBfRVhJVCk7CiAgICB0cmlnZ2VyX2V2ZW50KFBPV0VSX0VWRU5UX1dBS0VVUCk7CiAgICAKICAgIC8vIFRPRE86IOWunueOsOWunumZheeahOWUpOmGkumAu+i+kQogICAgLy8gLSDlvIDlkK8gTENEIOiDjOWFiQogICAgLy8gLSDmgaLlpI0gQ1BVIOmikeeOhwogICAgCiAgICByZXR1cm4gRVNQX09LOwp9Cgpib29sIHBvd2VyX21hbmFnZXJfaXNfc2xlZXBpbmcodm9pZCkKewogICAgcmV0dXJuIHNfcG0uc2xlZXBpbmc7Cn0KCnZvaWQgcG93ZXJfbWFuYWdlcl9yZXNldF9zbGVlcF90aW1lcih2b2lkKQp7CiAgICBzX3BtLmxhc3RfYWN0aXZpdHlfdGltZSA9IGdldF90aW1lc3RhbXBfbXMoKTsKICAgIAogICAgLy8g5aaC5p6c5q2j5Zyo5LyR55yg77yM5YiZ5ZSk6YaSCiAgICBpZiAoc19wbS5zbGVlcGluZykgewogICAgICAgIHBvd2VyX21hbmFnZXJfZXhpdF9zbGVlcCgpOwogICAgfQp9Cgp2b2lkIHBvd2VyX21hbmFnZXJfcmVnaXN0ZXJfY2FsbGJhY2socG93ZXJfZXZlbnRfY2FsbGJhY2tfdCBjYWxsYmFjaykKewogICAgc19wbS5ldmVudF9jYWxsYmFjayA9IGNhbGxiYWNrOwp9
+/**
+ * @file power_manager.c
+ * @brief 电源管理模块实现 - 电池监测与自动休眠
+ */
+
+#include "power_manager.h"
+#include "esp_log.h"
+#include "esp_adc/adc_oneshot.h"
+#include "esp_adc/adc_cali.h"
+#include "esp_adc/adc_cali_scheme.h"
+#include "esp_timer.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
+#include <math.h>
+
+static const char *TAG = "power_manager";
+
+// 硬件配置
+#define BATT_ADC_CHANNEL    ADC_CHANNEL_6
+#define BATT_DIVIDER_RATIO  ((9.1 + 2.4) / 2.4)  // 分压比 4.79
+#define ADC_SAMPLE_COUNT    10  // 多次采样取平均
+
+// 电池电压阈值 (mV)
+#define BATTERY_VOLTAGE_FULL        4200
+#define BATTERY_VOLTAGE_NOMINAL     3700
+#define BATTERY_VOLTAGE_EMPTY       3300
+#define BATTERY_VOLTAGE_CRITICAL    3100
+
+// 默认配置
+#define DEFAULT_LOW_BATTERY_THRESHOLD   20  // 20%
+#define DEFAULT_AUTO_SLEEP_TIMEOUT      300 // 5分钟
+
+// 电源管理器状态
+static struct {
+    bool initialized;
+    bool monitoring;
+    TaskHandle_t monitor_task_handle;
+    
+    // ADC 句柄
+    adc_oneshot_unit_handle_t adc1_handle;
+    adc_cali_handle_t cali_handle;
+    bool cali_enabled;
+    
+    // 电池状态
+    uint32_t battery_voltage;  // mV
+    uint8_t battery_level;     // 0-100%
+    battery_status_t status;
+    
+    // 配置
+    uint8_t low_battery_threshold;
+    uint32_t auto_sleep_timeout;  // 秒
+    
+    // 休眠管理
+    bool sleeping;
+    uint32_t last_activity_time;  // 毫秒时间戳
+    
+    // 回调
+    power_event_callback_t event_callback;
+} s_pm = {0};
+
+// 获取当前时间戳 (毫秒)
+static uint32_t get_timestamp_ms(void)
+{
+    return (uint32_t)(esp_timer_get_time() / 1000);
+}
+
+// ADC 采样并计算电压
+static uint32_t read_battery_voltage(void)
+{
+    if (!s_pm.adc1_handle) {
+        return 0;
+    }
+    
+    int adc_raw_sum = 0;
+    for (int i = 0; i < ADC_SAMPLE_COUNT; i++) {
+        int raw;
+        if (adc_oneshot_read(s_pm.adc1_handle, BATT_ADC_CHANNEL, &raw) == ESP_OK) {
+            adc_raw_sum += raw;
+        }
+        vTaskDelay(pdMS_TO_TICKS(1));
+    }
+    
+    int adc_raw_avg = adc_raw_sum / ADC_SAMPLE_COUNT;
+    
+    // 转换为电压
+    int voltage_mv = 0;
+    if (s_pm.cali_enabled && s_pm.cali_handle) {
+        adc_cali_raw_to_voltage(s_pm.cali_handle, adc_raw_avg, &voltage_mv);
+    } else {
+        // 无校准时使用近似公式
+        // ESP32 ADC: 12位, 11dB衰减, 参考电压约1100mV
+        voltage_mv = (adc_raw_avg * 1100 * 2) / 4095;
+    }
+    
+    // 考虑分压电阻
+    voltage_mv = (uint32_t)(voltage_mv * BATT_DIVIDER_RATIO);
+    
+    return voltage_mv;
+}
+
+// 根据电压计算电量百分比
+static uint8_t voltage_to_percentage(uint32_t voltage_mv)
+{
+    if (voltage_mv >= BATTERY_VOLTAGE_FULL) {
+        return 100;
+    }
+    if (voltage_mv <= BATTERY_VOLTAGE_CRITICAL) {
+        return 0;
+    }
+    
+    // 使用分段线性插值
+    // 3.3V - 3.7V: 0% - 20%
+    // 3.7V - 4.0V: 20% - 60%
+    // 4.0V - 4.2V: 60% - 100%
+    
+    if (voltage_mv < 3700) {
+        // 3.3V - 3.7V 映射到 0% - 20%
+        float ratio = (float)(voltage_mv - 3300) / (3700 - 3300);
+        return (uint8_t)(ratio * 20);
+    } else if (voltage_mv < 4000) {
+        // 3.7V - 4.0V 映射到 20% - 60%
+        float ratio = (float)(voltage_mv - 3700) / (4000 - 3700);
+        return (uint8_t)(20 + ratio * 40);
+    } else {
+        // 4.0V - 4.2V 映射到 60% - 100%
+        float ratio = (float)(voltage_mv - 4000) / (4200 - 4000);
+        return (uint8_t)(60 + ratio * 40);
+    }
+}
+
+// 触发电源事件
+static void trigger_event(power_event_t event)
+{
+    if (s_pm.event_callback) {
+        s_pm.event_callback(event);
+    }
+}
+
+// 更新电池状态
+static void update_battery_status(void)
+{
+    // 读取电压
+    s_pm.battery_voltage = read_battery_voltage();
+    
+    // 计算电量
+    s_pm.battery_level = voltage_to_percentage(s_pm.battery_voltage);
+    
+    // 判断状态
+    if (s_pm.battery_voltage >= BATTERY_VOLTAGE_FULL) {
+        s_pm.status = BATTERY_STATUS_FULL;
+    } else if (s_pm.battery_voltage > BATTERY_VOLTAGE_NOMINAL) {
+        s_pm.status = BATTERY_STATUS_DISCHARGING;
+    } else if (s_pm.battery_voltage < BATTERY_VOLTAGE_CRITICAL) {
+        s_pm.status = BATTERY_STATUS_UNKNOWN;
+        trigger_event(POWER_EVENT_BATTERY_CRITICAL);
+    } else {
+        s_pm.status = BATTERY_STATUS_DISCHARGING;
+    }
+    
+    // 检查低电量
+    if (s_pm.battery_level <= s_pm.low_battery_threshold) {
+        trigger_event(POWER_EVENT_BATTERY_LOW);
+    }
+    
+    ESP_LOGD(TAG, "Battery: %umV, %u%%", s_pm.battery_voltage, s_pm.battery_level);
+}
+
+// 检查自动休眠
+static void check_auto_sleep(void)
+{
+    if (s_pm.auto_sleep_timeout == 0) {
+        return;  // 禁用自动休眠
+    }
+    
+    if (s_pm.sleeping) {
+        return;  // 已经休眠
+    }
+    
+    uint32_t current_time = get_timestamp_ms();
+    uint32_t idle_time = (current_time - s_pm.last_activity_time) / 1000;  // 秒
+    
+    if (idle_time >= s_pm.auto_sleep_timeout) {
+        ESP_LOGI(TAG, "Auto sleep triggered after %u seconds idle", idle_time);
+        power_manager_enter_sleep();
+    }
+}
+
+// 电池监测任务
+static void battery_monitor_task(void *arg)
+{
+    ESP_LOGI(TAG, "Battery monitor task started");
+    
+    while (s_pm.monitoring) {
+        // 更新电池状态
+        update_battery_status();
+        
+        // 检查自动休眠
+        check_auto_sleep();
+        
+        // 每5秒检测一次
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
+    
+    ESP_LOGI(TAG, "Battery monitor task stopped");
+    s_pm.monitor_task_handle = NULL;
+    vTaskDelete(NULL);
+}
+
+esp_err_t power_manager_init(void)
+{
+    if (s_pm.initialized) {
+        ESP_LOGW(TAG, "Already initialized");
+        return ESP_OK;
+    }
+    
+    ESP_LOGI(TAG, "Initializing power manager");
+    
+    // 初始化 ADC
+    adc_oneshot_unit_init_cfg_t init_config = {
+        .unit_id = ADC_UNIT_1,
+    };
+    esp_err_t ret = adc_oneshot_new_unit(&init_config, &s_pm.adc1_handle);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize ADC: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    adc_oneshot_chan_cfg_t chan_config = {
+        .bitwidth = ADC_BITWIDTH_DEFAULT,
+        .atten = ADC_ATTEN_DB_12,
+    };
+    ret = adc_oneshot_config_channel(s_pm.adc1_handle, BATT_ADC_CHANNEL, &chan_config);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to config ADC channel: %s", esp_err_to_name(ret));
+        return ret;
+    }
+    
+    // ADC 校准 - ESP-IDF v5.5.4 API 变化较大，暂时禁用
+    // 使用近似公式计算电压
+    s_pm.cali_handle = NULL;
+    s_pm.cali_enabled = false;
+    ESP_LOGW(TAG, "ADC calibration disabled, using approximate formula");
+    ret = ESP_OK;
+    
+    // 设置默认配置
+    s_pm.low_battery_threshold = DEFAULT_LOW_BATTERY_THRESHOLD;
+    s_pm.auto_sleep_timeout = DEFAULT_AUTO_SLEEP_TIMEOUT;
+    s_pm.last_activity_time = get_timestamp_ms();
+    
+    // 初始读取电池状态
+    update_battery_status();
+    
+    s_pm.initialized = true;
+    ESP_LOGI(TAG, "Power manager initialized. Battery: %umV, %u%%", 
+             s_pm.battery_voltage, s_pm.battery_level);
+    
+    return ESP_OK;
+}
+
+esp_err_t power_manager_start_monitor(void)
+{
+    if (!s_pm.initialized) {
+        ESP_LOGE(TAG, "Not initialized");
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    if (s_pm.monitoring) {
+        ESP_LOGW(TAG, "Already monitoring");
+        return ESP_OK;
+    }
+    
+    ESP_LOGI(TAG, "Starting battery monitor");
+    
+    s_pm.monitoring = true;
+    BaseType_t ret = xTaskCreate(
+        battery_monitor_task,
+        "batt_monitor",
+        4096,
+        NULL,
+        5,
+        &s_pm.monitor_task_handle
+    );
+    
+    if (ret != pdPASS) {
+        ESP_LOGE(TAG, "Failed to create monitor task");
+        s_pm.monitoring = false;
+        return ESP_FAIL;
+    }
+    
+    return ESP_OK;
+}
+
+esp_err_t power_manager_stop_monitor(void)
+{
+    if (!s_pm.monitoring) {
+        return ESP_OK;
+    }
+    
+    ESP_LOGI(TAG, "Stopping battery monitor");
+    
+    s_pm.monitoring = false;
+    
+    // 等待任务结束
+    if (s_pm.monitor_task_handle) {
+        vTaskDelay(pdMS_TO_TICKS(100));
+        s_pm.monitor_task_handle = NULL;
+    }
+    
+    return ESP_OK;
+}
+
+uint8_t power_manager_get_battery_level(void)
+{
+    return s_pm.battery_level;
+}
+
+uint32_t power_manager_get_battery_voltage(void)
+{
+    return s_pm.battery_voltage;
+}
+
+battery_status_t power_manager_get_battery_status(void)
+{
+    return s_pm.status;
+}
+
+void power_manager_set_low_battery_threshold(uint8_t threshold)
+{
+    if (threshold > 100) {
+        threshold = 100;
+    }
+    s_pm.low_battery_threshold = threshold;
+    ESP_LOGI(TAG, "Low battery threshold set to %u%%", threshold);
+}
+
+void power_manager_set_auto_sleep_timeout(uint32_t seconds)
+{
+    s_pm.auto_sleep_timeout = seconds;
+    ESP_LOGI(TAG, "Auto sleep timeout set to %u seconds", seconds);
+}
+
+esp_err_t power_manager_enter_sleep(void)
+{
+    if (s_pm.sleeping) {
+        return ESP_OK;
+    }
+    
+    ESP_LOGI(TAG, "Entering sleep mode");
+    
+    s_pm.sleeping = true;
+    trigger_event(POWER_EVENT_SLEEP_ENTER);
+    
+    // TODO: 实现实际的休眠逻辑
+    // - 关闭 LCD 背光
+    // - 降低 CPU 频率
+    // - 进入 light sleep 或 deep sleep
+    
+    return ESP_OK;
+}
+
+esp_err_t power_manager_exit_sleep(void)
+{
+    if (!s_pm.sleeping) {
+        return ESP_OK;
+    }
+    
+    ESP_LOGI(TAG, "Exiting sleep mode");
+    
+    s_pm.sleeping = false;
+    s_pm.last_activity_time = get_timestamp_ms();
+    
+    trigger_event(POWER_EVENT_SLEEP_EXIT);
+    trigger_event(POWER_EVENT_WAKEUP);
+    
+    // TODO: 实现实际的唤醒逻辑
+    // - 开启 LCD 背光
+    // - 恢复 CPU 频率
+    
+    return ESP_OK;
+}
+
+bool power_manager_is_sleeping(void)
+{
+    return s_pm.sleeping;
+}
+
+void power_manager_reset_sleep_timer(void)
+{
+    s_pm.last_activity_time = get_timestamp_ms();
+    
+    // 如果正在休眠，则唤醒
+    if (s_pm.sleeping) {
+        power_manager_exit_sleep();
+    }
+}
+
+void power_manager_register_callback(power_event_callback_t callback)
+{
+    s_pm.event_callback = callback;
+}

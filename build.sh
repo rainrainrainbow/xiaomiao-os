@@ -1,1 +1,78 @@
-IyEvYmluL2Jhc2gKIyBYaWFvTWlhbyBPUyDmnoTlu7rohJrmnKwKIyDnlKjms5U6IC4vYnVpbGQuc2ggW2NsZWFufGJ1aWxkfGZsYXNofG1vbml0b3JdCgpzZXQgLWUKCiMg6aKc6Imy6L6T5Ye6ClJFRD0nXDAzM1swOzMxbScKR1JFRU49J1wwMzNbMDszMm0nCllFTExPVz0nXDAzM1sxOzMzbScKTkM9J1wwMzNbMG0nICMgTm8gQ29sb3IKCmVjaG8gLWUgIiR7R1JFRU59PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09JHtOQ30iCmVjaG8gLWUgIiR7R1JFRU59WGlhb01pYW8gT1MgQnVpbGQgU3lzdGVtJHtOQ30iCmVjaG8gLWUgIiR7R1JFRU59PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09JHtOQ30iCgojIOajgOafpUVTUC1JREbnjq/looMKaWYgWyAteiAiJElERl9QQVRIIiBdOyB0aGVuCiAgICBlY2hvIC1lICIke1lFTExPV31FU1AtSURGIOeOr+Wig+acquWKoOi9ve+8jOWwneivleWKoOi9vS4uLiR7TkN9IgogICAgaWYgWyAtZiAiJEhPTUUvZXNwL2VzcC1pZGYvZXhwb3J0LnNoIiBdOyB0aGVuCiAgICAgICAgLiAkSE9NRS9lc3AvZXNwLWlkZi9leHBvcnQuc2gKICAgIGVsaWYgWyAtZiAiL29wdC9lc3AvaWRmL2V4cG9ydC5zaCIgXTsgdGhlbgogICAgICAgIC4gL29wdC9lc3AvaWRmL2V4cG9ydC5zaAogICAgZWxzZQogICAgICAgIGVjaG8gLWUgIiR7UkVEfemUmeivrzog5pyq5om+5YiwIEVTUC1JREYke05DfSIKICAgICAgICBlY2hvICLor7flhYjlronoo4UgRVNQLUlERiB2NS41LjQ6IgogICAgICAgIGVjaG8gIiAgbWtkaXIgLXAgfi9lc3AgJiYgY2Qgfi9lc3AiCiAgICAgICAgZWNobyAiICBnaXQgY2xvbmUgLWIgdjUuNS40IC0tcmVjdXJzaXZlIGh0dHBzOi8vZ2l0aHViLmNvbS9lc3ByZXNzaWYvZXNwLWlkZi5naXQiCiAgICAgICAgZWNobyAiICBjZCBlc3AtaWRmICYmIC4vaW5zdGFsbC5zaCBlc3AzMiIKICAgICAgICBleGl0IDEKICAgIGZpCmZpCgplY2hvIC1lICIke0dSRUVOfUVTUC1JREYg54mI5pysOiAke0lERl9WRVJTSU9OfSR7TkN9IgoKIyDorr7nva7nm67moIfoiq/niYcKaWRmLnB5IHNldC10YXJnZXQgZXNwMzIKCiMg5aSE55CG5ZG95LukCmNhc2UgIiQxIiBpbgogICAgY2xlYW4pCiAgICAgICAgZWNobyAtZSAiJHtZRUxMT1d95riF55CG5p6E5bu6Li4uJHtOQ30iCiAgICAgICAgaWRmLnB5IGZ1bGxjbGVhbgogICAgICAgIDs7CiAgICBidWlsZCkKICAgICAgICBlY2hvIC1lICIke0dSRUVOfeW8gOWni+aehOW7ui4uLiR7TkN9IgogICAgICAgIGlkZi5weSBidWlsZAogICAgICAgIGVjaG8gLWUgIiR7R1JFRU595p6E5bu65a6M5oiQISR7TkN9IgogICAgICAgIGVjaG8gLWUgIuWbuuS7tuS9jee9rjogYnVpbGQveGlhb21pYW8tb3MuYmluIgogICAgICAgIGVjaG8gLWUgIuWQiOW5tuWbuuS7tjogYnVpbGQvbWVyZ2VkLmJpbiIKICAgICAgICA7OwogICAgZmxhc2gpCiAgICAgICAgZWNobyAtZSAiJHtHUkVFTn3ng6flvZXlm7rku7YuLi4ke05DfSIKICAgICAgICBpZiBbIC16ICIkMiIgXTsgdGhlbgogICAgICAgICAgICBlY2hvIC1lICIke1lFTExPV33nlKjms5U6IC4vYnVpbGQuc2ggZmxhc2ggPOerr+WPoz4ke05DfSIKICAgICAgICAgICAgZWNobyAtZSAi56S65L6LOiAuL2J1aWxkLnNoIGZsYXNoIC9kZXYvdHR5VVNCMCIKICAgICAgICAgICAgZXhpdCAxCiAgICAgICAgZmkKICAgICAgICBpZGYucHkgLXAgJDIgZmxhc2gKICAgICAgICA7OwogICAgbW9uaXRvcikKICAgICAgICBlY2hvIC1lICIke0dSRUVOfeWQr+WKqOebkeinhuWZqC4uLiR7TkN9IgogICAgICAgIGlmIFsgLXogIiQyIiBdOyB0aGVuCiAgICAgICAgICAgIGVjaG8gLWUgIiR7WUVMTE9XfeeUqOazlTogLi9idWlsZC5zaCBtb25pdG9yIDznq6/lj6M+JHtOQ30iCiAgICAgICAgICAgIGV4aXQgMQogICAgICAgIGZpCiAgICAgICAgaWRmLnB5IC1wICQyIG1vbml0b3IKICAgICAgICA7OwogICAgKikKICAgICAgICBlY2hvIC1lICIke1lFTExPV33nlKjms5U6IC4vYnVpbGQuc2ggW2NsZWFufGJ1aWxkfGZsYXNofG1vbml0b3JdJHtOQ30iCiAgICAgICAgZWNobyAiIgogICAgICAgIGVjaG8gIuWRveS7pDoiCiAgICAgICAgZWNobyAiICBjbGVhbiAgICAtIOa4heeQhuaehOW7uiIKICAgICAgICBlY2hvICIgIGJ1aWxkICAgIC0g5p6E5bu65Zu65Lu2IgogICAgICAgIGVjaG8gIiAgZmxhc2ggICAgLSDng6flvZXlm7rku7YgKOmcgOimgeaMh+Wumuerr+WPoykiCiAgICAgICAgZWNobyAiICBtb25pdG9yICAtIOWQr+WKqOS4suWPo+ebkeinhuWZqCAo6ZyA6KaB5oyH5a6a56uv5Y+jKSIKICAgICAgICA7Owplc2Fj
+#!/bin/bash
+# XiaoMiao OS 构建脚本
+# 用法: ./build.sh [clean|build|flash|monitor]
+
+set -e
+
+# 颜色输出
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}=================================${NC}"
+echo -e "${GREEN}XiaoMiao OS Build System${NC}"
+echo -e "${GREEN}=================================${NC}"
+
+# 检查ESP-IDF环境
+if [ -z "$IDF_PATH" ]; then
+    echo -e "${YELLOW}ESP-IDF 环境未加载，尝试加载...${NC}"
+    if [ -f "$HOME/esp/esp-idf/export.sh" ]; then
+        . $HOME/esp/esp-idf/export.sh
+    elif [ -f "/opt/esp/idf/export.sh" ]; then
+        . /opt/esp/idf/export.sh
+    else
+        echo -e "${RED}错误: 未找到 ESP-IDF${NC}"
+        echo "请先安装 ESP-IDF v5.5.4:"
+        echo "  mkdir -p ~/esp && cd ~/esp"
+        echo "  git clone -b v5.5.4 --recursive https://github.com/espressif/esp-idf.git"
+        echo "  cd esp-idf && ./install.sh esp32"
+        exit 1
+    fi
+fi
+
+echo -e "${GREEN}ESP-IDF 版本: ${IDF_VERSION}${NC}"
+
+# 设置目标芯片
+idf.py set-target esp32
+
+# 处理命令
+case "$1" in
+    clean)
+        echo -e "${YELLOW}清理构建...${NC}"
+        idf.py fullclean
+        ;;
+    build)
+        echo -e "${GREEN}开始构建...${NC}"
+        idf.py build
+        echo -e "${GREEN}构建完成!${NC}"
+        echo -e "固件位置: build/xiaomiao-os.bin"
+        echo -e "合并固件: build/merged.bin"
+        ;;
+    flash)
+        echo -e "${GREEN}烧录固件...${NC}"
+        if [ -z "$2" ]; then
+            echo -e "${YELLOW}用法: ./build.sh flash <端口>${NC}"
+            echo -e "示例: ./build.sh flash /dev/ttyUSB0"
+            exit 1
+        fi
+        idf.py -p $2 flash
+        ;;
+    monitor)
+        echo -e "${GREEN}启动监视器...${NC}"
+        if [ -z "$2" ]; then
+            echo -e "${YELLOW}用法: ./build.sh monitor <端口>${NC}"
+            exit 1
+        fi
+        idf.py -p $2 monitor
+        ;;
+    *)
+        echo -e "${YELLOW}用法: ./build.sh [clean|build|flash|monitor]${NC}"
+        echo ""
+        echo "命令:"
+        echo "  clean    - 清理构建"
+        echo "  build    - 构建固件"
+        echo "  flash    - 烧录固件 (需要指定端口)"
+        echo "  monitor  - 启动串口监视器 (需要指定端口)"
+        ;;
+esac

@@ -1,1 +1,377 @@
-LyoqCiAqIEBmaWxlIGx2Z2xfcG9ydC5jCiAqIEBicmllZiBMVkdMIOenu+akjeWxguWunueOsCAtIOaYvuekuumpseWKqOOAgeaMiemUrui+k+WFpeWSjOe7hOWQiOmUruajgOa1iwogKi8KCiNpbmNsdWRlICJsdmdsX3BvcnQuaCIKI2luY2x1ZGUgImRyaXZlci9ncGlvLmgiCiNpbmNsdWRlICJlc3BfbG9nLmgiCiNpbmNsdWRlICJlc3BfdGltZXIuaCIKI2luY2x1ZGUgImZyZWVydG9zL0ZyZWVSVE9TLmgiCiNpbmNsdWRlICJmcmVlcnRvcy90YXNrLmgiCiNpbmNsdWRlICJmcmVlcnRvcy9zZW1waHIuaCIKI2luY2x1ZGUgPHN0cmluZy5oPgoKc3RhdGljIGNvbnN0IGNoYXIgKlRBRyA9ICJsdmdsX3BvcnQiOwoKLy8g5pi+56S65Y+C5pWwCiNkZWZpbmUgTENEX0hfUkVTICAgICAgICAgICAxNjAKI2RlZmluZSBMQ0RfVl9SRVMgICAgICAgICAgIDEyOAojZGVmaW5lIExWR0xfVElDS19QRVJJT0RfTVMgMgoKLy8gTENEIOWPpeafhApzdGF0aWMgZXNwX2xjZF9wYW5lbF9pb19oYW5kbGVfdCBzX2xjZF9pbyA9IE5VTEw7CnN0YXRpYyBlc3BfbGNkX3BhbmVsX2hhbmRsZV90IHNfbGNkX3BhbmVsID0gTlVMTDsKCi8vIExWR0wg5pi+56S65ZKM6L6T5YWl6K6+5aSHCnN0YXRpYyBsdl9kaXNwbGF5X3QgKnNfZGlzcCA9IE5VTEw7CnN0YXRpYyBsdl9pbmRldl90ICpzX2luZGV2ID0gTlVMTDsKCi8vIExWR0wg5LqS5pal6ZSBCnN0YXRpYyBTZW1hcGhvcmVIYW5kbGVfdCBzX2x2Z2xfbXV0ZXggPSBOVUxMOwoKLy8g5oyJ6ZSuIEdQSU8g5a6a5LmJCiNkZWZpbmUgQlROX1BJTl9VUCAgICAgIEdQSU9fTlVNXzIKI2RlZmluZSBCVE5fUElOX0RPV04gICAgR1BJT19OVU1fMTMKI2RlZmluZSBCVE5fUElOX0xFRlQgICAgR1BJT19OVU1fMjcKI2RlZmluZSBCVE5fUElOX1JJR0hUICAgR1BJT19OVU1fMzUKI2RlZmluZSBCVE5fUElOX0EgICAgICAgR1BJT19OVU1fMzQKI2RlZmluZSBCVE5fUElOX0IgICAgICAgR1BJT19OVU1fMTIKCi8vIOaMiemUruWOu+aKluaXtumXtAojZGVmaW5lIERFQk9VTkNFX01TICAgICAyMAoKLy8g57uE5ZCI6ZSu6LaF5pe277yI5q+r56eS77yJCiNkZWZpbmUgQ09NQk9fVElNRU9VVF9NUyA1MDAKCi8vIOaMiemUrueKtuaAgQp0eXBlZGVmIHN0cnVjdCB7CiAgICBidXR0b25faWRfdCBpZDsKICAgIGdwaW9fbnVtX3QgZ3BpbzsKICAgIGJvb2wgcHJlc3NlZDsKICAgIGJvb2wgbGFzdF9zdGF0ZTsKICAgIHVpbnQzMl90IGxhc3RfY2hhbmdlX21zOwp9IGJ1dHRvbl9zdGF0ZV90OwoKc3RhdGljIGJ1dHRvbl9zdGF0ZV90IHNfYnV0dG9uc1tCVE5fQ09VTlRdID0gewogICAge0JUTl9VUCwgICAgQlROX1BJTl9VUCwgICAgZmFsc2UsIGZhbHNlLCAwfSwKICAgIHtCVE5fRE9XTiwgIEJUTl9QSU5fRE9XTiwgIGZhbHNlLCBmYWxzZSwgMH0sCiAgICB7QlROX0xFRlQsICBCVE5fUElOX0xFRlQsICBmYWxzZSwgZmFsc2UsIDB9LAogICAge0JUTl9SSUdIVCwgQlROX1BJTl9SSUdIVCwgZmFsc2UsIGZhbHNlLCAwfSwKICAgIHtCVE5fQSwgICAgIEJUTl9QSU5fQSwgICAgIGZhbHNlLCBmYWxzZSwgMH0sCiAgICB7QlROX0IsICAgICBCVE5fUElOX0IsICAgICBmYWxzZSwgZmFsc2UsIDB9LAp9OwoKLy8g57uE5ZCI6ZSu5Zue6LCDCnR5cGVkZWYgc3RydWN0IHsKICAgIGJ1dHRvbl9pZF90IGtleTE7CiAgICBidXR0b25faWRfdCBrZXkyOwogICAgY29tYm9fa2V5X2NhbGxiYWNrX3QgY2FsbGJhY2s7Cn0gY29tYm9fa2V5X3Q7CgojZGVmaW5lIE1BWF9DT01CT19LRVlTIDQKc3RhdGljIGNvbWJvX2tleV90IHNfY29tYm9fa2V5c1tNQVhfQ09NQk9fS0VZU107CnN0YXRpYyBpbnQgc19jb21ib19jb3VudCA9IDA7CgovLyDnu4TlkIjplK7mo4DmtYvnirbmgIEKc3RhdGljIGJ1dHRvbl9pZF90IHNfbGFzdF9wcmVzc2VkX2tleSA9IEJUTl9DT1VOVDsKc3RhdGljIHVpbnQzMl90IHNfbGFzdF9wcmVzc2VkX3RpbWUgPSAwOwoKLy8g5Y2V6ZSu5LqL5Lu25Zue6LCDCnN0YXRpYyBrZXlfZXZlbnRfY2FsbGJhY2tfdCBzX2tleV9ldmVudF9jYiA9IE5VTEw7Cgplc3BfZXJyX3QgbHZnbF9wb3J0X2lucHV0X2luaXQodm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiSW5pdGlhbGl6aW5nIGJ1dHRvbiBpbnB1dCIpOwogICAgCiAgICAvLyDphY3nva7miYDmnInmjInplK4gR1BJTwogICAgZm9yIChpbnQgaSA9IDA7IGkgPCBCVE5fQ09VTlQ7IGkrKykgewogICAgICAgIGdwaW9fY29uZmlnX3QgaW9fY29uZiA9IHsKICAgICAgICAgICAgLnBpbl9iaXRfbWFzayA9IDFVTEwgPDwgc19idXR0b25zW2ldLmdwaW8sCiAgICAgICAgICAgIC5tb2RlID0gR1BJT19NT0RFX0lOUFVULAogICAgICAgICAgICAucHVsbF91cF9lbiA9IEdQSU9fUFVMTFVQX0VOQUJMRSwKICAgICAgICAgICAgLnB1bGxfZG93bl9lbiA9IEdQSU9fUFVMTERPV05fRElTQUJMRSwKICAgICAgICAgICAgLmludHJfdHlwZSA9IEdQSU9fSU5UUl9ESVNBQkxFLAogICAgICAgIH07CiAgICAgICAgZXNwX2Vycl90IHJldCA9IGdwaW9fY29uZmlnKCZpb19jb25mKTsKICAgICAgICBpZiAocmV0ICE9IEVTUF9PSykgewogICAgICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gY29uZmlndXJlIEdQSU8gJWQ6ICVzIiwgCiAgICAgICAgICAgICAgICAgICAgIHNfYnV0dG9uc1tpXS5ncGlvLCBlc3BfZXJyX3RvX25hbWUocmV0KSk7CiAgICAgICAgICAgIHJldHVybiByZXQ7CiAgICAgICAgfQogICAgfQogICAgCiAgICBFU1BfTE9HSShUQUcsICJCdXR0b24gaW5wdXQgaW5pdGlhbGl6ZWQgc3VjY2Vzc2Z1bGx5Iik7CiAgICByZXR1cm4gRVNQX09LOwp9Cgp2b2lkIGx2Z2xfcG9ydF9yZWdpc3Rlcl9jb21ib19rZXkoY29uc3QgY2hhciAqY29tYm8sIGNvbWJvX2tleV9jYWxsYmFja190IGNhbGxiYWNrKQp7CiAgICBpZiAoc19jb21ib19jb3VudCA+PSBNQVhfQ09NQk9fS0VZUykgewogICAgICAgIEVTUF9MT0dXKFRBRywgIk1heCBjb21ibyBrZXlzIHJlYWNoZWQiKTsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGNvbWJvX2tleV90ICpjayA9ICZzX2NvbWJvX2tleXNbc19jb21ib19jb3VudF07CiAgICBjay0+Y2FsbGJhY2sgPSBjYWxsYmFjazsKICAgIAogICAgaWYgKHN0cmNtcChjb21ibywgInVwK2IiKSA9PSAwKSB7CiAgICAgICAgY2stPmtleTEgPSBCVE5fVVA7CiAgICAgICAgY2stPmtleTIgPSBCVE5fQjsKICAgIH0gZWxzZSBpZiAoc3RyY21wKGNvbWJvLCAiZG93bitiIikgPT0gMCkgewogICAgICAgIGNrLT5rZXkxID0gQlROX0RPV047CiAgICAgICAgY2stPmtleTIgPSBCVE5fQjsKICAgIH0gZWxzZSB7CiAgICAgICAgRVNQX0xPR1coVEFHLCAiVW5rbm93biBjb21ibzogJXMiLCBjb21ibyk7CiAgICAgICAgcmV0dXJuOwogICAgfQogICAgCiAgICBzX2NvbWJvX2NvdW50Kys7CiAgICBFU1BfTE9HSShUQUcsICJSZWdpc3RlcmVkIGNvbWJvIGtleTogJXMiLCBjb21ibyk7Cn0KCnZvaWQgbHZnbF9wb3J0X3JlZ2lzdGVyX2tleV9ldmVudChrZXlfZXZlbnRfY2FsbGJhY2tfdCBjYWxsYmFjaykKewogICAgc19rZXlfZXZlbnRfY2IgPSBjYWxsYmFjazsKICAgIEVTUF9MT0dJKFRBRywgIlJlZ2lzdGVyZWQga2V5IGV2ZW50IGNhbGxiYWNrIik7Cn0KCnZvaWQgbHZnbF9wb3J0X2tleXBhZF9yZWFkX2NiKGx2X2luZGV2X3QgKmluZGV2LCBsdl9pbmRldl9kYXRhX3QgKmRhdGEpCnsKICAgIC8vIOajgOafpeaYr+WQpuacieaMiemUruaMieS4iwogICAgZm9yIChpbnQgaSA9IDA7IGkgPCBCVE5fQ09VTlQ7IGkrKykgewogICAgICAgIGlmIChzX2J1dHRvbnNbaV0ucHJlc3NlZCkgewogICAgICAgICAgICBkYXRhLT5zdGF0ZSA9IExWX0lOREVWX1NUQVRFX1BSRVNTRUQ7CiAgICAgICAgICAgIAogICAgICAgICAgICAvLyDmmKDlsITliLAgTFZHTCDplK7lgLwKICAgICAgICAgICAgc3dpdGNoIChzX2J1dHRvbnNbaV0uaWQpIHsKICAgICAgICAgICAgICAgIGNhc2UgQlROX1VQOiAgICBkYXRhLT5rZXkgPSBMVl9LRVlfVVA7IGJyZWFrOwogICAgICAgICAgICAgICAgY2FzZSBCVE5fRE9XTjogIGRhdGEtPmtleSA9IExWX0tFWV9ET1dOOyBicmVhazsKICAgICAgICAgICAgICAgIGNhc2UgQlROX0xFRlQ6ICBkYXRhLT5rZXkgPSBMVl9LRVlfTEVGVDsgYnJlYWs7CiAgICAgICAgICAgICAgICBjYXNlIEJUTl9SSUdIVDogZGF0YS0+a2V5ID0gTFZfS0VZX1JJR0hUOyBicmVhazsKICAgICAgICAgICAgICAgIGNhc2UgQlROX0E6ICAgICBkYXRhLT5rZXkgPSBMVl9LRVlfRU5URVI7IGJyZWFrOwogICAgICAgICAgICAgICAgY2FzZSBCVE5fQjogICAgIGRhdGEtPmtleSA9IExWX0tFWV9FU0M7IGJyZWFrOwogICAgICAgICAgICAgICAgZGVmYXVsdDogICAgICAgIGRhdGEtPmtleSA9IDA7IGJyZWFrOwogICAgICAgICAgICB9CiAgICAgICAgICAgIHJldHVybjsKICAgICAgICB9CiAgICB9CiAgICAKICAgIGRhdGEtPnN0YXRlID0gTFZfSU5ERVZfU1RBVEVfUkVMRUFTRUQ7Cn0KCmJvb2wgbHZnbF9wb3J0X2lzX2J1dHRvbl9wcmVzc2VkKGJ1dHRvbl9pZF90IGJ0bikKewogICAgaWYgKGJ0biA+PSBCVE5fQ09VTlQpIHJldHVybiBmYWxzZTsKICAgIHJldHVybiBzX2J1dHRvbnNbYnRuXS5wcmVzc2VkOwp9Cgp2b2lkIGx2Z2xfcG9ydF9idXR0b25fc2Nhbl90YXNrKHZvaWQgKmFyZykKewogICAgRVNQX0xPR0koVEFHLCAiQnV0dG9uIHNjYW4gdGFzayBzdGFydGVkIik7CiAgICAKICAgIHdoaWxlICgxKSB7CiAgICAgICAgdWludDMyX3Qgbm93ID0gbHZfdGlja19nZXQoKTsKICAgICAgICAKICAgICAgICAvLyDmiavmj4/miYDmnInmjInplK4KICAgICAgICBmb3IgKGludCBpID0gMDsgaSA8IEJUTl9DT1VOVDsgaSsrKSB7CiAgICAgICAgICAgIGJ1dHRvbl9zdGF0ZV90ICpidG4gPSAmc19idXR0b25zW2ldOwogICAgICAgICAgICBib29sIGN1cnJlbnQgPSAoZ3Bpb19nZXRfbGV2ZWwoYnRuLT5ncGlvKSA9PSAwKTsgIC8vIOS9jueUteW5s+acieaViAogICAgICAgICAgICAKICAgICAgICAgICAgLy8g5Y675oqW5aSE55CGCiAgICAgICAgICAgIGlmIChjdXJyZW50ICE9IGJ0bi0+bGFzdF9zdGF0ZSkgewogICAgICAgICAgICAgICAgaWYgKG5vdyAtIGJ0bi0+bGFzdF9jaGFuZ2VfbXMgPj0gREVCT1VOQ0VfTVMpIHsKICAgICAgICAgICAgICAgICAgICBidG4tPmxhc3Rfc3RhdGUgPSBjdXJyZW50OwogICAgICAgICAgICAgICAgICAgIGJ0bi0+bGFzdF9jaGFuZ2VfbXMgPSBub3c7CiAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgaWYgKGN1cnJlbnQgJiYgIWJ0bi0+cHJlc3NlZCkgewogICAgICAgICAgICAgICAgICAgICAgICAvLyDmjInplK7mjInkuIsKICAgICAgICAgICAgICAgICAgICAgICAgYnRuLT5wcmVzc2VkID0gdHJ1ZTsKICAgICAgICAgICAgICAgICAgICAgICAgRVNQX0xPR0QoVEFHLCAiQnV0dG9uICVkIHByZXNzZWQiLCBidG4tPmlkKTsKICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgIC8vIOe7hOWQiOmUruajgOa1iwogICAgICAgICAgICAgICAgICAgICAgICBpZiAoc19sYXN0X3ByZXNzZWRfa2V5ICE9IEJUTl9DT1VOVCAmJiAKICAgICAgICAgICAgICAgICAgICAgICAgICAgIChub3cgLSBzX2xhc3RfcHJlc3NlZF90aW1lKSA8IENPTUJPX1RJTUVPVVRfTVMpIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIOajgOafpeaYr+WQpuWMuemFjee7hOWQiOmUrgogICAgICAgICAgICAgICAgICAgICAgICAgICAgZm9yIChpbnQgaiA9IDA7IGogPCBzX2NvbWJvX2NvdW50OyBqKyspIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb21ib19rZXlfdCAqY2sgPSAmc19jb21ib19rZXlzW2pdOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmICgoY2stPmtleTEgPT0gc19sYXN0X3ByZXNzZWRfa2V5ICYmIGNrLT5rZXkyID09IGJ0bi0+aWQpIHx8CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChjay0+a2V5MSA9PSBidG4tPmlkICYmIGNrLT5rZXkyID09IHNfbGFzdF9wcmVzc2VkX2tleSkpIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgRVNQX0xPR0koVEFHLCAiQ29tYm8ga2V5IGRldGVjdGVkOiAlZCslZCIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzX2xhc3RfcHJlc3NlZF9rZXksIGJ0bi0+aWQpOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoY2stPmNhbGxiYWNrKSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjay0+Y2FsbGJhY2soKTsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyDmuIXpmaTnirbmgIHvvIzpgb/lhY3ph43lpI3op6blj5EKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnRuLT5wcmVzc2VkID0gZmFsc2U7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNfYnV0dG9uc1tzX2xhc3RfcHJlc3NlZF9rZXldLnByZXNzZWQgPSBmYWxzZTsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc19sYXN0X3ByZXNzZWRfa2V5ID0gQlROX0NPVU5UOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgIC8vIOiusOW9leacgOWQjuaMieS4i+eahOmUrgogICAgICAgICAgICAgICAgICAgICAgICBzX2xhc3RfcHJlc3NlZF9rZXkgPSBidG4tPmlkOwogICAgICAgICAgICAgICAgICAgICAgICBzX2xhc3RfcHJlc3NlZF90aW1lID0gbm93OwogICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgLy8g6Kem5Y+R5Y2V6ZSu5LqL5Lu25Zue6LCD77yI5bu26L+f6Kem5Y+R77yM562J5b6F57uE5ZCI6ZSu56qX5Y+j77yJCiAgICAgICAgICAgICAgICAgICAgICAgIC8vIOWunumZheWcqOaMiemUrumHiuaUvuaXtuinpuWPkQogICAgICAgICAgICAgICAgICAgIH0gZWxzZSBpZiAoIWN1cnJlbnQgJiYgYnRuLT5wcmVzc2VkKSB7CiAgICAgICAgICAgICAgICAgICAgICAgIC8vIOaMiemUrumHiuaUvgogICAgICAgICAgICAgICAgICAgICAgICBidG4tPnByZXNzZWQgPSBmYWxzZTsKICAgICAgICAgICAgICAgICAgICAgICAgRVNQX0xPR0QoVEFHLCAiQnV0dG9uICVkIHJlbGVhc2VkIiwgYnRuLT5pZCk7CiAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAvLyDop6blj5HljZXplK7kuovku7bvvIjlpoLmnpzkuI3mmK/nu4TlkIjplK7nmoTkuIDpg6jliIbvvIkKICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHNfa2V5X2V2ZW50X2NiICYmIHNfbGFzdF9wcmVzc2VkX2tleSA9PSBidG4tPmlkKSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICBsdl9rZXlfdCBsdl9rZXkgPSAwOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgc3dpdGNoIChidG4tPmlkKSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2FzZSBCVE5fVVA6ICAgIGx2X2tleSA9IExWX0tFWV9VUDsgYnJlYWs7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2FzZSBCVE5fRE9XTjogIGx2X2tleSA9IExWX0tFWV9ET1dOOyBicmVhazsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjYXNlIEJUTl9MRUZUOiAgbHZfa2V5ID0gTFZfS0VZX0xFRlQ7IGJyZWFrOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNhc2UgQlROX1JJR0hUOiBsdl9rZXkgPSBMVl9LRVlfUklHSFQ7IGJyZWFrOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNhc2UgQlROX0E6ICAgICBsdl9rZXkgPSBMVl9LRVlfRU5URVI7IGJyZWFrOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNhc2UgQlROX0I6ICAgICBsdl9rZXkgPSBMVl9LRVlfRVNDOyBicmVhazsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkZWZhdWx0OiBicmVhazsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChsdl9rZXkgIT0gMCkgewogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNfa2V5X2V2ZW50X2NiKGx2X2tleSk7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzX2xhc3RfcHJlc3NlZF9rZXkgPSBCVE5fQ09VTlQ7CiAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICAgICAgCiAgICAgICAgdlRhc2tEZWxheShwZE1TX1RPX1RJQ0tTKDEwKSk7ICAvLyAxMG1zIOaJq+aPj+WRqOacnwogICAgfQp9CgovKiDilIDilIAgTFZHTCDmmL7npLrpqbHliqgg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCgovLyDmmL7npLrliLfmlrDlrozmiJDlm57osIMgLSBFU1AtSURGIHY1LjUuNCDnrb7lkI0Kc3RhdGljIGJvb2wgZmx1c2hfcmVhZHlfY2IoZXNwX2xjZF9wYW5lbF9pb19oYW5kbGVfdCBwYW5lbF9pbywgCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGVzcF9sY2RfcGFuZWxfaW9fZXZlbnRfZGF0YV90ICplZGF0YSwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgKnVzZXJfY3R4KQp7CiAgICAodm9pZClwYW5lbF9pbzsKICAgICh2b2lkKWVkYXRhOwogICAgbHZfZGlzcGxheV90ICpkaXNwID0gKGx2X2Rpc3BsYXlfdCAqKXVzZXJfY3R4OwogICAgbHZfZGlzcGxheV9mbHVzaF9yZWFkeShkaXNwKTsKICAgIHJldHVybiBmYWxzZTsKfQoKLy8gTFZHTCB0aWNrIOWbnuiwgwpzdGF0aWMgdm9pZCBsdmdsX3RpY2tfY2Iodm9pZCAqYXJnKQp7CiAgICAodm9pZClhcmc7CiAgICBsdl90aWNrX2luYyhMVkdMX1RJQ0tfUEVSSU9EX01TKTsKfQoKLy8g5pi+56S65Yi35paw5Zue6LCDIC0gTFZHTCB2OSDnrb7lkI0Kc3RhdGljIHZvaWQgZmx1c2hfY2IobHZfZGlzcGxheV90ICpkaXNwLCBjb25zdCBsdl9hcmVhX3QgKmFyZWEsIHVpbnQ4X3QgKnB4X21hcCkKewogICAgZXNwX2xjZF9wYW5lbF9oYW5kbGVfdCBwYW5lbCA9IChlc3BfbGNkX3BhbmVsX2hhbmRsZV90KWx2X2Rpc3BsYXlfZ2V0X3VzZXJfZGF0YShkaXNwKTsKICAgIAogICAgaW50MzJfdCB4MSA9IGFyZWEtPngxOwogICAgaW50MzJfdCB4MiA9IGFyZWEtPngyOwogICAgaW50MzJfdCB5MSA9IGFyZWEtPnkxOwogICAgaW50MzJfdCB5MiA9IGFyZWEtPnkyOwogICAgCiAgICBlc3BfbGNkX3BhbmVsX2RyYXdfYml0bWFwKHBhbmVsLCB4MSwgeTEsIHgyICsgMSwgeTIgKyAxLCBweF9tYXApOwogICAgLy8g5rOo5oSP77yaZmx1c2hfcmVhZHkg5Lya5ZyoIGRyYXdfYml0bWFwIOWujOaIkOWQjumAmui/h+Wbnuiwg+inpuWPkQp9Cgplc3BfZXJyX3QgbHZnbF9wb3J0X2luaXQoZXNwX2xjZF9wYW5lbF9pb19oYW5kbGVfdCBsY2RfaW8sIGVzcF9sY2RfcGFuZWxfaGFuZGxlX3QgbGNkX3BhbmVsKQp7CiAgICBFU1BfTE9HSShUQUcsICJJbml0aWFsaXppbmcgTFZHTCBwb3J0Iik7CiAgICAKICAgIHNfbGNkX2lvID0gbGNkX2lvOwogICAgc19sY2RfcGFuZWwgPSBsY2RfcGFuZWw7CiAgICAKICAgIC8vIOWIm+W7uuS6kuaWpemUgQogICAgc19sdmdsX211dGV4ID0geFNlbWFwaG9yZUNyZWF0ZU11dGV4KCk7CiAgICBpZiAoc19sdmdsX211dGV4ID09IE5VTEwpIHsKICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gY3JlYXRlIExWR0wgbXV0ZXgiKTsKICAgICAgICByZXR1cm4gRVNQX0ZBSUw7CiAgICB9CiAgICAKICAgIC8vIOWIm+W7uiBMVkdMIOaYvuekugogICAgc19kaXNwID0gbHZfZGlzcGxheV9jcmVhdGUoTENEX0hfUkVTLCBMQ0RfVl9SRVMpOwogICAgaWYgKHNfZGlzcCA9PSBOVUxMKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIGNyZWF0ZSBMVkdMIGRpc3BsYXkiKTsKICAgICAgICByZXR1cm4gRVNQX0ZBSUw7CiAgICB9CiAgICAKICAgIC8vIOWIhumFjee7mOWItue8k+WGsuWMuu+8iOS9v+eUqCBQU1JBTe+8iQogICAgc2l6ZV90IGJ1Zl9zaXplID0gTENEX0hfUkVTICogTENEX1ZfUkVTICogc2l6ZW9mKGx2X2NvbG9yX3QpOwogICAgbHZfY29sb3JfdCAqYnVmMSA9IGhlYXBfY2Fwc19tYWxsb2MoYnVmX3NpemUsIE1BTExPQ19DQVBfU1BJUkFNKTsKICAgIGx2X2NvbG9yX3QgKmJ1ZjIgPSBoZWFwX2NhcHNfbWFsbG9jKGJ1Zl9zaXplLCBNQUxMT0NfQ0FQX1NQSVJBTSk7CiAgICAKICAgIGlmIChidWYxID09IE5VTEwgfHwgYnVmMiA9PSBOVUxMKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIGFsbG9jYXRlIExWR0wgYnVmZmVycyIpOwogICAgICAgIHJldHVybiBFU1BfRVJSX05PX01FTTsKICAgIH0KICAgIAogICAgbHZfZGlzcGxheV9zZXRfYnVmZmVycyhzX2Rpc3AsIGJ1ZjEsIGJ1ZjIsIGJ1Zl9zaXplLCBMVl9ESVNQTEFZX1JFTkRFUl9NT0RFX0ZVTEwpOwogICAgbHZfZGlzcGxheV9zZXRfZmx1c2hfY2Ioc19kaXNwLCBmbHVzaF9jYik7CiAgICBsdl9kaXNwbGF5X3NldF91c2VyX2RhdGEoc19kaXNwLCBzX2xjZF9wYW5lbCk7CiAgICAKICAgIC8vIOazqOWGjOWIt+aWsOWujOaIkOWbnuiwgyAoRVNQLUlERiB2NS41LjQgdXNlcyBjYWxsYmFja3Mgc3RydWN0KQogICAgZXNwX2xjZF9wYW5lbF9pb19jYWxsYmFja3NfdCBjYnMgPSB7CiAgICAgICAgLm9uX2NvbG9yX3RyYW5zX2RvbmUgPSBmbHVzaF9yZWFkeV9jYiwKICAgIH07CiAgICBlc3BfbGNkX3BhbmVsX2lvX3JlZ2lzdGVyX2V2ZW50X2NhbGxiYWNrcyhzX2xjZF9pbywgJmNicywgc19kaXNwKTsKICAgIAogICAgLy8g5Yid5aeL5YyW5oyJ6ZSu6L6T5YWlCiAgICBlc3BfZXJyX3QgcmV0ID0gbHZnbF9wb3J0X2lucHV0X2luaXQoKTsKICAgIGlmIChyZXQgIT0gRVNQX09LKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIGluaXRpYWxpemUgaW5wdXQiKTsKICAgICAgICByZXR1cm4gcmV0OwogICAgfQogICAgCiAgICAvLyDliJvlu7ogTFZHTCDovpPlhaXorr7lpIcKICAgIHNfaW5kZXYgPSBsdl9pbmRldl9jcmVhdGUoKTsKICAgIGlmIChzX2luZGV2ID09IE5VTEwpIHsKICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gY3JlYXRlIExWR0wgaW5wdXQgZGV2aWNlIik7CiAgICAgICAgcmV0dXJuIEVTUF9GQUlMOwogICAgfQogICAgCiAgICBsdl9pbmRldl9zZXRfdHlwZShzX2luZGV2LCBMVl9JTkRFVl9UWVBFX0tFWVBBRCk7CiAgICBsdl9pbmRldl9zZXRfcmVhZF9jYihzX2luZGV2LCBsdmdsX3BvcnRfa2V5cGFkX3JlYWRfY2IpOwogICAgCiAgICAvLyDliJvlu7ogTFZHTCB0aWNrIOWumuaXtuWZqAogICAgZXNwX3RpbWVyX2NyZWF0ZV9hcmdzX3QgdGlja190aW1lcl9hcmdzID0gewogICAgICAgIC5jYWxsYmFjayA9IGx2Z2xfdGlja19jYiwKICAgICAgICAubmFtZSA9ICJsdmdsX3RpY2siCiAgICB9OwogICAgCiAgICBlc3BfdGltZXJfaGFuZGxlX3QgdGlja190aW1lciA9IE5VTEw7CiAgICByZXQgPSBlc3BfdGltZXJfY3JlYXRlKCZ0aWNrX3RpbWVyX2FyZ3MsICZ0aWNrX3RpbWVyKTsKICAgIGlmIChyZXQgIT0gRVNQX09LKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIGNyZWF0ZSBMVkdMIHRpY2sgdGltZXIiKTsKICAgICAgICByZXR1cm4gcmV0OwogICAgfQogICAgCiAgICByZXQgPSBlc3BfdGltZXJfc3RhcnRfcGVyaW9kaWModGlja190aW1lciwgTFZHTF9USUNLX1BFUklPRF9NUyAqIDEwMDApOwogICAgaWYgKHJldCAhPSBFU1BfT0spIHsKICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gc3RhcnQgTFZHTCB0aWNrIHRpbWVyIik7CiAgICAgICAgcmV0dXJuIHJldDsKICAgIH0KICAgIAogICAgRVNQX0xPR0koVEFHLCAiTFZHTCBwb3J0IGluaXRpYWxpemVkIHN1Y2Nlc3NmdWxseSIpOwogICAgcmV0dXJuIEVTUF9PSzsKfQoKdm9pZCBsdmdsX3BvcnRfdGFza19oYW5kbGVyKHZvaWQpCnsKICAgIGlmIChzX2x2Z2xfbXV0ZXggPT0gTlVMTCkgewogICAgICAgIHJldHVybjsKICAgIH0KICAgIAogICAgaWYgKHhTZW1hcGhvcmVUYWtlKHNfbHZnbF9tdXRleCwgcGRNU19UT19USUNLUygxMCkpID09IHBkVFJVRSkgewogICAgICAgIGx2X3RpbWVyX2hhbmRsZXIoKTsKICAgICAgICB4U2VtYXBob3JlR2l2ZShzX2x2Z2xfbXV0ZXgpOwogICAgfQp9
+/**
+ * @file lvgl_port.c
+ * @brief LVGL 移植层实现 - 显示驱动、按键输入和组合键检测
+ */
+
+#include "lvgl_port.h"
+#include "driver/gpio.h"
+#include "esp_log.h"
+#include "esp_timer.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "freertos/semphr.h"
+#include <string.h>
+
+static const char *TAG = "lvgl_port";
+
+// 显示参数
+#define LCD_H_RES           160
+#define LCD_V_RES           128
+#define LVGL_TICK_PERIOD_MS 2
+
+// LCD 句柄
+static esp_lcd_panel_io_handle_t s_lcd_io = NULL;
+static esp_lcd_panel_handle_t s_lcd_panel = NULL;
+
+// LVGL 显示和输入设备
+static lv_display_t *s_disp = NULL;
+static lv_indev_t *s_indev = NULL;
+
+// LVGL 互斥锁
+static SemaphoreHandle_t s_lvgl_mutex = NULL;
+
+// 按键 GPIO 定义
+#define BTN_PIN_UP      GPIO_NUM_2
+#define BTN_PIN_DOWN    GPIO_NUM_13
+#define BTN_PIN_LEFT    GPIO_NUM_27
+#define BTN_PIN_RIGHT   GPIO_NUM_35
+#define BTN_PIN_A       GPIO_NUM_34
+#define BTN_PIN_B       GPIO_NUM_12
+
+// 按键去抖时间
+#define DEBOUNCE_MS     20
+
+// 组合键超时（毫秒）
+#define COMBO_TIMEOUT_MS 500
+
+// 按键状态
+typedef struct {
+    button_id_t id;
+    gpio_num_t gpio;
+    bool pressed;
+    bool last_state;
+    uint32_t last_change_ms;
+} button_state_t;
+
+static button_state_t s_buttons[BTN_COUNT] = {
+    {BTN_UP,    BTN_PIN_UP,    false, false, 0},
+    {BTN_DOWN,  BTN_PIN_DOWN,  false, false, 0},
+    {BTN_LEFT,  BTN_PIN_LEFT,  false, false, 0},
+    {BTN_RIGHT, BTN_PIN_RIGHT, false, false, 0},
+    {BTN_A,     BTN_PIN_A,     false, false, 0},
+    {BTN_B,     BTN_PIN_B,     false, false, 0},
+};
+
+// 组合键回调
+typedef struct {
+    button_id_t key1;
+    button_id_t key2;
+    combo_key_callback_t callback;
+} combo_key_t;
+
+#define MAX_COMBO_KEYS 4
+static combo_key_t s_combo_keys[MAX_COMBO_KEYS];
+static int s_combo_count = 0;
+
+// 组合键检测状态
+static button_id_t s_last_pressed_key = BTN_COUNT;
+static uint32_t s_last_pressed_time = 0;
+
+// 单键事件回调
+static key_event_callback_t s_key_event_cb = NULL;
+
+esp_err_t lvgl_port_input_init(void)
+{
+    ESP_LOGI(TAG, "Initializing button input");
+    
+    // 配置所有按键 GPIO
+    for (int i = 0; i < BTN_COUNT; i++) {
+        gpio_config_t io_conf = {
+            .pin_bit_mask = 1ULL << s_buttons[i].gpio,
+            .mode = GPIO_MODE_INPUT,
+            .pull_up_en = GPIO_PULLUP_ENABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+            .intr_type = GPIO_INTR_DISABLE,
+        };
+        esp_err_t ret = gpio_config(&io_conf);
+        if (ret != ESP_OK) {
+            ESP_LOGE(TAG, "Failed to configure GPIO %d: %s", 
+                     s_buttons[i].gpio, esp_err_to_name(ret));
+            return ret;
+        }
+    }
+    
+    ESP_LOGI(TAG, "Button input initialized successfully");
+    return ESP_OK;
+}
+
+void lvgl_port_register_combo_key(const char *combo, combo_key_callback_t callback)
+{
+    if (s_combo_count >= MAX_COMBO_KEYS) {
+        ESP_LOGW(TAG, "Max combo keys reached");
+        return;
+    }
+    
+    combo_key_t *ck = &s_combo_keys[s_combo_count];
+    ck->callback = callback;
+    
+    if (strcmp(combo, "up+b") == 0) {
+        ck->key1 = BTN_UP;
+        ck->key2 = BTN_B;
+    } else if (strcmp(combo, "down+b") == 0) {
+        ck->key1 = BTN_DOWN;
+        ck->key2 = BTN_B;
+    } else {
+        ESP_LOGW(TAG, "Unknown combo: %s", combo);
+        return;
+    }
+    
+    s_combo_count++;
+    ESP_LOGI(TAG, "Registered combo key: %s", combo);
+}
+
+void lvgl_port_register_key_event(key_event_callback_t callback)
+{
+    s_key_event_cb = callback;
+    ESP_LOGI(TAG, "Registered key event callback");
+}
+
+void lvgl_port_keypad_read_cb(lv_indev_t *indev, lv_indev_data_t *data)
+{
+    // 检查是否有按键按下
+    for (int i = 0; i < BTN_COUNT; i++) {
+        if (s_buttons[i].pressed) {
+            data->state = LV_INDEV_STATE_PRESSED;
+            
+            // 映射到 LVGL 键值
+            switch (s_buttons[i].id) {
+                case BTN_UP:    data->key = LV_KEY_UP; break;
+                case BTN_DOWN:  data->key = LV_KEY_DOWN; break;
+                case BTN_LEFT:  data->key = LV_KEY_LEFT; break;
+                case BTN_RIGHT: data->key = LV_KEY_RIGHT; break;
+                case BTN_A:     data->key = LV_KEY_ENTER; break;
+                case BTN_B:     data->key = LV_KEY_ESC; break;
+                default:        data->key = 0; break;
+            }
+            return;
+        }
+    }
+    
+    data->state = LV_INDEV_STATE_RELEASED;
+}
+
+bool lvgl_port_is_button_pressed(button_id_t btn)
+{
+    if (btn >= BTN_COUNT) return false;
+    return s_buttons[btn].pressed;
+}
+
+void lvgl_port_button_scan_task(void *arg)
+{
+    ESP_LOGI(TAG, "Button scan task started");
+    
+    while (1) {
+        uint32_t now = lv_tick_get();
+        
+        // 扫描所有按键
+        for (int i = 0; i < BTN_COUNT; i++) {
+            button_state_t *btn = &s_buttons[i];
+            bool current = (gpio_get_level(btn->gpio) == 0);  // 低电平有效
+            
+            // 去抖处理
+            if (current != btn->last_state) {
+                if (now - btn->last_change_ms >= DEBOUNCE_MS) {
+                    btn->last_state = current;
+                    btn->last_change_ms = now;
+                    
+                    if (current && !btn->pressed) {
+                        // 按键按下
+                        btn->pressed = true;
+                        ESP_LOGD(TAG, "Button %d pressed", btn->id);
+                        
+                        // 组合键检测
+                        if (s_last_pressed_key != BTN_COUNT && 
+                            (now - s_last_pressed_time) < COMBO_TIMEOUT_MS) {
+                            // 检查是否匹配组合键
+                            for (int j = 0; j < s_combo_count; j++) {
+                                combo_key_t *ck = &s_combo_keys[j];
+                                if ((ck->key1 == s_last_pressed_key && ck->key2 == btn->id) ||
+                                    (ck->key1 == btn->id && ck->key2 == s_last_pressed_key)) {
+                                    ESP_LOGI(TAG, "Combo key detected: %d+%d", 
+                                             s_last_pressed_key, btn->id);
+                                    if (ck->callback) {
+                                        ck->callback();
+                                    }
+                                    // 清除状态，避免重复触发
+                                    btn->pressed = false;
+                                    s_buttons[s_last_pressed_key].pressed = false;
+                                    s_last_pressed_key = BTN_COUNT;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // 记录最后按下的键
+                        s_last_pressed_key = btn->id;
+                        s_last_pressed_time = now;
+                        
+                        // 触发单键事件回调（延迟触发，等待组合键窗口）
+                        // 实际在按键释放时触发
+                    } else if (!current && btn->pressed) {
+                        // 按键释放
+                        btn->pressed = false;
+                        ESP_LOGD(TAG, "Button %d released", btn->id);
+                        
+                        // 触发单键事件（如果不是组合键的一部分）
+                        if (s_key_event_cb && s_last_pressed_key == btn->id) {
+                            lv_key_t lv_key = 0;
+                            switch (btn->id) {
+                                case BTN_UP:    lv_key = LV_KEY_UP; break;
+                                case BTN_DOWN:  lv_key = LV_KEY_DOWN; break;
+                                case BTN_LEFT:  lv_key = LV_KEY_LEFT; break;
+                                case BTN_RIGHT: lv_key = LV_KEY_RIGHT; break;
+                                case BTN_A:     lv_key = LV_KEY_ENTER; break;
+                                case BTN_B:     lv_key = LV_KEY_ESC; break;
+                                default: break;
+                            }
+                            if (lv_key != 0) {
+                                s_key_event_cb(lv_key);
+                            }
+                            s_last_pressed_key = BTN_COUNT;
+                        }
+                    }
+                }
+            }
+        }
+        
+        vTaskDelay(pdMS_TO_TICKS(10));  // 10ms 扫描周期
+    }
+}
+
+/* ── LVGL 显示驱动 ─────────────────────────────────────────────────── */
+
+// 显示刷新完成回调 - ESP-IDF v5.5.4 签名
+static bool flush_ready_cb(esp_lcd_panel_io_handle_t panel_io, 
+                           esp_lcd_panel_io_event_data_t *edata, 
+                           void *user_ctx)
+{
+    (void)panel_io;
+    (void)edata;
+    lv_display_t *disp = (lv_display_t *)user_ctx;
+    lv_display_flush_ready(disp);
+    return false;
+}
+
+// LVGL tick 回调
+static void lvgl_tick_cb(void *arg)
+{
+    (void)arg;
+    lv_tick_inc(LVGL_TICK_PERIOD_MS);
+}
+
+// 显示刷新回调 - LVGL v9 签名
+static void flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map)
+{
+    esp_lcd_panel_handle_t panel = (esp_lcd_panel_handle_t)lv_display_get_user_data(disp);
+    
+    int32_t x1 = area->x1;
+    int32_t x2 = area->x2;
+    int32_t y1 = area->y1;
+    int32_t y2 = area->y2;
+    
+    esp_lcd_panel_draw_bitmap(panel, x1, y1, x2 + 1, y2 + 1, px_map);
+    // 注意：flush_ready 会在 draw_bitmap 完成后通过回调触发
+}
+
+esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_t lcd_panel)
+{
+    ESP_LOGI(TAG, "Initializing LVGL port");
+    
+    s_lcd_io = lcd_io;
+    s_lcd_panel = lcd_panel;
+    
+    // 创建互斥锁
+    s_lvgl_mutex = xSemaphoreCreateMutex();
+    if (s_lvgl_mutex == NULL) {
+        ESP_LOGE(TAG, "Failed to create LVGL mutex");
+        return ESP_FAIL;
+    }
+    
+    // 创建 LVGL 显示
+    s_disp = lv_display_create(LCD_H_RES, LCD_V_RES);
+    if (s_disp == NULL) {
+        ESP_LOGE(TAG, "Failed to create LVGL display");
+        return ESP_FAIL;
+    }
+    
+    // 分配绘制缓冲区（使用 PSRAM）
+    size_t buf_size = LCD_H_RES * LCD_V_RES * sizeof(lv_color_t);
+    lv_color_t *buf1 = heap_caps_malloc(buf_size, MALLOC_CAP_SPIRAM);
+    lv_color_t *buf2 = heap_caps_malloc(buf_size, MALLOC_CAP_SPIRAM);
+    
+    if (buf1 == NULL || buf2 == NULL) {
+        ESP_LOGE(TAG, "Failed to allocate LVGL buffers");
+        return ESP_ERR_NO_MEM;
+    }
+    
+    lv_display_set_buffers(s_disp, buf1, buf2, buf_size, LV_DISPLAY_RENDER_MODE_FULL);
+    lv_display_set_flush_cb(s_disp, flush_cb);
+    lv_display_set_user_data(s_disp, s_lcd_panel);
+    
+    // 注册刷新完成回调 (ESP-IDF v5.5.4 uses callbacks struct)
+    esp_lcd_panel_io_callbacks_t cbs = {
+        .on_color_trans_done = flush_ready_cb,
+    };
+    esp_lcd_panel_io_register_event_callbacks(s_lcd_io, &cbs, s_disp);
+    
+    // 初始化按键输入
+    esp_err_t ret = lvgl_port_input_init();
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to initialize input");
+        return ret;
+    }
+    
+    // 创建 LVGL 输入设备
+    s_indev = lv_indev_create();
+    if (s_indev == NULL) {
+        ESP_LOGE(TAG, "Failed to create LVGL input device");
+        return ESP_FAIL;
+    }
+    
+    lv_indev_set_type(s_indev, LV_INDEV_TYPE_KEYPAD);
+    lv_indev_set_read_cb(s_indev, lvgl_port_keypad_read_cb);
+    
+    // 创建 LVGL tick 定时器
+    esp_timer_create_args_t tick_timer_args = {
+        .callback = lvgl_tick_cb,
+        .name = "lvgl_tick"
+    };
+    
+    esp_timer_handle_t tick_timer = NULL;
+    ret = esp_timer_create(&tick_timer_args, &tick_timer);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to create LVGL tick timer");
+        return ret;
+    }
+    
+    ret = esp_timer_start_periodic(tick_timer, LVGL_TICK_PERIOD_MS * 1000);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to start LVGL tick timer");
+        return ret;
+    }
+    
+    ESP_LOGI(TAG, "LVGL port initialized successfully");
+    return ESP_OK;
+}
+
+void lvgl_port_task_handler(void)
+{
+    if (s_lvgl_mutex == NULL) {
+        return;
+    }
+    
+    if (xSemaphoreTake(s_lvgl_mutex, pdMS_TO_TICKS(10)) == pdTRUE) {
+        lv_timer_handler();
+        xSemaphoreGive(s_lvgl_mutex);
+    }
+}

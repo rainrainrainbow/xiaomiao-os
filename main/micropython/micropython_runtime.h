@@ -1,1 +1,57 @@
-LyoqCiAqIEBmaWxlIG1pY3JvcHl0aG9uX3J1bnRpbWUuaAogKiBAYnJpZWYgTWljcm9QeXRob27ov5DooYzml7bpm4bmiJAKICovCgojaWZuZGVmIE1JQ1JPUFlUSE9OX1JVTlRJTUVfSAojZGVmaW5lIE1JQ1JPUFlUSE9OX1JVTlRJTUVfSAoKI2luY2x1ZGUgImVzcF9lcnIuaCIKI2luY2x1ZGUgPHN0ZGJvb2wuaD4KCiNpZmRlZiBfX2NwbHVzcGx1cwpleHRlcm4gIkMiIHsKI2VuZGlmCgovKioKICogQGJyaWVmIOWIneWni+WMlk1pY3JvUHl0aG9u6L+Q6KGM5pe2CiAqIEByZXR1cm4gRVNQX09LIOaIkOWKnwogKi8KZXNwX2Vycl90IG1pY3JvcHl0aG9uX3J1bnRpbWVfaW5pdCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg5omn6KGMUHl0aG9u6ISa5pysCiAqIEBwYXJhbSBzY3JpcHRfcGF0aCDohJrmnKzot6/lvoQKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgbWljcm9weXRob25fZXhlY3V0ZV9zY3JpcHQoY29uc3QgY2hhciAqc2NyaXB0X3BhdGgpOwoKLyoqCiAqIEBicmllZiDlgZzmraLlvZPliY3ov5DooYznmoTohJrmnKwKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgbWljcm9weXRob25fc3RvcF9leGVjdXRpb24odm9pZCk7CgovKioKICogQGJyaWVmIOajgOafpeaYr+WQpuacieiEmuacrOato+WcqOi/kOihjAogKiBAcmV0dXJuIHRydWUg5q2j5Zyo6L+Q6KGMCiAqLwpib29sIG1pY3JvcHl0aG9uX2lzX3J1bm5pbmcodm9pZCk7CgovKioKICogQGJyaWVmIOiOt+WPluW9k+WJjei/kOihjOeahOiEmuacrOi3r+W+hAogKiBAcmV0dXJuIOiEmuacrOi3r+W+hO+8jE5VTEzooajnpLrml6DohJrmnKzov5DooYwKICovCmNvbnN0IGNoYXIgKm1pY3JvcHl0aG9uX2dldF9jdXJyZW50X3NjcmlwdCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg5rOo5YaM56Gs5Lu2QVBJ5YiwTWljcm9QeXRob24KICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgbWljcm9weXRob25fcmVnaXN0ZXJfaGFyZHdhcmVfYXBpKHZvaWQpOwoKI2lmZGVmIF9fY3BsdXNwbHVzCn0KI2VuZGlmCgojZW5kaWYgLyogTUlDUk9QWVRIT05fUlVOVElNRV9IICov
+/**
+ * @file micropython_runtime.h
+ * @brief MicroPython运行时集成
+ */
+
+#ifndef MICROPYTHON_RUNTIME_H
+#define MICROPYTHON_RUNTIME_H
+
+#include "esp_err.h"
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief 初始化MicroPython运行时
+ * @return ESP_OK 成功
+ */
+esp_err_t micropython_runtime_init(void);
+
+/**
+ * @brief 执行Python脚本
+ * @param script_path 脚本路径
+ * @return ESP_OK 成功
+ */
+esp_err_t micropython_execute_script(const char *script_path);
+
+/**
+ * @brief 停止当前运行的脚本
+ * @return ESP_OK 成功
+ */
+esp_err_t micropython_stop_execution(void);
+
+/**
+ * @brief 检查是否有脚本正在运行
+ * @return true 正在运行
+ */
+bool micropython_is_running(void);
+
+/**
+ * @brief 获取当前运行的脚本路径
+ * @return 脚本路径，NULL表示无脚本运行
+ */
+const char *micropython_get_current_script(void);
+
+/**
+ * @brief 注册硬件API到MicroPython
+ * @return ESP_OK 成功
+ */
+esp_err_t micropython_register_hardware_api(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* MICROPYTHON_RUNTIME_H */

@@ -1,1 +1,311 @@
-IyBYaWFvTWlhbyBPUyAtIE1pY3JvUHl0aG9uIOahjOmdouezu+e7nwoK5bCP5Za15o6M5py65LiK55qE5a6M5pW05qGM6Z2i5pON5L2c57O757uf77yM5pSv5oyB5a6J6KOF5ZKM6L+Q6KGM5Z+65LqOIE1pY3JvUHl0aG9uIOW8gOWPkeeahOW6lOeUqOeoi+W6j+OAggoKIyMg8J+OryDpobnnm67nm67moIcKCuWcqOWtpuiAjOaAneWwj+WWteaVmeiCsuaOjOacuu+8iEVTUDMyLVdST1ZFUi1CICsgR0QzMkYzNTBHOO+8ieS4iuWIm+W7uuS4gOS4quWKn+iDveWujOaVtOeahOahjOmdouaTjeS9nOezu+e7n++8jOaPkOS+m+exu+S8vCBXaW5kb3dzIFBob25lIOaIliBBbmRyb2lkIOeahOS6pOS6kuS9k+mqjOOAggoKIyMg8J+TgSDpobnnm67nu5PmnoQKCmBgYAp4aWFvbWlhby1vcy8K4pSc4pSA4pSAIENNYWtlTGlzdHMudHh0ICAgICAgICAgICAgICAjIEVTUC1JREYg6aG555uu6YWN572uCuKUnOKUgOKUgCBzZGtjb25maWcuZGVmYXVsdHMgICAgICAgICAgIyDmnb/nuqfphY3nva4K4pSc4pSA4pSAIHBhcnRpdGlvbnMuY3N2ICAgICAgICAgICAgICAjIOWIhuWMuuihqO+8iExvYWRlcuWFvOWuue+8iQrilJzilIDilIAgLmdpdGlnbm9yZQrilJzilIDilIAgUkVBRE1FLm1kICAgICAgICAgICAgICAgICAgICMg5pys5paH5qGjCuKUnOKUgOKUgCB1aS1zaW11bGF0b3IuaHRtbCAgICAgICAgICAgIyBVSSDmqKHmi5/lmajvvIhIVE1ML0NTUy9KU++8iQrilJTilIDilIAgbWFpbi8KICAgIOKUnOKUgOKUgCBDTWFrZUxpc3RzLnR4dCAgICAgICAgICAjIOe7hOS7tumFjee9rgogICAg4pSc4pSA4pSAIGlkZl9jb21wb25lbnQueW1sICAgICAgICMgTFZHTCA5LjUuMCDkvp3otZYKICAgIOKUnOKUgOKUgCByZXR1cm5fdG9fbG9hZGVyLmggICAgICAjIOi/lOWbnkxvYWRlcumbhuaIkAogICAg4pSc4pSA4pSAIG1haW4uYyAgICAgICAgICAgICAgICAgICMg5Li75YWl5Y+j77yI56Gs5Lu25Yid5aeL5YyWK+aooeWdl+aVtOWQiO+8iQogICAg4pSc4pSA4pSAIGx2Z2xfcG9ydC8gICAgICAgICAgICAgICMgTFZHTCDnp7vmpI3lsYIKICAgIOKUgiAgIOKUnOKUgOKUgCBsdmdsX3BvcnQuaCAgICAgICAgICMg5pi+56S66amx5YqoK+aMiemUrui+k+WFpSvnu4TlkIjplK4KICAgIOKUgiAgIOKUlOKUgOKUgCBsdmdsX3BvcnQuYwogICAg4pSc4pSA4pSAIGFwcF9tYW5hZ2VyLyAgICAgICAgICAgICMg5bqU55So566h55CG5ZmoCiAgICDilIIgICDilJzilIDilIAgYXBwX21hbmFnZXIuaCAgICAgICAjIFNE5Y2h5omr5o+PK21hbmlmZXN06Kej5p6QCiAgICDilIIgICDilJTilIDilIAgYXBwX21hbmFnZXIuYwogICAg4pSc4pSA4pSAIG1pY3JvcHl0aG9uLyAgICAgICAgICAgICMgTWljcm9QeXRob24g6L+Q6KGM5pe2CiAgICDilIIgICDilJzilIDilIAgbWljcm9weXRob25fcnVudGltZS5oCiAgICDilIIgICDilJTilIDilIAgbWljcm9weXRob25fcnVudGltZS5jCiAgICDilJzilIDilIAgY29uZmlnX21hbmFnZXIvICAgICAgICAgIyDphY3nva7nrqHnkIblmagKICAgIOKUgiAgIOKUnOKUgOKUgCBjb25maWdfbWFuYWdlci5oICAgICMgSlNPTumFjee9ruaMgeS5heWMlgogICAg4pSCICAg4pSU4pSA4pSAIGNvbmZpZ19tYW5hZ2VyLmMKICAgIOKUnOKUgOKUgCBwb3dlcl9tYW5hZ2VyLyAgICAgICAgICAjIOeUtea6kOeuoeeQhgogICAg4pSCICAg4pSc4pSA4pSAIHBvd2VyX21hbmFnZXIuaCAgICAgIyDnlLXmsaDnm5HmtYsr6Ieq5Yqo5LyR55ygCiAgICDilIIgICDilJTilIDilIAgcG93ZXJfbWFuYWdlci5jCiAgICDilJTilIDilIAgdWkvICAgICAgICAgICAgICAgICAgICAgIyDmoYzpnaIgVUkKICAgICAgICDilJzilIDilIAgdWlfbWFpbi5oICAgICAgICAgICAjIExWR0wg55WM6Z2i57O757ufCiAgICAgICAg4pSU4pSA4pSAIHVpX21haW4uYwpgYGAKCiMjIPCflKcg56Gs5Lu26KeE5qC8Cgp8IOWPguaVsCB8IOWAvCB8CnwtLS0tLS18LS0tLS0tfAp8IE1DVSB8IEVTUDMyLVdST1ZFUi1CIHwKfCBGbGFzaCB8IDRNQiBRSU8gODBNSHogfAp8IFBTUkFNIHwgOE1CIFF1YWQgODBNSHogfAp8IExDRCB8IFNUNzczNSBTUEkgVEZUIDE2MMOXMTI4IHwKfCBTROWNoSB8IE1pY3JvU0QgKOWFseS6q1NQSTIpIHwKfCDmjInplK4gfCA26ZSu5omL5p+EIChVUC9ET1dOL0xFRlQvUklHSFQvQS9CKSB8CnwgSTJDIHwgU0NMPTE1LCBTREE9MjEgQDEwMGtIeiB8Cnwg6JyC6bij5ZmoIHwgR1BJTzE0IChMRURDIFBXTSkgfAp8IOeUteaxoEFEQyB8IEdQSU8zNCAoOS4xay8yLjRr5YiG5Y6LKSB8CgojIyMg5byV6ISa5a6a5LmJCgpgYGAKTENEOiAgU0NMSz0xOCAgTU9TST0yMyAgTUlTTz0xOSAgQ1M9NSAgREM9NCAgIChTUEkyIEAgNDBNSHopClNEOiAgIENTPTIyICAgICjlhbHkuqsgU1BJMikKS2V5czogVVA9MiAgRE9XTj0xMyAgTEVGVD0yNyAgUklHSFQ9MzUgIEE9MzQgIEI9MTIgICjkvY7nlLXlubPmnInmlYgpCkkyQzogIFNDTD0xNSAgU0RBPTIxICAoMTAwa0h6KQpCdXp6OiBHUElPMTQgKExFREMgVGltZXIwL0NoMCkKQmF0dDogR1BJTzM0IChBREMxX0NINiwg5bim5YiG5Y6L55S16Zi7KQpgYGAKCiMjIPCfjq4g5pON5L2c6K+05piOCgojIyMg56Gs5Lu25oyJ6ZSuCgp8IOaMiemUriB8IOWKn+iDvSB8CnwtLS0tLS18LS0tLS0tfAp8IFVQL0RPV04vTEVGVC9SSUdIVCB8IOaWueWQkeWvvOiIqiB8CnwgQSB8IOehruiupC/ov5vlhaUgfAp8IEIgfCDov5Tlm57kuIrkuIDpobUgfAoKIyMjIOe7hOWQiOmUrgoKfCDnu4TlkIggfCDlip/og70gfAp8LS0tLS0tfC0tLS0tLXwKfCBVUCArIEIgfCDov5Tlm57kuLvpobUgfAp8IERPV04gKyBCIHwg5omT5byA5Lu75Yqh566h55CG5ZmoIHwKCiMjIyDku7vliqHnrqHnkIblmagKCnwg5pON5L2cIHwg5oyJ6ZSuIHwKfC0tLS0tLXwtLS0tLS18Cnwg6YCJ5oup5bqU55SoIHwgVVAvRE9XTiB8Cnwg6L+b5YWl5bqU55SoIHwgQSB8Cnwg6ZSB5a6aL+ino+mUgSB8IExFRlQgfAp8IOmUgOavgeW6lOeUqCB8IFJJR0hUIHwKfCDov5Tlm54gfCBCIHwKCiMjIPCfmoAg5b+r6YCf5byA5aeLCgojIyMgMS4g546v5aKD5YeG5aSHCgpgYGBiYXNoCiMg5a6J6KOFIEVTUC1JREYgdjUuNS40Cm1rZGlyIC1wIH4vZXNwCmNkIH4vZXNwCmdpdCBjbG9uZSAtYiB2NS41LjQgLS1yZWN1cnNpdmUgaHR0cHM6Ly9naXRodWIuY29tL2VzcHJlc3NpZi9lc3AtaWRmLmdpdApjZCBlc3AtaWRmCi4vaW5zdGFsbC5zaCBlc3AzMgoKIyDmv4DmtLvnjq/looMKLiB+L2VzcC9lc3AtaWRmL2V4cG9ydC5zaApgYGAKCiMjIyAyLiDmnoTlu7rpobnnm64KCmBgYGJhc2gKY2QgeGlhb21pYW8tb3MKaWRmLnB5IGJ1aWxkCmBgYAoKIyMjIDMuIOeDp+W9leWbuuS7tgoKYGBgYmFzaAojIOmAmui/hyBVU0IgKEdEMzIgVUFSVCDmoaUpCmlkZi5weSAtcCAvZGV2L3R0eUFDTTAgZmxhc2gKCiMg5oiW5L2/55SoIGVzcHRvb2wKZXNwdG9vbC5weSAtLWNoaXAgZXNwMzIgLWIgNDYwODAwIHdyaXRlX2ZsYXNoIDB4MCBidWlsZC94aWFvbWlhby1vcy1tZXJnZWQuYmluCmBgYAoKIyMjIDQuIOeUn+aIkOWQiOW5tuWbuuS7tgoKYGBgYmFzaAppZGYucHkgbWVyZ2UtYmluCmNwIGJ1aWxkL3hpYW9taWFvLW9zLW1lcmdlZC5iaW4gL3NkY2FyZC9yb21zL3hpYW9taWFvLW9zLmJpbgpgYGAKCiMjIPCfjqggVUkg5qih5ouf5ZmoCgrlnKjmtY/op4jlmajkuK3miZPlvIAgYHVpLXNpbXVsYXRvci5odG1sYCDlj6/ku6XkvZPpqozlrozmlbTnmoQgVUkg5Lqk5LqS77yaCgpgYGBiYXNoCiMg55u05o6l55So5rWP6KeI5Zmo5omT5byACm9wZW4gdWktc2ltdWxhdG9yLmh0bWwKIyDmiJYKeGRnLW9wZW4gdWktc2ltdWxhdG9yLmh0bWwKYGBgCgojIyMg6ZSu55uY5o6n5Yi2Cgp8IOaMiemUriB8IOWKn+iDvSB8CnwtLS0tLS18LS0tLS0tfAp8IFcvQS9TL0QgfCDmlrnlkJHplK4gKOS4ii/lt6Yv5LiLL+WPsykgfAp8IEogfCBB6ZSuICjnoa7orqQpIHwKfCBLIHwgQumUriAo6L+U5ZueKSB8CnwgU3BhY2UgfCDkuLvpobUgfAp8IEwgfCDliIfmjaLkuLvpobUv5bqU55So5YiX6KGoIHwKCiMjIyDlip/og73mvJTnpLoKCi0gKirlkK/liqjliqjnlLsqKjogMi4156eSIExvZ28g5bGV56S6Ci0gKirmoYzpnaIqKjogM8OXMiDlupTnlKjlm77moIfnvZHmoLwgKyDliIbpobXlnIbngrkKLSAqKuiuvue9rumhtemdoioqOiDkuLvpopjpgInmi6njgIHlhbPkuo7nrYkKLSAqKuS7u+WKoeeuoeeQhuWZqCoqOiDov5DooYzkuK3nmoTlupTnlKjnrqHnkIYKLSAqKuS4u+mimOezu+e7nyoqOiA256eN5Li76aKY77yI6buY6K6kL+a1t+a0iy/mo67mnpcv5pif56m6L+eBq+eEsC/lhrDmmbbvvIkKCiMjIPCfk6Yg5bqU55So5YyF5qC85byPICguYXBwKQoK5bqU55So5omT5YyF5Li6IFpJUCDmlofku7bvvIzmianlsZXlkI3mlLnkuLogYC5hcHBg77yaCgpgYGAKY29tLmV4YW1wbGUubXlhcHAuYXBwLwrilJzilIDilIAgbWFuaWZlc3QuanNvbiAgICAgICAgICAjIOW6lOeUqOa4heWNlSAo5b+F6ZyAKQrilJzilIDilIAgaWNvbi5wbmcgICAgICAgICAgICAgICAjIOWbvuaghyAxMjh4MTI4ICjlv4XpnIApCuKUnOKUgOKUgCBtYWluLnB5ICAgICAgICAgICAgICAgICMg5YWl5Y+j6ISa5pysICjlv4XpnIApCuKUnOKUgOKUgCBsaWIvICAgICAgICAgICAgICAgICAgICMg56eB5pyJ5bqTICjlj6/pgIkpCuKUnOKUgOKUgCBhc3NldHMvICAgICAgICAgICAgICAgICMg6LWE5rqQ5paH5Lu2ICjlj6/pgIkpCuKUlOKUgOKUgCBtb2RlbC8gICAgICAgICAgICAgICAgICMgTUzmqKHlnosgKOWPr+mAiSkKYGBgCgojIyMgbWFuaWZlc3QuanNvbiDnpLrkvosKCmBgYGpzb24KewogICJpZCI6ICJjb20uZXhhbXBsZS5teWFwcCIsCiAgIm5hbWUiOiAi5oiR55qE5bqU55SoIiwKICAidmVyc2lvbiI6ICIxLjAuMCIsCiAgImF1dGhvciI6ICJZb3VyTmFtZSIsCiAgImRlc2NyaXB0aW9uIjogIui/meaYr+S4gOS4quekuuS+i+W6lOeUqCIsCiAgImljb24iOiAiaWNvbi5wbmciLAogICJtYWluIjogIm1haW4ucHkiCn0KYGBgCgojIyDwn5OKIOWIhuWMuuihqAoKfCDliIbljLogfCDlgY/np7sgfCDlpKflsI8gfCDnlKjpgJQgfAp8LS0tLS0tfC0tLS0tLXwtLS0tLS18LS0tLS0tfAp8IG52cyB8IDB4QTAwMCB8IDIwS0IgfCDns7vnu5/phY3nva4gfAp8IHBoeV9pbml0IHwgMHhGMDAwIHwgNEtCIHwgUEhZ5qCh5YeGIHwKfCBmYWN0b3J5IHwgMHgxMDAwMCB8IDU2OEtCIHwgTG9hZGVy5Zu65Lu2IHwKfCBvdGFkYXRhIHwgMHhCRTAwMCB8IDhLQiB8IOWQr+WKqOmAieaLqSB8Cnwgb3RhXzAgfCAweEMwMDAwIHwgMy4yNU1CIHwgUk9N6L+Q6KGM5qe9IHwKCiMjIPCflIsg55S15rGg5qOA5rWLCgpHUElPMzQg6YCa6L+HIDkuMWsvMi40ayDliIbljovnlLXpmLvov57mjqXnlLXmsaDvvJoKCmBgYArnlLXmsaAgKDMuMC00LjJWKSDilIDilIDilKzilIDilIAgOS4xa86pIOKUgOKUgOKUrOKUgOKUgCBHUElPMzQgKEFEQykKICAgICAgICAgICAgICAgICAg4pSCICAgICAgICAgICDilIIKICAgICAgICAgICAgICAgICAg4pSU4pSA4pSAIDIuNGvOqSDilIDilIDilJgKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg4pSCCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgR05ECmBgYAoK5YiG5Y6L5q+UOiAoOS4xICsgMi40KSAvIDIuNCA9IDQuNzkKCkFEQyDor7vmlbAgw5cgNC43OSA9IOWunumZheeUteaxoOeUteWOiwoKIyMg8J+Pl++4jyDmqKHlnZfmnrbmnoQKCiMjIyBsdmdsX3BvcnQgLSBMVkdMIOenu+akjeWxggoKLSAqKuaYvuekuumpseWKqCoqOiBTVDc3MzUg5Y+M57yT5YayIERNQSDliLfmlrAKLSAqKuaMiemUrui+k+WFpSoqOiA26ZSuIEdQSU8g5omr5o+PICsg5Y675oqWCi0gKirnu4TlkIjplK7mo4DmtYsqKjogNTAwbXMg5pe26Ze056qX5Y+jCi0gKirmjInplK7kuovku7bliIblj5EqKjog5Y2V6ZSu5Zue6LCD5py65Yi2Ci0gKipMVkdMIHY5IEFQSSoqOiBgbHZfZGlzcGxheV9jcmVhdGVgLCBgbHZfaW5kZXZfY3JlYXRlYAoKIyMjIGFwcF9tYW5hZ2VyIC0g5bqU55So566h55CG5ZmoCgotICoqU0TljaHmiavmj48qKjog6Ieq5Yqo5qOA5rWLIGAvc2RjYXJkL2FwcHMvYCDnm67lvZUKLSAqKm1hbmlmZXN06Kej5p6QKio6IGNKU09OIOino+aekOW6lOeUqOS/oeaBrwotICoq5bqU55So55Sf5ZG95ZGo5pyfKio6IOWQr+WKqC/lgZzmraIv54q25oCB566h55CGCgojIyMgY29uZmlnX21hbmFnZXIgLSDphY3nva7nrqHnkIblmagKCi0gKipKU09O5oyB5LmF5YyWKio6IOWfuuS6jmNKU09O55qE6YWN572u5a2Y5YKoCi0gKirphY3nva7ot6/lvoQqKjogYC9zZGNhcmQvLnhpYW9taWFvL2NvbmZpZy5qc29uYAotICoq5pSv5oyB57G75Z6LKio6IOaVtOaVsOOAgeWtl+espuS4suOAgeW4g+WwlOWAvAotICoq6Ieq5Yqo5L+d5a2YKio6IOS4u+mimOWIh+aNouetiemFjee9ruiHquWKqOaMgeS5heWMlgoKIyMjIHBvd2VyX21hbmFnZXIgLSDnlLXmupDnrqHnkIYKCi0gKirnlLXmsaDnm5HmtYsqKjogQURD6YeH5qC3ICsg5YiG5Y6L6K6h566XICsg5qCh5YeGCi0gKirnlLXph4/orqHnrpcqKjog5YiG5q6157q/5oCn5o+S5YC8566X5rOVCi0gKirkvY7nlLXph4/lkYroraYqKjog5Y+v6YWN572u6ZiI5YC877yI6buY6K6kMjAl77yJCi0gKiroh6rliqjkvJHnnKAqKjog5Y+v6YWN572u6LaF5pe25pe26Ze077yI6buY6K6kNeWIhumSn++8iQotICoq5LqL5Lu25Zue6LCDKio6IOS9jueUtemHjy/kuLTnlYwv5LyR55ygL+WUpOmGkuS6i+S7tgoKIyMjIHVpIC0g5qGM6Z2i55WM6Z2iCgotICoq54q25oCB5qCPKio6IOaXtumXtCArIOeUteaxoAotICoq5bqU55So572R5qC8Kio6IDPDlzIg5Zu+5qCH5biD5bGACi0gKirpobXpnaLmjIfnpLrlmagqKjog5bqV6YOo5ZyG54K55YiG6aG1Ci0gKirkuLvpopjns7vnu58qKjogNuenjeWPr+WIh+aNouS4u+mimO+8iOaMgeS5heWMlu+8iQotICoq5Lu75Yqh566h55CG5ZmoKio6IOi/kOihjOW6lOeUqOeuoeeQhgotICoq6YWN572u6IGU5YqoKio6IOS4u+mimOmAieaLqeiHquWKqOS/neWtmAoKIyMg4pqg77iPIOazqOaEj+S6i+mhuQoKMS4gKipHUElPMzQvMzUqKjog5LuF6L6T5YWl77yM5peg5YaF6YOo5LiK5ouJ77yM6ZyA5aSW6YOo5LiK5ouJ55S16Zi7CjIuICoqU1BJ5oC757q/5YWx5LqrKio6IExDROWSjFNE5Y2h5YWx5LqrU1BJMu+8jOmAmui/h0NT5Yy65YiGCjMuICoqUFNSQU3pmZDliLYqKjogRVNQMzLkuI3og73ku45QU1JBTeaJp+ihjOS7o+egge+8jOS7heeUqOS6juaVsOaNruWtmOWCqAo0LiAqKkZsYXNo6ZmQ5Yi2Kio6IFJPTemVnOWDj+mhuyDiiaQgMy4yNU1CIChvdGFfMOWIhuWMuikKNS4gKirog4zlhYnmjqfliLYqKjog6IOM5YWJ56Gs5o6lVkND77yM5peg5rOV6L2v5Lu26LCD6IqC5Lqu5bqmCgojIyDwn5OdIOW8gOWPkeiuoeWIkgoKIyMjIOmYtuauteS4gO+8mueOr+Wig+aQreW7uuS4juWfuuehgOmqjOivgSDinIUKLSBbeF0g6aG555uu6aqo5p625Yib5bu6Ci0gW3hdIOehrOS7tuWIneWni+WMluS7o+eggQotIFt4XSBSZXR1cm4tdG8tTG9hZGVy6ZuG5oiQCgojIyMg6Zi25q615LqM77yaVUnorr7orqHkuI7mqKHmi58g4pyFCi0gW3hdIEhUTUwvQ1NTL0pTIFVJ5qih5ouf5ZmoIHYyCi0gW3hdIDPDlzIg5qGM6Z2iICsg5YiG6aG15ZyG54K5Ci0gW3hdIDbnp43kuLvpopjns7vnu58KLSBbeF0g5Lu75Yqh566h55CG5Zmo77yI6L+b5YWlL+mUgeWumi/plIDmr4HvvIkKCiMjIyDpmLbmrrXkuInvvJpD6K+t6KiA5qC45b+D5a6e546wIOKchQotIFt4XSBMVkdMIHY5IOenu+akjeWxgu+8iOaYvuekuivovpPlhaUr57uE5ZCI6ZSu77yJCi0gW3hdIOW6lOeUqOeuoeeQhuWZqO+8iFNE5Y2h5omr5o+PK21hbmlmZXN06Kej5p6Q77yJCi0gW3hdIE1pY3JvUHl0aG9uIOi/kOihjOaXtuahqQotIFt4XSDmoYzpnaIgVUnvvIjnirbmgIHmoI8r572R5qC8K+mhtemdouaMh+ekuuWZqO+8iQotIFt4XSDorr7nva7nlYzpnaIgKyDkuLvpopjpgInmi6kKLSBbeF0g5Lu75Yqh566h55CG5Zmo55WM6Z2iCi0gW3hdIOaMiemUruWvvOiIquezu+e7nwoKIyMjIOmYtuauteWbm++8muezu+e7n+WKn+iDveWujOWWhCDinIUKLSBbeF0gTWljcm9QeXRob24g6L+Q6KGM5pe25qGG5p6277yI5Lu75Yqh5omn6KGMK+iEmuacrOeuoeeQhu+8iQotIFt4XSBKU09O6YWN572u5oyB5LmF5YyW77yIY29uZmlnX21hbmFnZXLmqKHlnZfvvIkKLSBbeF0g55S15rqQ566h55CG77yI55S15rGg55uR5rWLK+iHquWKqOS8keecoO+8iQotIFt4XSDkuLvpopjmjIHkuYXljJbvvIjphY3nva7ogZTliqjvvIkKLSBbIF0g5bqU55So5a6J6KOFL+WNuOi9ve+8iOW+hemYtuauteS6lOWunueOsO+8iQoKIyMjIOmYtuauteS6lO+8mue8luivkeS4juS6pOS7mCDinIUKLSBbeF0gR2l0SHViIEFjdGlvbumFjee9ru+8iENJL0NE6Ieq5Yqo5p6E5bu677yJCi0gW3hdIOS/ruWkjUFEQ+i1hOa6kOWGsueqge+8iOe7n+S4gOeUsXBvd2VyX21hbmFnZXLnrqHnkIbvvIkKLSBbeF0g5a6M5ZaETFZHTOWtl+S9k+mFjee9ru+8iOa3u+WKoG1vbnRzZXJyYXRfOC8yOO+8iQotIFsgXSDmnIDnu4jmtYvor5XvvIjpnIBFU1AtSURG546v5aKD77yJCi0gWyBdIG1lcmdlZC5iaW7kuqTku5jvvIhDSeiHquWKqOeUn+aIkO+8iQoKIyMg8J+ThCDorrjlj6/or4EKCk1JVCBMaWNlbnNlCgojIyDwn5mPIOiHtOiwogoKLSBbeGlhb21pYW8tZmlybXdhcmVdKGh0dHBzOi8vZ2l0aHViLmNvbS9qc2ZhaW50L3hpYW9taWFvLWZpcm13YXJlKSAtIOehrOS7tlNraWxs5qih5p2/Ci0gW3hpYW9taWFvLWxvYWRlcl0oaHR0cHM6Ly9naXRodWIuY29tL2pzZmFpbnQveGlhb21pYW8tbG9hZGVyKSAtIFJPTSBMb2FkZXLlj4LogIMKLSBbeHVlZXJzaS1pZGZdKGh0dHBzOi8vZ2l0aHViLmNvbS9aeW91bmdJbmMveHVlZXJzaS1pZGYpIC0g56Gs5Lu26LWE5paZ5LiO6YCG5ZCR5oiQ5p6c
+# XiaoMiao OS - MicroPython 桌面系统
+
+小喵掌机上的完整桌面操作系统，支持安装和运行基于 MicroPython 开发的应用程序。
+
+## 🎯 项目目标
+
+在学而思小喵教育掌机（ESP32-WROVER-B + GD32F350G8）上创建一个功能完整的桌面操作系统，提供类似 Windows Phone 或 Android 的交互体验。
+
+## 📁 项目结构
+
+```
+xiaomiao-os/
+├── CMakeLists.txt              # ESP-IDF 项目配置
+├── sdkconfig.defaults          # 板级配置
+├── partitions.csv              # 分区表（Loader兼容）
+├── .gitignore
+├── README.md                   # 本文档
+├── ui-simulator.html           # UI 模拟器（HTML/CSS/JS）
+└── main/
+    ├── CMakeLists.txt          # 组件配置
+    ├── idf_component.yml       # LVGL 9.5.0 依赖
+    ├── return_to_loader.h      # 返回Loader集成
+    ├── main.c                  # 主入口（硬件初始化+模块整合）
+    ├── lvgl_port/              # LVGL 移植层
+    │   ├── lvgl_port.h         # 显示驱动+按键输入+组合键
+    │   └── lvgl_port.c
+    ├── app_manager/            # 应用管理器
+    │   ├── app_manager.h       # SD卡扫描+manifest解析
+    │   └── app_manager.c
+    ├── micropython/            # MicroPython 运行时
+    │   ├── micropython_runtime.h
+    │   └── micropython_runtime.c
+    ├── config_manager/         # 配置管理器
+    │   ├── config_manager.h    # JSON配置持久化
+    │   └── config_manager.c
+    ├── power_manager/          # 电源管理
+    │   ├── power_manager.h     # 电池监测+自动休眠
+    │   └── power_manager.c
+    └── ui/                     # 桌面 UI
+        ├── ui_main.h           # LVGL 界面系统
+        └── ui_main.c
+```
+
+## 🔧 硬件规格
+
+| 参数 | 值 |
+|------|------|
+| MCU | ESP32-WROVER-B |
+| Flash | 4MB QIO 80MHz |
+| PSRAM | 8MB Quad 80MHz |
+| LCD | ST7735 SPI TFT 160×128 |
+| SD卡 | MicroSD (共享SPI2) |
+| 按键 | 6键手柄 (UP/DOWN/LEFT/RIGHT/A/B) |
+| I2C | SCL=15, SDA=21 @100kHz |
+| 蜂鸣器 | GPIO14 (LEDC PWM) |
+| 电池ADC | GPIO34 (9.1k/2.4k分压) |
+
+### 引脚定义
+
+```
+LCD:  SCLK=18  MOSI=23  MISO=19  CS=5  DC=4   (SPI2 @ 40MHz)
+SD:   CS=22    (共享 SPI2)
+Keys: UP=2  DOWN=13  LEFT=27  RIGHT=35  A=34  B=12  (低电平有效)
+I2C:  SCL=15  SDA=21  (100kHz)
+Buzz: GPIO14 (LEDC Timer0/Ch0)
+Batt: GPIO34 (ADC1_CH6, 带分压电阻)
+```
+
+## 🎮 操作说明
+
+### 硬件按键
+
+| 按键 | 功能 |
+|------|------|
+| UP/DOWN/LEFT/RIGHT | 方向导航 |
+| A | 确认/进入 |
+| B | 返回上一页 |
+
+### 组合键
+
+| 组合 | 功能 |
+|------|------|
+| UP + B | 返回主页 |
+| DOWN + B | 打开任务管理器 |
+
+### 任务管理器
+
+| 操作 | 按键 |
+|------|------|
+| 选择应用 | UP/DOWN |
+| 进入应用 | A |
+| 锁定/解锁 | LEFT |
+| 销毁应用 | RIGHT |
+| 返回 | B |
+
+## 🚀 快速开始
+
+### 1. 环境准备
+
+```bash
+# 安装 ESP-IDF v5.5.4
+mkdir -p ~/esp
+cd ~/esp
+git clone -b v5.5.4 --recursive https://github.com/espressif/esp-idf.git
+cd esp-idf
+./install.sh esp32
+
+# 激活环境
+. ~/esp/esp-idf/export.sh
+```
+
+### 2. 构建项目
+
+```bash
+cd xiaomiao-os
+idf.py build
+```
+
+### 3. 烧录固件
+
+```bash
+# 通过 USB (GD32 UART 桥)
+idf.py -p /dev/ttyACM0 flash
+
+# 或使用 esptool
+esptool.py --chip esp32 -b 460800 write_flash 0x0 build/xiaomiao-os-merged.bin
+```
+
+### 4. 生成合并固件
+
+```bash
+idf.py merge-bin
+cp build/xiaomiao-os-merged.bin /sdcard/roms/xiaomiao-os.bin
+```
+
+## 🎨 UI 模拟器
+
+在浏览器中打开 `ui-simulator.html` 可以体验完整的 UI 交互：
+
+```bash
+# 直接用浏览器打开
+open ui-simulator.html
+# 或
+xdg-open ui-simulator.html
+```
+
+### 键盘控制
+
+| 按键 | 功能 |
+|------|------|
+| W/A/S/D | 方向键 (上/左/下/右) |
+| J | A键 (确认) |
+| K | B键 (返回) |
+| Space | 主页 |
+| L | 切换主页/应用列表 |
+
+### 功能演示
+
+- **启动动画**: 2.5秒 Logo 展示
+- **桌面**: 3×2 应用图标网格 + 分页圆点
+- **设置页面**: 主题选择、关于等
+- **任务管理器**: 运行中的应用管理
+- **主题系统**: 6种主题（默认/海洋/森林/星空/火焰/冰晶）
+
+## 📦 应用包格式 (.app)
+
+应用打包为 ZIP 文件，扩展名改为 `.app`：
+
+```
+com.example.myapp.app/
+├── manifest.json          # 应用清单 (必需)
+├── icon.png               # 图标 128x128 (必需)
+├── main.py                # 入口脚本 (必需)
+├── lib/                   # 私有库 (可选)
+├── assets/                # 资源文件 (可选)
+└── model/                 # ML模型 (可选)
+```
+
+### manifest.json 示例
+
+```json
+{
+  "id": "com.example.myapp",
+  "name": "我的应用",
+  "version": "1.0.0",
+  "author": "YourName",
+  "description": "这是一个示例应用",
+  "icon": "icon.png",
+  "main": "main.py"
+}
+```
+
+## 📊 分区表
+
+| 分区 | 偏移 | 大小 | 用途 |
+|------|------|------|------|
+| nvs | 0xA000 | 20KB | 系统配置 |
+| phy_init | 0xF000 | 4KB | PHY校准 |
+| factory | 0x10000 | 568KB | Loader固件 |
+| otadata | 0xBE000 | 8KB | 启动选择 |
+| ota_0 | 0xC0000 | 3.25MB | ROM运行槽 |
+
+## 🔋 电池检测
+
+GPIO34 通过 9.1k/2.4k 分压电阻连接电池：
+
+```
+电池 (3.0-4.2V) ──┬── 9.1kΩ ──┬── GPIO34 (ADC)
+                  │           │
+                  └── 2.4kΩ ──┘
+                              │
+                             GND
+```
+
+分压比: (9.1 + 2.4) / 2.4 = 4.79
+
+ADC 读数 × 4.79 = 实际电池电压
+
+## 🏗️ 模块架构
+
+### lvgl_port - LVGL 移植层
+
+- **显示驱动**: ST7735 双缓冲 DMA 刷新
+- **按键输入**: 6键 GPIO 扫描 + 去抖
+- **组合键检测**: 500ms 时间窗口
+- **按键事件分发**: 单键回调机制
+- **LVGL v9 API**: `lv_display_create`, `lv_indev_create`
+
+### app_manager - 应用管理器
+
+- **SD卡扫描**: 自动检测 `/sdcard/apps/` 目录
+- **manifest解析**: cJSON 解析应用信息
+- **应用生命周期**: 启动/停止/状态管理
+
+### config_manager - 配置管理器
+
+- **JSON持久化**: 基于cJSON的配置存储
+- **配置路径**: `/sdcard/.xiaomiao/config.json`
+- **支持类型**: 整数、字符串、布尔值
+- **自动保存**: 主题切换等配置自动持久化
+
+### power_manager - 电源管理
+
+- **电池监测**: ADC采样 + 分压计算 + 校准
+- **电量计算**: 分段线性插值算法
+- **低电量告警**: 可配置阈值（默认20%）
+- **自动休眠**: 可配置超时时间（默认5分钟）
+- **事件回调**: 低电量/临界/休眠/唤醒事件
+
+### ui - 桌面界面
+
+- **状态栏**: 时间 + 电池
+- **应用网格**: 3×2 图标布局
+- **页面指示器**: 底部圆点分页
+- **主题系统**: 6种可切换主题（持久化）
+- **任务管理器**: 运行应用管理
+- **配置联动**: 主题选择自动保存
+
+## ⚠️ 注意事项
+
+1. **GPIO34/35**: 仅输入，无内部上拉，需外部上拉电阻
+2. **SPI总线共享**: LCD和SD卡共享SPI2，通过CS区分
+3. **PSRAM限制**: ESP32不能从PSRAM执行代码，仅用于数据存储
+4. **Flash限制**: ROM镜像须 ≤ 3.25MB (ota_0分区)
+5. **背光控制**: 背光硬接VCC，无法软件调节亮度
+
+## 📝 开发计划
+
+### 阶段一：环境搭建与基础验证 ✅
+- [x] 项目骨架创建
+- [x] 硬件初始化代码
+- [x] Return-to-Loader集成
+
+### 阶段二：UI设计与模拟 ✅
+- [x] HTML/CSS/JS UI模拟器 v2
+- [x] 3×2 桌面 + 分页圆点
+- [x] 6种主题系统
+- [x] 任务管理器（进入/锁定/销毁）
+
+### 阶段三：C语言核心实现 ✅
+- [x] LVGL v9 移植层（显示+输入+组合键）
+- [x] 应用管理器（SD卡扫描+manifest解析）
+- [x] MicroPython 运行时桩
+- [x] 桌面 UI（状态栏+网格+页面指示器）
+- [x] 设置界面 + 主题选择
+- [x] 任务管理器界面
+- [x] 按键导航系统
+
+### 阶段四：系统功能完善 ✅
+- [x] MicroPython 运行时框架（任务执行+脚本管理）
+- [x] JSON配置持久化（config_manager模块）
+- [x] 电源管理（电池监测+自动休眠）
+- [x] 主题持久化（配置联动）
+- [ ] 应用安装/卸载（待阶段五实现）
+
+### 阶段五：编译与交付 ✅
+- [x] GitHub Action配置（CI/CD自动构建）
+- [x] 修复ADC资源冲突（统一由power_manager管理）
+- [x] 完善LVGL字体配置（添加montserrat_8/28）
+- [ ] 最终测试（需ESP-IDF环境）
+- [ ] merged.bin交付（CI自动生成）
+
+## 📄 许可证
+
+MIT License
+
+## 🙏 致谢
+
+- [xiaomiao-firmware](https://github.com/jsfaint/xiaomiao-firmware) - 硬件Skill模板
+- [xiaomiao-loader](https://github.com/jsfaint/xiaomiao-loader) - ROM Loader参考
+- [xueersi-idf](https://github.com/ZyoungInc/xueersi-idf) - 硬件资料与逆向成果

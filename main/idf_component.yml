@@ -1,1 +1,6 @@
-ZGVwZW5kZW5jaWVzOgogIGx2Z2wvbHZnbDoKICAgIHZlcnNpb246ICI5LjUuMCIKICAgIHB1YmxpYzogdHJ1ZQogIGlkZjoKICAgIHZlcnNpb246ICI+PTUuNS4wIg==
+dependencies:
+  lvgl/lvgl:
+    version: "9.5.0"
+    public: true
+  idf:
+    version: ">=5.5.0"

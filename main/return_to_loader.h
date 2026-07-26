@@ -1,1 +1,36 @@
-LyoKICogcmV0dXJuX3RvX2xvYWRlci5oIC0gRHJvcC1pbiBmb3IgUk9NIGZpcm13YXJlCiAqCiAqIEluY2x1ZGUgdGhpcyBoZWFkZXIgYW5kIGNhbGwgcmV0dXJuX3RvX2xvYWRlcl9zZXR1cCgpIGFzIHRoZSB2ZXJ5CiAqIGZpcnN0IGxpbmUgb2YgYXBwX21haW4oKS4gSXQgcG9pbnRzIHRoZSBPVEEgYm9vdCBwYXJ0aXRpb24gYmFjayB0bwogKiB0aGUgZmFjdG9yeSAobG9hZGVyKSBwYXJ0aXRpb24sIHNvIHRoYXQgYW55IHJlc2V0LCBwb3dlci1jeWNsZSwgb3IKICogZXNwX3Jlc3RhcnQoKSByZXR1cm5zIHRvIHRoZSBST00gTG9hZGVyIGluc3RlYWQgb2YgcmUtZW50ZXJpbmcgdGhpcwogKiBST00uCiAqCiAqIFVzYWdlOgogKiAgICNpbmNsdWRlICJyZXR1cm5fdG9fbG9hZGVyLmgiCiAqCiAqICAgdm9pZCBhcHBfbWFpbih2b2lkKSB7CiAqICAgICAgIHJldHVybl90b19sb2FkZXJfc2V0dXAoKTsgICAvLyDihpAgbXVzdCBiZSBmaXJzdAogKiAgICAgICAvLyAuLi4gbm9ybWFsIFJPTSBpbml0IC4uLgogKiAgIH0KICoKICogSWYgdGhlIHJ1bm5pbmcgZmlybXdhcmUgaXMgTk9UIG9uIGFuIE9UQSBwYXJ0aXRpb24gKGUuZy4gaXQgd2FzCiAqIGZsYXNoZWQgZGlyZWN0bHkgdG8gZmFjdG9yeSB2aWEgZXNwdG9vbCksIHRoaXMgZnVuY3Rpb24gaXMgYSBuby1vcC4KICovCgojcHJhZ21hIG9uY2UKCiNpbmNsdWRlICJlc3Bfb3RhX29wcy5oIgoKc3RhdGljIGlubGluZSB2b2lkIHJldHVybl90b19sb2FkZXJfc2V0dXAodm9pZCkKewogICAgY29uc3QgZXNwX3BhcnRpdGlvbl90ICpjdXIgPSBlc3Bfb3RhX2dldF9ydW5uaW5nX3BhcnRpdGlvbigpOwogICAgaWYgKCFjdXIgfHwgY3VyLT5zdWJ0eXBlICE9IEVTUF9QQVJUSVRJT05fU1VCVFlQRV9BUFBfT1RBXzApCiAgICAgICAgcmV0dXJuOwoKICAgIGNvbnN0IGVzcF9wYXJ0aXRpb25fdCAqZmFjID0gZXNwX3BhcnRpdGlvbl9maW5kX2ZpcnN0KAogICAgICAgIEVTUF9QQVJUSVRJT05fVFlQRV9BUFAsIEVTUF9QQVJUSVRJT05fU1VCVFlQRV9BUFBfRkFDVE9SWSwgTlVMTCk7CiAgICBpZiAoZmFjKQogICAgICAgIGVzcF9vdGFfc2V0X2Jvb3RfcGFydGl0aW9uKGZhYyk7Cn0=
+/*
+ * return_to_loader.h - Drop-in for ROM firmware
+ *
+ * Include this header and call return_to_loader_setup() as the very
+ * first line of app_main(). It points the OTA boot partition back to
+ * the factory (loader) partition, so that any reset, power-cycle, or
+ * esp_restart() returns to the ROM Loader instead of re-entering this
+ * ROM.
+ *
+ * Usage:
+ *   #include "return_to_loader.h"
+ *
+ *   void app_main(void) {
+ *       return_to_loader_setup();   // ← must be first
+ *       // ... normal ROM init ...
+ *   }
+ *
+ * If the running firmware is NOT on an OTA partition (e.g. it was
+ * flashed directly to factory via esptool), this function is a no-op.
+ */
+
+#pragma once
+
+#include "esp_ota_ops.h"
+
+static inline void return_to_loader_setup(void)
+{
+    const esp_partition_t *cur = esp_ota_get_running_partition();
+    if (!cur || cur->subtype != ESP_PARTITION_SUBTYPE_APP_OTA_0)
+        return;
+
+    const esp_partition_t *fac = esp_partition_find_first(
+        ESP_PARTITION_TYPE_APP, ESP_PARTITION_SUBTYPE_APP_FACTORY, NULL);
+    if (fac)
+        esp_ota_set_boot_partition(fac);
+}

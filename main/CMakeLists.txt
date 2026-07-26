@@ -1,1 +1,36 @@
-aWRmX2NvbXBvbmVudF9yZWdpc3RlcigKICAgIFNSQ1MgCiAgICAgICAgIm1haW4uYyIKICAgICAgICAibHZnbF9wb3J0L2x2Z2xfcG9ydC5jIgogICAgICAgICJhcHBfbWFuYWdlci9hcHBfbWFuYWdlci5jIgogICAgICAgICJtaWNyb3B5dGhvbi9taWNyb3B5dGhvbl9ydW50aW1lLmMiCiAgICAgICAgImNvbmZpZ19tYW5hZ2VyL2NvbmZpZ19tYW5hZ2VyLmMiCiAgICAgICAgInBvd2VyX21hbmFnZXIvcG93ZXJfbWFuYWdlci5jIgogICAgICAgICJ1aS91aV9tYWluLmMiCiAgICBQUklWX1JFUVVJUkVTIAogICAgICAgIGVzcF9sY2QKICAgICAgICBlc3BfdGltZXIKICAgICAgICBlc3BfZHJpdmVyX2dwaW8KICAgICAgICBlc3BfZHJpdmVyX3NwaQogICAgICAgIGVzcF9kcml2ZXJfaTJjCiAgICAgICAgZXNwX2RyaXZlcl9sZWRjCiAgICAgICAgZXNwX2FkYwogICAgICAgIGVzcF9od19zdXBwb3J0CiAgICAgICAgaGVhcAogICAgICAgIHNwaV9mbGFzaAogICAgICAgIGx2Z2wKICAgICAgICBhcHBfdXBkYXRlCiAgICAgICAgZmF0ZnMKICAgICAgICBzZG1tYwogICAgICAgIGpzb24KICAgICAgICBudnNfZmxhc2gKICAgIElOQ0xVREVfRElSUyAKICAgICAgICAiLiIKICAgICAgICAibHZnbF9wb3J0IgogICAgICAgICJhcHBfbWFuYWdlciIKICAgICAgICAibWljcm9weXRob24iCiAgICAgICAgImNvbmZpZ19tYW5hZ2VyIgogICAgICAgICJwb3dlcl9tYW5hZ2VyIgogICAgICAgICJ1aSIKKQp0YXJnZXRfbGlua19saWJyYXJpZXMoJHtDT01QT05FTlRfTElCfSBQUklWQVRFIG0p
+idf_component_register(
+    SRCS 
+        "main.c"
+        "lvgl_port/lvgl_port.c"
+        "app_manager/app_manager.c"
+        "micropython/micropython_runtime.c"
+        "config_manager/config_manager.c"
+        "power_manager/power_manager.c"
+        "ui/ui_main.c"
+    PRIV_REQUIRES 
+        esp_lcd
+        esp_timer
+        esp_driver_gpio
+        esp_driver_spi
+        esp_driver_i2c
+        esp_driver_ledc
+        esp_adc
+        esp_hw_support
+        heap
+        spi_flash
+        lvgl
+        app_update
+        fatfs
+        sdmmc
+        json
+        nvs_flash
+    INCLUDE_DIRS 
+        "."
+        "lvgl_port"
+        "app_manager"
+        "micropython"
+        "config_manager"
+        "power_manager"
+        "ui"
+)
+target_link_libraries(${COMPONENT_LIB} PRIVATE m)

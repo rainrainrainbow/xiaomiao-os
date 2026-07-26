@@ -1,1 +1,388 @@
-LyoKICogWGlhb01pYW8gT1MgLSBNaWNyb1B5dGhvbiBEZXNrdG9wIFN5c3RlbQogKgogKiBFU1AzMi1XUk9WRVItQiArIFNUNzczNSAxNjB4MTI4IFRGVCArIE1pY3JvU0QgKyA2LWtleSBrZXlwYWQuCiAqIEluY2x1ZGVzIHJldHVybi10by1sb2FkZXIgaW50ZWdyYXRpb24uCiAqLwojaW5jbHVkZSA8c3RkYm9vbC5oPgojaW5jbHVkZSA8c3RkZGVmLmg+CiNpbmNsdWRlIDxzdGRpbnQuaD4KI2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxhc3NlcnQuaD4KI2luY2x1ZGUgPHN0cmluZy5oPgojaW5jbHVkZSA8c3lzL3BhcmFtLmg+CiNpbmNsdWRlIDx1bmlzdGQuaD4KI2luY2x1ZGUgImRyaXZlci9ncGlvLmgiCiNpbmNsdWRlICJkcml2ZXIvc3BpX21hc3Rlci5oIgojaW5jbHVkZSAiZHJpdmVyL2kyYy5oIgojaW5jbHVkZSAiZHJpdmVyL2xlZGMuaCIKI2luY2x1ZGUgImVzcF9sY2RfcGFuZWxfaW8uaCIKI2luY2x1ZGUgImVzcF9lcnIuaCIKI2luY2x1ZGUgImVzcF9sb2cuaCIKI2luY2x1ZGUgImVzcF9zeXN0ZW0uaCIKI2luY2x1ZGUgImVzcF90aW1lci5oIgojaW5jbHVkZSAiZXNwX290YV9vcHMuaCIKI2luY2x1ZGUgImVzcF9wYXJ0aXRpb24uaCIKI2luY2x1ZGUgIm52c19mbGFzaC5oIgojaW5jbHVkZSAiZXNwX3Zmc19mYXQuaCIKI2luY2x1ZGUgInNkbW1jX2NtZC5oIgojaW5jbHVkZSAiZnJlZXJ0b3MvRnJlZVJUT1MuaCIKI2luY2x1ZGUgImZyZWVydG9zL3Rhc2suaCIKI2luY2x1ZGUgImx2Z2wuaCIKI2luY2x1ZGUgInNka2NvbmZpZy5oIgoKI2luY2x1ZGUgImx2Z2xfcG9ydC5oIgojaW5jbHVkZSAiYXBwX21hbmFnZXIuaCIKI2luY2x1ZGUgIm1pY3JvcHl0aG9uX3J1bnRpbWUuaCIKI2luY2x1ZGUgImNvbmZpZ19tYW5hZ2VyLmgiCiNpbmNsdWRlICJwb3dlcl9tYW5hZ2VyLmgiCiNpbmNsdWRlICJ1aV9tYWluLmgiCgpzdGF0aWMgY29uc3QgY2hhciAqVEFHID0gInhpYW9taWFvLW9zIjsKCi8qIOKUgOKUgCBIYXJkd2FyZSBDb25zdGFudHMg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCiNkZWZpbmUgTENEX0hPU1QgICAgICAgICAgICBTUEkyX0hPU1QKI2RlZmluZSBMQ0RfUElYRUxfQ0xPQ0tfSFogICg2MCAqIDEwMDAgKiAxMDAwKQojZGVmaW5lIExDRF9OQVRJVkVfSF9SRVMgICAgMTI4CiNkZWZpbmUgTENEX05BVElWRV9WX1JFUyAgICAxNjAKI2RlZmluZSBMQ0RfSF9SRVMgICAgICAgICAgIDE2MAojZGVmaW5lIExDRF9WX1JFUyAgICAgICAgICAgMTI4CiNkZWZpbmUgTENEX0RSQVdfQlVGX0xJTkVTICBMQ0RfVl9SRVMKI2RlZmluZSBMQ0RfRFBJICAgICAgICAgICAgIDYwCiNkZWZpbmUgUElOX0xDRF9TQ0xLICAgR1BJT19OVU1fMTgKI2RlZmluZSBQSU5fTENEX01PU0kgICBHUElPX05VTV8yMwojZGVmaW5lIFBJTl9MQ0RfTUlTTyAgIEdQSU9fTlVNXzE5CiNkZWZpbmUgUElOX0xDRF9DUyAgICAgR1BJT19OVU1fNQojZGVmaW5lIFBJTl9MQ0RfREMgICAgIEdQSU9fTlVNXzQKI2RlZmluZSBQSU5fU0RfQ1MgICAgICBHUElPX05VTV8yMgoKLy8gSTJDCiNkZWZpbmUgSTJDX01BU1RFUl9OVU0gICAgICBJMkNfTlVNXzAKI2RlZmluZSBJMkNfTUFTVEVSX1NDTF9JTyAgIDE1CiNkZWZpbmUgSTJDX01BU1RFUl9TREFfSU8gICAyMQojZGVmaW5lIEkyQ19NQVNURVJfRlJFUV9IWiAgMTAwMDAwCgovLyBCdXp6ZXIKI2RlZmluZSBCVVpaRVJfR1BJTyAgICAgICAgIEdQSU9fTlVNXzE0CiNkZWZpbmUgTEVEQ19USU1FUiAgICAgICAgICBMRURDX1RJTUVSXzAKI2RlZmluZSBMRURDX0NIQU5ORUwgICAgICAgIExFRENfQ0hBTk5FTF8wCgojZGVmaW5lIEJVVFRPTl9BQ1RJVkVfTEVWRUwgIDAKI2RlZmluZSBCVVRUT05fREVCT1VOQ0VfTVMgICAyNQoKI2RlZmluZSBMVkdMX1RJQ0tfUEVSSU9EX01TICAxCiNkZWZpbmUgTFZHTF9UQVNLX1NUQUNLICAgICAgKDEwICogMTAyNCkKI2RlZmluZSBMVkdMX1RBU0tfUFJJT1JJVFkgICA1CgovKiBTVDc3MzUgcmVnaXN0ZXJzICovCiNkZWZpbmUgU1Q3NzM1X1NXUkVTRVQgIDB4MDEKI2RlZmluZSBTVDc3MzVfU0xQT1VUICAgMHgxMQojZGVmaW5lIFNUNzczNV9OT1JPTiAgICAweDEzCiNkZWZpbmUgU1Q3NzM1X0lOVk9GRiAgIDB4MjAKI2RlZmluZSBTVDc3MzVfRElTUE9GRiAgMHgyOAojZGVmaW5lIFNUNzczNV9ESVNQT04gICAweDI5CiNkZWZpbmUgU1Q3NzM1X0NBU0VUICAgIDB4MkEKI2RlZmluZSBTVDc3MzVfUkFTRVQgICAgMHgyQgojZGVmaW5lIFNUNzczNV9SQU1XUiAgICAweDJDCiNkZWZpbmUgU1Q3NzM1X01BRENUTCAgIDB4MzYKI2RlZmluZSBTVDc3MzVfQ09MTU9EICAgMHgzQQojZGVmaW5lIFNUNzczNV9GUk1DVFIxICAweEIxCiNkZWZpbmUgU1Q3NzM1X0ZSTUNUUjIgIDB4QjIKI2RlZmluZSBTVDc3MzVfRlJNQ1RSMyAgMHhCMwojZGVmaW5lIFNUNzczNV9JTlZDVFIgICAweEI0CiNkZWZpbmUgU1Q3NzM1X1BXQ1RSMSAgIDB4QzAKI2RlZmluZSBTVDc3MzVfUFdDVFIyICAgMHhDMQojZGVmaW5lIFNUNzczNV9QV0NUUjMgICAweEMyCiNkZWZpbmUgU1Q3NzM1X1BXQ1RSNCAgIDB4QzMKI2RlZmluZSBTVDc3MzVfUFdDVFI1ICAgMHhDNAojZGVmaW5lIFNUNzczNV9WTUNUUjEgICAweEM1CiNkZWZpbmUgU1Q3NzM1X0dNQ1RSUDEgIDB4RTAKI2RlZmluZSBTVDc3MzVfR01DVFJOMSAgMHhFMQojZGVmaW5lIE1BRENUTF9NWCAgICAgICAweDQwCiNkZWZpbmUgTUFEQ1RMX01ZICAgICAgIDB4ODAKI2RlZmluZSBNQURDVExfTVYgICAgICAgMHgyMAojZGVmaW5lIE1BRENUTF9SR0IgICAgICAweDAwCgovKiDilIDilIAgR2xvYmFscyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgKi8Kc3RhdGljIGVzcF9sY2RfcGFuZWxfaW9faGFuZGxlX3Qgc19sY2RfaW8gPSBOVUxMOwpzdGF0aWMgc2RtbWNfY2FyZF90ICpzX3NkX2NhcmQgPSBOVUxMOwoKLyog4pSA4pSAIFJldHVybiB0byBMb2FkZXIg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnN0YXRpYyB2b2lkIHJldHVybl90b19sb2FkZXJfc2V0dXAodm9pZCkKewogICAgY29uc3QgZXNwX3BhcnRpdGlvbl90ICpjdXIgPSBlc3Bfb3RhX2dldF9ydW5uaW5nX3BhcnRpdGlvbigpOwogICAgaWYgKCFjdXIgfHwgY3VyLT5zdWJ0eXBlICE9IEVTUF9QQVJUSVRJT05fU1VCVFlQRV9BUFBfT1RBXzApIHsKICAgICAgICBFU1BfTE9HSShUQUcsICJOb3QgcnVubmluZyBmcm9tIE9UQSBwYXJ0aXRpb24sIHNraXAgbG9hZGVyIHJldHVybiBzZXR1cCIpOwogICAgICAgIHJldHVybjsKICAgIH0KICAgIAogICAgY29uc3QgZXNwX3BhcnRpdGlvbl90ICpmYWMgPSBlc3BfcGFydGl0aW9uX2ZpbmRfZmlyc3QoCiAgICAgICAgRVNQX1BBUlRJVElPTl9UWVBFX0FQUCwgRVNQX1BBUlRJVElPTl9TVUJUWVBFX0FQUF9GQUNUT1JZLCBOVUxMKTsKICAgIGlmIChmYWMpIHsKICAgICAgICBlc3Bfb3RhX3NldF9ib290X3BhcnRpdGlvbihmYWMpOwogICAgICAgIEVTUF9MT0dJKFRBRywgIlJldHVybiB0byBsb2FkZXIgY29uZmlndXJlZCAoZmFjdG9yeSBwYXJ0aXRpb24gc2V0KSIpOwogICAgfSBlbHNlIHsKICAgICAgICBFU1BfTE9HVyhUQUcsICJGYWN0b3J5IHBhcnRpdGlvbiBub3QgZm91bmQsIGNhbm5vdCByZXR1cm4gdG8gbG9hZGVyIik7CiAgICB9Cn0KCi8qIOKUgOKUgCBMQ0Qg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnN0YXRpYyB2b2lkIHN0NzczNV90eChlc3BfbGNkX3BhbmVsX2lvX2hhbmRsZV90IGlvLCBpbnQgY21kLAogICAgICAgICAgICAgICAgICAgICAgY29uc3Qgdm9pZCAqcGFyYW0sIHNpemVfdCBsZW4pCnsKICAgIGVzcF9sY2RfcGFuZWxfaW9fdHhfcGFyYW0oaW8sIGNtZCwgcGFyYW0sIGxlbik7Cn0KCnN0YXRpYyB2b2lkIHN0NzczNV9kZWxheSh1aW50MzJfdCBtcykgeyAKICAgIHZUYXNrRGVsYXkocGRNU19UT19USUNLUyhtcykpOyAKfQoKc3RhdGljIHZvaWQgc3Q3NzM1X2luaXQoZXNwX2xjZF9wYW5lbF9pb19oYW5kbGVfdCBpbykKewogICAgY29uc3QgdWludDhfdCBmcm1jdHJbXSAgPSB7MHgwMSwweDJDLDB4MkR9OwogICAgY29uc3QgdWludDhfdCBmcm1jdHIzW10gPSB7MHgwMSwweDJDLDB4MkQsMHgwMSwweDJDLDB4MkR9OwogICAgY29uc3QgdWludDhfdCBpbnZjdHJbXSAgPSB7MHgwN307CiAgICBjb25zdCB1aW50OF90IHB3Y3RyMVtdICA9IHsweEEyLDB4MDIsMHg4NH07CiAgICBjb25zdCB1aW50OF90IHB3Y3RyMltdICA9IHsweEM1fTsKICAgIGNvbnN0IHVpbnQ4X3QgcHdjdHIzW10gID0gezB4MEEsMHgwMH07CiAgICBjb25zdCB1aW50OF90IHB3Y3RyNFtdICA9IHsweDhBLDB4MkF9OwogICAgY29uc3QgdWludDhfdCBwd2N0cjVbXSAgPSB7MHg4QSwweEVFfTsKICAgIGNvbnN0IHVpbnQ4X3Qgdm1jdHIxW10gID0gezB4MEV9OwogICAgY29uc3QgdWludDhfdCBtYWRjdGxfZFtdID0ge01BRENUTF9NWCB8IE1BRENUTF9NWSB8IE1BRENUTF9SR0J9OwogICAgY29uc3QgdWludDhfdCBtYWRjdGxfcltdID0ge01BRENUTF9NWCB8IE1BRENUTF9NViB8IE1BRENUTF9SR0J9OwogICAgY29uc3QgdWludDhfdCBjb2xtb2RbXSA9IHsweDA1fTsKICAgIGNvbnN0IHVpbnQ4X3QgY2FzZXRbXSA9IHsweDAwLCAweDAwLCAweDAwLCBMQ0RfTkFUSVZFX0hfUkVTIC0gMX07CiAgICBjb25zdCB1aW50OF90IHJhc2V0W10gPSB7MHgwMCwgMHgwMCwgMHgwMCwgTENEX05BVElWRV9WX1JFUyAtIDF9OwogICAgY29uc3QgdWludDhfdCBncFtdID0gezB4MDIsMHgxQywweDA3LDB4MTIsMHgzNywweDMyLDB4MjksMHgyRCwKICAgICAgICAgICAgICAgICAgICAgICAgICAweDI5LDB4MjUsMHgyQiwweDM5LDB4MDAsMHgwMSwweDAzLDB4MTB9OwogICAgY29uc3QgdWludDhfdCBnbltdID0gezB4MDMsMHgxRCwweDA3LDB4MDYsMHgyRSwweDJDLDB4MjksMHgyRCwKICAgICAgICAgICAgICAgICAgICAgICAgICAweDJFLDB4MkUsMHgzNywweDNGLDB4MDAsMHgwMCwweDAyLDB4MTB9OwogICAgCiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9ESVNQT0ZGLCBOVUxMLCAwKTsKICAgIHN0NzczNV90eChpbywgU1Q3NzM1X1NXUkVTRVQsIE5VTEwsIDApOwogICAgc3Q3NzM1X2RlbGF5KDE1MCk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9TTFBPVVQsIE5VTEwsIDApOwogICAgc3Q3NzM1X2RlbGF5KDUwMCk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9GUk1DVFIxLCBmcm1jdHIsIHNpemVvZihmcm1jdHIpKTsKICAgIHN0NzczNV90eChpbywgU1Q3NzM1X0ZSTUNUUjIsIGZybWN0ciwgc2l6ZW9mKGZybWN0cikpOwogICAgc3Q3NzM1X3R4KGlvLCBTVDc3MzVfRlJNQ1RSMywgZnJtY3RyMywgc2l6ZW9mKGZybWN0cjMpKTsKICAgIHN0NzczNV90eChpbywgU1Q3NzM1X0lOVkNUUiwgaW52Y3RyLCBzaXplb2YoaW52Y3RyKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9QV0NUUjEsIHB3Y3RyMSwgc2l6ZW9mKHB3Y3RyMSkpOwogICAgc3Q3NzM1X3R4KGlvLCBTVDc3MzVfUFdDVFIyLCBwd2N0cjIsIHNpemVvZihwd2N0cjIpKTsKICAgIHN0NzczNV90eChpbywgU1Q3NzM1X1BXQ1RSMywgcHdjdHIzLCBzaXplb2YocHdjdHIzKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9QV0NUUjQsIHB3Y3RyNCwgc2l6ZW9mKHB3Y3RyNCkpOwogICAgc3Q3NzM1X3R4KGlvLCBTVDc3MzVfUFdDVFI1LCBwd2N0cjUsIHNpemVvZihwd2N0cjUpKTsKICAgIHN0NzczNV90eChpbywgU1Q3NzM1X1ZNQ1RSMSwgdm1jdHIxLCBzaXplb2Yodm1jdHIxKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9JTlZPRkYsIE5VTEwsIDApOwogICAgc3Q3NzM1X3R4KGlvLCBTVDc3MzVfTUFEQ1RMLCBtYWRjdGxfZCwgc2l6ZW9mKG1hZGN0bF9kKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9DT0xNT0QsIGNvbG1vZCwgc2l6ZW9mKGNvbG1vZCkpOwogICAgc3Q3NzM1X3R4KGlvLCBTVDc3MzVfQ0FTRVQsIGNhc2V0LCBzaXplb2YoY2FzZXQpKTsKICAgIHN0NzczNV90eChpbywgU1Q3NzM1X1JBU0VULCByYXNldCwgc2l6ZW9mKHJhc2V0KSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9HTUNUUlAxLCBncCwgc2l6ZW9mKGdwKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9HTUNUUk4xLCBnbiwgc2l6ZW9mKGduKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9OT1JPTiwgTlVMTCwgMCk7CiAgICBzdDc3MzVfZGVsYXkoMTApOwogICAgc3Q3NzM1X3R4KGlvLCBTVDc3MzVfTUFEQ1RMLCBtYWRjdGxfciwgc2l6ZW9mKG1hZGN0bF9yKSk7CiAgICBzdDc3MzVfdHgoaW8sIFNUNzczNV9ESVNQT04sIE5VTEwsIDApOwogICAgc3Q3NzM1X2RlbGF5KDIwKTsKfQoKc3RhdGljIHZvaWQgbGNkX2luaXQodm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiSW5pdGlhbGl6aW5nIExDRCIpOwogICAgCiAgICBzcGlfYnVzX2NvbmZpZ190IGJ1c2NmZyA9IHsKICAgICAgICAuc2Nsa19pb19udW0gPSBQSU5fTENEX1NDTEssCiAgICAgICAgLm1vc2lfaW9fbnVtID0gUElOX0xDRF9NT1NJLAogICAgICAgIC5taXNvX2lvX251bSA9IFBJTl9MQ0RfTUlTTywKICAgICAgICAucXVhZHdwX2lvX251bSA9IC0xLAogICAgICAgIC5xdWFkaGRfaW9fbnVtID0gLTEsCiAgICAgICAgLm1heF90cmFuc2Zlcl9zeiA9IExDRF9IX1JFUyAqIExDRF9WX1JFUyAqIHNpemVvZih1aW50MTZfdCksCiAgICB9OwogICAgRVNQX0VSUk9SX0NIRUNLKHNwaV9idXNfaW5pdGlhbGl6ZShMQ0RfSE9TVCwgJmJ1c2NmZywgU1BJX0RNQV9DSF9BVVRPKSk7CiAgICAKICAgIGVzcF9sY2RfcGFuZWxfaW9fc3BpX2NvbmZpZ190IGlvX2NvbmZpZyA9IHsKICAgICAgICAuZGNfZ3Bpb19udW0gPSBQSU5fTENEX0RDLAogICAgICAgIC5jc19ncGlvX251bSA9IFBJTl9MQ0RfQ1MsCiAgICAgICAgLnBjbGtfaHogPSBMQ0RfUElYRUxfQ0xPQ0tfSFosCiAgICAgICAgLnRyYW5zX3F1ZXVlX2RlcHRoID0gMTAsCiAgICAgICAgLnNwaV9tb2RlID0gMCwKICAgICAgICAubGNkX2NtZF9iaXRzID0gOCwKICAgICAgICAubGNkX3BhcmFtX2JpdHMgPSA4LAogICAgfTsKICAgIEVTUF9FUlJPUl9DSEVDSyhlc3BfbGNkX25ld19wYW5lbF9pb19zcGkoKGVzcF9sY2Rfc3BpX2J1c19oYW5kbGVfdClMQ0RfSE9TVCwgJmlvX2NvbmZpZywgJnNfbGNkX2lvKSk7CiAgICAKICAgIHN0NzczNV9pbml0KHNfbGNkX2lvKTsKICAgIEVTUF9MT0dJKFRBRywgIkxDRCBpbml0aWFsaXplZCBzdWNjZXNzZnVsbHkiKTsKfQoKLyog4pSA4pSAIFNEIENhcmQg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnN0YXRpYyB2b2lkIHNkY2FyZF9pbml0KHZvaWQpCnsKICAgIEVTUF9MT0dJKFRBRywgIkluaXRpYWxpemluZyBTRCBjYXJkIik7CiAgICAKICAgIGVzcF92ZnNfZmF0X3NkbW1jX21vdW50X2NvbmZpZ190IG1vdW50X2NvbmZpZyA9IHsKICAgICAgICAuZm9ybWF0X2lmX21vdW50X2ZhaWxlZCA9IGZhbHNlLAogICAgICAgIC5tYXhfZmlsZXMgPSA1LAogICAgICAgIC5hbGxvY2F0aW9uX3VuaXRfc2l6ZSA9IDE2ICogMTAyNAogICAgfTsKICAgIAogICAgc2RtbWNfaG9zdF90IGhvc3QgPSBTRFNQSV9IT1NUX0RFRkFVTFQoKTsKICAgIGhvc3Quc2xvdCA9IExDRF9IT1NUOwogICAgaG9zdC5tYXhfZnJlcV9raHogPSBTRE1NQ19GUkVRX0RFRkFVTFQ7CiAgICAKICAgIHNkc3BpX2RldmljZV9jb25maWdfdCBzbG90X2NvbmZpZyA9IFNEU1BJX0RFVklDRV9DT05GSUdfREVGQVVMVCgpOwogICAgc2xvdF9jb25maWcuZ3Bpb19jcyA9IFBJTl9TRF9DUzsKICAgIHNsb3RfY29uZmlnLmhvc3RfaWQgPSBob3N0LnNsb3Q7CiAgICAKICAgIGVzcF9lcnJfdCByZXQgPSBlc3BfdmZzX2ZhdF9zZHNwaV9tb3VudCgiL3NkY2FyZCIsICZob3N0LCAmc2xvdF9jb25maWcsICZtb3VudF9jb25maWcsICZzX3NkX2NhcmQpOwogICAgCiAgICBpZiAocmV0ICE9IEVTUF9PSykgewogICAgICAgIEVTUF9MT0dFKFRBRywgIkZhaWxlZCB0byBtb3VudCBTRCBjYXJkOiAlcyIsIGVzcF9lcnJfdG9fbmFtZShyZXQpKTsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIEVTUF9MT0dJKFRBRywgIlNEIGNhcmQgbW91bnRlZCBzdWNjZXNzZnVsbHkiKTsKfQoKLyog4pSA4pSAIEkyQyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgKi8Kc3RhdGljIHZvaWQgaTJjX2luaXQodm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiSW5pdGlhbGl6aW5nIEkyQyIpOwogICAgCiAgICBpMmNfY29uZmlnX3QgY29uZiA9IHsKICAgICAgICAubW9kZSA9IEkyQ19NT0RFX01BU1RFUiwKICAgICAgICAuc2RhX2lvX251bSA9IEkyQ19NQVNURVJfU0RBX0lPLAogICAgICAgIC5zY2xfaW9fbnVtID0gSTJDX01BU1RFUl9TQ0xfSU8sCiAgICAgICAgLnNkYV9wdWxsdXBfZW4gPSBHUElPX1BVTExVUF9FTkFCTEUsCiAgICAgICAgLnNjbF9wdWxsdXBfZW4gPSBHUElPX1BVTExVUF9FTkFCTEUsCiAgICAgICAgLm1hc3Rlci5jbGtfc3BlZWQgPSBJMkNfTUFTVEVSX0ZSRVFfSFosCiAgICB9OwogICAgCiAgICBFU1BfRVJST1JfQ0hFQ0soaTJjX3BhcmFtX2NvbmZpZyhJMkNfTUFTVEVSX05VTSwgJmNvbmYpKTsKICAgIEVTUF9FUlJPUl9DSEVDSyhpMmNfZHJpdmVyX2luc3RhbGwoSTJDX01BU1RFUl9OVU0sIGNvbmYubW9kZSwgMCwgMCwgMCkpOwogICAgCiAgICBFU1BfTE9HSShUQUcsICJJMkMgaW5pdGlhbGl6ZWQgc3VjY2Vzc2Z1bGx5Iik7Cn0KCi8qIOKUgOKUgCBCdXp6ZXIg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnN0YXRpYyB2b2lkIGJ1enplcl9pbml0KHZvaWQpCnsKICAgIEVTUF9MT0dJKFRBRywgIkluaXRpYWxpemluZyBCdXp6ZXIiKTsKICAgIAogICAgbGVkY190aW1lcl9jb25maWdfdCBsZWRjX3RpbWVyID0gewogICAgICAgIC5zcGVlZF9tb2RlID0gTEVEQ19MT1dfU1BFRURfTU9ERSwKICAgICAgICAudGltZXJfbnVtID0gTEVEQ19USU1FUiwKICAgICAgICAuZHV0eV9yZXNvbHV0aW9uID0gTEVEQ19USU1FUl8xMF9CSVQsCiAgICAgICAgLmZyZXFfaHogPSAxMDAwLAogICAgICAgIC5jbGtfY2ZnID0gTEVEQ19BVVRPX0NMSywKICAgIH07CiAgICBFU1BfRVJST1JfQ0hFQ0sobGVkY190aW1lcl9jb25maWcoJmxlZGNfdGltZXIpKTsKICAgIAogICAgbGVkY19jaGFubmVsX2NvbmZpZ190IGxlZGNfY2hhbm5lbCA9IHsKICAgICAgICAuc3BlZWRfbW9kZSA9IExFRENfTE9XX1NQRUVEX01PREUsCiAgICAgICAgLmNoYW5uZWwgPSBMRURDX0NIQU5ORUwsCiAgICAgICAgLnRpbWVyX3NlbCA9IExFRENfVElNRVIsCiAgICAgICAgLmludHJfdHlwZSA9IExFRENfSU5UUl9ESVNBQkxFLAogICAgICAgIC5ncGlvX251bSA9IEJVWlpFUl9HUElPLAogICAgICAgIC5kdXR5ID0gMCwKICAgICAgICAuaHBvaW50ID0gMCwKICAgIH07CiAgICBFU1BfRVJST1JfQ0hFQ0sobGVkY19jaGFubmVsX2NvbmZpZygmbGVkY19jaGFubmVsKSk7CiAgICAKICAgIEVTUF9MT0dJKFRBRywgIkJ1enplciBpbml0aWFsaXplZCBzdWNjZXNzZnVsbHkiKTsKfQoKLyog4pSA4pSAIENvbWJvIEtleSBDYWxsYmFja3Mg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnN0YXRpYyB2b2lkIG9uX2NvbWJvX3VwX2Iodm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiQ29tYm8ga2V5OiBVUCtCIC0+IEhvbWUiKTsKICAgIHVpX3Nob3dfaG9tZSgpOwp9CgpzdGF0aWMgdm9pZCBvbl9jb21ib19kb3duX2Iodm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiQ29tYm8ga2V5OiBET1dOK0IgLT4gVGFzayBNYW5hZ2VyIik7CiAgICB1aV9zaG93X3Rhc2tfbWFuYWdlcigpOwp9CgovKiDilIDilIAgS2V5IEV2ZW50IEhhbmRsZXIg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnN0YXRpYyB2b2lkIGhhbmRsZV9rZXlfZXZlbnQobHZfa2V5X3Qga2V5KQp7CiAgICBwb3dlcl9tYW5hZ2VyX3Jlc2V0X3NsZWVwX3RpbWVyKCk7CiAgICAKICAgIGlmIChrZXkgPT0gTFZfS0VZX0VTQykgewogICAgICAgIHVpX2dvX2JhY2soKTsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIHVpX2hhbmRsZV9rZXkoa2V5KTsKfQoKLyog4pSA4pSAIE1haW4gQXBwbGljYXRpb24g4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAICovCnZvaWQgYXBwX21haW4odm9pZCkKewogICAgLy8g6K6+572u6L+U5ZueIGxvYWRlcu+8iOW/hemhu+WcqOacgOW8gOWktO+8iQogICAgcmV0dXJuX3RvX2xvYWRlcl9zZXR1cCgpOwogICAgCiAgICBFU1BfTE9HSShUQUcsICI9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0iKTsKICAgIEVTUF9MT0dJKFRBRywgIlhpYW9NaWFvIE9TIHYxLjAuMCBTdGFydGluZy4uLiIpOwogICAgRVNQX0xPR0koVEFHLCAiPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Iik7CiAgICAKICAgIC8vIEluaXRpYWxpemUgTlZTCiAgICBlc3BfZXJyX3QgcmV0ID0gbnZzX2ZsYXNoX2luaXQoKTsKICAgIGlmIChyZXQgPT0gRVNQX0VSUl9OVlNfTk9fRlJFRV9QQUdFUyB8fCByZXQgPT0gRVNQX0VSUl9OVlNfTkVXX1ZFUlNJT05fRk9VTkQpIHsKICAgICAgICBFU1BfRVJST1JfQ0hFQ0sobnZzX2ZsYXNoX2VyYXNlKCkpOwogICAgICAgIHJldCA9IG52c19mbGFzaF9pbml0KCk7CiAgICB9CiAgICBFU1BfRVJST1JfQ0hFQ0socmV0KTsKICAgIAogICAgLy8gSW5pdGlhbGl6ZSBoYXJkd2FyZQogICAgbGNkX2luaXQoKTsKICAgIHNkY2FyZF9pbml0KCk7CiAgICBpMmNfaW5pdCgpOwogICAgYnV6emVyX2luaXQoKTsKICAgIAogICAgLy8gSW5pdGlhbGl6ZSBwb3dlciBtYW5hZ2VyCiAgICBwb3dlcl9tYW5hZ2VyX2luaXQoKTsKICAgIHBvd2VyX21hbmFnZXJfc3RhcnRfbW9uaXRvcigpOwogICAgCiAgICAvLyBJbml0aWFsaXplIExWR0wKICAgIGx2X2luaXQoKTsKICAgIAogICAgLy8gSW5pdGlhbGl6ZSBMVkdMIHBvcnQKICAgIGx2Z2xfcG9ydF9pbml0KHNfbGNkX2lvLCBOVUxMKTsKICAgIAogICAgLy8gSW5pdGlhbGl6ZSBjb25maWcgbWFuYWdlcgogICAgY29uZmlnX21hbmFnZXJfaW5pdCgpOwogICAgCiAgICAvLyBJbml0aWFsaXplIGFwcGxpY2F0aW9uIG1hbmFnZXIKICAgIGFwcF9tYW5hZ2VyX2luaXQoKTsKICAgIGFwcF9tYW5hZ2VyX3NjYW5fYXBwcygpOwogICAgCiAgICAvLyBJbml0aWFsaXplIE1pY3JvUHl0aG9uIHJ1bnRpbWUKICAgIG1pY3JvcHl0aG9uX3J1bnRpbWVfaW5pdCgpOwogICAgCiAgICAvLyBJbml0aWFsaXplIFVJIHN5c3RlbQogICAgdWlfbWFpbl9pbml0KCk7CiAgICAKICAgIC8vIFJlZ2lzdGVyIGNvbWJvIGtleXMKICAgIGx2Z2xfcG9ydF9yZWdpc3Rlcl9jb21ib19rZXkoInVwK2IiLCBvbl9jb21ib191cF9iKTsKICAgIGx2Z2xfcG9ydF9yZWdpc3Rlcl9jb21ib19rZXkoImRvd24rYiIsIG9uX2NvbWJvX2Rvd25fYik7CiAgICAKICAgIC8vIFJlZ2lzdGVyIGtleSBldmVudCBoYW5kbGVyCiAgICBsdmdsX3BvcnRfcmVnaXN0ZXJfa2V5X2V2ZW50KGhhbmRsZV9rZXlfZXZlbnQpOwogICAgCiAgICAvLyBTdGFydCBidXR0b24gc2NhbiB0YXNrCiAgICB4VGFza0NyZWF0ZShsdmdsX3BvcnRfYnV0dG9uX3NjYW5fdGFzaywgImJ1dHRvbl9zY2FuIiwgMjA0OCwgTlVMTCwgMTAsIE5VTEwpOwogICAgCiAgICBFU1BfTE9HSShUQUcsICI9PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0iKTsKICAgIEVTUF9MT0dJKFRBRywgIlhpYW9NaWFvIE9TIFJlYWR5ISIpOwogICAgRVNQX0xPR0koVEFHLCAiPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09Iik7CiAgICAKICAgIC8vIE1haW4gbG9vcAogICAgd2hpbGUgKDEpIHsKICAgICAgICBsdmdsX3BvcnRfdGFza19oYW5kbGVyKCk7CiAgICAgICAgdlRhc2tEZWxheShwZE1TX1RPX1RJQ0tTKDUpKTsKICAgIH0KfQo=
+/*
+ * XiaoMiao OS - MicroPython Desktop System
+ *
+ * ESP32-WROVER-B + ST7735 160x128 TFT + MicroSD + 6-key keypad.
+ * Includes return-to-loader integration.
+ */
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <assert.h>
+#include <string.h>
+#include <sys/param.h>
+#include <unistd.h>
+#include "driver/gpio.h"
+#include "driver/spi_master.h"
+#include "driver/i2c.h"
+#include "driver/ledc.h"
+#include "esp_lcd_panel_io.h"
+#include "esp_err.h"
+#include "esp_log.h"
+#include "esp_system.h"
+#include "esp_timer.h"
+#include "esp_ota_ops.h"
+#include "esp_partition.h"
+#include "nvs_flash.h"
+#include "esp_vfs_fat.h"
+#include "sdmmc_cmd.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "lvgl.h"
+#include "sdkconfig.h"
+
+#include "lvgl_port.h"
+#include "app_manager.h"
+#include "micropython_runtime.h"
+#include "config_manager.h"
+#include "power_manager.h"
+#include "ui_main.h"
+
+static const char *TAG = "xiaomiao-os";
+
+/* ── Hardware Constants ────────────────────────────────────────────────── */
+#define LCD_HOST            SPI2_HOST
+#define LCD_PIXEL_CLOCK_HZ  (60 * 1000 * 1000)
+#define LCD_NATIVE_H_RES    128
+#define LCD_NATIVE_V_RES    160
+#define LCD_H_RES           160
+#define LCD_V_RES           128
+#define LCD_DRAW_BUF_LINES  LCD_V_RES
+#define LCD_DPI             60
+#define PIN_LCD_SCLK   GPIO_NUM_18
+#define PIN_LCD_MOSI   GPIO_NUM_23
+#define PIN_LCD_MISO   GPIO_NUM_19
+#define PIN_LCD_CS     GPIO_NUM_5
+#define PIN_LCD_DC     GPIO_NUM_4
+#define PIN_SD_CS      GPIO_NUM_22
+
+// I2C
+#define I2C_MASTER_NUM      I2C_NUM_0
+#define I2C_MASTER_SCL_IO   15
+#define I2C_MASTER_SDA_IO   21
+#define I2C_MASTER_FREQ_HZ  100000
+
+// Buzzer
+#define BUZZER_GPIO         GPIO_NUM_14
+#define LEDC_TIMER          LEDC_TIMER_0
+#define LEDC_CHANNEL        LEDC_CHANNEL_0
+
+#define BUTTON_ACTIVE_LEVEL  0
+#define BUTTON_DEBOUNCE_MS   25
+
+#define LVGL_TICK_PERIOD_MS  1
+#define LVGL_TASK_STACK      (10 * 1024)
+#define LVGL_TASK_PRIORITY   5
+
+/* ST7735 registers */
+#define ST7735_SWRESET  0x01
+#define ST7735_SLPOUT   0x11
+#define ST7735_NORON    0x13
+#define ST7735_INVOFF   0x20
+#define ST7735_DISPOFF  0x28
+#define ST7735_DISPON   0x29
+#define ST7735_CASET    0x2A
+#define ST7735_RASET    0x2B
+#define ST7735_RAMWR    0x2C
+#define ST7735_MADCTL   0x36
+#define ST7735_COLMOD   0x3A
+#define ST7735_FRMCTR1  0xB1
+#define ST7735_FRMCTR2  0xB2
+#define ST7735_FRMCTR3  0xB3
+#define ST7735_INVCTR   0xB4
+#define ST7735_PWCTR1   0xC0
+#define ST7735_PWCTR2   0xC1
+#define ST7735_PWCTR3   0xC2
+#define ST7735_PWCTR4   0xC3
+#define ST7735_PWCTR5   0xC4
+#define ST7735_VMCTR1   0xC5
+#define ST7735_GMCTRP1  0xE0
+#define ST7735_GMCTRN1  0xE1
+#define MADCTL_MX       0x40
+#define MADCTL_MY       0x80
+#define MADCTL_MV       0x20
+#define MADCTL_RGB      0x00
+
+/* ── Globals ───────────────────────────────────────────────────────────── */
+static esp_lcd_panel_io_handle_t s_lcd_io = NULL;
+static sdmmc_card_t *s_sd_card = NULL;
+
+/* ── Return to Loader ──────────────────────────────────────────────────── */
+static void return_to_loader_setup(void)
+{
+    const esp_partition_t *cur = esp_ota_get_running_partition();
+    if (!cur || cur->subtype != ESP_PARTITION_SUBTYPE_APP_OTA_0) {
+        ESP_LOGI(TAG, "Not running from OTA partition, skip loader return setup");
+        return;
+    }
+    
+    const esp_partition_t *fac = esp_partition_find_first(
+        ESP_PARTITION_TYPE_APP, ESP_PARTITION_SUBTYPE_APP_FACTORY, NULL);
+    if (fac) {
+        esp_ota_set_boot_partition(fac);
+        ESP_LOGI(TAG, "Return to loader configured (factory partition set)");
+    } else {
+        ESP_LOGW(TAG, "Factory partition not found, cannot return to loader");
+    }
+}
+
+/* ── LCD ───────────────────────────────────────────────────────────────── */
+static void st7735_tx(esp_lcd_panel_io_handle_t io, int cmd,
+                      const void *param, size_t len)
+{
+    esp_lcd_panel_io_tx_param(io, cmd, param, len);
+}
+
+static void st7735_delay(uint32_t ms) { 
+    vTaskDelay(pdMS_TO_TICKS(ms)); 
+}
+
+static void st7735_init(esp_lcd_panel_io_handle_t io)
+{
+    const uint8_t frmctr[]  = {0x01,0x2C,0x2D};
+    const uint8_t frmctr3[] = {0x01,0x2C,0x2D,0x01,0x2C,0x2D};
+    const uint8_t invctr[]  = {0x07};
+    const uint8_t pwctr1[]  = {0xA2,0x02,0x84};
+    const uint8_t pwctr2[]  = {0xC5};
+    const uint8_t pwctr3[]  = {0x0A,0x00};
+    const uint8_t pwctr4[]  = {0x8A,0x2A};
+    const uint8_t pwctr5[]  = {0x8A,0xEE};
+    const uint8_t vmctr1[]  = {0x0E};
+    const uint8_t madctl_d[] = {MADCTL_MX | MADCTL_MY | MADCTL_RGB};
+    const uint8_t madctl_r[] = {MADCTL_MX | MADCTL_MV | MADCTL_RGB};
+    const uint8_t colmod[] = {0x05};
+    const uint8_t caset[] = {0x00, 0x00, 0x00, LCD_NATIVE_H_RES - 1};
+    const uint8_t raset[] = {0x00, 0x00, 0x00, LCD_NATIVE_V_RES - 1};
+    const uint8_t gp[] = {0x02,0x1C,0x07,0x12,0x37,0x32,0x29,0x2D,
+                          0x29,0x25,0x2B,0x39,0x00,0x01,0x03,0x10};
+    const uint8_t gn[] = {0x03,0x1D,0x07,0x06,0x2E,0x2C,0x29,0x2D,
+                          0x2E,0x2E,0x37,0x3F,0x00,0x00,0x02,0x10};
+    
+    st7735_tx(io, ST7735_DISPOFF, NULL, 0);
+    st7735_tx(io, ST7735_SWRESET, NULL, 0);
+    st7735_delay(150);
+    st7735_tx(io, ST7735_SLPOUT, NULL, 0);
+    st7735_delay(500);
+    st7735_tx(io, ST7735_FRMCTR1, frmctr, sizeof(frmctr));
+    st7735_tx(io, ST7735_FRMCTR2, frmctr, sizeof(frmctr));
+    st7735_tx(io, ST7735_FRMCTR3, frmctr3, sizeof(frmctr3));
+    st7735_tx(io, ST7735_INVCTR, invctr, sizeof(invctr));
+    st7735_tx(io, ST7735_PWCTR1, pwctr1, sizeof(pwctr1));
+    st7735_tx(io, ST7735_PWCTR2, pwctr2, sizeof(pwctr2));
+    st7735_tx(io, ST7735_PWCTR3, pwctr3, sizeof(pwctr3));
+    st7735_tx(io, ST7735_PWCTR4, pwctr4, sizeof(pwctr4));
+    st7735_tx(io, ST7735_PWCTR5, pwctr5, sizeof(pwctr5));
+    st7735_tx(io, ST7735_VMCTR1, vmctr1, sizeof(vmctr1));
+    st7735_tx(io, ST7735_INVOFF, NULL, 0);
+    st7735_tx(io, ST7735_MADCTL, madctl_d, sizeof(madctl_d));
+    st7735_tx(io, ST7735_COLMOD, colmod, sizeof(colmod));
+    st7735_tx(io, ST7735_CASET, caset, sizeof(caset));
+    st7735_tx(io, ST7735_RASET, raset, sizeof(raset));
+    st7735_tx(io, ST7735_GMCTRP1, gp, sizeof(gp));
+    st7735_tx(io, ST7735_GMCTRN1, gn, sizeof(gn));
+    st7735_tx(io, ST7735_NORON, NULL, 0);
+    st7735_delay(10);
+    st7735_tx(io, ST7735_MADCTL, madctl_r, sizeof(madctl_r));
+    st7735_tx(io, ST7735_DISPON, NULL, 0);
+    st7735_delay(20);
+}
+
+static void lcd_init(void)
+{
+    ESP_LOGI(TAG, "Initializing LCD");
+    
+    spi_bus_config_t buscfg = {
+        .sclk_io_num = PIN_LCD_SCLK,
+        .mosi_io_num = PIN_LCD_MOSI,
+        .miso_io_num = PIN_LCD_MISO,
+        .quadwp_io_num = -1,
+        .quadhd_io_num = -1,
+        .max_transfer_sz = LCD_H_RES * LCD_V_RES * sizeof(uint16_t),
+    };
+    ESP_ERROR_CHECK(spi_bus_initialize(LCD_HOST, &buscfg, SPI_DMA_CH_AUTO));
+    
+    esp_lcd_panel_io_spi_config_t io_config = {
+        .dc_gpio_num = PIN_LCD_DC,
+        .cs_gpio_num = PIN_LCD_CS,
+        .pclk_hz = LCD_PIXEL_CLOCK_HZ,
+        .trans_queue_depth = 10,
+        .spi_mode = 0,
+        .lcd_cmd_bits = 8,
+        .lcd_param_bits = 8,
+    };
+    ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi((esp_lcd_spi_bus_handle_t)LCD_HOST, &io_config, &s_lcd_io));
+    
+    st7735_init(s_lcd_io);
+    ESP_LOGI(TAG, "LCD initialized successfully");
+}
+
+/* ── SD Card ───────────────────────────────────────────────────────────── */
+static void sdcard_init(void)
+{
+    ESP_LOGI(TAG, "Initializing SD card");
+    
+    esp_vfs_fat_sdmmc_mount_config_t mount_config = {
+        .format_if_mount_failed = false,
+        .max_files = 5,
+        .allocation_unit_size = 16 * 1024
+    };
+    
+    sdmmc_host_t host = SDSPI_HOST_DEFAULT();
+    host.slot = LCD_HOST;
+    host.max_freq_khz = SDMMC_FREQ_DEFAULT;
+    
+    sdspi_device_config_t slot_config = SDSPI_DEVICE_CONFIG_DEFAULT();
+    slot_config.gpio_cs = PIN_SD_CS;
+    slot_config.host_id = host.slot;
+    
+    esp_err_t ret = esp_vfs_fat_sdspi_mount("/sdcard", &host, &slot_config, &mount_config, &s_sd_card);
+    
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to mount SD card: %s", esp_err_to_name(ret));
+        return;
+    }
+    
+    ESP_LOGI(TAG, "SD card mounted successfully");
+}
+
+/* ── I2C ───────────────────────────────────────────────────────────────── */
+static void i2c_init(void)
+{
+    ESP_LOGI(TAG, "Initializing I2C");
+    
+    i2c_config_t conf = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = I2C_MASTER_SDA_IO,
+        .scl_io_num = I2C_MASTER_SCL_IO,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = I2C_MASTER_FREQ_HZ,
+    };
+    
+    ESP_ERROR_CHECK(i2c_param_config(I2C_MASTER_NUM, &conf));
+    ESP_ERROR_CHECK(i2c_driver_install(I2C_MASTER_NUM, conf.mode, 0, 0, 0));
+    
+    ESP_LOGI(TAG, "I2C initialized successfully");
+}
+
+/* ── Buzzer ────────────────────────────────────────────────────────────── */
+static void buzzer_init(void)
+{
+    ESP_LOGI(TAG, "Initializing Buzzer");
+    
+    ledc_timer_config_t ledc_timer = {
+        .speed_mode = LEDC_LOW_SPEED_MODE,
+        .timer_num = LEDC_TIMER,
+        .duty_resolution = LEDC_TIMER_10_BIT,
+        .freq_hz = 1000,
+        .clk_cfg = LEDC_AUTO_CLK,
+    };
+    ESP_ERROR_CHECK(ledc_timer_config(&ledc_timer));
+    
+    ledc_channel_config_t ledc_channel = {
+        .speed_mode = LEDC_LOW_SPEED_MODE,
+        .channel = LEDC_CHANNEL,
+        .timer_sel = LEDC_TIMER,
+        .intr_type = LEDC_INTR_DISABLE,
+        .gpio_num = BUZZER_GPIO,
+        .duty = 0,
+        .hpoint = 0,
+    };
+    ESP_ERROR_CHECK(ledc_channel_config(&ledc_channel));
+    
+    ESP_LOGI(TAG, "Buzzer initialized successfully");
+}
+
+/* ── Combo Key Callbacks ──────────────────────────────────────────────── */
+static void on_combo_up_b(void)
+{
+    ESP_LOGI(TAG, "Combo key: UP+B -> Home");
+    ui_show_home();
+}
+
+static void on_combo_down_b(void)
+{
+    ESP_LOGI(TAG, "Combo key: DOWN+B -> Task Manager");
+    ui_show_task_manager();
+}
+
+/* ── Key Event Handler ────────────────────────────────────────────────── */
+static void handle_key_event(lv_key_t key)
+{
+    power_manager_reset_sleep_timer();
+    
+    if (key == LV_KEY_ESC) {
+        ui_go_back();
+        return;
+    }
+    
+    ui_handle_key(key);
+}
+
+/* ── Main Application ─────────────────────────────────────────────────── */
+void app_main(void)
+{
+    // 设置返回 loader（必须在最开头）
+    return_to_loader_setup();
+    
+    ESP_LOGI(TAG, "=================================");
+    ESP_LOGI(TAG, "XiaoMiao OS v1.0.0 Starting...");
+    ESP_LOGI(TAG, "=================================");
+    
+    // Initialize NVS
+    esp_err_t ret = nvs_flash_init();
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+        ESP_ERROR_CHECK(nvs_flash_erase());
+        ret = nvs_flash_init();
+    }
+    ESP_ERROR_CHECK(ret);
+    
+    // Initialize hardware
+    lcd_init();
+    sdcard_init();
+    i2c_init();
+    buzzer_init();
+    
+    // Initialize power manager
+    power_manager_init();
+    power_manager_start_monitor();
+    
+    // Initialize LVGL
+    lv_init();
+    
+    // Initialize LVGL port
+    lvgl_port_init(s_lcd_io, NULL);
+    
+    // Initialize config manager
+    config_manager_init();
+    
+    // Initialize application manager
+    app_manager_init();
+    app_manager_scan_apps();
+    
+    // Initialize MicroPython runtime
+    micropython_runtime_init();
+    
+    // Initialize UI system
+    ui_main_init();
+    
+    // Register combo keys
+    lvgl_port_register_combo_key("up+b", on_combo_up_b);
+    lvgl_port_register_combo_key("down+b", on_combo_down_b);
+    
+    // Register key event handler
+    lvgl_port_register_key_event(handle_key_event);
+    
+    // Start button scan task
+    xTaskCreate(lvgl_port_button_scan_task, "button_scan", 2048, NULL, 10, NULL);
+    
+    ESP_LOGI(TAG, "=================================");
+    ESP_LOGI(TAG, "XiaoMiao OS Ready!");
+    ESP_LOGI(TAG, "=================================");
+    
+    // Main loop
+    while (1) {
+        lvgl_port_task_handler();
+        vTaskDelay(pdMS_TO_TICKS(5));
+    }
+}

@@ -1,1 +1,9 @@
-ewogICJpZCI6ICJjb20ueGlhb21pYW8uaGVsbG8iLAogICJuYW1lIjogIkhlbGxvIFdvcmxkIiwKICAidmVyc2lvbiI6ICIxLjAuMCIsCiAgImF1dGhvciI6ICJYaWFvTWlhbyBUZWFtIiwKICAiZGVzY3JpcHRpb24iOiAi566A5Y2V55qESGVsbG8gV29ybGTnpLrkvovlupTnlKgiLAogICJpY29uIjogImljb24ucG5nIiwKICAibWFpbiI6ICJtYWluLnB5Igp9
+{
+  "id": "com.xiaomiao.hello",
+  "name": "Hello World",
+  "version": "1.0.0",
+  "author": "XiaoMiao Team",
+  "description": "简单的Hello World示例应用",
+  "icon": "icon.png",
+  "main": "main.py"
+}

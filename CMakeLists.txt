@@ -1,1 +1,3 @@
-Y21ha2VfbWluaW11bV9yZXF1aXJlZChWRVJTSU9OIDMuMTYpCmluY2x1ZGUoJEVOVntJREZfUEFUSH0vdG9vbHMvY21ha2UvcHJvamVjdC5jbWFrZSkKcHJvamVjdCh4aWFvbWlhby1vcykK
+cmake_minimum_required(VERSION 3.16)
+include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+project(xiaomiao-os)

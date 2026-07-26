@@ -1,1 +1,38 @@
-IiIiCuaXtumSn+W6lOeUqCAtIFhpYW9NaWFvIE9TCuaYvuekuuW9k+WJjeaXtumXtOWSjOaXpeacnwoiIiIKCmltcG9ydCB0aW1lCmltcG9ydCBkaXNwbGF5CgpkZWYgbWFpbigpOgogICAgIiIi5pe26ZKf5bqU55So5Li75Ye95pWwIiIiCiAgICBkaXNwbGF5LmNsZWFyKDB4MDAwMCkgICMg6buR6Imy6IOM5pmvCiAgICAKICAgIHdoaWxlIFRydWU6CiAgICAgICAgIyDojrflj5blvZPliY3ml7bpl7QKICAgICAgICB0ID0gdGltZS5sb2NhbHRpbWUoKQogICAgICAgIGhvdXIgPSB0WzNdCiAgICAgICAgbWludXRlID0gdFs0XQogICAgICAgIHNlY29uZCA9IHRbNV0KICAgICAgICB5ZWFyID0gdFswXQogICAgICAgIG1vbnRoID0gdFsxXQogICAgICAgIGRheSA9IHRbMl0KICAgICAgICAKICAgICAgICAjIOaYvuekuuaXtumXtCAo5aSn5a2X5L2TKQogICAgICAgIHRpbWVfc3RyID0gZiJ7aG91cjowMmR9OnttaW51dGU6MDJkfTp7c2Vjb25kOjAyZH0iCiAgICAgICAgZGlzcGxheS50ZXh0KHRpbWVfc3RyLCAyMCwgMzAsIDB4RkZGRiwgMykgICMg55m96Imy77yMM+WPt+Wtl+S9kwogICAgICAgIAogICAgICAgICMg5pi+56S65pel5pyfCiAgICAgICAgZGF0ZV9zdHIgPSBmInt5ZWFyfS17bW9udGg6MDJkfS17ZGF5OjAyZH0iCiAgICAgICAgZGlzcGxheS50ZXh0KGRhdGVfc3RyLCA0MCwgNzAsIDB4MDdGRiwgMikgICMg6Z2S6Imy77yMMuWPt+Wtl+S9kwogICAgICAgIAogICAgICAgICMg5Yi35paw5pi+56S6CiAgICAgICAgZGlzcGxheS5yZWZyZXNoKCkKICAgICAgICAKICAgICAgICAjIOavj+enkuabtOaWsAogICAgICAgIHRpbWUuc2xlZXAoMSkKCmlmIF9fbmFtZV9fID09ICJfX21haW5fXyI6CiAgICBtYWluKCk=
+"""
+时钟应用 - XiaoMiao OS
+显示当前时间和日期
+"""
+
+import time
+import display
+
+def main():
+    """时钟应用主函数"""
+    display.clear(0x0000)  # 黑色背景
+    
+    while True:
+        # 获取当前时间
+        t = time.localtime()
+        hour = t[3]
+        minute = t[4]
+        second = t[5]
+        year = t[0]
+        month = t[1]
+        day = t[2]
+        
+        # 显示时间 (大字体)
+        time_str = f"{hour:02d}:{minute:02d}:{second:02d}"
+        display.text(time_str, 20, 30, 0xFFFF, 3)  # 白色，3号字体
+        
+        # 显示日期
+        date_str = f"{year}-{month:02d}-{day:02d}"
+        display.text(date_str, 40, 70, 0x07FF, 2)  # 青色，2号字体
+        
+        # 刷新显示
+        display.refresh()
+        
+        # 每秒更新
+        time.sleep(1)
+
+if __name__ == "__main__":
+    main()

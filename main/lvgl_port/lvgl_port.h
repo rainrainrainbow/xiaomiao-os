@@ -1,1 +1,94 @@
-LyoqCiAqIEBmaWxlIGx2Z2xfcG9ydC5oCiAqIEBicmllZiBMVkdMIOenu+akjeWxgiAtIOaYvuekuumpseWKqOOAgeaMiemUrui+k+WFpeWSjOe7hOWQiOmUruajgOa1iwogKi8KCiNpZm5kZWYgTFZHTF9QT1JUX0gKI2RlZmluZSBMVkdMX1BPUlRfSAoKI2luY2x1ZGUgImx2Z2wuaCIKI2luY2x1ZGUgImVzcF9lcnIuaCIKI2luY2x1ZGUgImVzcF9sY2RfcGFuZWxfaW8uaCIKI2luY2x1ZGUgImVzcF9sY2RfcGFuZWxfb3BzLmgiCgojaWZkZWYgX19jcGx1c3BsdXMKZXh0ZXJuICJDIiB7CiNlbmRpZgoKLyoqCiAqIEBicmllZiDmjInplK7mnprkuL4KICovCnR5cGVkZWYgZW51bSB7CiAgICBCVE5fVVAgPSAwLAogICAgQlROX0RPV04sCiAgICBCVE5fTEVGVCwKICAgIEJUTl9SSUdIVCwKICAgIEJUTl9BLAogICAgQlROX0IsCiAgICBCVE5fQ09VTlQKfSBidXR0b25faWRfdDsKCi8qKgogKiBAYnJpZWYg57uE5ZCI6ZSu5Zue6LCD57G75Z6LCiAqLwp0eXBlZGVmIHZvaWQgKCpjb21ib19rZXlfY2FsbGJhY2tfdCkodm9pZCk7CgovKioKICogQGJyaWVmIOaMiemUruS6i+S7tuWbnuiwg+exu+WeiwogKi8KdHlwZWRlZiB2b2lkICgqa2V5X2V2ZW50X2NhbGxiYWNrX3QpKGx2X2tleV90IGtleSk7CgovKioKICogQGJyaWVmIOWIneWni+WMliBMVkdMIOenu+akjeWxgu+8iOaYvuekuumpseWKqCArIOaMiemUrui+k+WFpe+8iQogKiBAcGFyYW0gbGNkX2lvIExDRCDpnaLmnb8gSU8g5Y+l5p+ECiAqIEBwYXJhbSBsY2RfcGFuZWwgTENEIOmdouadv+WPpeafhAogKiBAcmV0dXJuIEVTUF9PSyDmiJDlip8KICovCmVzcF9lcnJfdCBsdmdsX3BvcnRfaW5pdChlc3BfbGNkX3BhbmVsX2lvX2hhbmRsZV90IGxjZF9pbywgZXNwX2xjZF9wYW5lbF9oYW5kbGVfdCBsY2RfcGFuZWwpOwoKLyoqCiAqIEBicmllZiBMVkdMIOS7u+WKoeWkhOeQhu+8iOWcqOS4u+W+queOr+S4reiwg+eUqO+8iQogKi8Kdm9pZCBsdmdsX3BvcnRfdGFza19oYW5kbGVyKHZvaWQpOwoKLyoqCiAqIEBicmllZiDliJ3lp4vljJbmjInplK7ovpPlhaUKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgbHZnbF9wb3J0X2lucHV0X2luaXQodm9pZCk7CgovKioKICogQGJyaWVmIOazqOWGjOe7hOWQiOmUruWbnuiwgwogKiBAcGFyYW0gY29tYm8g57uE5ZCI6ZSu57G75Z6LOiAidXArYiIg5oiWICJkb3duK2IiCiAqIEBwYXJhbSBjYWxsYmFjayDlm57osIPlh73mlbAKICovCnZvaWQgbHZnbF9wb3J0X3JlZ2lzdGVyX2NvbWJvX2tleShjb25zdCBjaGFyICpjb21ibywgY29tYm9fa2V5X2NhbGxiYWNrX3QgY2FsbGJhY2spOwoKLyoqCiAqIEBicmllZiDms6jlhozmjInplK7kuovku7blm57osIPvvIjljZXplK7mjInkuIvml7bop6blj5HvvIkKICogQHBhcmFtIGNhbGxiYWNrIOWbnuiwg+WHveaVsAogKi8Kdm9pZCBsdmdsX3BvcnRfcmVnaXN0ZXJfa2V5X2V2ZW50KGtleV9ldmVudF9jYWxsYmFja190IGNhbGxiYWNrKTsKCi8qKgogKiBAYnJpZWYgTFZHTCDmjInplK7or7vlj5blm57osIPvvIjkvpsgTFZHTCDovpPlhaXorr7lpIfkvb/nlKjvvIkKICovCnZvaWQgbHZnbF9wb3J0X2tleXBhZF9yZWFkX2NiKGx2X2luZGV2X3QgKmluZGV2LCBsdl9pbmRldl9kYXRhX3QgKmRhdGEpOwoKLyoqCiAqIEBicmllZiDojrflj5bmjInplK7nirbmgIEKICogQHBhcmFtIGJ0biDmjInplK5JRAogKiBAcmV0dXJuIHRydWUg5oyJ5LiL77yMZmFsc2Ug6YeK5pS+CiAqLwpib29sIGx2Z2xfcG9ydF9pc19idXR0b25fcHJlc3NlZChidXR0b25faWRfdCBidG4pOwoKLyoqCiAqIEBicmllZiDmjInplK7miavmj4/ku7vliqHvvIjpnIDopoHlnKggRnJlZVJUT1Mg5Lu75Yqh5Lit6LCD55So77yJCiAqLwp2b2lkIGx2Z2xfcG9ydF9idXR0b25fc2Nhbl90YXNrKHZvaWQgKmFyZyk7CgojaWZkZWYgX19jcGx1c3BsdXMKfQojZW5kaWYKCiNlbmRpZiAvKiBMVkdMX1BPUlRfSCAqLw==
+/**
+ * @file lvgl_port.h
+ * @brief LVGL 移植层 - 显示驱动、按键输入和组合键检测
+ */
+
+#ifndef LVGL_PORT_H
+#define LVGL_PORT_H
+
+#include "lvgl.h"
+#include "esp_err.h"
+#include "esp_lcd_panel_io.h"
+#include "esp_lcd_panel_ops.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @brief 按键枚举
+ */
+typedef enum {
+    BTN_UP = 0,
+    BTN_DOWN,
+    BTN_LEFT,
+    BTN_RIGHT,
+    BTN_A,
+    BTN_B,
+    BTN_COUNT
+} button_id_t;
+
+/**
+ * @brief 组合键回调类型
+ */
+typedef void (*combo_key_callback_t)(void);
+
+/**
+ * @brief 按键事件回调类型
+ */
+typedef void (*key_event_callback_t)(lv_key_t key);
+
+/**
+ * @brief 初始化 LVGL 移植层（显示驱动 + 按键输入）
+ * @param lcd_io LCD 面板 IO 句柄
+ * @param lcd_panel LCD 面板句柄
+ * @return ESP_OK 成功
+ */
+esp_err_t lvgl_port_init(esp_lcd_panel_io_handle_t lcd_io, esp_lcd_panel_handle_t lcd_panel);
+
+/**
+ * @brief LVGL 任务处理（在主循环中调用）
+ */
+void lvgl_port_task_handler(void);
+
+/**
+ * @brief 初始化按键输入
+ * @return ESP_OK 成功
+ */
+esp_err_t lvgl_port_input_init(void);
+
+/**
+ * @brief 注册组合键回调
+ * @param combo 组合键类型: "up+b" 或 "down+b"
+ * @param callback 回调函数
+ */
+void lvgl_port_register_combo_key(const char *combo, combo_key_callback_t callback);
+
+/**
+ * @brief 注册按键事件回调（单键按下时触发）
+ * @param callback 回调函数
+ */
+void lvgl_port_register_key_event(key_event_callback_t callback);
+
+/**
+ * @brief LVGL 按键读取回调（供 LVGL 输入设备使用）
+ */
+void lvgl_port_keypad_read_cb(lv_indev_t *indev, lv_indev_data_t *data);
+
+/**
+ * @brief 获取按键状态
+ * @param btn 按键ID
+ * @return true 按下，false 释放
+ */
+bool lvgl_port_is_button_pressed(button_id_t btn);
+
+/**
+ * @brief 按键扫描任务（需要在 FreeRTOS 任务中调用）
+ */
+void lvgl_port_button_scan_task(void *arg);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* LVGL_PORT_H */

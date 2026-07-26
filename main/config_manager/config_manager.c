@@ -1,1 +1,297 @@
-LyoqCiAqIEBmaWxlIGNvbmZpZ19tYW5hZ2VyLmMKICogQGJyaWVmIOmFjee9rueuoeeQhuWZqCAtIEpTT07phY3nva7mjIHkuYXljJYKICovCgojaW5jbHVkZSAiY29uZmlnX21hbmFnZXIuaCIKI2luY2x1ZGUgImVzcF9sb2cuaCIKI2luY2x1ZGUgImNKU09OLmgiCiNpbmNsdWRlIDxzdGRpby5oPgojaW5jbHVkZSA8c3RyaW5nLmg+CiNpbmNsdWRlIDxzeXMvc3RhdC5oPgojaW5jbHVkZSA8c3lzL3R5cGVzLmg+CiNpbmNsdWRlIDxlcnJuby5oPgoKc3RhdGljIGNvbnN0IGNoYXIgKlRBRyA9ICJjb25maWdfbWFuYWdlciI7CgovLyDphY3nva7lrZjlgqgKc3RhdGljIGNKU09OICpzX2NvbmZpZyA9IE5VTEw7CnN0YXRpYyBib29sIHNfaW5pdGlhbGl6ZWQgPSBmYWxzZTsKc3RhdGljIGJvb2wgc19kaXJ0eSA9IGZhbHNlOyAgLy8g5qCH6K6w5piv5ZCm5pyJ5pyq5L+d5a2Y55qE5pu05pS5CgovLyDliJvlu7rphY3nva7nm67lvZUKc3RhdGljIGVzcF9lcnJfdCBlbnN1cmVfY29uZmlnX2Rpcih2b2lkKQp7CiAgICAvLyDliJvlu7ogLnhpYW9taWFvIOebruW9lQogICAgc3RydWN0IHN0YXQgc3Q7CiAgICBpZiAoc3RhdCgiL3NkY2FyZC8ueGlhb21pYW8iLCAmc3QpICE9IDApIHsKICAgICAgICBpZiAobWtkaXIoIi9zZGNhcmQvLnhpYW9taWFvIiwgMDc1NSkgIT0gMCkgewogICAgICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gY3JlYXRlIGNvbmZpZyBkaXJlY3Rvcnk6ICVzIiwgc3RyZXJyb3IoZXJybm8pKTsKICAgICAgICAgICAgcmV0dXJuIEVTUF9GQUlMOwogICAgICAgIH0KICAgICAgICBFU1BfTE9HSShUQUcsICJDcmVhdGVkIGNvbmZpZyBkaXJlY3RvcnkiKTsKICAgIH0KICAgIHJldHVybiBFU1BfT0s7Cn0KCmVzcF9lcnJfdCBjb25maWdfbWFuYWdlcl9pbml0KHZvaWQpCnsKICAgIEVTUF9MT0dJKFRBRywgIkluaXRpYWxpemluZyBjb25maWcgbWFuYWdlciIpOwogICAgCiAgICBpZiAoc19pbml0aWFsaXplZCkgewogICAgICAgIEVTUF9MT0dXKFRBRywgIkFscmVhZHkgaW5pdGlhbGl6ZWQiKTsKICAgICAgICByZXR1cm4gRVNQX09LOwogICAgfQogICAgCiAgICAvLyDnoa7kv53phY3nva7nm67lvZXlrZjlnKgKICAgIGVzcF9lcnJfdCByZXQgPSBlbnN1cmVfY29uZmlnX2RpcigpOwogICAgaWYgKHJldCAhPSBFU1BfT0spIHsKICAgICAgICByZXR1cm4gcmV0OwogICAgfQogICAgCiAgICAvLyDliJvlu7rnqbrphY3nva7lr7nosaEKICAgIHNfY29uZmlnID0gY0pTT05fQ3JlYXRlT2JqZWN0KCk7CiAgICBpZiAoIXNfY29uZmlnKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIGNyZWF0ZSBjb25maWcgb2JqZWN0Iik7CiAgICAgICAgcmV0dXJuIEVTUF9FUlJfTk9fTUVNOwogICAgfQogICAgCiAgICBzX2luaXRpYWxpemVkID0gdHJ1ZTsKICAgIAogICAgLy8g5bCd6K+V5Yqg6L296YWN572uCiAgICByZXQgPSBjb25maWdfbWFuYWdlcl9sb2FkKCk7CiAgICBpZiAocmV0ICE9IEVTUF9PSykgewogICAgICAgIEVTUF9MT0dXKFRBRywgIk5vIGNvbmZpZyBmaWxlIGZvdW5kLCB1c2luZyBkZWZhdWx0cyIpOwogICAgfQogICAgCiAgICBFU1BfTE9HSShUQUcsICJDb25maWcgbWFuYWdlciBpbml0aWFsaXplZCIpOwogICAgcmV0dXJuIEVTUF9PSzsKfQoKZXNwX2Vycl90IGNvbmZpZ19tYW5hZ2VyX2xvYWQodm9pZCkKewogICAgaWYgKCFzX2luaXRpYWxpemVkKSB7CiAgICAgICAgcmV0dXJuIEVTUF9FUlJfSU5WQUxJRF9TVEFURTsKICAgIH0KICAgIAogICAgRVNQX0xPR0koVEFHLCAiTG9hZGluZyBjb25maWcgZnJvbSAlcyIsIENPTkZJR19GSUxFX1BBVEgpOwogICAgCiAgICBGSUxFICpmID0gZm9wZW4oQ09ORklHX0ZJTEVfUEFUSCwgInIiKTsKICAgIGlmICghZikgewogICAgICAgIEVTUF9MT0dXKFRBRywgIkNvbmZpZyBmaWxlIG5vdCBmb3VuZCIpOwogICAgICAgIHJldHVybiBFU1BfRVJSX05PVF9GT1VORDsKICAgIH0KICAgIAogICAgLy8g6I635Y+W5paH5Lu25aSn5bCPCiAgICBmc2VlayhmLCAwLCBTRUVLX0VORCk7CiAgICBsb25nIGZzaXplID0gZnRlbGwoZik7CiAgICBmc2VlayhmLCAwLCBTRUVLX1NFVCk7CiAgICAKICAgIGlmIChmc2l6ZSA8PSAwIHx8IGZzaXplID4gNjQgKiAxMDI0KSB7ICAvLyDpmZDliLY2NEtCCiAgICAgICAgRVNQX0xPR0UoVEFHLCAiSW52YWxpZCBjb25maWcgZmlsZSBzaXplOiAlbGQiLCBmc2l6ZSk7CiAgICAgICAgZmNsb3NlKGYpOwogICAgICAgIHJldHVybiBFU1BfRkFJTDsKICAgIH0KICAgIAogICAgLy8g6K+75Y+W5paH5Lu25YaF5a65CiAgICBjaGFyICpqc29uX3N0ciA9IG1hbGxvYyhmc2l6ZSArIDEpOwogICAgaWYgKCFqc29uX3N0cikgewogICAgICAgIGZjbG9zZShmKTsKICAgICAgICByZXR1cm4gRVNQX0VSUl9OT19NRU07CiAgICB9CiAgICAKICAgIHNpemVfdCByZWFkX3NpemUgPSBmcmVhZChqc29uX3N0ciwgMSwgZnNpemUsIGYpOwogICAgZmNsb3NlKGYpOwogICAgCiAgICBpZiAocmVhZF9zaXplICE9IChzaXplX3QpZnNpemUpIHsKICAgICAgICBmcmVlKGpzb25fc3RyKTsKICAgICAgICByZXR1cm4gRVNQX0ZBSUw7CiAgICB9CiAgICBqc29uX3N0cltmc2l6ZV0gPSAnXDAnOwogICAgCiAgICAvLyDop6PmnpBKU09OCiAgICBjSlNPTiAqbmV3X2NvbmZpZyA9IGNKU09OX1BhcnNlKGpzb25fc3RyKTsKICAgIGZyZWUoanNvbl9zdHIpOwogICAgCiAgICBpZiAoIW5ld19jb25maWcpIHsKICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gcGFyc2UgY29uZmlnIEpTT04iKTsKICAgICAgICByZXR1cm4gRVNQX0ZBSUw7CiAgICB9CiAgICAKICAgIC8vIOabv+aNouaXp+mFjee9rgogICAgaWYgKHNfY29uZmlnKSB7CiAgICAgICAgY0pTT05fRGVsZXRlKHNfY29uZmlnKTsKICAgIH0KICAgIHNfY29uZmlnID0gbmV3X2NvbmZpZzsKICAgIAogICAgRVNQX0xPR0koVEFHLCAiQ29uZmlnIGxvYWRlZCBzdWNjZXNzZnVsbHkiKTsKICAgIHJldHVybiBFU1BfT0s7Cn0KCmVzcF9lcnJfdCBjb25maWdfbWFuYWdlcl9zYXZlKHZvaWQpCnsKICAgIGlmICghc19pbml0aWFsaXplZCB8fCAhc19jb25maWcpIHsKICAgICAgICByZXR1cm4gRVNQX0VSUl9JTlZBTElEX1NUQVRFOwogICAgfQogICAgCiAgICBFU1BfTE9HSShUQUcsICJTYXZpbmcgY29uZmlnIHRvICVzIiwgQ09ORklHX0ZJTEVfUEFUSCk7CiAgICAKICAgIC8vIOeUn+aIkEpTT07lrZfnrKbkuLIKICAgIGNoYXIgKmpzb25fc3RyID0gY0pTT05fUHJpbnQoc19jb25maWcpOwogICAgaWYgKCFqc29uX3N0cikgewogICAgICAgIEVTUF9MT0dFKFRBRywgIkZhaWxlZCB0byBnZW5lcmF0ZSBKU09OIik7CiAgICAgICAgcmV0dXJuIEVTUF9FUlJfTk9fTUVNOwogICAgfQogICAgCiAgICAvLyDlhpnlhaXmlofku7YKICAgIEZJTEUgKmYgPSBmb3BlbihDT05GSUdfRklMRV9QQVRILCAidyIpOwogICAgaWYgKCFmKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIG9wZW4gY29uZmlnIGZpbGUgZm9yIHdyaXRpbmciKTsKICAgICAgICBmcmVlKGpzb25fc3RyKTsKICAgICAgICByZXR1cm4gRVNQX0ZBSUw7CiAgICB9CiAgICAKICAgIHNpemVfdCBsZW4gPSBzdHJsZW4oanNvbl9zdHIpOwogICAgc2l6ZV90IHdyaXR0ZW4gPSBmd3JpdGUoanNvbl9zdHIsIDEsIGxlbiwgZik7CiAgICBmY2xvc2UoZik7CiAgICBmcmVlKGpzb25fc3RyKTsKICAgIAogICAgaWYgKHdyaXR0ZW4gIT0gbGVuKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIHdyaXRlIGNvbmZpZyBmaWxlIik7CiAgICAgICAgcmV0dXJuIEVTUF9GQUlMOwogICAgfQogICAgCiAgICBzX2RpcnR5ID0gZmFsc2U7CiAgICBFU1BfTE9HSShUQUcsICJDb25maWcgc2F2ZWQgc3VjY2Vzc2Z1bGx5Iik7CiAgICByZXR1cm4gRVNQX09LOwp9CgppbnQgY29uZmlnX21hbmFnZXJfZ2V0X2ludChjb25zdCBjaGFyICprZXksIGludCBkZWZhdWx0X3ZhbHVlKQp7CiAgICBpZiAoIXNfaW5pdGlhbGl6ZWQgfHwgIXNfY29uZmlnIHx8ICFrZXkpIHsKICAgICAgICByZXR1cm4gZGVmYXVsdF92YWx1ZTsKICAgIH0KICAgIAogICAgY0pTT04gKml0ZW0gPSBjSlNPTl9HZXRPYmplY3RJdGVtKHNfY29uZmlnLCBrZXkpOwogICAgaWYgKGNKU09OX0lzTnVtYmVyKGl0ZW0pKSB7CiAgICAgICAgcmV0dXJuIGl0ZW0tPnZhbHVlaW50OwogICAgfQogICAgCiAgICByZXR1cm4gZGVmYXVsdF92YWx1ZTsKfQoKdm9pZCBjb25maWdfbWFuYWdlcl9zZXRfaW50KGNvbnN0IGNoYXIgKmtleSwgaW50IHZhbHVlKQp7CiAgICBpZiAoIXNfaW5pdGlhbGl6ZWQgfHwgIXNfY29uZmlnIHx8ICFrZXkpIHsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGNKU09OICppdGVtID0gY0pTT05fR2V0T2JqZWN0SXRlbShzX2NvbmZpZywga2V5KTsKICAgIGlmIChpdGVtKSB7CiAgICAgICAgY0pTT05fU2V0TnVtYmVyVmFsdWUoaXRlbSwgdmFsdWUpOwogICAgfSBlbHNlIHsKICAgICAgICBjSlNPTl9BZGROdW1iZXJUb09iamVjdChzX2NvbmZpZywga2V5LCB2YWx1ZSk7CiAgICB9CiAgICAKICAgIHNfZGlydHkgPSB0cnVlOwp9Cgp2b2lkIGNvbmZpZ19tYW5hZ2VyX2dldF9zdHIoY29uc3QgY2hhciAqa2V5LCBjb25zdCBjaGFyICpkZWZhdWx0X3ZhbHVlLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNoYXIgKmJ1ZmZlciwgc2l6ZV90IGJ1ZmZlcl9zaXplKQp7CiAgICBpZiAoIXNfaW5pdGlhbGl6ZWQgfHwgIXNfY29uZmlnIHx8ICFrZXkgfHwgIWJ1ZmZlciB8fCBidWZmZXJfc2l6ZSA9PSAwKSB7CiAgICAgICAgaWYgKGJ1ZmZlciAmJiBidWZmZXJfc2l6ZSA+IDAgJiYgZGVmYXVsdF92YWx1ZSkgewogICAgICAgICAgICBzdHJuY3B5KGJ1ZmZlciwgZGVmYXVsdF92YWx1ZSwgYnVmZmVyX3NpemUgLSAxKTsKICAgICAgICAgICAgYnVmZmVyW2J1ZmZlcl9zaXplIC0gMV0gPSAnXDAnOwogICAgICAgIH0KICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGNKU09OICppdGVtID0gY0pTT05fR2V0T2JqZWN0SXRlbShzX2NvbmZpZywga2V5KTsKICAgIGlmIChjSlNPTl9Jc1N0cmluZyhpdGVtKSAmJiBpdGVtLT52YWx1ZXN0cmluZykgewogICAgICAgIHN0cm5jcHkoYnVmZmVyLCBpdGVtLT52YWx1ZXN0cmluZywgYnVmZmVyX3NpemUgLSAxKTsKICAgICAgICBidWZmZXJbYnVmZmVyX3NpemUgLSAxXSA9ICdcMCc7CiAgICB9IGVsc2UgaWYgKGRlZmF1bHRfdmFsdWUpIHsKICAgICAgICBzdHJuY3B5KGJ1ZmZlciwgZGVmYXVsdF92YWx1ZSwgYnVmZmVyX3NpemUgLSAxKTsKICAgICAgICBidWZmZXJbYnVmZmVyX3NpemUgLSAxXSA9ICdcMCc7CiAgICB9Cn0KCnZvaWQgY29uZmlnX21hbmFnZXJfc2V0X3N0cihjb25zdCBjaGFyICprZXksIGNvbnN0IGNoYXIgKnZhbHVlKQp7CiAgICBpZiAoIXNfaW5pdGlhbGl6ZWQgfHwgIXNfY29uZmlnIHx8ICFrZXkpIHsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGNKU09OICppdGVtID0gY0pTT05fR2V0T2JqZWN0SXRlbShzX2NvbmZpZywga2V5KTsKICAgIGlmIChpdGVtKSB7CiAgICAgICAgaWYgKHZhbHVlKSB7CiAgICAgICAgICAgIGNKU09OX1NldFZhbHVlc3RyaW5nKGl0ZW0sIHZhbHVlKTsKICAgICAgICB9IGVsc2UgewogICAgICAgICAgICBjSlNPTl9SZXBsYWNlSXRlbUluT2JqZWN0KHNfY29uZmlnLCBrZXksIGNKU09OX0NyZWF0ZU51bGwoKSk7CiAgICAgICAgfQogICAgfSBlbHNlIGlmICh2YWx1ZSkgewogICAgICAgIGNKU09OX0FkZFN0cmluZ1RvT2JqZWN0KHNfY29uZmlnLCBrZXksIHZhbHVlKTsKICAgIH0KICAgIAogICAgc19kaXJ0eSA9IHRydWU7Cn0KCmJvb2wgY29uZmlnX21hbmFnZXJfZ2V0X2Jvb2woY29uc3QgY2hhciAqa2V5LCBib29sIGRlZmF1bHRfdmFsdWUpCnsKICAgIGlmICghc19pbml0aWFsaXplZCB8fCAhc19jb25maWcgfHwgIWtleSkgewogICAgICAgIHJldHVybiBkZWZhdWx0X3ZhbHVlOwogICAgfQogICAgCiAgICBjSlNPTiAqaXRlbSA9IGNKU09OX0dldE9iamVjdEl0ZW0oc19jb25maWcsIGtleSk7CiAgICBpZiAoY0pTT05fSXNCb29sKGl0ZW0pKSB7CiAgICAgICAgcmV0dXJuIGNKU09OX0lzVHJ1ZShpdGVtKTsKICAgIH0KICAgIAogICAgcmV0dXJuIGRlZmF1bHRfdmFsdWU7Cn0KCnZvaWQgY29uZmlnX21hbmFnZXJfc2V0X2Jvb2woY29uc3QgY2hhciAqa2V5LCBib29sIHZhbHVlKQp7CiAgICBpZiAoIXNfaW5pdGlhbGl6ZWQgfHwgIXNfY29uZmlnIHx8ICFrZXkpIHsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGNKU09OICppdGVtID0gY0pTT05fR2V0T2JqZWN0SXRlbShzX2NvbmZpZywga2V5KTsKICAgIGlmIChpdGVtKSB7CiAgICAgICAgY0pTT05fUmVwbGFjZUl0ZW1Jbk9iamVjdChzX2NvbmZpZywga2V5LCBjSlNPTl9DcmVhdGVCb29sKHZhbHVlKSk7CiAgICB9IGVsc2UgewogICAgICAgIGNKU09OX0FkZEJvb2xUb09iamVjdChzX2NvbmZpZywga2V5LCB2YWx1ZSk7CiAgICB9CiAgICAKICAgIHNfZGlydHkgPSB0cnVlOwp9Cgp2b2lkIGNvbmZpZ19tYW5hZ2VyX2RlbGV0ZShjb25zdCBjaGFyICprZXkpCnsKICAgIGlmICghc19pbml0aWFsaXplZCB8fCAhc19jb25maWcgfHwgIWtleSkgewogICAgICAgIHJldHVybjsKICAgIH0KICAgIAogICAgY0pTT05fRGVsZXRlSXRlbUZyb21PYmplY3Qoc19jb25maWcsIGtleSk7CiAgICBzX2RpcnR5ID0gdHJ1ZTsKfQoKdm9pZCBjb25maWdfbWFuYWdlcl9yZXNldCh2b2lkKQp7CiAgICBpZiAoIXNfaW5pdGlhbGl6ZWQpIHsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIEVTUF9MT0dJKFRBRywgIlJlc2V0dGluZyBjb25maWcgdG8gZGVmYXVsdHMiKTsKICAgIAogICAgaWYgKHNfY29uZmlnKSB7CiAgICAgICAgY0pTT05fRGVsZXRlKHNfY29uZmlnKTsKICAgIH0KICAgIAogICAgc19jb25maWcgPSBjSlNPTl9DcmVhdGVPYmplY3QoKTsKICAgIHNfZGlydHkgPSB0cnVlOwogICAgCiAgICAvLyDkv53lrZjpu5jorqTphY3nva4KICAgIGNvbmZpZ19tYW5hZ2VyX3NhdmUoKTsKfQo=
+/**
+ * @file config_manager.c
+ * @brief 配置管理器 - JSON配置持久化
+ */
+
+#include "config_manager.h"
+#include "esp_log.h"
+#include "cJSON.h"
+#include <stdio.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <errno.h>
+
+static const char *TAG = "config_manager";
+
+// 配置存储
+static cJSON *s_config = NULL;
+static bool s_initialized = false;
+static bool s_dirty = false;  // 标记是否有未保存的更改
+
+// 创建配置目录
+static esp_err_t ensure_config_dir(void)
+{
+    // 创建 .xiaomiao 目录
+    struct stat st;
+    if (stat("/sdcard/.xiaomiao", &st) != 0) {
+        if (mkdir("/sdcard/.xiaomiao", 0755) != 0) {
+            ESP_LOGE(TAG, "Failed to create config directory: %s", strerror(errno));
+            return ESP_FAIL;
+        }
+        ESP_LOGI(TAG, "Created config directory");
+    }
+    return ESP_OK;
+}
+
+esp_err_t config_manager_init(void)
+{
+    ESP_LOGI(TAG, "Initializing config manager");
+    
+    if (s_initialized) {
+        ESP_LOGW(TAG, "Already initialized");
+        return ESP_OK;
+    }
+    
+    // 确保配置目录存在
+    esp_err_t ret = ensure_config_dir();
+    if (ret != ESP_OK) {
+        return ret;
+    }
+    
+    // 创建空配置对象
+    s_config = cJSON_CreateObject();
+    if (!s_config) {
+        ESP_LOGE(TAG, "Failed to create config object");
+        return ESP_ERR_NO_MEM;
+    }
+    
+    s_initialized = true;
+    
+    // 尝试加载配置
+    ret = config_manager_load();
+    if (ret != ESP_OK) {
+        ESP_LOGW(TAG, "No config file found, using defaults");
+    }
+    
+    ESP_LOGI(TAG, "Config manager initialized");
+    return ESP_OK;
+}
+
+esp_err_t config_manager_load(void)
+{
+    if (!s_initialized) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    ESP_LOGI(TAG, "Loading config from %s", CONFIG_FILE_PATH);
+    
+    FILE *f = fopen(CONFIG_FILE_PATH, "r");
+    if (!f) {
+        ESP_LOGW(TAG, "Config file not found");
+        return ESP_ERR_NOT_FOUND;
+    }
+    
+    // 获取文件大小
+    fseek(f, 0, SEEK_END);
+    long fsize = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    
+    if (fsize <= 0 || fsize > 64 * 1024) {  // 限制64KB
+        ESP_LOGE(TAG, "Invalid config file size: %ld", fsize);
+        fclose(f);
+        return ESP_FAIL;
+    }
+    
+    // 读取文件内容
+    char *json_str = malloc(fsize + 1);
+    if (!json_str) {
+        fclose(f);
+        return ESP_ERR_NO_MEM;
+    }
+    
+    size_t read_size = fread(json_str, 1, fsize, f);
+    fclose(f);
+    
+    if (read_size != (size_t)fsize) {
+        free(json_str);
+        return ESP_FAIL;
+    }
+    json_str[fsize] = '\0';
+    
+    // 解析JSON
+    cJSON *new_config = cJSON_Parse(json_str);
+    free(json_str);
+    
+    if (!new_config) {
+        ESP_LOGE(TAG, "Failed to parse config JSON");
+        return ESP_FAIL;
+    }
+    
+    // 替换旧配置
+    if (s_config) {
+        cJSON_Delete(s_config);
+    }
+    s_config = new_config;
+    
+    ESP_LOGI(TAG, "Config loaded successfully");
+    return ESP_OK;
+}
+
+esp_err_t config_manager_save(void)
+{
+    if (!s_initialized || !s_config) {
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    ESP_LOGI(TAG, "Saving config to %s", CONFIG_FILE_PATH);
+    
+    // 生成JSON字符串
+    char *json_str = cJSON_Print(s_config);
+    if (!json_str) {
+        ESP_LOGE(TAG, "Failed to generate JSON");
+        return ESP_ERR_NO_MEM;
+    }
+    
+    // 写入文件
+    FILE *f = fopen(CONFIG_FILE_PATH, "w");
+    if (!f) {
+        ESP_LOGE(TAG, "Failed to open config file for writing");
+        free(json_str);
+        return ESP_FAIL;
+    }
+    
+    size_t len = strlen(json_str);
+    size_t written = fwrite(json_str, 1, len, f);
+    fclose(f);
+    free(json_str);
+    
+    if (written != len) {
+        ESP_LOGE(TAG, "Failed to write config file");
+        return ESP_FAIL;
+    }
+    
+    s_dirty = false;
+    ESP_LOGI(TAG, "Config saved successfully");
+    return ESP_OK;
+}
+
+int config_manager_get_int(const char *key, int default_value)
+{
+    if (!s_initialized || !s_config || !key) {
+        return default_value;
+    }
+    
+    cJSON *item = cJSON_GetObjectItem(s_config, key);
+    if (cJSON_IsNumber(item)) {
+        return item->valueint;
+    }
+    
+    return default_value;
+}
+
+void config_manager_set_int(const char *key, int value)
+{
+    if (!s_initialized || !s_config || !key) {
+        return;
+    }
+    
+    cJSON *item = cJSON_GetObjectItem(s_config, key);
+    if (item) {
+        cJSON_SetNumberValue(item, value);
+    } else {
+        cJSON_AddNumberToObject(s_config, key, value);
+    }
+    
+    s_dirty = true;
+}
+
+void config_manager_get_str(const char *key, const char *default_value, 
+                            char *buffer, size_t buffer_size)
+{
+    if (!s_initialized || !s_config || !key || !buffer || buffer_size == 0) {
+        if (buffer && buffer_size > 0 && default_value) {
+            strncpy(buffer, default_value, buffer_size - 1);
+            buffer[buffer_size - 1] = '\0';
+        }
+        return;
+    }
+    
+    cJSON *item = cJSON_GetObjectItem(s_config, key);
+    if (cJSON_IsString(item) && item->valuestring) {
+        strncpy(buffer, item->valuestring, buffer_size - 1);
+        buffer[buffer_size - 1] = '\0';
+    } else if (default_value) {
+        strncpy(buffer, default_value, buffer_size - 1);
+        buffer[buffer_size - 1] = '\0';
+    }
+}
+
+void config_manager_set_str(const char *key, const char *value)
+{
+    if (!s_initialized || !s_config || !key) {
+        return;
+    }
+    
+    cJSON *item = cJSON_GetObjectItem(s_config, key);
+    if (item) {
+        if (value) {
+            cJSON_SetValuestring(item, value);
+        } else {
+            cJSON_ReplaceItemInObject(s_config, key, cJSON_CreateNull());
+        }
+    } else if (value) {
+        cJSON_AddStringToObject(s_config, key, value);
+    }
+    
+    s_dirty = true;
+}
+
+bool config_manager_get_bool(const char *key, bool default_value)
+{
+    if (!s_initialized || !s_config || !key) {
+        return default_value;
+    }
+    
+    cJSON *item = cJSON_GetObjectItem(s_config, key);
+    if (cJSON_IsBool(item)) {
+        return cJSON_IsTrue(item);
+    }
+    
+    return default_value;
+}
+
+void config_manager_set_bool(const char *key, bool value)
+{
+    if (!s_initialized || !s_config || !key) {
+        return;
+    }
+    
+    cJSON *item = cJSON_GetObjectItem(s_config, key);
+    if (item) {
+        cJSON_ReplaceItemInObject(s_config, key, cJSON_CreateBool(value));
+    } else {
+        cJSON_AddBoolToObject(s_config, key, value);
+    }
+    
+    s_dirty = true;
+}
+
+void config_manager_delete(const char *key)
+{
+    if (!s_initialized || !s_config || !key) {
+        return;
+    }
+    
+    cJSON_DeleteItemFromObject(s_config, key);
+    s_dirty = true;
+}
+
+void config_manager_reset(void)
+{
+    if (!s_initialized) {
+        return;
+    }
+    
+    ESP_LOGI(TAG, "Resetting config to defaults");
+    
+    if (s_config) {
+        cJSON_Delete(s_config);
+    }
+    
+    s_config = cJSON_CreateObject();
+    s_dirty = true;
+    
+    // 保存默认配置
+    config_manager_save();
+}

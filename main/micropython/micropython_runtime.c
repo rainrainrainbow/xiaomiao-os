@@ -1,1 +1,195 @@
-LyoqCiAqIEBmaWxlIG1pY3JvcHl0aG9uX3J1bnRpbWUuYwogKiBAYnJpZWYgTWljcm9QeXRob27ov5DooYzml7bpm4bmiJDlrp7njrAKICovCgojaW5jbHVkZSAibWljcm9weXRob25fcnVudGltZS5oIgojaW5jbHVkZSAiZXNwX2xvZy5oIgojaW5jbHVkZSAiZnJlZXJ0b3MvRnJlZVJUT1MuaCIKI2luY2x1ZGUgImZyZWVydG9zL3Rhc2suaCIKI2luY2x1ZGUgPHN0ZGlvLmg+CiNpbmNsdWRlIDxzdHJpbmcuaD4KCnN0YXRpYyBjb25zdCBjaGFyICpUQUcgPSAibWljcm9weXRob24iOwoKLy8gTWljcm9QeXRob27ov5DooYzml7bnirbmgIEKc3RhdGljIGJvb2wgc19pc19ydW5uaW5nID0gZmFsc2U7CnN0YXRpYyBib29sIHNfaW5pdGlhbGl6ZWQgPSBmYWxzZTsKc3RhdGljIFRhc2tIYW5kbGVfdCBzX21weV90YXNrX2hhbmRsZSA9IE5VTEw7CnN0YXRpYyBjaGFyIHNfY3VycmVudF9zY3JpcHRbMjU2XSA9IHswfTsKCi8vIE1pY3JvUHl0aG9u5aS05paH5Lu277yI6ZyA6KaB6ZO+5o6lTWljcm9QeXRob27lupPvvIkKLy8gI2luY2x1ZGUgInB5L3J1bnRpbWUuaCIKLy8gI2luY2x1ZGUgInB5L3N0YWNrY3RybC5oIgovLyAjaW5jbHVkZSAicHkvZ2MuaCIKLy8gI2luY2x1ZGUgInB5L21wc3RhdGUuaCIKCi8vIE1pY3JvUHl0aG9u5omn6KGM5Lu75YqhCnN0YXRpYyB2b2lkIG1pY3JvcHl0aG9uX3Rhc2sodm9pZCAqYXJnKQp7CiAgICBjaGFyICpzY3JpcHRfcGF0aCA9IChjaGFyICopYXJnOwogICAgRVNQX0xPR0koVEFHLCAiTWljcm9QeXRob24gdGFzayBzdGFydGVkOiAlcyIsIHNjcmlwdF9wYXRoKTsKICAgIAogICAgLy8gVE9ETzog5a6e6ZmF55qETWljcm9QeXRob27miafooYzpgLvovpEKICAgIC8vIOmcgOimgemTvuaOpU1pY3JvUHl0aG9u5bqT5ZCO5a6e546wCiAgICAvKgogICAgLy8g6K+75Y+W6ISa5pys5paH5Lu2CiAgICBGSUxFICpmID0gZm9wZW4oc2NyaXB0X3BhdGgsICJyIik7CiAgICBpZiAoIWYpIHsKICAgICAgICBFU1BfTE9HRShUQUcsICJGYWlsZWQgdG8gb3BlbiBzY3JpcHQ6ICVzIiwgc2NyaXB0X3BhdGgpOwogICAgICAgIHNfaXNfcnVubmluZyA9IGZhbHNlOwogICAgICAgIHZUYXNrRGVsZXRlKE5VTEwpOwogICAgICAgIHJldHVybjsKICAgIH0KICAgIAogICAgLy8g6I635Y+W5paH5Lu25aSn5bCPCiAgICBmc2VlayhmLCAwLCBTRUVLX0VORCk7CiAgICBsb25nIGZzaXplID0gZnRlbGwoZik7CiAgICBmc2VlayhmLCAwLCBTRUVLX1NFVCk7CiAgICAKICAgIC8vIOivu+WPluiEmuacrOWGheWuuQogICAgY2hhciAqc2NyaXB0ID0gbWFsbG9jKGZzaXplICsgMSk7CiAgICBpZiAoIXNjcmlwdCkgewogICAgICAgIGZjbG9zZShmKTsKICAgICAgICBzX2lzX3J1bm5pbmcgPSBmYWxzZTsKICAgICAgICB2VGFza0RlbGV0ZShOVUxMKTsKICAgICAgICByZXR1cm47CiAgICB9CiAgICAKICAgIGZyZWFkKHNjcmlwdCwgMSwgZnNpemUsIGYpOwogICAgc2NyaXB0W2ZzaXplXSA9IDA7CiAgICBmY2xvc2UoZik7CiAgICAKICAgIC8vIOaJp+ihjOiEmuacrAogICAgbXBfbGV4ZXJfdCAqbGV4ID0gbXBfbGV4ZXJfbmV3X2Zyb21fc3RyX2xlbihNUF9RU1RSXywgc2NyaXB0LCBmc2l6ZSwgMCk7CiAgICBtcF9wYXJzZV90cmVlX3QgcGFyc2VfdHJlZSA9IG1wX3BhcnNlKGxleCwgTVBfUEFSU0VfRklMRV9JTlBVVCk7CiAgICBtcF9vYmpfdCBtb2R1bGVfZnVuID0gbXBfY29tcGlsZSgmcGFyc2VfdHJlZSwgbGV4LT5zb3VyY2VfbmFtZSwgdHJ1ZSk7CiAgICBtcF9jYWxsX2Z1bmN0aW9uXzAobW9kdWxlX2Z1bik7CiAgICAKICAgIGZyZWUoc2NyaXB0KTsKICAgICovCiAgICAKICAgIC8vIOaooeaLn+aJp+ihjO+8iOahqeWunueOsO+8iQogICAgRVNQX0xPR0koVEFHLCAiRXhlY3V0aW5nIHNjcmlwdCAoc3R1Yik6ICVzIiwgc2NyaXB0X3BhdGgpOwogICAgdlRhc2tEZWxheShwZE1TX1RPX1RJQ0tTKDEwMDApKTsgIC8vIOaooeaLn+aJp+ihjOaXtumXtAogICAgCiAgICBzX2lzX3J1bm5pbmcgPSBmYWxzZTsKICAgIHNfbXB5X3Rhc2tfaGFuZGxlID0gTlVMTDsKICAgIHZUYXNrRGVsZXRlKE5VTEwpOwp9Cgplc3BfZXJyX3QgbWljcm9weXRob25fcnVudGltZV9pbml0KHZvaWQpCnsKICAgIEVTUF9MT0dJKFRBRywgIkluaXRpYWxpemluZyBNaWNyb1B5dGhvbiBydW50aW1lIik7CiAgICAKICAgIGlmIChzX2luaXRpYWxpemVkKSB7CiAgICAgICAgRVNQX0xPR1coVEFHLCAiTWljcm9QeXRob24gYWxyZWFkeSBpbml0aWFsaXplZCIpOwogICAgICAgIHJldHVybiBFU1BfT0s7CiAgICB9CiAgICAKICAgIC8vIFRPRE86IOWIneWni+WMlk1pY3JvUHl0aG9u6L+Q6KGM5pe2CiAgICAvLyBtcF9zdGFja19jdHJsX2luaXQoKTsKICAgIC8vIGdjX2luaXQoaGVhcF9zdGFydCwgaGVhcF9lbmQpOwogICAgLy8gbXBfaW5pdCgpOwogICAgCiAgICBzX2luaXRpYWxpemVkID0gdHJ1ZTsKICAgIEVTUF9MT0dJKFRBRywgIk1pY3JvUHl0aG9uIHJ1bnRpbWUgaW5pdGlhbGl6ZWQgKHN0dWIgbW9kZSkiKTsKICAgIHJldHVybiBFU1BfT0s7Cn0KCmVzcF9lcnJfdCBtaWNyb3B5dGhvbl9leGVjdXRlX3NjcmlwdChjb25zdCBjaGFyICpzY3JpcHRfcGF0aCkKewogICAgRVNQX0xPR0koVEFHLCAiRXhlY3V0aW5nIHNjcmlwdDogJXMiLCBzY3JpcHRfcGF0aCk7CiAgICAKICAgIGlmICghc19pbml0aWFsaXplZCkgewogICAgICAgIEVTUF9MT0dFKFRBRywgIk1pY3JvUHl0aG9uIG5vdCBpbml0aWFsaXplZCIpOwogICAgICAgIHJldHVybiBFU1BfRVJSX0lOVkFMSURfU1RBVEU7CiAgICB9CiAgICAKICAgIGlmIChzX2lzX3J1bm5pbmcpIHsKICAgICAgICBFU1BfTE9HVyhUQUcsICJTY3JpcHQgYWxyZWFkeSBydW5uaW5nIik7CiAgICAgICAgcmV0dXJuIEVTUF9FUlJfSU5WQUxJRF9TVEFURTsKICAgIH0KICAgIAogICAgLy8g5L+d5a2Y6ISa5pys6Lev5b6ECiAgICBzdHJuY3B5KHNfY3VycmVudF9zY3JpcHQsIHNjcmlwdF9wYXRoLCBzaXplb2Yoc19jdXJyZW50X3NjcmlwdCkgLSAxKTsKICAgIAogICAgLy8g5Yib5bu65omn6KGM5Lu75YqhCiAgICBCYXNlVHlwZV90IHJldCA9IHhUYXNrQ3JlYXRlKAogICAgICAgIG1pY3JvcHl0aG9uX3Rhc2ssCiAgICAgICAgIm1pY3JvcHl0aG9uIiwKICAgICAgICA4MTkyLCAgLy8g5qCI5aSn5bCPCiAgICAgICAgKHZvaWQgKilzX2N1cnJlbnRfc2NyaXB0LAogICAgICAgIDUsICAgICAvLyDkvJjlhYjnuqcKICAgICAgICAmc19tcHlfdGFza19oYW5kbGUKICAgICk7CiAgICAKICAgIGlmIChyZXQgIT0gcGRQQVNTKSB7CiAgICAgICAgRVNQX0xPR0UoVEFHLCAiRmFpbGVkIHRvIGNyZWF0ZSBNaWNyb1B5dGhvbiB0YXNrIik7CiAgICAgICAgcmV0dXJuIEVTUF9GQUlMOwogICAgfQogICAgCiAgICBzX2lzX3J1bm5pbmcgPSB0cnVlOwogICAgRVNQX0xPR0koVEFHLCAiU2NyaXB0IGV4ZWN1dGlvbiBzdGFydGVkIik7CiAgICByZXR1cm4gRVNQX09LOwp9Cgplc3BfZXJyX3QgbWljcm9weXRob25fc3RvcF9leGVjdXRpb24odm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiU3RvcHBpbmcgc2NyaXB0IGV4ZWN1dGlvbiIpOwogICAgCiAgICBpZiAoIXNfaXNfcnVubmluZykgewogICAgICAgIEVTUF9MT0dXKFRBRywgIk5vIHNjcmlwdCBydW5uaW5nIik7CiAgICAgICAgcmV0dXJuIEVTUF9FUlJfSU5WQUxJRF9TVEFURTsKICAgIH0KICAgIAogICAgLy8gVE9ETzog5YGc5q2iTWljcm9QeXRob27miafooYwKICAgIC8vIG1wX3NjaGVkX3NjaGVkdWxlIEtleWJvYXJkSW50ZXJydXB0CiAgICAKICAgIC8vIOWIoOmZpOS7u+WKoQogICAgaWYgKHNfbXB5X3Rhc2tfaGFuZGxlICE9IE5VTEwpIHsKICAgICAgICB2VGFza0RlbGV0ZShzX21weV90YXNrX2hhbmRsZSk7CiAgICAgICAgc19tcHlfdGFza19oYW5kbGUgPSBOVUxMOwogICAgfQogICAgCiAgICBzX2lzX3J1bm5pbmcgPSBmYWxzZTsKICAgIHNfY3VycmVudF9zY3JpcHRbMF0gPSAwOwogICAgCiAgICBFU1BfTE9HSShUQUcsICJTY3JpcHQgZXhlY3V0aW9uIHN0b3BwZWQiKTsKICAgIHJldHVybiBFU1BfT0s7Cn0KCmJvb2wgbWljcm9weXRob25faXNfcnVubmluZyh2b2lkKQp7CiAgICByZXR1cm4gc19pc19ydW5uaW5nOwp9Cgpjb25zdCBjaGFyICptaWNyb3B5dGhvbl9nZXRfY3VycmVudF9zY3JpcHQodm9pZCkKewogICAgaWYgKHNfY3VycmVudF9zY3JpcHRbMF0gPT0gMCkgewogICAgICAgIHJldHVybiBOVUxMOwogICAgfQogICAgcmV0dXJuIHNfY3VycmVudF9zY3JpcHQ7Cn0KCmVzcF9lcnJfdCBtaWNyb3B5dGhvbl9yZWdpc3Rlcl9oYXJkd2FyZV9hcGkodm9pZCkKewogICAgRVNQX0xPR0koVEFHLCAiUmVnaXN0ZXJpbmcgaGFyZHdhcmUgQVBJIik7CiAgICAKICAgIC8vIFRPRE86IOazqOWGjOehrOS7tkFQSeWIsE1pY3JvUHl0aG9uCiAgICAvLyDkvovlpoLvvJpMQ0TjgIHmjInplK7jgIHonILpuKPlmajjgIHnlLXmsaDnrYkKICAgIAogICAgLy8g56S65L6L77ya5rOo5YaMTENE5qih5Z2XCiAgICAvLyBtcF9vYmpfdCBsY2RfbW9kdWxlID0gbXBfb2JqX25ld19tb2R1bGUoTVBfUVNUUl9sY2QpOwogICAgLy8gbXBfb2JqX2RpY3RfdCAqbGNkX2xvY2FscyA9IG1wX29ial9tb2R1bGVfZ2V0X2dsb2JhbHMobGNkX21vZHVsZSk7CiAgICAvLyBtcF9vYmpfZGljdF9zdG9yZShsY2RfbG9jYWxzLCBNUF9PQkpfTkVXX1FTVFIoTVBfUVNUUl9jbGVhciksIG1wX29ial9sY2RfY2xlYXIpOwogICAgLy8gbXBfb2JqX2RpY3Rfc3RvcmUobGNkX2xvY2FscywgTVBfT0JKX05FV19RU1RSKE1QX1FTVFJfZHJhd19waXhlbCksIG1wX29ial9sY2RfZHJhd19waXhlbCk7CiAgICAKICAgIC8vIOekuuS+i++8muazqOWGjOaMiemUruaooeWdlwogICAgLy8gbXBfb2JqX3QgYnRuX21vZHVsZSA9IG1wX29ial9uZXdfbW9kdWxlKE1QX1FTVFJfYnV0dG9ucyk7CiAgICAvLyBtcF9vYmpfZGljdF90ICpidG5fbG9jYWxzID0gbXBfb2JqX21vZHVsZV9nZXRfZ2xvYmFscyhidG5fbW9kdWxlKTsKICAgIC8vIG1wX29ial9kaWN0X3N0b3JlKGJ0bl9sb2NhbHMsIE1QX09CSl9ORVdfUVNUUihNUF9RU1RSX3BvbGwpLCBtcF9vYmpfYnV0dG9uc19wb2xsKTsKICAgIAogICAgRVNQX0xPR0koVEFHLCAiSGFyZHdhcmUgQVBJIHJlZ2lzdGVyZWQgKHN0dWIpIik7CiAgICByZXR1cm4gRVNQX09LOwp9
+/**
+ * @file micropython_runtime.c
+ * @brief MicroPython运行时集成实现
+ */
+
+#include "micropython_runtime.h"
+#include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include <stdio.h>
+#include <string.h>
+
+static const char *TAG = "micropython";
+
+// MicroPython运行时状态
+static bool s_is_running = false;
+static bool s_initialized = false;
+static TaskHandle_t s_mpy_task_handle = NULL;
+static char s_current_script[256] = {0};
+
+// MicroPython头文件（需要链接MicroPython库）
+// #include "py/runtime.h"
+// #include "py/stackctrl.h"
+// #include "py/gc.h"
+// #include "py/mpstate.h"
+
+// MicroPython执行任务
+static void micropython_task(void *arg)
+{
+    char *script_path = (char *)arg;
+    ESP_LOGI(TAG, "MicroPython task started: %s", script_path);
+    
+    // TODO: 实际的MicroPython执行逻辑
+    // 需要链接MicroPython库后实现
+    /*
+    // 读取脚本文件
+    FILE *f = fopen(script_path, "r");
+    if (!f) {
+        ESP_LOGE(TAG, "Failed to open script: %s", script_path);
+        s_is_running = false;
+        vTaskDelete(NULL);
+        return;
+    }
+    
+    // 获取文件大小
+    fseek(f, 0, SEEK_END);
+    long fsize = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    
+    // 读取脚本内容
+    char *script = malloc(fsize + 1);
+    if (!script) {
+        fclose(f);
+        s_is_running = false;
+        vTaskDelete(NULL);
+        return;
+    }
+    
+    fread(script, 1, fsize, f);
+    script[fsize] = 0;
+    fclose(f);
+    
+    // 执行脚本
+    mp_lexer_t *lex = mp_lexer_new_from_str_len(MP_QSTR_, script, fsize, 0);
+    mp_parse_tree_t parse_tree = mp_parse(lex, MP_PARSE_FILE_INPUT);
+    mp_obj_t module_fun = mp_compile(&parse_tree, lex->source_name, true);
+    mp_call_function_0(module_fun);
+    
+    free(script);
+    */
+    
+    // 模拟执行（桩实现）
+    ESP_LOGI(TAG, "Executing script (stub): %s", script_path);
+    vTaskDelay(pdMS_TO_TICKS(1000));  // 模拟执行时间
+    
+    s_is_running = false;
+    s_mpy_task_handle = NULL;
+    vTaskDelete(NULL);
+}
+
+esp_err_t micropython_runtime_init(void)
+{
+    ESP_LOGI(TAG, "Initializing MicroPython runtime");
+    
+    if (s_initialized) {
+        ESP_LOGW(TAG, "MicroPython already initialized");
+        return ESP_OK;
+    }
+    
+    // TODO: 初始化MicroPython运行时
+    // mp_stack_ctrl_init();
+    // gc_init(heap_start, heap_end);
+    // mp_init();
+    
+    s_initialized = true;
+    ESP_LOGI(TAG, "MicroPython runtime initialized (stub mode)");
+    return ESP_OK;
+}
+
+esp_err_t micropython_execute_script(const char *script_path)
+{
+    ESP_LOGI(TAG, "Executing script: %s", script_path);
+    
+    if (!s_initialized) {
+        ESP_LOGE(TAG, "MicroPython not initialized");
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    if (s_is_running) {
+        ESP_LOGW(TAG, "Script already running");
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    // 保存脚本路径
+    strncpy(s_current_script, script_path, sizeof(s_current_script) - 1);
+    
+    // 创建执行任务
+    BaseType_t ret = xTaskCreate(
+        micropython_task,
+        "micropython",
+        8192,  // 栈大小
+        (void *)s_current_script,
+        5,     // 优先级
+        &s_mpy_task_handle
+    );
+    
+    if (ret != pdPASS) {
+        ESP_LOGE(TAG, "Failed to create MicroPython task");
+        return ESP_FAIL;
+    }
+    
+    s_is_running = true;
+    ESP_LOGI(TAG, "Script execution started");
+    return ESP_OK;
+}
+
+esp_err_t micropython_stop_execution(void)
+{
+    ESP_LOGI(TAG, "Stopping script execution");
+    
+    if (!s_is_running) {
+        ESP_LOGW(TAG, "No script running");
+        return ESP_ERR_INVALID_STATE;
+    }
+    
+    // TODO: 停止MicroPython执行
+    // mp_sched_schedule KeyboardInterrupt
+    
+    // 删除任务
+    if (s_mpy_task_handle != NULL) {
+        vTaskDelete(s_mpy_task_handle);
+        s_mpy_task_handle = NULL;
+    }
+    
+    s_is_running = false;
+    s_current_script[0] = 0;
+    
+    ESP_LOGI(TAG, "Script execution stopped");
+    return ESP_OK;
+}
+
+bool micropython_is_running(void)
+{
+    return s_is_running;
+}
+
+const char *micropython_get_current_script(void)
+{
+    if (s_current_script[0] == 0) {
+        return NULL;
+    }
+    return s_current_script;
+}
+
+esp_err_t micropython_register_hardware_api(void)
+{
+    ESP_LOGI(TAG, "Registering hardware API");
+    
+    // TODO: 注册硬件API到MicroPython
+    // 例如：LCD、按键、蜂鸣器、电池等
+    
+    // 示例：注册LCD模块
+    // mp_obj_t lcd_module = mp_obj_new_module(MP_QSTR_lcd);
+    // mp_obj_dict_t *lcd_locals = mp_obj_module_get_globals(lcd_module);
+    // mp_obj_dict_store(lcd_locals, MP_OBJ_NEW_QSTR(MP_QSTR_clear), mp_obj_lcd_clear);
+    // mp_obj_dict_store(lcd_locals, MP_OBJ_NEW_QSTR(MP_QSTR_draw_pixel), mp_obj_lcd_draw_pixel);
+    
+    // 示例：注册按键模块
+    // mp_obj_t btn_module = mp_obj_new_module(MP_QSTR_buttons);
+    // mp_obj_dict_t *btn_locals = mp_obj_module_get_globals(btn_module);
+    // mp_obj_dict_store(btn_locals, MP_OBJ_NEW_QSTR(MP_QSTR_poll), mp_obj_buttons_poll);
+    
+    ESP_LOGI(TAG, "Hardware API registered (stub)");
+    return ESP_OK;
+}

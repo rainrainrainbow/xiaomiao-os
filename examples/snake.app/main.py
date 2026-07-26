@@ -1,1 +1,163 @@
-IiIiCui0quWQg+ibh+a4uOaIjyAtIFhpYW9NaWFvIE9TCue7j+WFuOi0quWQg+ibh+a4uOaIj++8jOS9v+eUqOaWueWQkemUruaOp+WItgoiIiIKCmltcG9ydCB0aW1lCmltcG9ydCBkaXNwbGF5CmltcG9ydCBidXR0b25zCgojIOWxj+W5leWwuuWvuApTQ1JFRU5fVyA9IDE2MApTQ1JFRU5fSCA9IDEyOAoKIyDmuLjmiI/ljLrln5/vvIjnlZnlh7rnirbmgIHmoI/vvIkKR0FNRV9YID0gMApHQU1FX1kgPSAxMgpHQU1FX1cgPSAxNjAKR0FNRV9IID0gMTE2CgojIOe9keagvOWkp+WwjwpDRUxMX1NJWkUgPSA0CkdSSURfVyA9IEdBTUVfVyAvLyBDRUxMX1NJWkUgICMgNDAKR1JJRF9IID0gR0FNRV9IIC8vIENFTExfU0laRSAgIyAyOQoKIyDpopzoibIKQ09MT1JfQkcgPSAweDAwMDAKQ09MT1JfU05BS0UgPSAweDA3RTAgICAgICAjIOe7v+iJsgpDT0xPUl9IRUFEID0gMHhGRkZGICAgICAgICAjIOeZveiJsgpDT0xPUl9GT09EID0gMHhGODAwICAgICAgICAjIOe6ouiJsgpDT0xPUl9HUklEID0gMHgxMDgyICAgICAgICAjIOa3seeBsApDT0xPUl9URVhUID0gMHhGRkZGCgojIOaWueWQkQpESVJfVVAgPSAoMCwgLTEpCkRJUl9ET1dOID0gKDAsIDEpCkRJUl9MRUZUID0gKC0xLCAwKQpESVJfUklHSFQgPSAoMSwgMCkKCgpjbGFzcyBTbmFrZUdhbWU6CiAgICBkZWYgX19pbml0X18oc2VsZik6CiAgICAgICAgc2VsZi5yZXNldCgpCiAgICAKICAgIGRlZiByZXNldChzZWxmKToKICAgICAgICAiIiLph43nva7muLjmiI8iIiIKICAgICAgICBjeCA9IEdSSURfVyAvLyAyCiAgICAgICAgY3kgPSBHUklEX0ggLy8gMgogICAgICAgIHNlbGYuc25ha2UgPSBbKGN4LCBjeSksIChjeC0xLCBjeSksIChjeC0yLCBjeSldCiAgICAgICAgc2VsZi5kaXJlY3Rpb24gPSBESVJfUklHSFQKICAgICAgICBzZWxmLm5leHRfZGlyZWN0aW9uID0gRElSX1JJR0hUCiAgICAgICAgc2VsZi5mb29kID0gc2VsZi5fc3Bhd25fZm9vZCgpCiAgICAgICAgc2VsZi5zY29yZSA9IDAKICAgICAgICBzZWxmLmdhbWVfb3ZlciA9IEZhbHNlCiAgICAgICAgc2VsZi5zcGVlZCA9IDAuMTUgICMg56eSL+W4pwogICAgCiAgICBkZWYgX3NwYXduX2Zvb2Qoc2VsZik6CiAgICAgICAgIiIi55Sf5oiQ6aOf54mpIiIiCiAgICAgICAgaW1wb3J0IHJhbmRvbQogICAgICAgIHdoaWxlIFRydWU6CiAgICAgICAgICAgIHBvcyA9IChyYW5kb20ucmFuZGludCgwLCBHUklEX1ctMSksIHJhbmRvbS5yYW5kaW50KDAsIEdSSURfSC0xKSkKICAgICAgICAgICAgaWYgcG9zIG5vdCBpbiBzZWxmLnNuYWtlOgogICAgICAgICAgICAgICAgcmV0dXJuIHBvcwogICAgCiAgICBkZWYgaGFuZGxlX2lucHV0KHNlbGYsIGJ0bik6CiAgICAgICAgIiIi5aSE55CG5oyJ6ZSu6L6T5YWlIiIiCiAgICAgICAgaWYgc2VsZi5nYW1lX292ZXI6CiAgICAgICAgICAgIGlmIGJ0biA9PSBidXR0b25zLkE6CiAgICAgICAgICAgICAgICBzZWxmLnJlc2V0KCkKICAgICAgICAgICAgcmV0dXJuCiAgICAgICAgCiAgICAgICAgaWYgYnRuID09IGJ1dHRvbnMuVVAgYW5kIHNlbGYuZGlyZWN0aW9uICE9IERJUl9ET1dOOgogICAgICAgICAgICBzZWxmLm5leHRfZGlyZWN0aW9uID0gRElSX1VQCiAgICAgICAgZWxpZiBidG4gPT0gYnV0dG9ucy5ET1dOIGFuZCBzZWxmLmRpcmVjdGlvbiAhPSBESVJfVVA6CiAgICAgICAgICAgIHNlbGYubmV4dF9kaXJlY3Rpb24gPSBESVJfRE9XTgogICAgICAgIGVsaWYgYnRuID09IGJ1dHRvbnMuTEVGVCBhbmQgc2VsZi5kaXJlY3Rpb24gIT0gRElSX1JJR0hUOgogICAgICAgICAgICBzZWxmLm5leHRfZGlyZWN0aW9uID0gRElSX0xFRlQKICAgICAgICBlbGlmIGJ0biA9PSBidXR0b25zLlJJR0hUIGFuZCBzZWxmLmRpcmVjdGlvbiAhPSBESVJfTEVGVDoKICAgICAgICAgICAgc2VsZi5uZXh0X2RpcmVjdGlvbiA9IERJUl9SSUdIVAogICAgCiAgICBkZWYgdXBkYXRlKHNlbGYpOgogICAgICAgICIiIuabtOaWsOa4uOaIj+eKtuaAgSIiIgogICAgICAgIGlmIHNlbGYuZ2FtZV9vdmVyOgogICAgICAgICAgICByZXR1cm4KICAgICAgICAKICAgICAgICBzZWxmLmRpcmVjdGlvbiA9IHNlbGYubmV4dF9kaXJlY3Rpb24KICAgICAgICAKICAgICAgICAjIOiuoeeul+aWsOWktOmDqOS9jee9rgogICAgICAgIGhlYWQgPSBzZWxmLnNuYWtlWzBdCiAgICAgICAgbmV3X2hlYWQgPSAoaGVhZFswXSArIHNlbGYuZGlyZWN0aW9uWzBdLCBoZWFkWzFdICsgc2VsZi5kaXJlY3Rpb25bMV0pCiAgICAgICAgCiAgICAgICAgIyDnorDmkp7mo4DmtYsgLSDlopnlo4EKICAgICAgICBpZiAobmV3X2hlYWRbMF0gPCAwIG9yIG5ld19oZWFkWzBdID49IEdSSURfVyBvcgogICAgICAgICAgICBuZXdfaGVhZFsxXSA8IDAgb3IgbmV3X2hlYWRbMV0gPj0gR1JJRF9IKToKICAgICAgICAgICAgc2VsZi5nYW1lX292ZXIgPSBUcnVlCiAgICAgICAgICAgIHJldHVybgogICAgICAgIAogICAgICAgICMg56Kw5pKe5qOA5rWLIC0g6Ieq6LqrCiAgICAgICAgaWYgbmV3X2hlYWQgaW4gc2VsZi5zbmFrZToKICAgICAgICAgICAgc2VsZi5nYW1lX292ZXIgPSBUcnVlCiAgICAgICAgICAgIHJldHVybgogICAgICAgIAogICAgICAgICMg56e75Yqo6JuHCiAgICAgICAgc2VsZi5zbmFrZS5pbnNlcnQoMCwgbmV3X2hlYWQpCiAgICAgICAgCiAgICAgICAgIyDlkIPpo5/niakKICAgICAgICBpZiBuZXdfaGVhZCA9PSBzZWxmLmZvb2Q6CiAgICAgICAgICAgIHNlbGYuc2NvcmUgKz0gMTAKICAgICAgICAgICAgc2VsZi5mb29kID0gc2VsZi5fc3Bhd25fZm9vZCgpCiAgICAgICAgICAgICMg5Yqg6YCfCiAgICAgICAgICAgIGlmIHNlbGYuc3BlZWQgPiAwLjA1OgogICAgICAgICAgICAgICAgc2VsZi5zcGVlZCAtPSAwLjAwNQogICAgICAgIGVsc2U6CiAgICAgICAgICAgIHNlbGYuc25ha2UucG9wKCkKICAgIAogICAgZGVmIGRyYXcoc2VsZik6CiAgICAgICAgIiIi57uY5Yi25ri45oiP55S76Z2iIiIiCiAgICAgICAgZGlzcGxheS5jbGVhcihDT0xPUl9CRykKICAgICAgICAKICAgICAgICAjIOe7mOWItumjn+eJqQogICAgICAgIGZ4ID0gR0FNRV9YICsgc2VsZi5mb29kWzBdICogQ0VMTF9TSVpFCiAgICAgICAgZnkgPSBHQU1FX1kgKyBzZWxmLmZvb2RbMV0gKiBDRUxMX1NJWkUKICAgICAgICBkaXNwbGF5LmZpbGxfcmVjdChmeCwgZnksIENFTExfU0laRSwgQ0VMTF9TSVpFLCBDT0xPUl9GT09EKQogICAgICAgIAogICAgICAgICMg57uY5Yi26JuH6LqrCiAgICAgICAgZm9yIGksIChzeCwgc3kpIGluIGVudW1lcmF0ZShzZWxmLnNuYWtlKToKICAgICAgICAgICAgcHggPSBHQU1FX1ggKyBzeCAqIENFTExfU0laRQogICAgICAgICAgICBweSA9IEdBTUVfWSArIHN5ICogQ0VMTF9TSVpFCiAgICAgICAgICAgIGNvbG9yID0gQ09MT1JfSEVBRCBpZiBpID09IDAgZWxzZSBDT0xPUl9TTkFLRQogICAgICAgICAgICBkaXNwbGF5LmZpbGxfcmVjdChweCwgcHksIENFTExfU0laRSwgQ0VMTF9TSVpFLCBjb2xvcikKICAgICAgICAKICAgICAgICAjIOe7mOWItuWIhuaVsAogICAgICAgIGRpc3BsYXkudGV4dChmIlNjb3JlOntzZWxmLnNjb3JlfSIsIDIsIDIsIENPTE9SX1RFWFQsIDEpCiAgICAgICAgCiAgICAgICAgIyDmuLjmiI/nu5PmnZ/nlLvpnaIKICAgICAgICBpZiBzZWxmLmdhbWVfb3ZlcjoKICAgICAgICAgICAgZGlzcGxheS50ZXh0KCJHQU1FIE9WRVIiLCA0MCwgNTAsIENPTE9SX0ZPT0QsIDIpCiAgICAgICAgICAgIGRpc3BsYXkudGV4dChmIlNjb3JlOiB7c2VsZi5zY29yZX0iLCA1MCwgNzAsIENPTE9SX1RFWFQsIDEpCiAgICAgICAgICAgIGRpc3BsYXkudGV4dCgiQTpSZXN0YXJ0IEI6RXhpdCIsIDMwLCA5MCwgQ09MT1JfR1JJRCwgMSkKICAgICAgICAKICAgICAgICBkaXNwbGF5LnJlZnJlc2goKQoKCmRlZiBtYWluKCk6CiAgICAiIiLotKrlkIPom4fkuLvlh73mlbAiIiIKICAgIGdhbWUgPSBTbmFrZUdhbWUoKQogICAgCiAgICB3aGlsZSBUcnVlOgogICAgICAgICMg5aSE55CG5oyJ6ZSuCiAgICAgICAgYnRuID0gYnV0dG9ucy5wb2xsKCkKICAgICAgICBpZiBidG4gPT0gYnV0dG9ucy5COgogICAgICAgICAgICBicmVhawogICAgICAgIGlmIGJ0biBpcyBub3QgTm9uZToKICAgICAgICAgICAgZ2FtZS5oYW5kbGVfaW5wdXQoYnRuKQogICAgICAgIAogICAgICAgICMg5pu05paw5ZKM57uY5Yi2CiAgICAgICAgZ2FtZS51cGRhdGUoKQogICAgICAgIGdhbWUuZHJhdygpCiAgICAgICAgCiAgICAgICAgdGltZS5zbGVlcChnYW1lLnNwZWVkKQoKCmlmIF9fbmFtZV9fID09ICJfX21haW5fXyI6CiAgICBtYWluKCk=
+"""
+贪吃蛇游戏 - XiaoMiao OS
+经典贪吃蛇游戏，使用方向键控制
+"""
+
+import time
+import display
+import buttons
+
+# 屏幕尺寸
+SCREEN_W = 160
+SCREEN_H = 128
+
+# 游戏区域（留出状态栏）
+GAME_X = 0
+GAME_Y = 12
+GAME_W = 160
+GAME_H = 116
+
+# 网格大小
+CELL_SIZE = 4
+GRID_W = GAME_W // CELL_SIZE  # 40
+GRID_H = GAME_H // CELL_SIZE  # 29
+
+# 颜色
+COLOR_BG = 0x0000
+COLOR_SNAKE = 0x07E0      # 绿色
+COLOR_HEAD = 0xFFFF        # 白色
+COLOR_FOOD = 0xF800        # 红色
+COLOR_GRID = 0x1082        # 深灰
+COLOR_TEXT = 0xFFFF
+
+# 方向
+DIR_UP = (0, -1)
+DIR_DOWN = (0, 1)
+DIR_LEFT = (-1, 0)
+DIR_RIGHT = (1, 0)
+
+
+class SnakeGame:
+    def __init__(self):
+        self.reset()
+    
+    def reset(self):
+        """重置游戏"""
+        cx = GRID_W // 2
+        cy = GRID_H // 2
+        self.snake = [(cx, cy), (cx-1, cy), (cx-2, cy)]
+        self.direction = DIR_RIGHT
+        self.next_direction = DIR_RIGHT
+        self.food = self._spawn_food()
+        self.score = 0
+        self.game_over = False
+        self.speed = 0.15  # 秒/帧
+    
+    def _spawn_food(self):
+        """生成食物"""
+        import random
+        while True:
+            pos = (random.randint(0, GRID_W-1), random.randint(0, GRID_H-1))
+            if pos not in self.snake:
+                return pos
+    
+    def handle_input(self, btn):
+        """处理按键输入"""
+        if self.game_over:
+            if btn == buttons.A:
+                self.reset()
+            return
+        
+        if btn == buttons.UP and self.direction != DIR_DOWN:
+            self.next_direction = DIR_UP
+        elif btn == buttons.DOWN and self.direction != DIR_UP:
+            self.next_direction = DIR_DOWN
+        elif btn == buttons.LEFT and self.direction != DIR_RIGHT:
+            self.next_direction = DIR_LEFT
+        elif btn == buttons.RIGHT and self.direction != DIR_LEFT:
+            self.next_direction = DIR_RIGHT
+    
+    def update(self):
+        """更新游戏状态"""
+        if self.game_over:
+            return
+        
+        self.direction = self.next_direction
+        
+        # 计算新头部位置
+        head = self.snake[0]
+        new_head = (head[0] + self.direction[0], head[1] + self.direction[1])
+        
+        # 碰撞检测 - 墙壁
+        if (new_head[0] < 0 or new_head[0] >= GRID_W or
+            new_head[1] < 0 or new_head[1] >= GRID_H):
+            self.game_over = True
+            return
+        
+        # 碰撞检测 - 自身
+        if new_head in self.snake:
+            self.game_over = True
+            return
+        
+        # 移动蛇
+        self.snake.insert(0, new_head)
+        
+        # 吃食物
+        if new_head == self.food:
+            self.score += 10
+            self.food = self._spawn_food()
+            # 加速
+            if self.speed > 0.05:
+                self.speed -= 0.005
+        else:
+            self.snake.pop()
+    
+    def draw(self):
+        """绘制游戏画面"""
+        display.clear(COLOR_BG)
+        
+        # 绘制食物
+        fx = GAME_X + self.food[0] * CELL_SIZE
+        fy = GAME_Y + self.food[1] * CELL_SIZE
+        display.fill_rect(fx, fy, CELL_SIZE, CELL_SIZE, COLOR_FOOD)
+        
+        # 绘制蛇身
+        for i, (sx, sy) in enumerate(self.snake):
+            px = GAME_X + sx * CELL_SIZE
+            py = GAME_Y + sy * CELL_SIZE
+            color = COLOR_HEAD if i == 0 else COLOR_SNAKE
+            display.fill_rect(px, py, CELL_SIZE, CELL_SIZE, color)
+        
+        # 绘制分数
+        display.text(f"Score:{self.score}", 2, 2, COLOR_TEXT, 1)
+        
+        # 游戏结束画面
+        if self.game_over:
+            display.text("GAME OVER", 40, 50, COLOR_FOOD, 2)
+            display.text(f"Score: {self.score}", 50, 70, COLOR_TEXT, 1)
+            display.text("A:Restart B:Exit", 30, 90, COLOR_GRID, 1)
+        
+        display.refresh()
+
+
+def main():
+    """贪吃蛇主函数"""
+    game = SnakeGame()
+    
+    while True:
+        # 处理按键
+        btn = buttons.poll()
+        if btn == buttons.B:
+            break
+        if btn is not None:
+            game.handle_input(btn)
+        
+        # 更新和绘制
+        game.update()
+        game.draw()
+        
+        time.sleep(game.speed)
+
+
+if __name__ == "__main__":
+    main()

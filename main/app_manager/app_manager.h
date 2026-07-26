@@ -1,1 +1,93 @@
-LyoqCiAqIEBmaWxlIGFwcF9tYW5hZ2VyLmgKICogQGJyaWVmIOW6lOeUqOeuoeeQhuWZqCAtIOaJq+aPj1NE5Y2h44CB6Kej5p6QLmFwcOaWh+S7tuOAgeeuoeeQhuW6lOeUqOWIl+ihqAogKi8KCiNpZm5kZWYgQVBQX01BTkFHRVJfSAojZGVmaW5lIEFQUF9NQU5BR0VSX0gKCiNpbmNsdWRlICJlc3BfZXJyLmgiCiNpbmNsdWRlIDxzdGRpbnQuaD4KI2luY2x1ZGUgPHN0ZGJvb2wuaD4KCiNpZmRlZiBfX2NwbHVzcGx1cwpleHRlcm4gIkMiIHsKI2VuZGlmCgovLyDlupTnlKjkv6Hmga/nu5PmnoQKdHlwZWRlZiBzdHJ1Y3QgewogICAgY2hhciBpZFs2NF07ICAgICAgICAgICAvLyDlupTnlKhJRAogICAgY2hhciBuYW1lWzY0XTsgICAgICAgICAvLyDlupTnlKjlkI3np7AKICAgIGNoYXIgdmVyc2lvblsxNl07ICAgICAgLy8g54mI5pys5Y+3CiAgICBjaGFyIGF1dGhvcls2NF07ICAgICAgIC8vIOS9nOiAhQogICAgY2hhciBkZXNjcmlwdGlvblsxMjhdOyAvLyDmj4/ov7AKICAgIGNoYXIgaWNvbl9wYXRoWzEyOF07ICAgLy8g5Zu+5qCH6Lev5b6ECiAgICBjaGFyIG1haW5fc2NyaXB0WzEyOF07IC8vIOS4u+iEmuacrOi3r+W+hAogICAgYm9vbCBpc19zeXN0ZW07ICAgICAgICAvLyDmmK/lkKbns7vnu5/lupTnlKgKICAgIHVpbnQzMl90IHNpemU7ICAgICAgICAgLy8g5bqU55So5aSn5bCP77yI5a2X6IqC77yJCn0gYXBwX2luZm9fdDsKCi8vIOW6lOeUqOWIl+ihqAp0eXBlZGVmIHN0cnVjdCB7CiAgICBhcHBfaW5mb190ICphcHBzOyAgICAgIC8vIOW6lOeUqOaVsOe7hAogICAgdWludDMyX3QgY291bnQ7ICAgICAgICAvLyDlupTnlKjmlbDph48KICAgIHVpbnQzMl90IGNhcGFjaXR5OyAgICAgLy8g5pWw57uE5a656YePCn0gYXBwX2xpc3RfdDsKCi8qKgogKiBAYnJpZWYg5Yid5aeL5YyW5bqU55So566h55CG5ZmoCiAqIEByZXR1cm4gRVNQX09LIOaIkOWKnwogKi8KZXNwX2Vycl90IGFwcF9tYW5hZ2VyX2luaXQodm9pZCk7CgovKioKICogQGJyaWVmIOaJq+aPj1NE5Y2h5LiK55qE5bqU55So77yI57uT5p6c5a2Y5YWl5YWo5bGA5YiX6KGo77yJCiAqIEByZXR1cm4gRVNQX09LIOaIkOWKnwogKi8KZXNwX2Vycl90IGFwcF9tYW5hZ2VyX3NjYW5fYXBwcyh2b2lkKTsKCi8qKgogKiBAYnJpZWYg6Kej5p6QLmFwcOaWh+S7tgogKiBAcGFyYW0gYXBwX3BhdGggLmFwcOaWh+S7tui3r+W+hAogKiBAcGFyYW0gaW5mbyDlupTnlKjkv6Hmga/ovpPlh7oKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgYXBwX21hbmFnZXJfcGFyc2VfYXBwKGNvbnN0IGNoYXIgKmFwcF9wYXRoLCBhcHBfaW5mb190ICppbmZvKTsKCi8qKgogKiBAYnJpZWYg6I635Y+W5bqU55So5YiX6KGoCiAqIEByZXR1cm4g5bqU55So5YiX6KGo5oyH6ZKICiAqLwphcHBfbGlzdF90ICphcHBfbWFuYWdlcl9nZXRfbGlzdCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg5ZCv5Yqo5bqU55SoCiAqIEBwYXJhbSBhcHBfaWQg5bqU55SoSUQKICogQHJldHVybiBFU1BfT0sg5oiQ5YqfCiAqLwplc3BfZXJyX3QgYXBwX21hbmFnZXJfbGF1bmNoX2FwcChjb25zdCBjaGFyICphcHBfaWQpOwoKLyoqCiAqIEBicmllZiDlgZzmraLlupTnlKgKICogQHBhcmFtIGFwcF9pZCDlupTnlKhJRAogKiBAcmV0dXJuIEVTUF9PSyDmiJDlip8KICovCmVzcF9lcnJfdCBhcHBfbWFuYWdlcl9zdG9wX2FwcChjb25zdCBjaGFyICphcHBfaWQpOwoKLyoqCiAqIEBicmllZiDojrflj5blvZPliY3ov5DooYznmoTlupTnlKgKICogQHJldHVybiDlupTnlKhJRO+8jE5VTEzooajnpLrml6DlupTnlKjov5DooYwKICovCmNvbnN0IGNoYXIgKmFwcF9tYW5hZ2VyX2dldF9jdXJyZW50X2FwcCh2b2lkKTsKCi8qKgogKiBAYnJpZWYg6YeK5pS+5bqU55So5YiX6KGoCiAqIEBwYXJhbSBsaXN0IOW6lOeUqOWIl+ihqOaMh+mSiAogKi8Kdm9pZCBhcHBfbWFuYWdlcl9mcmVlX2xpc3QoYXBwX2xpc3RfdCAqbGlzdCk7CgojaWZkZWYgX19jcGx1c3BsdXMKfQojZW5kaWYKCiNlbmRpZiAvKiBBUFBfTUFOQUdFUl9IICov
+/**
+ * @file app_manager.h
+ * @brief 应用管理器 - 扫描SD卡、解析.app文件、管理应用列表
+ */
+
+#ifndef APP_MANAGER_H
+#define APP_MANAGER_H
+
+#include "esp_err.h"
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// 应用信息结构
+typedef struct {
+    char id[64];           // 应用ID
+    char name[64];         // 应用名称
+    char version[16];      // 版本号
+    char author[64];       // 作者
+    char description[128]; // 描述
+    char icon_path[128];   // 图标路径
+    char main_script[128]; // 主脚本路径
+    bool is_system;        // 是否系统应用
+    uint32_t size;         // 应用大小（字节）
+} app_info_t;
+
+// 应用列表
+typedef struct {
+    app_info_t *apps;      // 应用数组
+    uint32_t count;        // 应用数量
+    uint32_t capacity;     // 数组容量
+} app_list_t;
+
+/**
+ * @brief 初始化应用管理器
+ * @return ESP_OK 成功
+ */
+esp_err_t app_manager_init(void);
+
+/**
+ * @brief 扫描SD卡上的应用（结果存入全局列表）
+ * @return ESP_OK 成功
+ */
+esp_err_t app_manager_scan_apps(void);
+
+/**
+ * @brief 解析.app文件
+ * @param app_path .app文件路径
+ * @param info 应用信息输出
+ * @return ESP_OK 成功
+ */
+esp_err_t app_manager_parse_app(const char *app_path, app_info_t *info);
+
+/**
+ * @brief 获取应用列表
+ * @return 应用列表指针
+ */
+app_list_t *app_manager_get_list(void);
+
+/**
+ * @brief 启动应用
+ * @param app_id 应用ID
+ * @return ESP_OK 成功
+ */
+esp_err_t app_manager_launch_app(const char *app_id);
+
+/**
+ * @brief 停止应用
+ * @param app_id 应用ID
+ * @return ESP_OK 成功
+ */
+esp_err_t app_manager_stop_app(const char *app_id);
+
+/**
+ * @brief 获取当前运行的应用
+ * @return 应用ID，NULL表示无应用运行
+ */
+const char *app_manager_get_current_app(void);
+
+/**
+ * @brief 释放应用列表
+ * @param list 应用列表指针
+ */
+void app_manager_free_list(app_list_t *list);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* APP_MANAGER_H */
