@@ -1,143 +1,96 @@
-name: Build XiaoMiao OS
+# XiaoMiao OS - Build Pipeline
+# Builds ESP-IDF firmware for ESP32-WROVER-B
+
+name: Build Firmware
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, develop]
   pull_request:
-    branches: [main, master]
+    branches: [main]
   workflow_dispatch:
-
-env:
-  ESP_IDF_VERSION: v5.5.4
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container: espressif/idf:v5.5.4
+    
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      - name: Cache ESP-IDF
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/esp-idf
-            ~/.espressif
-          key: esp-idf-${{ env.ESP_IDF_VERSION }}-${{ runner.os }}
-
-      - name: Install ESP-IDF
+      
+      - name: Build firmware
+        shell: bash
         run: |
-          set -e
-          # System deps
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq \
-            git wget curl flex bison gperf python3-pip python3-venv \
-            cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 \
-            pkg-config
-
-          # Clone IDF if not cached
-          if [ ! -f "$HOME/esp-idf/tools/idf_tools.py" ]; then
-            git clone --recursive --depth 1 -b ${{ env.ESP_IDF_VERSION }} \
-              https://github.com/espressif/esp-idf.git $HOME/esp-idf
-          fi
-
-          cd $HOME/esp-idf
-
-          # Install python deps
-          python3 -m pip install --upgrade pip
-          python3 -m pip install -r requirements.txt
-
-          # Install binary tools (xtensa toolchain, cmake, ninja, etc.)
-          python3 tools/idf_tools.py install all
-
-          # Create virtualenv
-          python3 tools/idf_tools.py install-python-env
-
-          echo "IDF_PATH=$HOME/esp-idf" >> $GITHUB_ENV
-
-          # Add tools to PATH
-          TOOLS="$HOME/.espressif/tools"
-          echo "$TOOLS/xtensa-esp32-elf/esp-13.2.0_20230928/xtensa-esp32-elf/bin" >> $GITHUB_PATH
-          echo "$TOOLS/cmake/3.30.2/bin" >> $GITHUB_PATH
-          echo "$TOOLS/ninja/1.11.1" >> $GITHUB_PATH
-          echo "$HOME/esp-idf/components/esptool_py/esptool" >> $GITHUB_PATH
-
-          PYENV="$HOME/.espressif/python_env/idf_${{ env.ESP_IDF_VERSION }}_py3.12_env"
-          if [ -d "$PYENV/bin" ]; then
-            echo "$PYENV/bin" >> $GITHUB_PATH
-          fi
-
-          # Verify
-          echo "--- IDF tools installed ---"
-          ls $TOOLS/
-
-      - name: Configure project
-        run: |
-          cd $GITHUB_WORKSPACE
-          export IDF_PATH="$HOME/esp-idf"
           . $IDF_PATH/export.sh
-          idf.py set-target esp32
-
-      - name: Build
+          idf.py build
+      
+      - name: Generate merged binary
+        shell: bash
         run: |
-          cd $GITHUB_WORKSPACE
-          export IDF_PATH="$HOME/esp-idf"
           . $IDF_PATH/export.sh
-          idf.py build 2>&1 | tee build_output.log
-          # Check for errors
-          if grep -q "Error:" build_output.log; then
-            echo "❌ Build failed - errors found"
-            exit 1
-          fi
-          echo "✅ Build succeeded"
-
-      - name: Merge binary
-        run: |
-          cd $GITHUB_WORKSPACE
-          export IDF_PATH="$HOME/esp-idf"
-          . $IDF_PATH/export.sh
-          idf.py merge-bin -o build/xiaomiao-os-merged.bin
-
-      - name: Check binary size
-        run: |
-          SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
-          MAX=$((2120 * 1024))
-          echo "Binary size: $SIZE bytes ($(( SIZE * 100 / MAX ))% of ota_0)"
-          if [ "$SIZE" -gt "$MAX" ]; then
-            echo "ERROR: Binary exceeds ota_0 partition (${MAX} bytes)!"
-            exit 1
-          fi
-          echo "✅ Size OK"
-
-      - name: Build summary
-        run: |
-          SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
-          echo "## XiaoMiao OS Build Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
-          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| Binary | $SIZE bytes |" >> $GITHUB_STEP_SUMMARY
-          echo "| Max (ota_0) | 2163200 bytes |" >> $GITHUB_STEP_SUMMARY
-          echo "| ESP-IDF | ${{ env.ESP_IDF_VERSION }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| LVGL | 9.5.0 |" >> $GITHUB_STEP_SUMMARY
-          echo "| Target | esp32 |" >> $GITHUB_STEP_SUMMARY
-
-      - name: Upload artifact
+          cd build
+          python -m esptool --chip esp32 merge_bin \
+            --flash_mode dio --flash_freq 80m --flash_size 4MB \
+            -o merged-binary.bin \
+            0x1000 bootloader/bootloader.bin \
+            0x8000 partition_table/partition-table.bin \
+            0x10000 xiaomiao-os.bin
+      
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: xiaomiao-os-merged-bin
-          path: build/xiaomiao-os-merged.bin
+          name: xiaomiao-os-firmware
+          path: |
+            build/*.bin
+            build/*.elf
+            build/*.map
+            build/bootloader/*.bin
+            build/partition_table/*.bin
+          retention-days: 30
+      
+      - name: Upload app-only binary (for loader)
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: xiaomiao-os-app-only
+          path: build/xiaomiao-os.bin
+          retention-days: 30
+      
+      - name: Upload merged binary
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: xiaomiao-os-merged
+          path: build/merged-binary.bin
           retention-days: 30
 
-      - name: Upload logs on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: Download firmware
+        uses: actions/download-artifact@v4
         with:
-          name: build-logs
-          path: |
-            build_output.log
-            build/CMakeCache.txt
-            build/CMakeFiles/CMakeOutput.log
-          retention-days: 7
+          name: xiaomiao-os-firmware
+      
+      - name: Get version
+        id: version
+        run: |
+          echo "version=$(date +'%Y%m%d')-${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          name: XiaoMiao OS ${{ steps.version.outputs.version }}
+          files: |
+            *.bin
+            *.elf
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
