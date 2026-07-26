@@ -1,99 +1,97 @@
-# XiaoMiao OS - Build Pipeline
-# Builds ESP-IDF firmware for ESP32-WROVER-B
-
-name: Build Firmware
+name: Build XiaoMiao OS
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, master]
   pull_request:
-    branches: [main]
+    branches: [main, master]
   workflow_dispatch:
 
-permissions:
-  contents: write
+env:
+  ESP_IDF_VERSION: v5.5.4
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    container: espressif/idf:v5.5.4
-    
+    runs-on: ubuntu-22.04
+    container:
+      image: espressif/idf:${{ env.ESP_IDF_VERSION }}
+    permissions:
+      contents: write
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: recursive
-      
-      - name: Build firmware
-        shell: bash
+          fetch-depth: 0
+
+      - name: Verify IDF
         run: |
-          . $IDF_PATH/export.sh
-          idf.py build
-      
-      - name: Generate merged binary
-        shell: bash
+          echo "IDF_PATH=$IDF_PATH"
+          idf.py --version
+
+      - name: Configure project
         run: |
-          . $IDF_PATH/export.sh
-          cd build
-          python -m esptool --chip esp32 merge_bin \
-            --flash_mode dio --flash_freq 80m --flash_size 4MB \
-            -o merged-binary.bin \
-            0x1000 bootloader/bootloader.bin \
-            0x8000 partition_table/partition-table.bin \
-            0x10000 xiaomiao-os.bin
-      
-      - name: Upload build artifacts
+          idf.py set-target esp32
+
+      - name: Build
+        run: |
+          idf.py build 2>&1 | tee build_output.log
+          if grep -qE "Error:|error:" build_output.log; then
+            echo "❌ Build failed"
+            tail -50 build_output.log
+            exit 1
+          fi
+          echo "✅ Build OK"
+
+      - name: Merge binary
+        run: |
+          idf.py merge-bin -o build/xiaomiao-os-merged.bin
+          ls -la build/xiaomiao-os-merged.bin
+
+      - name: Check size
+        run: |
+          SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
+          MAX=$((2120 * 1024))
+          echo "Binary: $SIZE / $MAX bytes ($(( SIZE * 100 / MAX ))%)"
+          if [ "$SIZE" -gt "$MAX" ]; then
+            echo "❌ Too large!"; exit 1
+          fi
+          echo "✅ Size OK"
+
+      - name: Upload artifact (GitHub Actions)
         uses: actions/upload-artifact@v4
         with:
-          name: xiaomiao-os-firmware
-          path: |
-            build/*.bin
-            build/*.elf
-            build/*.map
-            build/bootloader/*.bin
-            build/partition_table/*.bin
-          retention-days: 30
-      
-      - name: Upload app-only binary (for loader)
-        uses: actions/upload-artifact@v4
-        if: success()
-        with:
-          name: xiaomiao-os-app-only
-          path: build/xiaomiao-os.bin
-          retention-days: 30
-      
-      - name: Upload merged binary
-        uses: actions/upload-artifact@v4
-        if: success()
-        with:
-          name: xiaomiao-os-merged
-          path: build/merged-binary.bin
+          name: xiaomiao-os-merged-bin
+          path: build/xiaomiao-os-merged.bin
           retention-days: 30
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    steps:
-      - name: Download firmware
-        uses: actions/download-artifact@v4
-        with:
-          name: xiaomiao-os-firmware
-      
-      - name: Get version
-        id: version
+      - name: Commit binary to repo
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
-          echo "version=$(date +'%Y%m%d')-${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
-      
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+          cp build/xiaomiao-os-merged.bin firmware/xiaomiao-os-merged.bin
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add firmware/xiaomiao-os-merged.bin
+          git diff --staged --quiet || git commit -m "chore: update merged binary [skip ci]"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+
+      - name: Build summary
+        run: |
+          SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
+          echo "## XiaoMiao OS Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------| >> $GITHUB_STEP_SUMMARY"
+          echo "| Binary | $SIZE bytes |" >> $GITHUB_STEP_SUMMARY
+          echo "| ESP-IDF | ${{ env.ESP_IDF_VERSION }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| LVGL | 9.5.0 |" >> $GITHUB_STEP_SUMMARY
+          echo "| Target | esp32 |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: v${{ steps.version.outputs.version }}
-          name: XiaoMiao OS ${{ steps.version.outputs.version }}
-          files: |
-            *.bin
-            *.elf
-          generate_release_notes: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: build-logs
+          path: build_output.log
+          retention-days: 7
