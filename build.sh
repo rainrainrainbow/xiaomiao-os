@@ -1,78 +1,53 @@
 #!/bin/bash
-# XiaoMiao OS 构建脚本
-# 用法: ./build.sh [clean|build|flash|monitor]
-
+# xiaomiao-os 一键构建脚本
 set -e
 
-# 颜色输出
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-NC='\033[0m' # No Color
+echo "=========================================="
+echo "  XiaoMiao OS Build Script"
+echo "=========================================="
 
-echo -e "${GREEN}=================================${NC}"
-echo -e "${GREEN}XiaoMiao OS Build System${NC}"
-echo -e "${GREEN}=================================${NC}"
-
-# 检查ESP-IDF环境
+# 检查 ESP-IDF 环境
 if [ -z "$IDF_PATH" ]; then
-    echo -e "${YELLOW}ESP-IDF 环境未加载，尝试加载...${NC}"
-    if [ -f "$HOME/esp/esp-idf/export.sh" ]; then
-        . $HOME/esp/esp-idf/export.sh
-    elif [ -f "/opt/esp/idf/export.sh" ]; then
-        . /opt/esp/idf/export.sh
-    else
-        echo -e "${RED}错误: 未找到 ESP-IDF${NC}"
-        echo "请先安装 ESP-IDF v5.5.4:"
-        echo "  mkdir -p ~/esp && cd ~/esp"
-        echo "  git clone -b v5.5.4 --recursive https://github.com/espressif/esp-idf.git"
-        echo "  cd esp-idf && ./install.sh esp32"
-        exit 1
-    fi
+    echo "Error: IDF_PATH not set. Run: . \$HOME/esp/esp-idf/export.sh"
+    exit 1
 fi
 
-echo -e "${GREEN}ESP-IDF 版本: ${IDF_VERSION}${NC}"
+echo ""
+echo "[1/4] Cleaning previous build..."
+rm -rf build/
 
-# 设置目标芯片
+echo ""
+echo "[2/4] Configuring project..."
 idf.py set-target esp32
 
-# 处理命令
-case "$1" in
-    clean)
-        echo -e "${YELLOW}清理构建...${NC}"
-        idf.py fullclean
-        ;;
-    build)
-        echo -e "${GREEN}开始构建...${NC}"
-        idf.py build
-        echo -e "${GREEN}构建完成!${NC}"
-        echo -e "固件位置: build/xiaomiao-os.bin"
-        echo -e "合并固件: build/merged.bin"
-        ;;
-    flash)
-        echo -e "${GREEN}烧录固件...${NC}"
-        if [ -z "$2" ]; then
-            echo -e "${YELLOW}用法: ./build.sh flash <端口>${NC}"
-            echo -e "示例: ./build.sh flash /dev/ttyUSB0"
-            exit 1
-        fi
-        idf.py -p $2 flash
-        ;;
-    monitor)
-        echo -e "${GREEN}启动监视器...${NC}"
-        if [ -z "$2" ]; then
-            echo -e "${YELLOW}用法: ./build.sh monitor <端口>${NC}"
-            exit 1
-        fi
-        idf.py -p $2 monitor
-        ;;
-    *)
-        echo -e "${YELLOW}用法: ./build.sh [clean|build|flash|monitor]${NC}"
-        echo ""
-        echo "命令:"
-        echo "  clean    - 清理构建"
-        echo "  build    - 构建固件"
-        echo "  flash    - 烧录固件 (需要指定端口)"
-        echo "  monitor  - 启动串口监视器 (需要指定端口)"
-        ;;
-esac
+echo ""
+echo "[3/4] Building..."
+idf.py build
+
+echo ""
+echo "[4/4] Merging binary..."
+idf.py merge-bin -o build/xiaomiao-os-merged.bin
+
+# 检查大小
+SIZE=$(stat -c%s build/xiaomiao-os-merged.bin 2>/dev/null || stat -f%z build/xiaomiao-os-merged.bin)
+MAX=$((2120 * 1024))  # ota_0 = 2120KB
+
+echo ""
+echo "=========================================="
+echo "  Build Complete!"
+echo "=========================================="
+echo "  Merged bin: build/xiaomiao-os-merged.bin"
+echo "  Size: $SIZE bytes"
+if [ "$SIZE" -gt "$MAX" ]; then
+    echo "  WARNING: Exceeds ota_0 partition size ($MAX bytes)!"
+    exit 1
+else
+    echo "  OK: Within ota_0 partition limit"
+fi
+echo ""
+echo "  Flash command:"
+echo "    esptool.py --chip esp32 -b 460800 write_flash 0x0 build/xiaomiao-os-merged.bin"
+echo ""
+echo "  Or copy to SD card:"
+echo "    cp build/xiaomiao-os-merged.bin /sdcard/boot/xiaomiao-os.bin"
+echo "=========================================="
