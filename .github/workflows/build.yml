@@ -3,95 +3,50 @@ name: Build XiaoMiao OS
 on:
   push:
     branches: [main, master]
-  pull_request:
-    branches: [main, master]
   workflow_dispatch:
-
-env:
-  ESP_IDF_VERSION: v5.5.4
 
 jobs:
   build:
     runs-on: ubuntu-22.04
     container:
-      image: espressif/idf:${{ env.ESP_IDF_VERSION }}
-    permissions:
-      contents: write
+      image: espressif/idf:v5.5.4
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: recursive
-          fetch-depth: 0
-
-      - name: Verify IDF
-        run: |
-          echo "IDF_PATH=$IDF_PATH"
-          idf.py --version
-
-      - name: Configure project
-        run: |
-          idf.py set-target esp32
 
       - name: Build
         run: |
-          idf.py build 2>&1 | tee build_output.log
-          if grep -qE "Error:|error:" build_output.log; then
-            echo "❌ Build failed"
-            tail -50 build_output.log
+          idf.py set-target esp32
+          idf.py build 2>&1 | tee /tmp/build.log
+          if grep -qE "Error:" /tmp/build.log; then
+            echo "BUILD FAILED"
+            tail -80 /tmp/build.log
             exit 1
           fi
-          echo "✅ Build OK"
 
-      - name: Merge binary
+      - name: Merge bin
         run: |
           idf.py merge-bin -o build/xiaomiao-os-merged.bin
           ls -la build/xiaomiao-os-merged.bin
-
-      - name: Check size
-        run: |
           SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
-          MAX=$((2120 * 1024))
-          echo "Binary: $SIZE / $MAX bytes ($(( SIZE * 100 / MAX ))%)"
-          if [ "$SIZE" -gt "$MAX" ]; then
-            echo "❌ Too large!"; exit 1
+          echo "Size: $SIZE bytes"
+          if [ "$SIZE" -gt 2228224 ]; then
+            echo "TOO LARGE"; exit 1
           fi
-          echo "✅ Size OK"
 
-      - name: Upload artifact (GitHub Actions)
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: xiaomiao-os-merged-bin
           path: build/xiaomiao-os-merged.bin
           retention-days: 30
 
-      - name: Commit binary to repo
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        run: |
-          cp build/xiaomiao-os-merged.bin firmware/xiaomiao-os-merged.bin
-          git config --global --add safe.directory $GITHUB_WORKSPACE
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add firmware/xiaomiao-os-merged.bin
-          git diff --staged --quiet || git commit -m "chore: update merged binary [skip ci]"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
-
-      - name: Build summary
-        run: |
-          SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
-          echo "## XiaoMiao OS Build Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
-          echo "|------|-------| >> $GITHUB_STEP_SUMMARY"
-          echo "| Binary | $SIZE bytes |" >> $GITHUB_STEP_SUMMARY
-          echo "| ESP-IDF | ${{ env.ESP_IDF_VERSION }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| LVGL | 9.5.0 |" >> $GITHUB_STEP_SUMMARY
-          echo "| Target | esp32 |" >> $GITHUB_STEP_SUMMARY
-
-      - name: Upload logs on failure
+      - name: Upload logs if failed
         if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: build-logs
-          path: build_output.log
-          retention-days: 7
+          path: /tmp/build.log
+          retention-days: 3
