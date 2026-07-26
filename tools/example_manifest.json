@@ -1,0 +1,11 @@
+{
+  "package_name": "com.xiaomiao.hello",
+  "version": "1.0.0",
+  "display_name": "你好世界",
+  "description": "XiaoMiao OS 示例应用 - 展示全部系统 API",
+  "author": "XiaoMiao Team",
+  "entry_point": "main.py",
+  "icon": "icon.png",
+  "permissions": ["storage", "display", "sensor", "music"],
+  "required_api_version": "1.0"
+}
