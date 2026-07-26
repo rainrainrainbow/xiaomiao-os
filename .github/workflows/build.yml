@@ -12,36 +12,91 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Cache ESP-IDF
+        uses: actions/cache@v4
         with:
-          python-version: '3.12'
+          path: |
+            ~/esp-idf
+            ~/.espressif
+          key: esp-idf-${{ env.ESP_IDF_VERSION }}-${{ runner.os }}
 
       - name: Install ESP-IDF
-        uses: espressif/setup-esp-idf@v1
-        with:
-          version: ${{ env.ESP_IDF_VERSION }}
-          target: esp32
+        run: |
+          set -e
+          # System deps
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            git wget curl flex bison gperf python3-pip python3-venv \
+            cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0 \
+            pkg-config
+
+          # Clone IDF if not cached
+          if [ ! -f "$HOME/esp-idf/tools/idf_tools.py" ]; then
+            git clone --recursive --depth 1 -b ${{ env.ESP_IDF_VERSION }} \
+              https://github.com/espressif/esp-idf.git $HOME/esp-idf
+          fi
+
+          cd $HOME/esp-idf
+
+          # Install python deps
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements.txt
+
+          # Install binary tools (xtensa toolchain, cmake, ninja, etc.)
+          python3 tools/idf_tools.py install all
+
+          # Create virtualenv
+          python3 tools/idf_tools.py install-python-env
+
+          echo "IDF_PATH=$HOME/esp-idf" >> $GITHUB_ENV
+
+          # Add tools to PATH
+          TOOLS="$HOME/.espressif/tools"
+          echo "$TOOLS/xtensa-esp32-elf/esp-13.2.0_20230928/xtensa-esp32-elf/bin" >> $GITHUB_PATH
+          echo "$TOOLS/cmake/3.30.2/bin" >> $GITHUB_PATH
+          echo "$TOOLS/ninja/1.11.1" >> $GITHUB_PATH
+          echo "$HOME/esp-idf/components/esptool_py/esptool" >> $GITHUB_PATH
+
+          PYENV="$HOME/.espressif/python_env/idf_${{ env.ESP_IDF_VERSION }}_py3.12_env"
+          if [ -d "$PYENV/bin" ]; then
+            echo "$PYENV/bin" >> $GITHUB_PATH
+          fi
+
+          # Verify
+          echo "--- IDF tools installed ---"
+          ls $TOOLS/
 
       - name: Configure project
         run: |
+          cd $GITHUB_WORKSPACE
+          export IDF_PATH="$HOME/esp-idf"
           . $IDF_PATH/export.sh
           idf.py set-target esp32
 
       - name: Build
         run: |
+          cd $GITHUB_WORKSPACE
+          export IDF_PATH="$HOME/esp-idf"
           . $IDF_PATH/export.sh
-          idf.py build
+          idf.py build 2>&1 | tee build_output.log
+          # Check for errors
+          if grep -q "Error:" build_output.log; then
+            echo "❌ Build failed - errors found"
+            exit 1
+          fi
+          echo "✅ Build succeeded"
 
       - name: Merge binary
         run: |
+          cd $GITHUB_WORKSPACE
+          export IDF_PATH="$HOME/esp-idf"
           . $IDF_PATH/export.sh
           idf.py merge-bin -o build/xiaomiao-os-merged.bin
 
@@ -49,11 +104,12 @@ jobs:
         run: |
           SIZE=$(stat -c%s build/xiaomiao-os-merged.bin)
           MAX=$((2120 * 1024))
-          echo "Binary size: $SIZE bytes / $MAX max"
+          echo "Binary size: $SIZE bytes ($(( SIZE * 100 / MAX ))% of ota_0)"
           if [ "$SIZE" -gt "$MAX" ]; then
-            echo "ERROR: Binary exceeds ota_0 partition size!"
+            echo "ERROR: Binary exceeds ota_0 partition (${MAX} bytes)!"
             exit 1
           fi
+          echo "✅ Size OK"
 
       - name: Build summary
         run: |
@@ -64,8 +120,9 @@ jobs:
           echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
           echo "| Binary | $SIZE bytes |" >> $GITHUB_STEP_SUMMARY
           echo "| Max (ota_0) | 2163200 bytes |" >> $GITHUB_STEP_SUMMARY
-          echo "| ESP-IDF | v5.5.4 |" >> $GITHUB_STEP_SUMMARY
+          echo "| ESP-IDF | ${{ env.ESP_IDF_VERSION }} |" >> $GITHUB_STEP_SUMMARY
           echo "| LVGL | 9.5.0 |" >> $GITHUB_STEP_SUMMARY
+          echo "| Target | esp32 |" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -80,6 +137,7 @@ jobs:
         with:
           name: build-logs
           path: |
-            build/log/
+            build_output.log
             build/CMakeCache.txt
+            build/CMakeFiles/CMakeOutput.log
           retention-days: 7
