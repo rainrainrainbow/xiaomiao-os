@@ -1,0 +1,7 @@
+{
+    "id": "com.example.hello",
+    "name": "Hello World",
+    "version": "1.0.0",
+    "icon": "👋",
+    "entry": "main.py"
+}

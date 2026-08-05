@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小喵OS UI模拟器 - 160x128</title>
+<style>
+:root{
+  --yellow:#F6D34A; --black:#1B1713; --brown:#5C4220;
+  --red:#E64B3C; --cream:#FFF3B0; --green:#2DD466;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  background:#1a1a2e; color:#eee; font-family:system-ui,sans-serif;
+  display:flex; flex-direction:column; align-items:center;
+  min-height:100vh; padding:12px; gap:10px; user-select:none;
+}
+h1{font-size:15px;color:var(--yellow)}
+.note{font-size:11px;color:#889;text-align:center;max-width:500px}
+/* ── 掌机外壳 ── */
+.console{
+  background:linear-gradient(145deg,#f8da5a,#e0b830);
+  border-radius:24px; padding:18px 16px 12px;
+  box-shadow:0 8px 30px rgba(0,0,0,.6), inset 0 2px 4px rgba(255,255,255,.5);
+}
+.bezel{
+  background:#222; border-radius:8px; padding:10px;
+  box-shadow:inset 0 2px 8px #000;
+}
+/* 160x128 逻辑屏幕 — 真实分辨率模拟:
+   #stage 内部始终按 160x128 CSS px 的真实物理像素布局(1单位=1px=LCD一个物理像素点)，
+   外部 screen-wrap 仅用整数倍 transform:scale 放大显示，不引入任何非整数缩放失真。 */
+.screen-wrap{width:480px;height:384px;overflow:hidden;position:relative}
+#stage{
+  width:160px;height:128px; position:relative; overflow:hidden;
+  background:var(--yellow);
+  transform:scale(3); transform-origin:top left;
+  image-rendering:pixelated;
+  font-family:"MS Gothic","SimSun",monospace;
+  transition:transform .15s;
+}
+#stage.true-size{transform:scale(1)}
+.scale-toggle{
+  position:absolute; z-index:50; top:4px; right:4px;
+  font-size:10px; background:#000a; color:#ffd35a; border:1px solid #ffd35a55;
+  border-radius:4px; padding:3px 7px; cursor:pointer;
+}
+.res-badge{
+  position:absolute; z-index:50; top:4px; left:4px;
+  font-size:9px; background:#000a; color:#8f8; padding:2px 6px; border-radius:4px;
+}
+@media (max-width:540px){
+  .screen-wrap{width:320px;height:256px}
+  #stage{transform:scale(2)}
+  #stage.true-size{transform:scale(1)}
+}
+/* ── 屏幕内通用 ── */
+.scr{
+  position:absolute; inset:0; display:none; flex-direction:column;
+  background:var(--yellow);
+}
+.scr.active{display:flex}
+.scr.slide-in{animation:slidein .18s ease-out}
+@keyframes slidein{from{transform:translateX(160px)}to{transform:translateX(0)}}
+/* 状态栏 12px */
+.statusbar{
+  height:12px; background:var(--brown); color:var(--cream);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 3px; font-size:7px; flex-shrink:0;
+}
+.batt{display:flex;align-items:center;gap:1px}
+.batt-body{
+  width:11px;height:5px;border:1px solid var(--cream);
+  border-radius:1px;position:relative;
+}
+.batt-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green)}
+.batt-fill.low{background:var(--red)}
+.batt-tip{width:1px;height:3px;background:var(--cream)}
+/* ── 桌面: 3列x2行=6图标/屏 ── */
+.grid{
+  flex:1; display:grid;
+  grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr);
+  padding:3px 4px; gap:2px;
+}
+.icon{
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; border-radius:4px; gap:1px;
+}
+.icon .glyph{font-size:20px; line-height:22px}
+.icon .lbl{
+  font-size:7px; color:var(--black); max-width:48px;
+  overflow:hidden; white-space:nowrap; text-align:center;
+}
+.icon.sel{background:var(--brown)}
+.icon.sel .lbl{color:var(--cream)}
+.icon.moving{animation:jig .25s infinite alternate; background:var(--red)}
+@keyframes jig{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+/* dock 圆点 */
+.dock{
+  height:8px; display:flex; align-items:center; justify-content:center;
+  gap:3px; flex-shrink:0;
+}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--brown);opacity:.35}
+.dot.on{opacity:1}
+/* ── 列表页(应用列表/设置) ── */
+.titlebar{
+  height:12px; background:var(--brown); color:var(--cream);
+  font-size:7px; display:flex; align-items:center;
+  padding:0 4px; flex-shrink:0;
+}
+.list{flex:1; overflow:hidden; padding:1px 2px}
+.li{
+  height:14px; display:flex; align-items:center; gap:3px;
+  padding:0 3px; font-size:7px; color:var(--black);
+  border-radius:2px; justify-content:space-between;
+}
+.li .l{display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap}
+.li .r{font-size:6px;opacity:.8}
+.li.sel{background:var(--brown);color:var(--cream)}
+/* ── 运行中的APP ── */
+.appfull{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.appfull .big{font-size:24px}
+.appfull .nm{font-size:8px;color:var(--black)}
+.appfull .st{font-size:6px;color:var(--brown)}
+/* ── 积木编辑器 ── */
+.ed-split{flex:1;display:flex;overflow:hidden}
+.ed-pane{flex:1;display:flex;flex-direction:column;overflow:hidden;padding:1px}
+.ed-pane h4{
+  font-size:6px;background:var(--cream);color:var(--brown);
+  text-align:center;flex-shrink:0;border-radius:2px;
+}
+.ed-pane.on h4{background:var(--brown);color:var(--cream)}
+.ed-item{
+  font-size:6px;height:10px;display:flex;align-items:center;
+  padding:0 2px;color:var(--black);border-radius:1px;
+  white-space:nowrap;overflow:hidden;
+}
+.ed-item.blk{background:#e8c33f;margin:1px 0}
+.ed-item.sel{background:var(--brown);color:var(--cream)}
+/* toast */
+#toast{
+  position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+  background:var(--black); color:var(--cream); font-size:6px;
+  padding:2px 6px; border-radius:4px; opacity:0; transition:opacity .2s;
+  pointer-events:none; z-index:99; white-space:nowrap;
+}
+#toast.show{opacity:.92}
+/* ── 实体按键区 ── */
+.pads{display:flex;align-items:center;gap:40px;margin-top:14px;justify-content:center}
+.dpad{position:relative;width:96px;height:96px}
+.k{
+  position:absolute;width:32px;height:32px;background:#3a2c12;
+  border-radius:6px;color:var(--cream);font-size:13px;border:none;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 0 #241a08; cursor:pointer;
+}
+.k:active,.k.pressed{transform:translateY(2px);box-shadow:0 1px 0 #241a08}
+.k-up{left:32px;top:0}.k-down{left:32px;bottom:0}
+.k-left{left:0;top:32px}.k-right{right:0;top:32px}
+.ab{display:flex;gap:14px}
+.k-a,.k-b{
+  position:static;width:40px;height:40px;border-radius:50%;
+  font-size:14px;font-weight:bold;
+}
+.k-a{background:var(--red)}
+.k-b{background:#3a5c8a}
+.keymap{font-size:10px;color:#778;text-align:center;line-height:1.7}
+kbd{background:#333;padding:1px 5px;border-radius:3px;font-size:10px;color:#ffd35a}
+</style>
+</head>
+<body>
+<h1>小喵OS 桌面模拟器 (160×128)</h1>
+<div class="note">键盘: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>方向 <kbd>J</kbd>=A确认(长按=整理图标) <kbd>K</kbd>=B返回 · 也可点击下方虚拟按键</div>
+
+<div class="console">
+  <div class="bezel">
+    <div class="screen-wrap">
+      <span class="res-badge" id="res-badge">160×128 @3x</span>
+      <span class="scale-toggle" id="scale-toggle">1:1真实尺寸</span>
+      <div id="stage">
+
+        <!-- ═══ 桌面 ═══ -->
+        <div class="scr active" id="scr-home">
+          <div class="statusbar">
+            <span id="sb-time">12:00</span>
+            <span style="font-size:6px">小喵OS</span>
+            <span class="batt">
+              <span class="batt-body"><span class="batt-fill" id="sb-batt" style="width:80%"></span></span>
+              <span class="batt-tip"></span>
+            </span>
+          </div>
+          <div class="grid" id="home-grid"></div>
+          <div class="dock" id="home-dock"></div>
+        </div>
+
+        <!-- ═══ 应用列表 ═══ -->
+        <div class="scr" id="scr-apps">
+          <div class="titlebar">📦 全部应用</div>
+          <div class="list" id="apps-list"></div>
+        </div>
+
+        <!-- ═══ 设置 ═══ -->
+        <div class="scr" id="scr-settings">
+          <div class="titlebar">⚙ 设置</div>
+          <div class="list" id="set-list"></div>
+        </div>
+
+        <!-- ═══ 运行中App ═══ -->
+        <div class="scr" id="scr-app">
+          <div class="statusbar">
+            <span id="app-title">App</span>
+            <span class="batt">
+              <span class="batt-body"><span class="batt-fill" style="width:80%"></span></span>
+              <span class="batt-tip"></span>
+            </span>
+          </div>
+          <div class="appfull">
+            <div class="big" id="app-glyph">🎮</div>
+            <div class="nm" id="app-name">应用</div>
+            <div class="st" id="app-status">MicroPython VM 运行中…</div>
+          </div>
+        </div>
+
+        <!-- ═══ 积木编辑器 ═══ -->
+        <div class="scr" id="scr-editor">
+          <div class="titlebar">🧩 积木编辑器</div>
+          <div class="ed-split">
+            <div class="ed-pane on" id="ed-blocks">
+              <h4>积木库</h4>
+              <div id="ed-block-list"></div>
+            </div>
+            <div class="ed-pane" id="ed-prog">
+              <h4>程序 main.py</h4>
+              <div id="ed-prog-list"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ 商店 ═══ -->
+        <div class="scr" id="scr-store">
+          <div class="titlebar">🛒 应用商店</div>
+          <div class="list" id="store-list"></div>
+        </div>
+
+        <div id="toast"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 虚拟按键 -->
+  <div class="pads">
+    <div class="dpad">
+      <button class="k k-up" data-k="up">▲</button>
+      <button class="k k-left" data-k="left">◀</button>
+      <button class="k k-right" data-k="right">▶</button>
+      <button class="k k-down" data-k="down">▼</button>
+    </div>
+    <div class="ab">
+      <button class="k k-b" data-k="b">B</button>
+      <button class="k k-a" data-k="a">A</button>
+    </div>
+  </div>
+</div>
+
+<div class="keymap">
+  桌面: 方向键移动焦点 → A打开 → B无操作 · 长按A(360ms)进入图标整理模式(方向键交换位置,A/B确认)<br>
+  应用内: B返回桌面 · 设置里A键切换选项 · 编辑器: 左右切换积木库/程序区
+</div>
+
+<script>
+/* ═══════════ 数据模型 ═══════════ */
+/* 与固件端一致: 每屏 4列x3行=12图标, 支持多页 */
+let apps = [
+  {id:"sys.applist",  glyph:"📦", name:"应用",   sys:true, open:()=>show("scr-apps")},
+  {id:"sys.settings", glyph:"⚙️", name:"设置",   sys:true, open:()=>show("scr-settings")},
+  {id:"sys.editor",   glyph:"🧩", name:"积木",   sys:true, open:()=>show("scr-editor")},
+  {id:"sys.store",    glyph:"🛒", name:"商店",   sys:true, open:()=>show("scr-store")},
+  {id:"com.demo.snake",  glyph:"🐍", name:"贪吃蛇", ver:"1.0.2"},
+  {id:"com.demo.music",  glyph:"🎵", name:"音乐",  ver:"0.9.0"},
+  {id:"com.demo.paint",  glyph:"🎨", name:"画板",  ver:"1.1.0"},
+  {id:"com.demo.clock",  glyph:"⏰", name:"时钟",  ver:"2.0.0"},
+  {id:"com.demo.weather",glyph:"🌤️", name:"天气",  ver:"1.0.0"},
+  {id:"com.demo.calc",   glyph:"🔢", name:"计算器",ver:"1.0.1"},
+  {id:"com.demo.files",  glyph:"📁", name:"文件",  ver:"1.2.0"},
+  {id:"com.demo.hello",  glyph:"👋", name:"Hello", ver:"0.1.0"},
+  {id:"com.demo.pixel",  glyph:"🕹️", name:"像素鸟", ver:"1.3.0"},
+  {id:"com.demo.timer",  glyph:"⏱️", name:"秒表",  ver:"1.0.0"},
+];
+const COLS = 3;
+const PAGE = 6; /* 3列x2行/屏 */
+let st = {
+  screen:"scr-home", page:0, sel:0,
+  moveMode:false, moveFrom:-1,
+  listSel:0, setSel:0, storeSel:0,
+  edPane:0, edBlockSel:0, edProgSel:0,
+  battery:0.80, volume:60, bright:80, wifi:true,
+};
+let settings = [
+  {k:"Wi-Fi",     get:()=>st.wifi?"已连接":"关闭", act:()=>{st.wifi=!st.wifi}},
+  {k:"音量",      get:()=>st.volume+"%", act:()=>{st.volume=(st.volume+20)%120}},
+  {k:"屏幕亮度",  get:()=>st.bright+"%", act:()=>{st.bright=(st.bright+20)%120||20}},
+  {k:"壁纸",      get:()=>"默认黄", act:()=>toast("壁纸: 需SD卡图片")},
+  {k:"语言",      get:()=>"简体中文", act:()=>toast("暂只支持中文")},
+  {k:"电池",      get:()=>(3.3+st.battery*0.9).toFixed(2)+"V", act:()=>toast("GPIO34 ADC实测")},
+  {k:"关于",      get:()=>"v0.1.0", act:()=>toast("小喵OS v0.1.0 · ESP32")},
+];
+let storeApps = [
+  {id:"com.store.tetris", glyph:"🧱", name:"俄罗斯方块", size:"48KB", installed:false},
+  {id:"com.store.chess",  glyph:"♟️", name:"中国象棋",  size:"96KB", installed:false},
+  {id:"com.store.reader", glyph:"📖", name:"电子书",    size:"64KB", installed:false},
+  {id:"com.store.radio",  glyph:"📻", name:"网络电台",  size:"32KB", installed:false},
+];
+let edBlocks = [
+  "🖥 显示文字(x,y,内容)", "🎨 清屏(颜色)", "⏱ 延时(毫秒)",
+  "🔁 循环(次数)", "❓ 如果(条件)", "🔊 蜂鸣(频率,时长)",
+  "🎮 读按键()", "💡 LED(开/关)", "📐 陀螺仪读取()", "🌐 HTTP请求(url)",
+];
+let edProg = [
+  '显示文字(10,10,"你好")', '延时(1000)', '清屏(黑)',
+];
+
+/* ═══════════ 工具 ═══════════ */
+const $ = id => document.getElementById(id);
+function toast(msg, ms=1400){
+  const t=$("toast"); t.textContent=msg; t.classList.add("show");
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),ms);
+}
+function show(id){
+  document.querySelectorAll(".scr").forEach(s=>s.classList.remove("active","slide-in"));
+  const s=$(id); s.classList.add("active","slide-in");
+  st.screen=id; render();
+}
+
+/* ═══════════ 渲染 ═══════════ */
+function renderHome(){
+  const grid=$("home-grid"); grid.innerHTML="";
+  const start=st.page*PAGE;
+  const pageApps=apps.slice(start,start+PAGE);
+  pageApps.forEach((a,i)=>{
+    const d=document.createElement("div");
+    d.className="icon"+(i===st.sel?" sel":"")+
+      (st.moveMode&&i===st.sel?" moving":"");
+    d.innerHTML=`<div class="glyph">${a.glyph}</div><div class="lbl">${a.name}</div>`;
+    d.onclick=()=>{st.sel=i;render();openSel();};
+    grid.appendChild(d);
+  });
+  const pages=Math.max(1,Math.ceil(apps.length/PAGE));
+  const dock=$("home-dock"); dock.innerHTML="";
+  for(let p=0;p<pages;p++){
+    const dot=document.createElement("span");
+    dot.className="dot"+(p===st.page?" on":"");
+    dock.appendChild(dot);
+  }
+}
+function renderApps(){
+  const l=$("apps-list"); l.innerHTML="";
+  const inst=apps.filter(a=>!a.sys);
+  inst.forEach((a,i)=>{
+    const d=document.createElement("div");
+    d.className="li"+(i===st.listSel?" sel":"");
+    d.innerHTML=`<span class="l">${a.glyph} ${a.name}</span><span class="r">${a.ver||""}</span>`;
+    d.onclick=()=>{st.listSel=i;render();launchApp(a);};
+    l.appendChild(d);
+  });
+}
+function renderSettings(){
+  const l=$("set-list"); l.innerHTML="";
+  settings.forEach((s,i)=>{
+    const d=document.createElement("div");
+    d.className="li"+(i===st.setSel?" sel":"");
+    d.innerHTML=`<span class="l">${s.k}</span><span class="r">${s.get()} ›</span>`;
+    d.onclick=()=>{st.setSel=i;s.act();render();};
+    l.appendChild(d);
+  });
+}
+function renderStore(){
+  const l=$("store-list"); l.innerHTML="";
+  storeApps.forEach((a,i)=>{
+    const d=document.createElement("div");
+    d.className="li"+(i===st.storeSel?" sel":"");
+    d.innerHTML=`<span class="l">${a.glyph} ${a.name}</span>
+      <span class="r">${a.installed?"✓已装":a.size+" ⇩"}</span>`;
+    d.onclick=()=>{st.storeSel=i;render();storeInstall();};
+    l.appendChild(d);
+  });
+}
+function renderEditor(){
+  $("ed-blocks").classList.toggle("on",st.edPane===0);
+  $("ed-prog").classList.toggle("on",st.edPane===1);
+  const bl=$("ed-block-list"); bl.innerHTML="";
+  edBlocks.slice(0,9).forEach((b,i)=>{
+    const d=document.createElement("div");
+    d.className="ed-item blk"+(st.edPane===0&&i===st.edBlockSel?" sel":"");
+    d.textContent=b;
+    bl.appendChild(d);
+  });
+  const pl=$("ed-prog-list"); pl.innerHTML="";
+  edProg.forEach((p,i)=>{
+    const d=document.createElement("div");
+    d.className="ed-item"+(st.edPane===1&&i===st.edProgSel?" sel":"");
+    d.textContent=(i+1)+". "+p;
+    pl.appendChild(d);
+  });
+}
+function render(){
+  if(st.screen==="scr-home")renderHome();
+  else if(st.screen==="scr-apps")renderApps();
+  else if(st.screen==="scr-settings")renderSettings();
+  else if(st.screen==="scr-store")renderStore();
+  else if(st.screen==="scr-editor")renderEditor();
+}
+
+/* ═══════════ 动作 ═══════════ */
+function pageApps(){ return apps.slice(st.page*PAGE, st.page*PAGE+PAGE); }
+function launchApp(a){
+  if(a.sys){ a.open(); return; }
+  $("app-title").textContent=a.name;
+  $("app-glyph").textContent=a.glyph;
+  $("app-name").textContent=a.name+" v"+(a.ver||"1.0");
+  $("app-status").textContent="解压 "+a.id+".app → MicroPython VM 运行中…";
+  show("scr-app");
+  toast("启动 "+a.id);
+}
+function openSel(){
+  const a=pageApps()[st.sel];
+  if(a) launchApp(a);
+}
+function storeInstall(){
+  const a=storeApps[st.storeSel];
+  if(a.installed){ toast(a.name+" 已安装"); return; }
+  toast("下载 "+a.name+" ("+a.size+")…");
+  setTimeout(()=>{
+    a.installed=true;
+    apps.push({id:a.id, glyph:a.glyph, name:a.name, ver:"1.0.0"});
+    toast("✓ "+a.name+" 安装完成");
+    render();
+  },900);
+}
+function editorGenApp(){
+  toast("生成 com.user.myapp.app ("+edProg.length+"条积木→main.py) ✓",2200);
+}
+
+/* ═══════════ 按键处理 ═══════════ */
+/* 模拟固件行为: 长按A 360ms 触发长按事件(与LVGL long_press_time一致) */
+function handleKey(k){
+  const s=st.screen;
+  if(s==="scr-home"){
+if(st.moveMode){ /* 整理模式: 方向键交换图标 */
+      const base=st.page*PAGE;
+      let target=st.sel;
+      if(k==="left")  target=st.sel-1;
+      if(k==="right") target=st.sel+1;
+      if(k==="up")    target=st.sel-COLS;
+      if(k==="down")  target=st.sel+COLS;
+      if(k==="a"||k==="b"){ st.moveMode=false; toast("排序已保存 (desktop.json)"); render(); return; }
+      const cnt=pageApps().length;
+      if(target>=0&&target<cnt&&target!==st.sel){
+        [apps[base+st.sel],apps[base+target]]=[apps[base+target],apps[base+st.sel]];
+        st.sel=target;
+      }
+      render(); return;
+    }
+    const cnt=pageApps().length;
+    const pages=Math.ceil(apps.length/PAGE);
+    if(k==="left"){
+      if(st.sel%COLS===0 && st.page>0){ st.page--; st.sel+=COLS-1; }
+      else if(st.sel%COLS>0) st.sel--;
+    }
+    if(k==="right"){
+      if(st.sel%COLS===COLS-1 && st.page<pages-1){ st.page++; st.sel-=COLS-1; }
+      else if(st.sel%COLS<COLS-1 && st.sel+1<cnt) st.sel++;
+    }
+    if(k==="up"   && st.sel>=COLS) st.sel-=COLS;
+    if(k==="down" && st.sel+COLS<cnt) st.sel+=COLS;
+    if(k==="a") { openSel(); return; }
+    render();
+  }
+  else if(s==="scr-apps"){
+    const inst=apps.filter(a=>!a.sys);
+    if(k==="up")   st.listSel=Math.max(0,st.listSel-1);
+    if(k==="down") st.listSel=Math.min(inst.length-1,st.listSel+1);
+    if(k==="a")    { launchApp(inst[st.listSel]); return; }
+    if(k==="b")    { show("scr-home"); return; }
+    render();
+  }
+  else if(s==="scr-settings"){
+    if(k==="up")   st.setSel=Math.max(0,st.setSel-1);
+    if(k==="down") st.setSel=Math.min(settings.length-1,st.setSel+1);
+    if(k==="a")    settings[st.setSel].act();
+    if(k==="b")    { show("scr-home"); return; }
+    render();
+  }
+  else if(s==="scr-store"){
+    if(k==="up")   st.storeSel=Math.max(0,st.storeSel-1);
+    if(k==="down") st.storeSel=Math.min(storeApps.length-1,st.storeSel+1);
+    if(k==="a")    { storeInstall(); return; }
+    if(k==="b")    { show("scr-home"); return; }
+    render();
+  }
+  else if(s==="scr-editor"){
+    if(k==="left")  st.edPane=0;
+    if(k==="right") st.edPane=1;
+    if(st.edPane===0){
+      if(k==="up")   st.edBlockSel=Math.max(0,st.edBlockSel-1);
+      if(k==="down") st.edBlockSel=Math.min(8,st.edBlockSel+1);
+      if(k==="a"){ /* 选积木→填参数→插入 */
+        const b=edBlocks[st.edBlockSel];
+        edProg.push(b.replace(/^[^ ]+ /,""));
+        toast("已插入: "+b.substring(0,14)+"…");
+      }
+    }else{
+      if(k==="up")   st.edProgSel=Math.max(0,st.edProgSel-1);
+      if(k==="down") st.edProgSel=Math.min(edProg.length-1,st.edProgSel+1);
+      if(k==="a"&&edProg.length){ edProg.splice(st.edProgSel,1);
+        st.edProgSel=Math.max(0,st.edProgSel-1); toast("删除该行"); }
+    }
+    if(k==="b"){ show("scr-home"); return; }
+    render();
+  }
+  else if(s==="scr-app"){
+    if(k==="b"){ toast("VM结束, 释放内存"); show("scr-home"); return; }
+  }
+}
+function handleLongA(){
+  if(st.screen==="scr-home"&&!st.moveMode){
+    st.moveMode=true; toast("进入图标整理模式"); render();
+  } else if(st.screen==="scr-editor"){
+    editorGenApp();
+  }
+}
+
+/* ── 键盘/虚拟按键统一入口(带长按检测) ── */
+const KEYMAP={w:"up",s:"down",a:"left",d:"right",j:"a",k:"b",
+  ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right",Enter:"a",Escape:"b"};
+let aDownTime=0, aLongFired=false, aTimer=null;
+function press(k){
+  if(k==="a"){
+    aDownTime=Date.now(); aLongFired=false;
+    aTimer=setTimeout(()=>{aLongFired=true;handleLongA();},360);
+  }else{
+    handleKey(k);
+  }
+}
+function release(k){
+  if(k==="a"){
+    clearTimeout(aTimer);
+    if(!aLongFired) handleKey("a");
+  }
+}
+document.addEventListener("keydown",e=>{
+  if(e.repeat)return;
+  const k=KEYMAP[e.key.toLowerCase()]||KEYMAP[e.key];
+  if(!k)return; e.preventDefault(); press(k);
+  document.querySelector(`.k[data-k="${k}"]`)?.classList.add("pressed");
+});
+document.addEventListener("keyup",e=>{
+  const k=KEYMAP[e.key.toLowerCase()]||KEYMAP[e.key];
+  if(!k)return; release(k);
+  document.querySelector(`.k[data-k="${k}"]`)?.classList.remove("pressed");
+});
+document.querySelectorAll(".k[data-k]").forEach(btn=>{
+  const k=btn.dataset.k;
+  const dn=e=>{e.preventDefault();press(k);};
+  const up=e=>{e.preventDefault();release(k);};
+  btn.addEventListener("pointerdown",dn);
+  btn.addEventListener("pointerup",up);
+  btn.addEventListener("pointerleave",()=>{if(k==="a")clearTimeout(aTimer);});
+});
+
+/* ── 分辨率切换: 3倍放大预览 <-> 1:1真实物理像素 ── */
+let trueSize=false;
+$("scale-toggle").addEventListener("click",()=>{
+  trueSize=!trueSize;
+  $("stage").classList.toggle("true-size",trueSize);
+  $("scale-toggle").textContent = trueSize ? "3倍放大预览" : "1:1真实尺寸";
+  $("res-badge").textContent = trueSize ? "160×128 @1x(真实)" : "160×128 @3x";
+});
+
+/* ── 状态栏时钟 & 电量模拟 ── */
+function tickStatus(){
+  const d=new Date();
+  $("sb-time").textContent=
+    String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+  st.battery=Math.max(0.05,st.battery-0.0005);
+  const f=$("sb-batt");
+  f.style.width=(st.battery*100)+"%";
+  f.classList.toggle("low",st.battery<0.2);
+}
+setInterval(tickStatus,1000); tickStatus();
+render();
+</script>
+</body>
+</html>
