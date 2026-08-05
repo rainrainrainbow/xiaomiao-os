@@ -16,7 +16,6 @@ idf_component_register(SRCS "main.c"
                                      esp_driver_spi
                                      esp_driver_ledc
                                      esp_driver_i2c
-                                     esp_driver_adc
                                      esp_hw_support
                                      heap
                                      spi_flash
