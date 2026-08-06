@@ -33,5 +33,6 @@ PRIV_REQUIRES esp_lcd
                                      "../components/micropython/micropython/py"
 "../components/micropython/micropython/ports/esp32"
                                       "../components/micropython/micropython/ports/esp32/boards/ESP32_GENERIC"
-                                      "../components/micropython/micropython/py/genhdr")
+                                      "../components/micropython/micropython/py/genhdr"
+                                      "../components/micropython/modules/xiaomiao")
 target_link_libraries(${COMPONENT_LIB} PRIVATE m)

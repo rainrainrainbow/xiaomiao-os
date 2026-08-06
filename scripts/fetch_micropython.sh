@@ -60,10 +60,8 @@ if [ ! -f py/genhdr/qstrdefs.generated.h ] || [ ! -s py/genhdr/qstrdefs.generate
     echo "Creating minimal qstrdefs.generated.h..."
     echo "#ifndef MICROPY_INCLUDED_PY_GENHDR_QSTRDEFS_GENERATED_H" > py/genhdr/qstrdefs.generated.h
     echo "#define MICROPY_INCLUDED_PY_GENHDR_QSTRDEFS_GENERATED_H" >> py/genhdr/qstrdefs.generated.h
-    # Core qstrs needed by MicroPython
+    # Minimal header - just enough to compile
     echo "Q()" >> py/genhdr/qstrdefs.generated.h
-    echo "Q(/)">> py/genhdr/qstrdefs.generated.h
-    echo "Q(\\n)">> py/genhdr/qstrdefs.generated.h
     echo "#endif" >> py/genhdr/qstrdefs.generated.h
 fi
 
