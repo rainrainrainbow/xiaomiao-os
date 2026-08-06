@@ -10,21 +10,22 @@ idf_component_register(SRCS "main.c"
                             "ui/ui_apprun.c"
                             "ui/ui_appstore.c"
                             "ui/ui_main.c"
-                       PRIV_REQUIRES esp_lcd
-                                     esp_timer
-                                     esp_driver_gpio
-                                     esp_driver_spi
-                                     esp_driver_ledc
-                                     esp_driver_i2c
-                                     esp_hw_support
-                                     heap
-                                     spi_flash
-                                     lvgl
-                                     app_update
-                                     fatfs
-                                     spiffs
-                                     esp_adc
-                                     micropython
+PRIV_REQUIRES esp_lcd
+                                      esp_timer
+                                      esp_driver_gpio
+                                      esp_driver_spi
+                                      esp_driver_ledc
+                                      esp_driver_i2c
+                                      esp_hw_support
+                                      heap
+                                      spi_flash
+                                      lvgl
+                                      app_update
+                                      fatfs
+                                      spiffs
+                                      esp_adc
+                                      micropython
+                                      esp_wifi
                        INCLUDE_DIRS "ui"
                                      ".."
                                      "../components/micropython"
