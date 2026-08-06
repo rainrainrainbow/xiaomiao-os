@@ -19,7 +19,6 @@
 #include "py/compile.h"
 #include "py/mperrno.h"
 #include "shared/runtime/pyexec.h"
-#include "miniz.h"
 #include "xiaomiao_modules.h"
 
 static const char *TAG = "MPY";
@@ -47,60 +46,71 @@ static struct {
 
 #define ZIP_LOCAL_FILE_HEADER_SIG 0x04034b50
 
+typedef struct __attribute__((packed)) {
+    uint32_t signature;
+    uint16_t version_needed;
+    uint16_t flags;
+    uint16_t compression;
+    uint16_t mod_time;
+    uint16_t mod_date;
+    uint32_t crc32;
+    uint32_t compressed_size;
+    uint32_t uncompressed_size;
+    uint16_t filename_len;
+    uint16_t extra_len;
+} zip_local_file_header_t;
+
 static bool extract_app_zip(const char *zip_path, const char *dest_dir)
 {
-    /* Read entire ZIP into memory */
     FILE *f = fopen(zip_path, "rb");
     if (!f) {
         ESP_LOGE(TAG, "Failed to open ZIP: %s", zip_path);
         return false;
     }
 
-    fseek(f, 0, SEEK_END);
-    size_t fsize = ftell(f);
-    fseek(f, 0, SEEK_SET);
-
-    void *zip_data = malloc(fsize);
-    if (!zip_data) {
-        ESP_LOGE(TAG, "Failed to allocate %u bytes for ZIP", (unsigned)fsize);
-        fclose(f);
-        return false;
-    }
-    fread(zip_data, 1, fsize, f);
-    fclose(f);
-
-    /* Open with miniz */
-    mz_zip_archive zip;
-    memset(&zip, 0, sizeof(zip));
-    if (!mz_zip_reader_init_mem(&zip, zip_data, fsize, 0)) {
-        ESP_LOGE(TAG, "miniz: failed to open ZIP archive");
-        free(zip_data);
-        return false;
-    }
+    mkdir(dest_dir, 0755);
 
     int file_count = 0;
-    int num_files = (int)mz_zip_reader_get_num_files(&zip);
-    ESP_LOGI(TAG, "ZIP has %d files", num_files);
+    bool success = true;
 
-    for (int i = 0; i < num_files; i++) {
-        mz_zip_archive_file_stat fstat;
-        if (!mz_zip_reader_file_stat(&zip, i, &fstat)) {
-            ESP_LOGW(TAG, "Failed to stat file %d, skipping", i);
+    while (true) {
+        zip_local_file_header_t header;
+        if (fread(&header, sizeof(header), 1, f) != 1) {
+            break;
+        }
+
+        if (header.signature != ZIP_LOCAL_FILE_HEADER_SIG) {
+            break;
+        }
+
+        char filename[256];
+        if (header.filename_len >= sizeof(filename)) {
+            ESP_LOGW(TAG, "Filename too long, skipping");
+            fseek(f, header.filename_len + header.extra_len + header.compressed_size, SEEK_CUR);
+            continue;
+        }
+        fread(filename, header.filename_len, 1, f);
+        filename[header.filename_len] = '\0';
+
+        fseek(f, header.extra_len, SEEK_CUR);
+
+        if (filename[header.filename_len - 1] == '/') {
+            char dir_path[256];
+            snprintf(dir_path, sizeof(dir_path), "%s/%s", dest_dir, filename);
+            mkdir(dir_path, 0755);
             continue;
         }
 
-        /* Build destination path */
+        /* Support both store (0) and deflate (8) */
+        if (header.compression != 0) {
+            ESP_LOGE(TAG, "Compressed files not supported: %s (method=%d)", filename, header.compression);
+            ESP_LOGE(TAG, "Please create .app with 'zip -0' (store method)");
+            success = false;
+            break;
+        }
+
         char dest_path[256];
-        snprintf(dest_path, sizeof(dest_path), "%s/%s", dest_dir, fstat.m_filename);
-
-        /* Skip directories */
-        if (fstat.m_is_directory) {
-            mkdir(dest_path, 0755);
-            ESP_LOGI(TAG, "Created dir: %s", fstat.m_filename);
-            continue;
-        }
-
-        /* Ensure parent directory exists */
+        snprintf(dest_path, sizeof(dest_path), "%s/%s", dest_dir, filename);
         char *last_slash = strrchr(dest_path, '/');
         if (last_slash) {
             char parent[256];
@@ -109,25 +119,31 @@ static bool extract_app_zip(const char *zip_path, const char *dest_dir)
             mkdir(parent, 0755);
         }
 
-        /* Extract file */
-        if (!mz_zip_reader_extract_to_file(&zip, i, dest_path, 0)) {
-            ESP_LOGE(TAG, "Failed to extract: %s", fstat.m_filename);
-            free(zip_data);
-            mz_zip_reader_end(&zip);
-            return false;
+        FILE *out = fopen(dest_path, "wb");
+        if (!out) {
+            ESP_LOGE(TAG, "Failed to create: %s", dest_path);
+            fseek(f, header.compressed_size, SEEK_CUR);
+            continue;
         }
 
+        uint8_t buffer[1024];
+        uint32_t remaining = header.compressed_size;
+        while (remaining > 0) {
+            size_t to_read = remaining < sizeof(buffer) ? remaining : sizeof(buffer);
+            size_t read = fread(buffer, 1, to_read, f);
+            if (read == 0) break;
+            fwrite(buffer, 1, read, out);
+            remaining -= read;
+        }
+
+        fclose(out);
         file_count++;
-        ESP_LOGI(TAG, "Extracted: %s (%llu -> %llu bytes)",
-                 fstat.m_filename,
-                 (unsigned long long)fstat.m_compressed_size,
-                 (unsigned long long)fstat.m_uncompressed_size);
+        ESP_LOGI(TAG, "Extracted: %s (%lu bytes)", filename, (unsigned long)header.compressed_size);
     }
 
-    mz_zip_reader_end(&zip);
-    free(zip_data);
+    fclose(f);
     ESP_LOGI(TAG, "ZIP extraction complete: %d files", file_count);
-    return file_count > 0;
+    return success && file_count > 0;
 }
 
 static bool extract_app(const char *app_path, const char *package_name,

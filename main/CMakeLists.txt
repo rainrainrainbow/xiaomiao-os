@@ -24,6 +24,5 @@ idf_component_register(SRCS "main.c"
                                      fatfs
                                      esp_adc
                                      micropython
-                                     miniz
                        INCLUDE_DIRS "ui")
 target_link_libraries(${COMPONENT_LIB} PRIVATE m)
