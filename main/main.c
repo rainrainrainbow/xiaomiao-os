@@ -25,7 +25,7 @@
 #include "esp_system.h"
 #include "esp_timer.h"
 #include "esp_vfs_fat.h"
-#include "esp_spiffs.h"
+#include "esp_vfs_spiffs.h"
 #include "sdmmc_cmd.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

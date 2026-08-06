@@ -22,6 +22,7 @@ idf_component_register(SRCS "main.c"
                                      lvgl
                                      app_update
                                      fatfs
+                                     spiffs
                                      esp_adc
                                      micropython
                        INCLUDE_DIRS "ui")
