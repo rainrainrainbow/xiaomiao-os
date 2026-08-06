@@ -234,14 +234,14 @@ static bool init_vm_instance(app_vm_instance_t *inst, const char *app_dir)
     mp_init();
 
     /* Set sys.path */
-    mp_obj_list_init(MP_STATE_VM(mp_path), 0);
-    mp_obj_list_append(MP_STATE_VM(mp_path),
+    mp_obj_list_init(mp_sys_path, 0);
+    mp_obj_list_append(mp_sys_path,
                        mp_obj_new_str(app_dir, strlen(app_dir)));
     
     char lib_path[256];
     snprintf(lib_path, sizeof(lib_path), "%s/lib", app_dir);
     if (access(lib_path, F_OK) == 0) {
-        mp_obj_list_append(MP_STATE_VM(mp_path),
+        mp_obj_list_append(mp_sys_path,
                            mp_obj_new_str(lib_path, strlen(lib_path)));
     }
 
