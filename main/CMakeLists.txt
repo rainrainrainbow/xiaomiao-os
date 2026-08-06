@@ -71,6 +71,7 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
     -DMICROPY_PY_SYS_PATH=1
     -DMICROPY_PY_SYS_ATTR_DELEGATION=1
     -DMICROPY_HEAP_SIZE=65536
+    -DMP_QSTRnull=0
     -Wno-unused-function
     -Wno-unused-variable
     -Wno-error=format-truncation
