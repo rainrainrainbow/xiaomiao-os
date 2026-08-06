@@ -93,9 +93,15 @@ add_custom_command(OUTPUT ${GENHDR_DIR}/qstrdefs.generated.h
     VERBATIM
 )
 
-# Custom command to generate mpversion.h
+# Custom command to generate mpversion.h (mkversionheader.py may not exist in v1.22.0)
 add_custom_command(OUTPUT ${GENHDR_DIR}/mpversion.h
-    COMMAND python3 ${MKVERSION} ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated mpversion" > ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_VERSION_MAJOR (1)" >> ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_VERSION_MINOR (22)" >> ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_VERSION_MICRO (0)" >> ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_VERSION_STRING \"v1.22.0\"" >> ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_GIT_TAG \"v1.22.0\"" >> ${GENHDR_DIR}/mpversion.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_BUILD_DATE \"2024-01-01\"" >> ${GENHDR_DIR}/mpversion.h
     COMMENT "Generating mpversion.h"
     VERBATIM
 )
