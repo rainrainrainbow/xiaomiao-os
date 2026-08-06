@@ -25,5 +25,9 @@ idf_component_register(SRCS "main.c"
                                      spiffs
                                      esp_adc
                                      micropython
-                       INCLUDE_DIRS "ui" "..")
+                       INCLUDE_DIRS "ui"
+                                     "../components/micropython"
+                                     "../components/micropython/micropython"
+                                     "../components/micropython/micropython/py"
+                                     "../components/micropython/micropython/ports/esp32")
 target_link_libraries(${COMPONENT_LIB} PRIVATE m)

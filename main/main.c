@@ -361,9 +361,6 @@ static esp_err_t sd_card_init(void)
     sdspi_device_config_t slot = SDSPI_DEVICE_CONFIG_DEFAULT();
     slot.host_id = SPI2_HOST;
     slot.gpio_cs = PIN_SD_CS;
-    slot.gpio_miso = GPIO_NUM_19;
-    slot.gpio_mosi = GPIO_NUM_23;
-    slot.gpio_sck  = GPIO_NUM_18;
     esp_err_t ret = esp_vfs_fat_sdspi_mount("/sdcard", &host, &slot,
                                             &mcfg, &s_card);
     if (ret != ESP_OK) {
@@ -493,9 +490,9 @@ static lv_display_t *display_init(esp_lcd_panel_io_handle_t io)
     uint32_t stride = lv_draw_buf_width_to_stride(LCD_H_RES, cf);
     size_t sz = stride * LCD_V_RES;
 
-    void *b1 = spi_bus_dma_memory_alloc(LCD_HOST, sz, 0);
-    void *b2 = spi_bus_dma_memory_alloc(LCD_HOST, sz, 0);
-    void *b3 = spi_bus_dma_memory_alloc(LCD_HOST, sz, 0);
+    void *b1 = heap_caps_malloc(sz, MALLOC_CAP_DMA);
+    void *b2 = heap_caps_malloc(sz, MALLOC_CAP_DMA);
+    void *b3 = heap_caps_malloc(sz, MALLOC_CAP_DMA);
     assert(b1 && b2 && b3);
 
     lv_display_set_color_format(d, cf);

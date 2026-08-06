@@ -5,6 +5,8 @@
 #include "driver/adc.h"
 #include "esp_log.h"
 #include <stdbool.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 static const char *TAG = "PWR";
 

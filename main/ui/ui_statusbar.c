@@ -4,6 +4,7 @@
 #include "ui_statusbar.h"
 #include "ui_theme.h"
 #include <time.h>
+#include <stdio.h>
 
 void ui_statusbar_create(ui_statusbar_t *sb, lv_obj_t *parent)
 {
