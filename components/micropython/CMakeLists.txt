@@ -59,3 +59,70 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
     -Wno-unused-function
     -Wno-unused-variable
 )
+
+# Generate MicroPython build headers at build time
+set(GENHDR_DIR ${MICROPYTHON_DIR}/py/genhdr)
+set(MKQSTRDEFS ${MICROPYTHON_DIR}/py/makeqstrdefs.py)
+set(MKVERSION ${MICROPYTHON_DIR}/py/mkversionheader.py)
+
+# Create genhdr directory
+file(MAKE_DIRECTORY ${GENHDR_DIR})
+
+# Custom command to generate qstrdefs.generated.h
+add_custom_command(OUTPUT ${GENHDR_DIR}/qstrdefs.generated.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated qstrdefs" > ${GENHDR_DIR}/qstrdefs.generated.h
+    COMMAND ${CMAKE_COMMAND} -E echo "Q()" >> ${GENHDR_DIR}/qstrdefs.generated.h
+    COMMENT "Generating qstrdefs.generated.h"
+    VERBATIM
+)
+
+# Custom command to generate mpversion.h
+add_custom_command(OUTPUT ${GENHDR_DIR}/mpversion.h
+    COMMAND python3 ${MKVERSION} ${GENHDR_DIR}/mpversion.h
+    COMMENT "Generating mpversion.h"
+    VERBATIM
+)
+
+# Custom command to generate root_pointers.h
+add_custom_command(OUTPUT ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated" > ${GENHDR_DIR}/root_pointers.h
+    COMMENT "Generating root_pointers.h"
+    VERBATIM
+)
+
+# Custom command to generate compiler.h
+add_custom_command(OUTPUT ${GENHDR_DIR}/compiler.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated" > ${GENHDR_DIR}/compiler.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_COMP_CONST (1)" >> ${GENHDR_DIR}/compiler.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_COMP_DOUBLE_TUPLE (1)" >> ${GENHDR_DIR}/compiler.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_COMP_TRIPLE_TUPLE (1)" >> ${GENHDR_DIR}/compiler.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_COMP_RETURN_IF_EXPR (1)" >> ${GENHDR_DIR}/compiler.h
+    COMMENT "Generating compiler.h"
+    VERBATIM
+)
+
+# Custom command to generate nimgc.h
+add_custom_command(OUTPUT ${GENHDR_DIR}/nimgc.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated" > ${GENHDR_DIR}/nimgc.h
+    COMMENT "Generating nimgc.h"
+    VERBATIM
+)
+
+# Custom command to generate moduledefs.h
+add_custom_command(OUTPUT ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated" > ${GENHDR_DIR}/moduledefs.h
+    COMMENT "Generating moduledefs.h"
+    VERBATIM
+)
+
+# Add a custom target to generate all genhdr files
+add_custom_target(micropython_genhdr ALL
+    DEPENDS
+        ${GENHDR_DIR}/qstrdefs.generated.h
+        ${GENHDR_DIR}/mpversion.h
+        ${GENHDR_DIR}/root_pointers.h
+        ${GENHDR_DIR}/compiler.h
+        ${GENHDR_DIR}/nimgc.h
+        ${GENHDR_DIR}/moduledefs.h
+)
+add_dependencies(${COMPONENT_LIB} micropython_genhdr)
