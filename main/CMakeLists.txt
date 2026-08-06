@@ -5,10 +5,9 @@ set(MICROPYTHON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../components/micropython/microp
 set(MICROPY_PORT_DIR ${MICROPYTHON_DIR}/ports/esp32)
 set(MICROPY_MODULES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../components/micropython/modules)
 
-# Collect MicroPython core sources (only if fetched)
+# Collect MicroPython core sources (only py/*.c, not ports/esp32/*.c which needs MicroPython's own build env)
 file(GLOB MICROPY_CORE_SOURCES
     ${MICROPYTHON_DIR}/py/*.c
-    ${MICROPY_PORT_DIR}/*.c
 )
 
 # Collect custom module sources
