@@ -30,5 +30,6 @@ idf_component_register(SRCS "main.c"
                                      "../components/micropython"
                                      "../components/micropython/micropython"
                                      "../components/micropython/micropython/py"
-                                     "../components/micropython/micropython/ports/esp32")
+                                     "../components/micropython/micropython/ports/esp32"
+                                      "../components/micropython/micropython/ports/esp32/boards/ESP32_GENERIC")
 target_link_libraries(${COMPONENT_LIB} PRIVATE m)
