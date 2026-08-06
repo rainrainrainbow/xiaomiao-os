@@ -86,6 +86,9 @@ def main():
     # First entry: MP_QSTRnull (no underscore) is the special qstr 0
     output += 'QDEF0(MP_QSTRnull, 0, 0, "")\n'
 
+    # Second entry: MP_QSTR_ (empty string) - used in compile.c
+    output += 'QDEF0(MP_QSTR_, 0, 0, "")\n'
+
     # Sort for reproducibility
     for q in sorted(qstrs):
         decoded = decode_mp_qstr(q)
