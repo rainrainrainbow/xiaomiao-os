@@ -55,6 +55,7 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
     -DMICROPY_PY_IO=1
     -DMICROPY_PY_STRUCT=1
     -DMICROPY_PY_SYS=1
+    -DMICROPY_PY_SYS_PATH=1
     -DMICROPY_HEAP_SIZE=65536
     -Wno-unused-function
     -Wno-unused-variable
@@ -69,9 +70,9 @@ set(MKVERSION ${MICROPYTHON_DIR}/py/mkversionheader.py)
 file(MAKE_DIRECTORY ${GENHDR_DIR})
 
 # Custom command to generate qstrdefs.generated.h
+# Must contain valid Q() entries - empty qstr list is fine
 add_custom_command(OUTPUT ${GENHDR_DIR}/qstrdefs.generated.h
     COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated qstrdefs" > ${GENHDR_DIR}/qstrdefs.generated.h
-    COMMAND ${CMAKE_COMMAND} -E echo "Q()" >> ${GENHDR_DIR}/qstrdefs.generated.h
     COMMENT "Generating qstrdefs.generated.h"
     VERBATIM
 )
