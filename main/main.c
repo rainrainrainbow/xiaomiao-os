@@ -568,7 +568,7 @@ void app_main(void)
     app_manager_init();
     app_manager_scan_sdcard();
 
-    /* Initialize App Store (PoC: scan /sdcard/store/*.app) */
+    /* Initialize App Store (PoC: scan /sdcard/store/ *.app) */
     app_store_init();
     app_store_scan();
 

@@ -1,7 +1,7 @@
 /*
  * app_store.h — Application store (PoC)
  *
- * Scope: a local app-store concept that scans /sdcard/store/*.app and lets
+ * Scope: a local app-store concept that scans /sdcard/store/ *.app and lets
  * the user install any of them into /sdcard/apps/. This is a PoC; the real
  * "store" would download from a remote URL over WiFi (out of scope here).
  *

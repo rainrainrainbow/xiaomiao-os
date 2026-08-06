@@ -4,7 +4,7 @@
  * Architecture:
  *   - Single global registry s_app_registry
  *   - System apps (kind=SYSTEM) are pre-registered; cannot be uninstalled
- *   - User apps (kind=USER) are loaded by scanning /sdcard/apps/*.app and
+ *   - User apps (kind=USER) are loaded by scanning /sdcard/apps/ *.app and
  *     extracting manifest.json via miniz-free ZIP reader
  *   - Desktop ordering is persisted to /vfs/desktop.json
  *   - Settings (brightness/volume/wifi) are persisted to /vfs/settings.json

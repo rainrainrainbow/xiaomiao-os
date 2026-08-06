@@ -1,7 +1,7 @@
 /*
  * app_store.c — Application store (PoC) implementation
  *
- * Scans /sdcard/store/*.app, parses manifest.json from each, and presents
+ * Scans /sdcard/store/ *.app, parses manifest.json from each, and presents
  * them as installable items. Installation copies the .app to /sdcard/apps/
  * and registers it via app_manager.
  */

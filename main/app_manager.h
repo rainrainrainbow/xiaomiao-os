@@ -2,7 +2,7 @@
  * app_manager.h — Installed .app registry & lifecycle
  *
  * An .app file is a ZIP containing manifest.json + icon.png + main.py [+ lib/ + assets/].
- * The manager scans /sdcard/apps/*.app, parses manifest.json, and maintains
+ * The manager scans /sdcard/apps/ *.app, parses manifest.json, and maintains
  * an in-memory + Flash-persisted (desktop.json on /vfs) list of installed apps.
  *
  * The registry is a single global instance (s_app_registry) to keep the API
@@ -53,7 +53,7 @@ app_registry_t *app_manager_get_registry(void);
 
 /* Registry lifecycle */
 void app_manager_init(void);                 /* mounts registry, loads desktop.json order */
-int  app_manager_scan_sdcard(void);          /* scans /sdcard/apps/*.app, returns count found */
+int  app_manager_scan_sdcard(void);          /* scans /sdcard/apps/ *.app, returns count found */
 int  app_manager_count(void);
 const app_entry_t *app_manager_get(int index);
 const app_entry_t *app_manager_find(const char *package_name);
