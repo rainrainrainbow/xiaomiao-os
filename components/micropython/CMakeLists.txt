@@ -30,6 +30,7 @@ idf_component_register(
         ${MICROPYTHON_DIR}
         ${MICROPYTHON_DIR}/py
         ${MICROPY_PORT_DIR}
+        ${MICROPY_PORT_DIR}/boards/ESP32_GENERIC
         ${MICROPY_MODULES_DIR}
     PRIV_REQUIRES
         esp_lcd

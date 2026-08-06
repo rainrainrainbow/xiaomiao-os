@@ -5,6 +5,7 @@
 #pragma once
 #include "lvgl.h"
 #include "../app_manager.h"
+#include "ui_theme.h"
 
 typedef struct {
     lv_obj_t *root;
