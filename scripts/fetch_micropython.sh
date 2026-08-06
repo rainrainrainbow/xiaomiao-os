@@ -44,32 +44,61 @@ echo "MicroPython source downloaded successfully!"
 echo "Location: $MICROPYTHON_DIR"
 echo ""
 
-# Generate MicroPython build headers (qstrdefs.generated.h, etc.)
+# Generate MicroPython build headers (qstrdefs.generated.h, root_pointers.h, etc.)
 echo "Generating MicroPython build headers..."
 cd "$MICROPYTHON_DIR"
 mkdir -p py/genhdr
-python3 py/makeqstrdefs.py py/modules.cmake py/genhdr/qstrdefs.generated.h 2>/dev/null || \
-    python3 py/makeqstrdefs.py py/modules.cmake py/genhdr/qstrdefs.generated.h 2>&1 | tail -5
-# Fallback: create minimal headers needed for compilation
-if [ ! -f py/genhdr/qstrdefs.generated.h ]; then
-    echo "Creating minimal qstrdefs.generated.h..."
-    echo "// Auto-generated" > py/genhdr/qstrdefs.generated.h
-fi
-# Generate mpversion.h (needed by some modules)
+
+# Generate mpversion.h
 python3 py/mkversionheader.py py/genhdr/mpversion.h 2>/dev/null || true
+
+# Generate qstrdefs.generated.h (use makeqstrdefs.py or fallback)
+python3 py/makeqstrdefs.py py/modules.cmake py/genhdr/qstrdefs.generated.h 2>/dev/null || true
+
+# Generate root_pointers.h (needed by mpstate.h)
+python3 -c "
+import sys
+# Scan all .c and .h files for MP_ROOT_POINTER declarations
+# and generate root_pointers.h
+import os, re
+root_pointers = set()
+for root, dirs, files in os.walk('.'):
+    for f in files:
+        if f.endswith(('.c', '.h')):
+            path = os.path.join(root, f)
+            try:
+                with open(path, 'r') as fh:
+                    for line in fh:
+                        m = re.search(r'MP_ROOT_POINTER\s*\(\s*(\w+)', line)
+                        if m:
+                            root_pointers.add(m.group(1))
+            except:
+                pass
+with open('py/genhdr/root_pointers.h', 'w') as f:
+    for rp in sorted(root_pointers):
+        f.write(f'MP_ROOT_POINTER({rp});\\n')
+print(f'Generated root_pointers.h with {len(root_pointers)} entries')
+" 2>/dev/null || echo "// Auto-generated" > py/genhdr/root_pointers.h
+
 # Generate compiler.h
 echo "// Auto-generated compiler features" > py/genhdr/compiler.h
 echo "#define MICROPY_COMP_CONST (1)" >> py/genhdr/compiler.h
 echo "#define MICROPY_COMP_DOUBLE_TUPLE (1)" >> py/genhdr/compiler.h
 echo "#define MICROPY_COMP_TRIPLE_TUPLE (1)" >> py/genhdr/compiler.h
 echo "#define MICROPY_COMP_RETURN_IF_EXPR (1)" >> py/genhdr/compiler.h
+
 # Generate nimgc.h
 echo "// Auto-generated" > py/genhdr/nimgc.h
+
 # Generate moduledefs.h placeholder
 echo "// Auto-generated" > py/genhdr/moduledefs.h
-# Generate qstr.i.last (needed by some build systems)
+
+# Generate qstr.i.last
 touch py/genhdr/qstr.i.last
+
 echo "Done generating headers."
+echo "Headers in py/genhdr:"
+ls -la py/genhdr/
 
 echo ""
 echo "Next steps:"
