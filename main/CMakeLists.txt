@@ -85,10 +85,14 @@ set(MKVERSION ${MICROPYTHON_DIR}/py/mkversionheader.py)
 # Create genhdr directory
 file(MAKE_DIRECTORY ${GENHDR_DIR})
 
-# Custom command to generate qstrdefs.generated.h
+# Custom command to generate qstrdefs.generated.h by scanning MicroPython source
+# Use the generate_qstrdefs.py script when available, fallback to empty if not
+set(QSTRGEN_SCRIPT ${CMAKE_SOURCE_DIR}/scripts/generate_qstrdefs.py)
 add_custom_command(OUTPUT ${GENHDR_DIR}/qstrdefs.generated.h
-    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated qstrdefs" > ${GENHDR_DIR}/qstrdefs.generated.h
-    COMMENT "Generating qstrdefs.generated.h"
+    COMMAND python3 ${QSTRGEN_SCRIPT} ${MICROPYTHON_DIR}/py ${GENHDR_DIR}/qstrdefs.generated.h
+    COMMAND echo "--- qstrdefs.generated.h generated ---"
+    COMMENT "Generating qstrdefs.generated.h by scanning MicroPython source"
+    DEPENDS ${QSTRGEN_SCRIPT}
     VERBATIM
 )
 
