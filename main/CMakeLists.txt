@@ -36,6 +36,7 @@ PRIV_REQUIRES esp_lcd
                                       "../components/micropython/micropython/py/genhdr"
                                       "../components/micropython/modules/xiaomiao")
 target_compile_options(${COMPONENT_LIB} PRIVATE
+    -DMICROPY_PY_SYS=1
     -DMICROPY_PY_SYS_PATH=1
 )
 target_link_libraries(${COMPONENT_LIB} PRIVATE m)
