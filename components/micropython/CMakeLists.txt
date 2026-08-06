@@ -85,8 +85,13 @@ add_custom_command(OUTPUT ${GENHDR_DIR}/mpversion.h
 )
 
 # Custom command to generate root_pointers.h
+# Must include root pointers registered via MP_REGISTER_ROOT_POINTER in modsys.c etc.
 add_custom_command(OUTPUT ${GENHDR_DIR}/root_pointers.h
-    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated" > ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated root pointers" > ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_list_t mp_sys_argv_obj);" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_t sys_mutable[MP_SYS_MUTABLE_NUM]);" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_base_t * cur_exception);" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_t sys_exitfunc);" >> ${GENHDR_DIR}/root_pointers.h
     COMMENT "Generating root_pointers.h"
     VERBATIM
 )

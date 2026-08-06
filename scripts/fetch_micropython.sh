@@ -66,29 +66,11 @@ if [ ! -f py/genhdr/qstrdefs.generated.h ] || [ ! -s py/genhdr/qstrdefs.generate
 fi
 
 # Generate root_pointers.h (needed by mpstate.h)
-python3 -c "
-import sys
-# Scan all .c and .h files for MP_ROOT_POINTER declarations
-# and generate root_pointers.h
-import os, re
-root_pointers = set()
-for root, dirs, files in os.walk('.'):
-    for f in files:
-        if f.endswith(('.c', '.h')):
-            path = os.path.join(root, f)
-            try:
-                with open(path, 'r') as fh:
-                    for line in fh:
-                        m = re.search(r'MP_ROOT_POINTER\s*\(\s*(\w+)', line)
-                        if m:
-                            root_pointers.add(m.group(1))
-            except:
-                pass
-with open('py/genhdr/root_pointers.h', 'w') as f:
-    for rp in sorted(root_pointers):
-        f.write(f'MP_ROOT_POINTER({rp});\\n')
-print(f'Generated root_pointers.h with {len(root_pointers)} entries')
-" 2>/dev/null || echo "// Auto-generated" > py/genhdr/root_pointers.h
+echo "// Auto-generated root pointers" > py/genhdr/root_pointers.h
+echo "MP_ROOT_POINTER(mp_obj_list_t mp_sys_argv_obj);" >> py/genhdr/root_pointers.h
+echo "MP_ROOT_POINTER(mp_obj_t sys_mutable[MP_SYS_MUTABLE_NUM]);" >> py/genhdr/root_pointers.h
+echo "MP_ROOT_POINTER(mp_obj_base_t * cur_exception);" >> py/genhdr/root_pointers.h
+echo "MP_ROOT_POINTER(mp_obj_t sys_exitfunc);" >> py/genhdr/root_pointers.h
 
 # Generate compiler.h
 echo "// Auto-generated compiler features" > py/genhdr/compiler.h
