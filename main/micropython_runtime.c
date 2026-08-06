@@ -260,8 +260,7 @@ static bool run_main_py(app_vm_instance_t *inst)
 
     ESP_LOGI(TAG, "Executing %s for %s", main_path, inst->package_name);
 
-    mp_obj_t module_fun;
-    int ret = pyexec_file(main_path, &module_fun);
+    int ret = pyexec_file(main_path);
     if (ret != 0) {
         ESP_LOGE(TAG, "Failed to execute main.py (error=%d)", ret);
         return false;
