@@ -26,6 +26,7 @@ idf_component_register(SRCS "main.c"
                                      esp_adc
                                      micropython
                        INCLUDE_DIRS "ui"
+                                     ".."
                                      "../components/micropython"
                                      "../components/micropython/micropython"
                                      "../components/micropython/micropython/py"
