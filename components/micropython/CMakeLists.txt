@@ -4,7 +4,7 @@
 set(MICROPYTHON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/micropython)
 
 # Check if MicroPython source exists
-if(NOT EXISTS ${MICROPYTHON_DIR}/py/micropython.mk)
+if(NOT EXISTS ${MICROPYTHON_DIR}/py)
     message(WARNING "MicroPython source not found. Run scripts/fetch_micropython.sh first.")
     return()
 endif()
