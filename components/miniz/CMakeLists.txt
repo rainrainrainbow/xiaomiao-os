@@ -3,8 +3,9 @@
 
 set(MINIZ_FILES
     miniz.h miniz.c miniz_export.h
-    miniz_common.h miniz_tdef.h
-    miniz_tinfl.h miniz_zip.h)
+    miniz_common.h miniz_tdef.h miniz_tdef.c
+    miniz_tinfl.h miniz_tinfl.c
+    miniz_zip.h miniz_zip.c)
 
 foreach(F ${MINIZ_FILES})
     if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/${F}")
@@ -16,5 +17,10 @@ foreach(F ${MINIZ_FILES})
     endif()
 endforeach()
 
-idf_component_register(SRCS "miniz.c"
-                       INCLUDE_DIRS ".")
+idf_component_register(SRCS "miniz.c" "miniz_tdef.c" "miniz_tinfl.c" "miniz_zip.c"
+                       INCLUDE_DIRS "."
+                       PRIV_INCLUDE_DIRS ".")
+target_compile_options(${COMPONENT_LIB} PRIVATE
+    -Wno-error=implicit-function-declaration
+    -Wno-error=type-limits
+    -Wno-error=unused-function)
