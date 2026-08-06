@@ -65,12 +65,12 @@ if [ ! -f py/genhdr/qstrdefs.generated.h ] || [ ! -s py/genhdr/qstrdefs.generate
     echo "#endif" >> py/genhdr/qstrdefs.generated.h
 fi
 
-# Generate root_pointers.h (needed by mpstate.h)
+# Generate root_pointers.h (needed by mpstate.h - included inside mp_state_vm_t struct)
 echo "// Auto-generated root pointers" > py/genhdr/root_pointers.h
-echo "MP_ROOT_POINTER(mp_obj_list_t mp_sys_argv_obj);" >> py/genhdr/root_pointers.h
-echo "MP_ROOT_POINTER(mp_obj_t sys_mutable[MP_SYS_MUTABLE_NUM]);" >> py/genhdr/root_pointers.h
-echo "MP_ROOT_POINTER(mp_obj_base_t * cur_exception);" >> py/genhdr/root_pointers.h
-echo "MP_ROOT_POINTER(mp_obj_t sys_exitfunc);" >> py/genhdr/root_pointers.h
+echo "mp_obj_list_t mp_sys_argv_obj;" >> py/genhdr/root_pointers.h
+echo "mp_obj_t sys_mutable[MP_SYS_MUTABLE_NUM];" >> py/genhdr/root_pointers.h
+echo "mp_obj_base_t * cur_exception;" >> py/genhdr/root_pointers.h
+echo "mp_obj_t sys_exitfunc;" >> py/genhdr/root_pointers.h
 
 # Generate compiler.h
 echo "// Auto-generated compiler features" > py/genhdr/compiler.h

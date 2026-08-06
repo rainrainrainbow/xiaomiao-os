@@ -56,6 +56,7 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
     -DMICROPY_PY_STRUCT=1
     -DMICROPY_PY_SYS=1
     -DMICROPY_PY_SYS_PATH=1
+    -DMICROPY_PY_SYS_ATTR_DELEGATION=1
     -DMICROPY_HEAP_SIZE=65536
     -Wno-unused-function
     -Wno-unused-variable
@@ -85,13 +86,13 @@ add_custom_command(OUTPUT ${GENHDR_DIR}/mpversion.h
 )
 
 # Custom command to generate root_pointers.h
-# Must include root pointers registered via MP_REGISTER_ROOT_POINTER in modsys.c etc.
+# Must contain actual variable declarations (included inside mp_state_vm_t struct)
 add_custom_command(OUTPUT ${GENHDR_DIR}/root_pointers.h
     COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated root pointers" > ${GENHDR_DIR}/root_pointers.h
-    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_list_t mp_sys_argv_obj);" >> ${GENHDR_DIR}/root_pointers.h
-    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_t sys_mutable[MP_SYS_MUTABLE_NUM]);" >> ${GENHDR_DIR}/root_pointers.h
-    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_base_t * cur_exception);" >> ${GENHDR_DIR}/root_pointers.h
-    COMMAND ${CMAKE_COMMAND} -E echo "MP_ROOT_POINTER(mp_obj_t sys_exitfunc);" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "mp_obj_list_t mp_sys_argv_obj;" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "mp_obj_t sys_mutable[MP_SYS_MUTABLE_NUM];" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "mp_obj_base_t * cur_exception;" >> ${GENHDR_DIR}/root_pointers.h
+    COMMAND ${CMAKE_COMMAND} -E echo "mp_obj_t sys_exitfunc;" >> ${GENHDR_DIR}/root_pointers.h
     COMMENT "Generating root_pointers.h"
     VERBATIM
 )
