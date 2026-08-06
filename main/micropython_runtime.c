@@ -151,7 +151,7 @@ static bool extract_app(const char *app_path, const char *package_name,
 {
     snprintf(out_path, out_len, "/tmp/%s", package_name);
 
-    char cmd[256];
+    char cmd[512];
     snprintf(cmd, sizeof(cmd), "rm -rf %s", out_path);
     system(cmd);
 

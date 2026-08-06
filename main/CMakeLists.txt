@@ -39,5 +39,6 @@ target_compile_options(${COMPONENT_LIB} PRIVATE
     -DMICROPY_PY_SYS=1
     -DMICROPY_PY_SYS_PATH=1
     -DMICROPY_PY_SYS_ATTR_DELEGATION=1
+    -Wno-error=format-truncation
 )
 target_link_libraries(${COMPONENT_LIB} PRIVATE m)
