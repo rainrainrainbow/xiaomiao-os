@@ -54,6 +54,18 @@ python3 py/mkversionheader.py py/genhdr/mpversion.h 2>/dev/null || true
 
 # Generate qstrdefs.generated.h (use makeqstrdefs.py or fallback)
 python3 py/makeqstrdefs.py py/modules.cmake py/genhdr/qstrdefs.generated.h 2>/dev/null || true
+# Fallback: create minimal qstrdefs.generated.h if makeqstrdefs.py fails
+# (makeqstrdefs.py may fail because it needs modules.cmake which needs the port build system)
+if [ ! -f py/genhdr/qstrdefs.generated.h ] || [ ! -s py/genhdr/qstrdefs.generated.h ]; then
+    echo "Creating minimal qstrdefs.generated.h..."
+    echo "#ifndef MICROPY_INCLUDED_PY_GENHDR_QSTRDEFS_GENERATED_H" > py/genhdr/qstrdefs.generated.h
+    echo "#define MICROPY_INCLUDED_PY_GENHDR_QSTRDEFS_GENERATED_H" >> py/genhdr/qstrdefs.generated.h
+    # Core qstrs needed by MicroPython
+    echo "Q()" >> py/genhdr/qstrdefs.generated.h
+    echo "Q(/)">> py/genhdr/qstrdefs.generated.h
+    echo "Q(\\n)">> py/genhdr/qstrdefs.generated.h
+    echo "#endif" >> py/genhdr/qstrdefs.generated.h
+fi
 
 # Generate root_pointers.h (needed by mpstate.h)
 python3 -c "
