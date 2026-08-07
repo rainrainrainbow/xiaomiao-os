@@ -139,8 +139,16 @@ add_custom_command(OUTPUT ${GENHDR_DIR}/nimgc.h
 )
 
 # Custom command to generate moduledefs.h
+# MICROPY_REGISTERED_MODULES and MICROPY_REGISTERED_EXTENSIBLE_MODULES are used
+# in objmodule.c to define the built-in module arrays.
 add_custom_command(OUTPUT ${GENHDR_DIR}/moduledefs.h
-    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated" > ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Auto-generated moduledefs" > ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#ifndef MODULEDEFS_H" >> ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MODULEDEFS_H" >> ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "// Empty module list - no built-in modules registered" >> ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_REGISTERED_MODULES" >> ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#define MICROPY_REGISTERED_EXTENSIBLE_MODULES" >> ${GENHDR_DIR}/moduledefs.h
+    COMMAND ${CMAKE_COMMAND} -E echo "#endif // MODULEDEFS_H" >> ${GENHDR_DIR}/moduledefs.h
     COMMENT "Generating moduledefs.h"
     VERBATIM
 )
