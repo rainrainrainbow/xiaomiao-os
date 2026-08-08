@@ -3,21 +3,4 @@ sdkconfig
 sdkconfig.old
 managed_components/
 dependencies.lock
-
-# MicroPython source (fetched automatically by scripts/fetch_micropython.sh)
-components/micropython/micropython/
-
-# IDE and editor files
 .vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Temporary files
-/tmp/
-*.tmp
