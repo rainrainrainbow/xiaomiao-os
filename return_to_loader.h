@@ -1,21 +1,11 @@
 /*
- * return_to_loader.h — drop-in for OS firmware
+ * return_to_loader.h — drop-in for ROM firmware
  *
  * Include this header and call return_to_loader_setup() as the very
  * first line of app_main().  It points the OTA boot partition back to
  * the factory (loader) partition, so that any reset, power-cycle, or
- * esp_restart() returns to the ROM Loader instead of re-entering the OS.
- *
- * Usage:
- *   #include "return_to_loader.h"
- *
- *   void app_main(void) {
- *       return_to_loader_setup();   // ← must be first
- *       // ... normal OS init ...
- *   }
- *
- * If the running firmware is NOT on an OTA partition (e.g. it was
- * flashed directly to factory via esptool), this function is a no-op.
+ * esp_restart() returns to the ROM Loader instead of re-entering this
+ * ROM.
  */
 
 #pragma once
