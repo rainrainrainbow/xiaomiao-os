@@ -51,10 +51,10 @@
 #define LV_USE_BTN                   1
 #define LV_USE_LABEL                 1
 #define LV_USE_SLIDER                1
-#define LV_USE_ARC                   0
+#define LV_USE_ARC                   1   // spinner 需要
 #define LV_USE_SWITCH                1
 #define LV_USE_LIST                  1
-#define LV_USE_DROPDOWN              0
+#define LV_USE_DROPDOWN              1   // calendar header 需要
 #define LV_USE_TABLE                 0
 #define LV_USE_TABVIEW               0
 #define LV_USE_WIN                   0
@@ -67,6 +67,13 @@
 #define LV_USE_ROLLER                0
 #define LV_USE_TEXTAREA              1
 #define LV_USE_SPINBOX               0
+// 关闭不需要的 widget（避免连锁要求更多 widget）
+#define LV_USE_CALENDAR              0
+#define LV_USE_SPINNER               0
+#define LV_USE_LED                   0
+#define LV_USE_METER                 0
+#define LV_USE_ANIMIMG               0
+#define LV_USE_QRCODE                0
 
 // 布局
 #define LV_USE_FLEX                  1
