@@ -53,7 +53,8 @@ jobs:
       - name: Build firmware
         run: |
           source ~/esp/esp-idf/export.sh
-          cd xiaomiao-os
+          # 工程根就是 GITHUB_WORKSPACE（xiaomiao-os 目录）
+          pwd && ls
           idf.py --version
           idf.py set-target esp32
           idf.py fullclean || true
@@ -62,7 +63,6 @@ jobs:
       - name: Merge bootloader+app → single bin
         run: |
           source ~/esp/esp-idf/export.sh
-          cd xiaomiao-os
           mkdir -p dist
           idf.py merge-bin --fill-partition-size -o dist/xiaomiao-os-merged.bin || \
             idf.py merge-bin -o dist/xiaomiao-os-merged.bin
@@ -73,8 +73,8 @@ jobs:
         with:
           name: xiaomiao-os-firmware
           path: |
-            xiaomiao-os/dist/xiaomiao-os-merged.bin
-            xiaomiao-os/build/*.bin
-            xiaomiao-os/build/*.elf
+            dist/xiaomiao-os-merged.bin
+            build/*.bin
+            build/*.elf
           retention-days: 14
           if-no-files-found: error
