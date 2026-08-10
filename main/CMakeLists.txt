@@ -27,7 +27,7 @@ idf_component_register(
         "core"
         "mpy"
         "desktop"
-    REQUIRES
+    PRIV_REQUIRES
         driver
         nvs_flash
         esp_lcd
@@ -38,4 +38,9 @@ idf_component_register(
         lvgl
         esp_wifi
         # micropython  (开启 CONFIG_ENABLE_MICROPYTHON 后由 idf_component 拉取)
+)
+
+# 让 LVGL 9 使用我们的 lvgl_conf.h (160x128 极小屏配置)
+target_compile_definitions(${COMPONENT_LIB} PRIVATE
+    LV_CONF_PATH="${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
 )
