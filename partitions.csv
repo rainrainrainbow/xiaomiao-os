@@ -1,0 +1,14 @@
+# ==================== 小喵 Loader 兼容分区表 ====================
+# 必须与原厂 Loader (ota) 分区布局匹配
+#   - factory: 当前 ROM
+#   - ota_0:  内置 OS（被本项目占用，~3.25MB）
+#   - ota_1: 备用
+#   - storage: NVS / 用户数据 / SD 卡虚拟映射
+#   - loader: 返回用镜像
+
+# Name,     Type,  SubType, Offset,   Size,    Flags
+nvs,        data,  nvs,     0x9000,   0x4000,
+phy_init,   data,  phy,     0xd000,   0x1000,
+factory,    app,   factory, 0x10000,  0x1F0000,
+storage,    data,  fat,     0x200000, 0x100000,
+loader,     data,  ota,     0x300000, 0x100000,

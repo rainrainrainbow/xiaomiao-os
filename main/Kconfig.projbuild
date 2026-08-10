@@ -1,0 +1,23 @@
+# ================ Kconfig - 小喵 OS 自定义开关 ================
+
+menu "Xiaomiao OS"
+
+    config ENABLE_MICROPYTHON
+        bool "Enable MicroPython runtime for .app sandbox"
+        default n
+        help
+            When enabled, .app packages are executed by a real MicroPython
+            interpreter in a per-app globals() sandbox. Requires the
+            micropython component to be added to idf_component.yml.
+
+            When disabled, .app launches are stubbed (UI shows status only,
+            but the rest of the desktop works).
+
+    config ENABLE_MICROPYTHON_DEBUG
+        bool "Verbose MicroPython error diagnostics"
+        depends on ENABLE_MICROPYTHON
+        default n
+        help
+            Print Python tracebacks to UART (uses ~3KB Flash).
+
+endmenu

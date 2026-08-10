@@ -1,0 +1,23 @@
+# ==================== ESP-IDF Gitignore ====================
+build/
+sdkconfig
+sdkconfig.old
+dependencies.lock
+managed_components/
+*.bin
+*.elf
+*.map
+*.hex
+
+# ==================== 编辑器 / 系统 ====================
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# ==================== 工具产物 ====================
+dist/
+desktop.json
+# 例外: examples/ 下的 .app 是示例, 必须入库
+!examples/*.app

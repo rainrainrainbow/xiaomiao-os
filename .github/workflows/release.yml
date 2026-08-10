@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: xiaomiao-os-firmware
+          path: artifacts/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: 小喵 OS ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            artifacts/xiaomiao-os-merged.bin
+            artifacts/*.bin
+        body: |
+          ## 小喵 OS ${{ github.ref_name }}
+
+          **安装方式**: 把 `xiaomiao-os-merged.bin` 拷到 TF 卡 `/roms/` 目录, 重启 Loader 即可刷入.
+
+          **刷入方式**:
+          ```bash
+          # 通过 USB-UART 桥 (GD32)
+          idf.py -p /dev/ttyACM0 -b 460800 flash
+          ```
+          或直接把 `xiaomiao-os-merged.bin` 复制到 TF 卡 `ota.bin` 由 Loader 自动识别.
+
+          **核对文件**:
+          - `xiaomiao-os-merged.bin` — 合并固件（bootloader + partition + app），直接可烧录
+          - 其他 `.bin` — 分区镜像，调试用
+
+          **驱动列表** (若失败请到 GitHub Issues 反馈):
+          - 主控: ESP32-WROVER-B 4MB / 8MB PSRAM
+          - 协: GD32F350G8
+          - 屏: ST7735 160×128
+          - IMU: MPU6050 (I2C 0x68)
+          - SD: SPI2 CS=22
+          - 按键: GPIO 2/13/27/35/34/12

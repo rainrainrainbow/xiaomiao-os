@@ -1,0 +1,80 @@
+name: Build xiaomiao-os
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Cache ESP-IDF
+        uses: actions/cache@v4
+        with:
+          path: ~/esp
+          key: idf-v5.5.4-${{ runner.os }}
+          restore-keys: |
+            idf-v5.5.4-
+
+      - name: Install ESP-IDF v5.5.4
+        run: |
+          mkdir -p ~/esp
+          cd ~/esp
+          if [ ! -d "esp-idf" ]; then
+            git clone --depth 1 --branch v5.5.4 --recurse-submodules --shallow-submodules \
+              https://github.com/espressif/esp-idf.git
+            ./esp-idf/install.sh esp32
+          fi
+
+      - name: Build firmware
+        run: |
+          source ~/esp/esp-idf/export.sh
+          cd xiaomiao-os
+          idf.py --version
+          idf.py set-target esp32
+          idf.py fullclean || true
+          idf.py build
+
+      - name: Merge bootloader+app → single bin
+        run: |
+          source ~/esp/esp-idf/export.sh
+          cd xiaomiao-os
+          mkdir -p dist
+          idf.py merge-bin --fill-partition-size -o dist/xiaomiao-os-merged.bin || \
+            idf.py merge-bin -o dist/xiaomiao-os-merged.bin
+          ls -lh dist/
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: xiaomiao-os-firmware
+          path: |
+            xiaomiao-os/dist/xiaomiao-os-merged.bin
+            xiaomiao-os/build/*.bin
+            xiaomiao-os/build/*.elf
+          retention-days: 14
+          if-no-files-found: error
