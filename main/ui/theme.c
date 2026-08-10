@@ -25,7 +25,7 @@ static lv_style_t s_icon_moving;
 void style_apply_icon(lv_obj_t *obj, bool selected, bool moving)
 {
     if (!obj) return;
-    lv_style_reset(obj);
+    // LVGL 9: 清除所有自定义样式, 然后逐条添加（不再需要 style_reset）
     if (selected) {
         lv_obj_set_style_bg_color(obj, C_BROWN, 0);
     }
