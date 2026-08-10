@@ -28,15 +28,16 @@
 
 static const char *TAG = "main";
 
-// ================ LVGL flush 回调（三缓冲） ================
-static lv_disp_draw_buf_t s_draw_buf;
-static lv_color_t *s_buf1, *s_buf2;
+// ================ LVGL 9.5 flush 回调（三缓冲） ================
+// LVGL 9 API：lv_display_t + lv_display_set_flush_cb + lv_display_flush_ready
+static lv_display_t *s_disp = NULL;
+static uint8_t *s_buf1 = NULL, *s_buf2 = NULL;
 
-static void lcd_flush_cb(lv_disp_drv_t *drv, const lv_area_t *area, lv_color_t *color_p)
+static void lcd_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map)
 {
     (void)area;
-    lcd_flush((uint16_t *)color_p, LV_HOR_RES * LV_VER_RES);
-    lv_disp_flush_ready(drv);
+    lcd_flush((uint16_t *)px_map, LV_HOR_RES * LV_VER_RES);
+    lv_display_flush_ready(disp);
 }
 
 // ================ 状态栏刷新任务 ================
@@ -146,18 +147,14 @@ void app_main(void)
     // 4. LVGL 初始化
     lv_init();
 
-    // 三缓冲
-    s_buf1 = (lv_color_t *)lcd_front_buffer_take();
-    s_buf2 = (lv_color_t *)lcd_front_buffer_take();
-    lv_disp_draw_buf_init(&s_draw_buf, s_buf1, s_buf2, LV_HOR_RES * LV_VER_RES);
-
-    static lv_disp_drv_t disp_drv;
-    lv_disp_drv_init(&disp_drv);
-    disp_drv.flush_cb = lcd_flush_cb;
-    disp_drv.draw_buf = &s_draw_buf;
-    disp_drv.hor_res = LV_HOR_RES;
-    disp_drv.ver_res = LV_VER_RES;
-    lv_disp_drv_register(&disp_drv);
+    // LVGL 9 display 创建 + 三缓冲
+    s_buf1 = lcd_front_buffer_take();
+    s_buf2 = lcd_front_buffer_take();
+    s_disp = lv_display_create(LV_HOR_RES, LV_VER_RES);
+    // 缓冲大小按字节：160*128*2 = 40KB
+    lv_display_set_buffers(s_disp, s_buf1, s_buf2, LV_HOR_RES * LV_VER_RES * sizeof(uint16_t),
+                           LV_DISPLAY_RENDER_MODE_PARTIAL);
+    lv_display_set_flush_cb(s_disp, lcd_flush_cb);
 
     // 5. 主题
     theme_init();

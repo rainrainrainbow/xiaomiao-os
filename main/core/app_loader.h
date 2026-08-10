@@ -22,7 +22,7 @@
 extern "C" {
 #endif
 
-/** 启动扫描 — 把 /sdcard/roms/*.app 注册成新 App */
+/** 启动扫描 — 把 /sdcard/roms/ 下所有 .app 注册成新 App */
 int app_loader_scan_app_dir(void);
 
 /** 加载单个 .app JSON 文件到 app_info_t */
@@ -35,7 +35,7 @@ int app_loader_blocks_to_python(const char *const *blocks, int n,
 /** 从 .app 包文件里读 main.py 源码（PSRAM 分配, 调用方 free） */
 char *app_loader_read_source(const char *path);
 
-/** 扫描 /sdcard/roms/*.app 并对每个回调 */
+/** 扫描 /sdcard/roms/ 下所有 .app, 对每个回调 */
 int app_loader_scan_app_dir_with_cb(int (*cb)(const app_info_t *));
 
 #ifdef __cplusplus

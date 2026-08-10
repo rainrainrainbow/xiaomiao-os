@@ -2,6 +2,7 @@
 
 #include "lcd_st7735.h"
 #include "esp_log.h"
+#include "esp_check.h"        // 提供 ESP_RETURN_ON_ERROR
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 #include "driver/ledc.h"
