@@ -1,14 +1,9 @@
 # ================ IDF Component Manager ================
-# 自动拉取 LVGL 9.5.0 + ST7735 驱动
+# 自动拉取 LVGL 9.5.0 (主工程的 lcd_st7735 驱动是自写的)
 
 dependencies:
   lvgl/lvgl:
     version: "9.5.0"
-    override_path: ""
-  espressif/esp_lcd_st7735:
-    version: "^1.0"
-  espressif/esp_lcd_panel_io_additions:
-    version: "^1.0"
   # 注意: MicroPython 默认 STUB 模式（编译快, 桌面仍能跑）
   # 想真跑 .app 时:
   #   1. 取消下面注释
