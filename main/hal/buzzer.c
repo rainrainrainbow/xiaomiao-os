@@ -2,6 +2,7 @@
 
 #include "buzzer.h"
 #include "esp_log.h"
+#include "esp_check.h"
 #include "driver/ledc.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

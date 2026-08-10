@@ -2,6 +2,7 @@
 
 #include "led_motor.h"
 #include "esp_log.h"
+#include "esp_check.h"
 #include "driver/uart.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

@@ -2,6 +2,7 @@
 
 #include "mpu6050.h"
 #include "esp_log.h"
+#include "esp_check.h"
 #include "driver/i2c.h"
 #include "freertos/FreeRTOS.h"
 
