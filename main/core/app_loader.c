@@ -100,7 +100,7 @@ int app_loader_scan_app_dir(void)
     struct dirent *de;
     while ((de = readdir(d))) {
         if (strstr(de->d_name, ".app")) {
-            char path[256];
+            char path[512];
             snprintf(path, sizeof(path), "%s/%s", dir, de->d_name);
             ESP_LOGI(TAG, "found %s", path);
             n++;
@@ -180,7 +180,7 @@ int app_loader_scan_app_dir_with_cb(int (*cb)(const app_info_t *))
     while ((de = readdir(d))) {
         const char *dot = strrchr(de->d_name, '.');
         if (dot && strcmp(dot, ".app") == 0) {
-            char path[256];
+            char path[512];
             snprintf(path, sizeof(path), "%s/%s", dir, de->d_name);
             app_info_t info = {0};
             if (app_loader_load_file(path, &info) == 0) {

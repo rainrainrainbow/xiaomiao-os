@@ -18,10 +18,6 @@ void theme_init(void)
     (void)th;  // LVGL 9 由宏自动应用
 }
 
-static lv_style_t s_icon_def;
-static lv_style_t s_icon_sel;
-static lv_style_t s_icon_moving;
-
 void style_apply_icon(lv_obj_t *obj, bool selected, bool moving)
 {
     if (!obj) return;
@@ -36,9 +32,6 @@ void style_apply_icon(lv_obj_t *obj, bool selected, bool moving)
     lv_obj_set_style_radius(obj, 4, 0);
     lv_obj_set_style_pad_all(obj, 2, 0);
 }
-
-static lv_style_t s_li_def;
-static lv_style_t s_li_sel;
 
 void style_apply_list_item(lv_obj_t *obj, bool selected)
 {
