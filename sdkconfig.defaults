@@ -37,10 +37,11 @@ CONFIG_FATFS_LONG_FILENAMES=y
 CONFIG_FATFS_MAX_LFN=255
 CONFIG_FATFS_LFN_STACK_BUFFER=y
 
-# === LVGL（通过 IDF Component Manager 注入到 sdkconfig） ===
-# 这些会被 idf_component.yml 拉取的 lvgl 组件自动加入:
-#   CONFIG_LVGL_CONF_SKIP=n
-#   CONFIG_LVGL_CONF_INCLUDE="lvgl_conf.h"
+# === LVGL 配置 ===
+# LVGL 9.5 在 ESP-IDF 下使用 esp.cmake 第 74 行的 LV_CONF_INCLUDE_SIMPLE
+# 模式, 会在 ${LVGL_ROOT_DIR} 下查找 lv_conf.h. 由 main/CMakeLists.txt
+# 在 configure 阶段把 main/lvgl_conf.h 复制过去, 不需要 Kconfig 注入.
+# 所有 LV_FONT_MONTSERRAT_X 开关在 main/lvgl_conf.h 里 #define 1.
 
 # === GCC 警告 ===
 CONFIG_COMPILER_WARN_WRITE_STRINGS=y
@@ -49,7 +50,3 @@ CONFIG_COMPILER_WARN_WRITE_STRINGS=y
 # 默认关闭 MicroPython（编译快, 桌面仍可显示, App 走 stub）
 # 想真跑 .app 时改为 y, 必须在 idf_component.yml 也启用 micropython
 CONFIG_ENABLE_MICROPYTHON=n
-
-# === LVGL 高级配置 ===
-CONFIG_LVGL_CONF_SKIP=n
-CONFIG_LVGL_CONF_INCLUDE="lvgl_conf.h"
