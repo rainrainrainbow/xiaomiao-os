@@ -1,5 +1,24 @@
 # ================ main/CMakeLists ================
 
+# LVGL 9.5 esp.cmake 第 74 行硬编码 -DLV_CONF_INCLUDE_SIMPLE,
+# 它会让 LVGL 内部 .c 文件 #include "lv_conf.h" 时只在 esp.cmake
+# 暴露的 INCLUDE_DIRS (LVGL_ROOT_DIR、LVGL_ROOT_DIR/src、LVGL_ROOT_DIR/../)
+# 里搜索. main/ 目录不在搜索范围内, 所以我们必须把 lvgl_conf.h
+# 复制到 ${LVGL_ROOT_DIR}/lv_conf.h, 让 esp.cmake 简单模式下能找到.
+#
+# LVGL_ROOT_DIR 是 LVGL 组件顶层 CMakeLists.txt 在 ESP_PLATFORM 块
+# 之前 set 出来的全局变量, 在这里可以直接使用.
+if(DEFINED LVGL_ROOT_DIR)
+    configure_file(
+        "${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
+        "${LVGL_ROOT_DIR}/lv_conf.h"
+        COPYONLY
+    )
+    message(STATUS "[xiaomiao-os] 已把 lvgl_conf.h 复制到 ${LVGL_ROOT_DIR}/lv_conf.h")
+else()
+    message(FATAL_ERROR "[xiaomiao-os] LVGL_ROOT_DIR 未定义, LVGL 组件未正确声明")
+endif()
+
 idf_component_register(
     SRCS
         "main.c"
@@ -38,9 +57,4 @@ idf_component_register(
         lvgl
         esp_wifi
         # micropython  (开启 CONFIG_ENABLE_MICROPYTHON 后由 idf_component 拉取)
-)
-
-# 让 LVGL 9 使用我们的 lvgl_conf.h (160x128 极小屏配置)
-target_compile_definitions(${COMPONENT_LIB} PRIVATE
-    LV_CONF_PATH="${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
 )
