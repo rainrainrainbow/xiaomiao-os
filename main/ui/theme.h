@@ -14,14 +14,14 @@
 #define COLOR_GREEN   0x2DD4
 #define COLOR_GREY    0x7BEF
 
-// 应用 LVGL 颜色结构体
-const lv_color_t C_YELLOW;
-const lv_color_t C_BLACK;
-const lv_color_t C_BROWN;
-const lv_color_t C_RED;
-const lv_color_t C_CREAM;
-const lv_color_t C_GREEN;
-const lv_color_t C_GREY;
+// 应用 LVGL 颜色结构体（定义在 theme.c，避免重复定义 -fno-common）
+extern const lv_color_t C_YELLOW;
+extern const lv_color_t C_BLACK;
+extern const lv_color_t C_BROWN;
+extern const lv_color_t C_RED;
+extern const lv_color_t C_CREAM;
+extern const lv_color_t C_GREEN;
+extern const lv_color_t C_GREY;
 
 /**
  * @brief 初始化 LVGL 默认主题（小喵风格）
