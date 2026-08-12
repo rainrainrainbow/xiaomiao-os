@@ -51,9 +51,10 @@ idf_component_register(
 # 注意: component manager 拉取的组件名是 lvgl__lvgl (vendor__package).
 # 如果找不到, 回退到 managed_components/lvgl__lvgl 目录.
 #
-# 注意: configure_file 在 configure 阶段执行, 但 managed_components
-# 目录此时可能不存在. 改用 add_custom_command 在 build 阶段复制,
-# 确保 LVGL 的 .c 文件编译时 lv_conf.h 已就位.
+# 注意: add_custom_command(TARGET ${COMPONENT_LIB} PRE_BUILD ...) 只保证
+# 在 main 组件编译前执行, 但 LVGL 组件可能先于 main 编译, 导致 lv_conf.h
+# 还没复制 LVGL 就开始编译. 因此改用 file(COPY) 在 configure 阶段直接复制.
+# 日志显示 configure 阶段 managed_components 目录已存在, 所以 file(COPY) 可行.
 get_filename_component(proj_root "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
 set(lvgl_dir "${proj_root}/managed_components/lvgl__lvgl")
 if(NOT EXISTS "${lvgl_dir}")
@@ -66,11 +67,7 @@ if(NOT EXISTS "${lvgl_dir}")
         message(FATAL_ERROR "[xiaomiao-os] 无法定位 lvgl 组件目录 (${lvgl_dir} 不存在)")
     endif()
 endif()
-# 用 add_custom_command 在 build 阶段复制 (确保目标目录已存在)
-add_custom_command(TARGET ${COMPONENT_LIB} PRE_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
-        "${lvgl_dir}/lv_conf.h"
-    COMMENT "[xiaomiao-os] 复制 lvgl_conf.h -> ${lvgl_dir}/lv_conf.h"
-)
-message(STATUS "[xiaomiao-os] 注册了 lvgl_conf.h 复制到 ${lvgl_dir}/lv_conf.h")
+# 在 configure 阶段直接复制 (确保 LVGL 编译时 lv_conf.h 已就位)
+file(COPY "${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h" DESTINATION "${lvgl_dir}/")
+file(RENAME "${lvgl_dir}/lvgl_conf.h" "${lvgl_dir}/lv_conf.h")
+message(STATUS "[xiaomiao-os] 已复制 lvgl_conf.h -> ${lvgl_dir}/lv_conf.h")
