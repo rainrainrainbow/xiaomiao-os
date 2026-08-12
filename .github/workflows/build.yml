@@ -47,16 +47,19 @@ jobs:
           if [ ! -d "esp-idf" ]; then
             git clone --depth 1 --branch v5.5.4 --recurse-submodules --shallow-submodules \
               https://github.com/espressif/esp-idf.git
-            # 用 idf_tools.py 手动安装 esp32 目标工具链, 跳过 ULP (esp32ulp-elf)
-            # 下载经常在 GitHub Actions 上超时, 而我们不用 ULP 协处理器.
-            # 先装 Python 环境, 再装非 ULP 工具链.
-            python3 esp-idf/tools/idf_tools.py install-python-env --features=core
-            python3 esp-idf/tools/idf_tools.py install --targets=esp32 || true
-            # 如果上面因为 ULP 失败, 用 --skip 重试 (只装核心)
-            python3 esp-idf/tools/idf_tools.py install --targets=esp32 --skip=esp32ulp-elf || \
-              python3 esp-idf/tools/idf_tools.py install --targets=esp32 2>/dev/null || true
-            # 确保核心工具链已就位
-            ls ~/.espressif/tools/ 2>/dev/null | head
+            # GitHub Actions 上从 GitHub Releases 下载工具链偶发超时,
+            # 用重试循环确保安装成功.
+            for i in 1 2 3; do
+              echo "--- install.sh attempt $i ---"
+              if ./esp-idf/install.sh esp32; then
+                echo "install.sh succeeded on attempt $i"
+                break
+              fi
+              echo "install.sh failed, retrying in 5s..."
+              sleep 5
+            done
+            # 确保工具链已安装
+            ls ~/.espressif/tools/ 2>/dev/null
           fi
 
       - name: Build firmware
