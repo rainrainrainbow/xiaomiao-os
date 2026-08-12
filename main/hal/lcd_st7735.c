@@ -1,10 +1,12 @@
 // ================ lcd_st7735.c - ST7735 + GPIO0 背光 LEDC ================
-// 版本 v0.3
-//   - SPI 频率降至 15MHz（ST7735 最大规格）
+// 版本 v0.4
+//   - SPI 频率 40MHz（MicroPython 示例）
 //   - 背光 duty 映射用 255 而非 256（避免 8-bit 截断）
 //   - GPIO0 初始化时序（先输出低再 LEDC 接管）
 //   - 字节序转换：LVGL 小端 RGB565 → ST7735 大端 RGB565
 //   - 部分区域刷新（lcd_flush_area）
+//   - MADCTL=0x60（MX|MV, rotation 90 横屏 160x128）
+//   - RESET GPIO19 硬件复位时序
 
 #include "lcd_st7735.h"
 #include "esp_log.h"
@@ -58,7 +60,9 @@ static const uint8_t kGmaNeg[] = {
     0x03,0x1D,0x07,0x06,0x2E,0x2C,0x29,0x2D,
     0x2E,0x2E,0x37,0x3F,0x00,0x00,0x02,0x10
 };
-static const uint8_t kFrmctrl3[] = {0x01, 0x2C, 0x01, 0x2C};
+static const uint8_t kFrmctrl1[] = {0x01, 0x2C, 0x2D};
+static const uint8_t kFrmctrl2[] = {0x01, 0x2C, 0x2D};
+static const uint8_t kFrmctrl3[] = {0x01, 0x2C, 0x2D, 0x01, 0x2C, 0x2D};
 static const uint8_t kPwctr1[] = {0xA2, 0x02, 0x84};
 static const uint8_t kXset[] = {0x00, 0x00, 0x00, 0x7F};
 static const uint8_t kYset[] = {0x00, 0x00, 0x00, 0x9F};
@@ -66,9 +70,9 @@ static const uint8_t kYset[] = {0x00, 0x00, 0x00, 0x9F};
 static const lcd_cmd_t kInitSeq[] = {
     {0x01, 0, NULL},
     {0x11, 0, NULL},
-    {0xB1, 2, (const uint8_t[]){0x01, 0x2C}},
-    {0xB2, 2, (const uint8_t[]){0x01, 0x2C}},
-    {0xB3, 4, kFrmctrl3},
+    {0xB1, 3, kFrmctrl1},
+    {0xB2, 3, kFrmctrl2},
+    {0xB3, 6, kFrmctrl3},
     {0xB4, 1, (const uint8_t[]){0x07}},
     {0xC0, 3, kPwctr1},
     {0xC1, 1, (const uint8_t[]){0xC5}},
@@ -77,7 +81,7 @@ static const lcd_cmd_t kInitSeq[] = {
     {0xC4, 2, (const uint8_t[]){0x8A, 0xEE}},
     {0xC5, 1, (const uint8_t[]){0x0E}},
     {0x3A, 1, (const uint8_t[]){0x05}},        // RGB565
-    {0x36, 1, (const uint8_t[]){0xC0}},        // 横屏
+    {0x36, 1, (const uint8_t[]){0x68}},        // 横屏 rotation 90 + BGR: MX|MV|BGR (0x40|0x20|0x08)
     {0x2A, 4, kXset},
     {0x2B, 4, kYset},
     {0xE0, 16, kGmaPos},
@@ -187,7 +191,25 @@ esp_err_t lcd_init(void)
     };
     gpio_config(&dc_conf);
 
-    // 2. 分配三缓冲
+    // 2. 硬件复位（RESET=GPIO19，与 SD MISO 共享）
+    //    先拉高，再拉低 10ms，再拉高
+    if (LCD_PIN_RST >= 0) {
+        gpio_config_t rst_conf = {
+            .pin_bit_mask = (1ULL << LCD_PIN_RST),
+            .mode = GPIO_MODE_OUTPUT,
+            .pull_up_en = GPIO_PULLUP_DISABLE,
+            .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        };
+        gpio_config(&rst_conf);
+        gpio_set_level(LCD_PIN_RST, 1);
+        vTaskDelay(pdMS_TO_TICKS(10));
+        gpio_set_level(LCD_PIN_RST, 0);
+        vTaskDelay(pdMS_TO_TICKS(20));
+        gpio_set_level(LCD_PIN_RST, 1);
+        vTaskDelay(pdMS_TO_TICKS(120));
+    }
+
+    // 3. 分配三缓冲
     s_bufs.buf_a = heap_caps_malloc(LCD_PIXELS * 2, MALLOC_CAP_SPIRAM);
     s_bufs.buf_b = heap_caps_malloc(LCD_PIXELS * 2, MALLOC_CAP_SPIRAM);
     s_bufs.buf_c = heap_caps_malloc(LCD_PIXELS * 2, MALLOC_CAP_SPIRAM);
@@ -199,10 +221,10 @@ esp_err_t lcd_init(void)
     memset(s_bufs.buf_b, 0, LCD_PIXELS * 2);
     memset(s_bufs.buf_c, 0, LCD_PIXELS * 2);
 
-    // 3. ST7735 寄存器序列
+    // 4. ST7735 寄存器序列
     ESP_RETURN_ON_ERROR(lcd_apply_init_seq(), TAG, "init seq");
 
-    // 4. 背光（默认满亮度）
+    // 5. 背光（默认满亮度）
     ESP_RETURN_ON_ERROR(lcd_backlight_init(), TAG, "bl init");
     lcd_set_brightness(100);
 
@@ -218,7 +240,7 @@ void lcd_flush(uint16_t *pixel_buf, uint32_t pixel_count)
 }
 
 // 部分区域刷新：只更新 [x0..x1] x [y0..y1] 的脏区域
-//   pixel_buf 是 LVGL 传入的紧凑布局（宽=w, 高=h），从 area 左上角开始连续排列
+//   pixel_buf 是 LVGL 整屏缓冲（宽=LCD_HRES, 高=LCD_VRES），从 (0,0) 开始连续排列
 //   注意：LVGL 渲染的是小端 RGB565，ST7735 需要大端，需做字节交换
 void lcd_flush_area(uint16_t *pixel_buf, int x0, int y0, int x1, int y1)
 {
@@ -231,7 +253,6 @@ void lcd_flush_area(uint16_t *pixel_buf, int x0, int y0, int x1, int y1)
 
     int w = x1 - x0 + 1;
     int h = y1 - y0 + 1;
-    int n_pixels = w * h;
 
     // 设置窗口 (CAS=0x2A, RAS=0x2B)
     lcd_cmd(0x2A);
@@ -242,30 +263,34 @@ void lcd_flush_area(uint16_t *pixel_buf, int x0, int y0, int x1, int y1)
                                 (uint8_t)(y1 >> 8), (uint8_t)(y1 & 0xFF) }, 4);
     lcd_cmd(0x2C);
 
-    // 字节序转换：LVGL 小端 RGB565 → ST7735 大端 RGB565
+    // pixel_buf 是整屏缓冲（宽=LCD_HRES），需要按行提取脏区域像素
+    // 每行从 pixel_buf + ((y0+row) * LCD_HRES + x0) 取 w 个像素
+    // 同时做字节序转换：小端 RGB565 → 大端 RGB565
     // 使用 PSRAM 临时缓冲（避免占用内部 RAM）
     static uint16_t *s_swap_buf = NULL;
     if (!s_swap_buf) {
-        s_swap_buf = heap_caps_malloc(LCD_PIXELS * 2, MALLOC_CAP_SPIRAM);
+        s_swap_buf = heap_caps_malloc(LCD_HRES * 2, MALLOC_CAP_SPIRAM);  // 一行最多 160 像素
         if (!s_swap_buf) {
             ESP_LOGE(TAG, "swap buf alloc fail");
             return;
         }
     }
 
-    // 逐像素交换高低字节
-    for (int i = 0; i < n_pixels; i++) {
-        uint16_t c = pixel_buf[i];
-        s_swap_buf[i] = (uint16_t)((c >> 8) | (c << 8));
+    for (int row = 0; row < h; row++) {
+        uint16_t *line = pixel_buf + ((y0 + row) * LCD_HRES) + x0;
+        // 字节交换整行
+        for (int col = 0; col < w; col++) {
+            uint16_t c = line[col];
+            s_swap_buf[col] = (uint16_t)((c >> 8) | (c << 8));
+        }
+        // 一次性发送整行（大端）
+        spi_transaction_t t = {
+            .length = w * 2 * 8,
+            .tx_buffer = s_swap_buf,
+            .user = (void *)1,
+        };
+        spi_device_polling_transmit(s_spi_dev, &t);
     }
-
-    // 一次性发送全部像素（大端）
-    spi_transaction_t t = {
-        .length = n_pixels * 2 * 8,
-        .tx_buffer = s_swap_buf,
-        .user = (void *)1,
-    };
-    spi_device_polling_transmit(s_spi_dev, &t);
 }
 
 void lcd_sleep(void)
