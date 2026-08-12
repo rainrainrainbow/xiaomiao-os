@@ -10,6 +10,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 用乐鑫官方 IDF Docker 镜像 (预装 ESP-IDF 5.5.4 + 全部工具链),
+    # 避免每次从 GitHub Releases 下载工具链超时.
+    container:
+      image: espressif/idf:v5.5.4
     timeout-minutes: 30
 
     steps:
@@ -19,53 +23,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Cache ESP-IDF
-        uses: actions/cache@v4
-        with:
-          path: ~/esp
-          key: idf-v5.5.4-${{ runner.os }}
-          restore-keys: |
-            idf-v5.5.4-
-
-      - name: Install ESP-IDF v5.5.4
-        run: |
-          mkdir -p ~/esp
-          cd ~/esp
-          if [ ! -d "esp-idf" ]; then
-            git clone --depth 1 --branch v5.5.4 --recurse-submodules --shallow-submodules \
-              https://github.com/espressif/esp-idf.git
-            # GitHub Actions 上从 GitHub Releases 下载工具链偶发超时,
-            # 用重试循环确保安装成功.
-            for i in 1 2 3; do
-              echo "--- install.sh attempt $i ---"
-              if ./esp-idf/install.sh esp32; then
-                echo "install.sh succeeded on attempt $i"
-                break
-              fi
-              echo "install.sh failed, retrying in 5s..."
-              sleep 5
-            done
-            # 确保工具链已安装
-            ls ~/.espressif/tools/ 2>/dev/null
-          fi
-
       - name: Build firmware
         run: |
-          source ~/esp/esp-idf/export.sh
-          # 工程根就是 GITHUB_WORKSPACE（xiaomiao-os 目录）
+          # Docker 镜像已 export IDF 环境, 直接 build
           pwd && ls
           idf.py --version
           idf.py set-target esp32
@@ -74,7 +34,6 @@ jobs:
 
       - name: Merge bootloader+app → single bin
         run: |
-          source ~/esp/esp-idf/export.sh
           mkdir -p dist
           idf.py merge-bin --fill-partition-size -o dist/xiaomiao-os-merged.bin || \
             idf.py merge-bin -o dist/xiaomiao-os-merged.bin
