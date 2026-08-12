@@ -1,4 +1,10 @@
 // ================ lcd_st7735.c - ST7735 + GPIO0 背光 LEDC ================
+// 版本 v0.3
+//   - SPI 频率降至 15MHz（ST7735 最大规格）
+//   - 背光 duty 映射用 255 而非 256（避免 8-bit 截断）
+//   - GPIO0 初始化时序（先输出低再 LEDC 接管）
+//   - 字节序转换：LVGL 小端 RGB565 → ST7735 大端 RGB565
+//   - 部分区域刷新（lcd_flush_area）
 
 #include "lcd_st7735.h"
 #include "esp_log.h"
@@ -92,15 +98,27 @@ static esp_err_t lcd_apply_init_seq(void)
     return ESP_OK;
 }
 
-// ================ 背光（LEDC Timer1 Channel0） ================
+// ================ 背光（LEDC Timer1 Channel1） ================
 //   GPIO0 低电平点亮:
-//     亮度 = 100%   → duty 0   (常低)
-//     亮度 = 0%     → duty 256 (常高) - 灭
+//     亮度 = 100%   → duty = 0   (常低, 100% 点亮)
+//     亮度 = 0%     → duty = 255 (常高, 熄灭)
 //
-//   所以实际亮度映射为: active_duty = 256 * (100 - pct) / 100
+//   LEDC 8-bit 分辨率: duty 范围 0~255
+//   映射公式: duty = (255 * (100 - pct)) / 100
+//     注意: 用 255 不是 256, 避免溢出/截断
 //
 esp_err_t lcd_backlight_init(void)
 {
+    // 先确保 GPIO0 被 LEDC 接管前输出低电平（避免启动瞬间闪亮）
+    gpio_config_t bl_conf = {
+        .pin_bit_mask = (1ULL << LCD_PIN_BL),
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+    };
+    gpio_config(&bl_conf);
+    gpio_set_level(LCD_PIN_BL, 0);  // 先输出低（点亮）
+
     ledc_timer_config_t tcfg = {
         .duty_resolution = LEDC_TIMER_8_BIT,
         .freq_hz = 5000,
@@ -111,7 +129,7 @@ esp_err_t lcd_backlight_init(void)
 
     ledc_channel_config_t ccfg = {
         .channel    = LEDC_CHANNEL_1,   // 避开 Ch0 (蜂鸣器)
-        .duty       = 0,                 // 100% 亮度
+        .duty       = 0,                 // 初始 100% 亮度
         .gpio_num   = LCD_PIN_BL,
         .speed_mode = LEDC_LOW_SPEED_MODE,
         .timer_sel  = LEDC_TIMER_1,
@@ -127,8 +145,9 @@ void lcd_set_brightness(uint8_t pct)
 {
     if (pct > 100) pct = 100;
     s_backlight_pct = pct;
-    // 反向: 100-pct 高电平比例
-    uint32_t duty = (256UL * (100 - pct)) / 100UL;
+    // 反向映射: pct=100 → duty=0 (常低, 最亮)
+    //           pct=0   → duty=255 (常高, 熄灭)
+    uint32_t duty = (255UL * (100 - pct)) / 100UL;
     ledc_set_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_1, duty);
     ledc_update_duty(LEDC_LOW_SPEED_MODE, LEDC_CHANNEL_1);
 }
@@ -191,18 +210,59 @@ esp_err_t lcd_init(void)
     return ESP_OK;
 }
 
+// 全屏刷新（兼容旧调用）
 void lcd_flush(uint16_t *pixel_buf, uint32_t pixel_count)
 {
     if (!pixel_buf || pixel_count != LCD_PIXELS) return;
+    lcd_flush_area(pixel_buf, 0, 0, LCD_HRES - 1, LCD_VRES - 1);
+}
+
+// 部分区域刷新：只更新 [x0..x1] x [y0..y1] 的脏区域
+//   pixel_buf 是 LVGL 传入的紧凑布局（宽=w, 高=h），从 area 左上角开始连续排列
+//   注意：LVGL 渲染的是小端 RGB565，ST7735 需要大端，需做字节交换
+void lcd_flush_area(uint16_t *pixel_buf, int x0, int y0, int x1, int y1)
+{
+    if (!pixel_buf) return;
+    if (x0 < 0) x0 = 0;
+    if (y0 < 0) y0 = 0;
+    if (x1 >= LCD_HRES) x1 = LCD_HRES - 1;
+    if (y1 >= LCD_VRES) y1 = LCD_VRES - 1;
+    if (x1 < x0 || y1 < y0) return;
+
+    int w = x1 - x0 + 1;
+    int h = y1 - y0 + 1;
+    int n_pixels = w * h;
+
+    // 设置窗口 (CAS=0x2A, RAS=0x2B)
     lcd_cmd(0x2A);
-    lcd_data((const uint8_t[]){0x00, 0x00, 0x00, 0x7F}, 4);
+    lcd_data((const uint8_t[]){ (uint8_t)(x0 >> 8), (uint8_t)(x0 & 0xFF),
+                                (uint8_t)(x1 >> 8), (uint8_t)(x1 & 0xFF) }, 4);
     lcd_cmd(0x2B);
-    lcd_data((const uint8_t[]){0x00, 0x00, 0x00, 0x9F}, 4);
+    lcd_data((const uint8_t[]){ (uint8_t)(y0 >> 8), (uint8_t)(y0 & 0xFF),
+                                (uint8_t)(y1 >> 8), (uint8_t)(y1 & 0xFF) }, 4);
     lcd_cmd(0x2C);
 
+    // 字节序转换：LVGL 小端 RGB565 → ST7735 大端 RGB565
+    // 使用 PSRAM 临时缓冲（避免占用内部 RAM）
+    static uint16_t *s_swap_buf = NULL;
+    if (!s_swap_buf) {
+        s_swap_buf = heap_caps_malloc(LCD_PIXELS * 2, MALLOC_CAP_SPIRAM);
+        if (!s_swap_buf) {
+            ESP_LOGE(TAG, "swap buf alloc fail");
+            return;
+        }
+    }
+
+    // 逐像素交换高低字节
+    for (int i = 0; i < n_pixels; i++) {
+        uint16_t c = pixel_buf[i];
+        s_swap_buf[i] = (uint16_t)((c >> 8) | (c << 8));
+    }
+
+    // 一次性发送全部像素（大端）
     spi_transaction_t t = {
-        .length = LCD_PIXELS * 2 * 8,
-        .tx_buffer = pixel_buf,
+        .length = n_pixels * 2 * 8,
+        .tx_buffer = s_swap_buf,
         .user = (void *)1,
     };
     spi_device_polling_transmit(s_spi_dev, &t);

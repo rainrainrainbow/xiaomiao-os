@@ -35,8 +35,9 @@ static uint8_t *s_buf1 = NULL, *s_buf2 = NULL;
 
 static void lcd_flush_cb(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map)
 {
-    (void)area;
-    lcd_flush((uint16_t *)px_map, LV_HOR_RES * LV_VER_RES);
+    // 使用脏区域只刷新变化部分，避免全屏刷新导致的撕裂/闪烁
+    lcd_flush_area((uint16_t *)px_map,
+                   area->x1, area->y1, area->x2, area->y2);
     lv_display_flush_ready(disp);
 }
 

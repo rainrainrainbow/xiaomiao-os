@@ -1,8 +1,9 @@
 // ================ lcd_st7735.h - ST7735 160x128 SPI 驱动 + 背光控制 ================
-// 小喵掌机: SPI2 @ 60MHz, CS=5, DC=4, RST=-1
+// 小喵掌机: SPI2 @ 15MHz, CS=5, DC=4, RST=-1
 // 背光: GPIO0, **低电平点亮**, 通过 LEDC 软件控亮度（PWM 占空比 0~100）
 //
 // 修正（v0.2）：背光由硬接 VCC 改为 GPIO0 控, 可实现设置里的"屏幕亮度"真实生效
+// 修正（v0.3）：SPI 频率从 60MHz 降至 15MHz（ST7735 最大规格），修复字节序（小端→大端）
 
 #ifndef __LCD_ST7735_H__
 #define __LCD_ST7735_H__
@@ -25,7 +26,7 @@ extern "C" {
 // 背光 GPIO（低电平点亮）
 #define LCD_PIN_BL    0
 
-#define LCD_SPI_FREQ_HZ  (60 * 1000 * 1000)
+#define LCD_SPI_FREQ_HZ  (15 * 1000 * 1000)   // ST7735 最大 15MHz
 
 #define LCD_HRES  160
 #define LCD_VRES  128
@@ -49,6 +50,7 @@ typedef struct {
 
 esp_err_t lcd_init(void);
 void       lcd_flush(uint16_t *pixel_buf, uint32_t pixel_count);
+void       lcd_flush_area(uint16_t *pixel_buf, int x0, int y0, int x1, int y1);
 
 // ================ 背光控制 (LEDC 占空比) ================
 //
