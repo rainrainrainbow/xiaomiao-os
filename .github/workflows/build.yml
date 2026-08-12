@@ -25,7 +25,8 @@ jobs:
 
       - name: Build firmware
         run: |
-          # Docker 镜像已 export IDF 环境, 直接 build
+          # Docker 镜像中 IDF 安装在 /opt/esp/idf, 需要先 source export.sh
+          . /opt/esp/idf/export.sh
           pwd && ls
           idf.py --version
           idf.py set-target esp32
@@ -34,6 +35,7 @@ jobs:
 
       - name: Merge bootloader+app → single bin
         run: |
+          . /opt/esp/idf/export.sh
           mkdir -p dist
           idf.py merge-bin --fill-partition-size -o dist/xiaomiao-os-merged.bin || \
             idf.py merge-bin -o dist/xiaomiao-os-merged.bin
