@@ -4,8 +4,8 @@
 //
 //  详见: https://docs.lvgl.io/9.5/CHANGELOG.html
 
-#ifndef LVGL_CONF_H
-#define LVGL_CONF_H
+#ifndef LV_CONF_H
+#define LV_CONF_H
 
 // 颜色深度（与 ST7735 RGB565 一致）
 #define LV_COLOR_DEPTH 16
@@ -99,4 +99,4 @@
 // 字节序
 #define LV_USE_BIG_ENDIAN            0
 
-#endif // LVGL_CONF_H
+#endif // LV_CONF_H
