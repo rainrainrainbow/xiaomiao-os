@@ -36,10 +36,13 @@ jobs:
       - name: Merge bootloader+app → single bin
         run: |
           . /opt/esp/idf/export.sh
-          mkdir -p dist
-          idf.py merge-bin --fill-partition-size -o dist/xiaomiao-os-merged.bin || \
+          # merge-bin 在 build/ 目录下执行, 输出路径相对于 build/
+          mkdir -p build/dist
+          idf.py merge-bin --fill-flash-size -o dist/xiaomiao-os-merged.bin || \
             idf.py merge-bin -o dist/xiaomiao-os-merged.bin
-          ls -lh dist/
+          # 复制到项目根目录方便上传
+          cp build/dist/xiaomiao-os-merged.bin dist/ 2>/dev/null || true
+          ls -lh dist/ 2>/dev/null || ls -lh build/dist/
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
