@@ -40,7 +40,8 @@ jobs:
           mkdir -p build/dist
           idf.py merge-bin --fill-flash-size -o dist/xiaomiao-os-merged.bin || \
             idf.py merge-bin -o dist/xiaomiao-os-merged.bin
-          # 复制到项目根目录方便上传
+          # 复制到项目根目录方便上传 (先确保 dist/ 存在)
+          mkdir -p dist
           cp build/dist/xiaomiao-os-merged.bin dist/ 2>/dev/null || true
           ls -lh dist/ 2>/dev/null || ls -lh build/dist/
 
