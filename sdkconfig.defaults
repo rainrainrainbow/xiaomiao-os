@@ -40,13 +40,16 @@ CONFIG_FATFS_LFN_STACK_BUFFER=y
 # === LVGL 配置 ===
 # LVGL 9.5 在 ESP-IDF 下使用 esp.cmake 第 74 行的 LV_CONF_INCLUDE_SIMPLE
 # 模式, 会在 ${LVGL_ROOT_DIR} 下查找 lv_conf.h. 由 main/CMakeLists.txt
-# 在 configure 阶段把 main/lvgl_conf.h 复制过去.
+# 在 build 阶段把 main/lvgl_conf.h 复制过去.
 # 所有 LV_FONT_MONTSERRAT_X 开关在 main/lvgl_conf.h 里 #define 1.
 #
 # 关键: 必须设置 CONFIG_LV_CONF_SKIP=n, 否则 lv_conf_internal.h
 # 会跳过 #include "lv_conf.h", 导致 lvgl_conf.h 里的字体/控件开关
 # 全部无效, 所有 LV_FONT_MONTSERRAT_X 默认为 0.
 CONFIG_LV_CONF_SKIP=n
+# 禁用 LVGL examples 编译 (esp.cmake 第 12 行检查 CONFIG_LV_BUILD_EXAMPLES)
+# 我们不需要 examples, 且它们会引用未启用的控件导致编译失败
+CONFIG_LV_BUILD_EXAMPLES=n
 
 # === GCC 警告 ===
 CONFIG_COMPILER_WARN_WRITE_STRINGS=y
