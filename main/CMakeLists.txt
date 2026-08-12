@@ -63,6 +63,8 @@ if(NOT lvgl_dir)
         message(FATAL_ERROR "[xiaomiao-os] 无法定位 lvgl 组件目录 (尝试了 lvgl__lvgl, lvgl, 和 ${lvgl_dir})")
     endif()
 endif()
-file(COPY "${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
-     DESTINATION "${lvgl_dir}")
-message(STATUS "[xiaomiao-os] 已把 lvgl_conf.h 复制到 ${lvgl_dir}/lv_conf.h")
+# 用 configure_file 复制并重命名为 lv_conf.h (LVGL 期望的文件名)
+configure_file("${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
+               "${lvgl_dir}/lv_conf.h"
+               COPYONLY)
+message(STATUS "[xiaomiao-os] 已把 lvgl_conf.h 复制为 ${lvgl_dir}/lv_conf.h")
