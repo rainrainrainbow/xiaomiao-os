@@ -48,11 +48,21 @@ idf_component_register(
 #
 # 在 idf_component_register 之后, IDF 已解析完所有依赖, 可以用
 # idf_component_get_property 拿到 lvgl 组件的实际目录.
-idf_component_get_property(lvgl_dir lvgl COMPONENT_DIR)
-if(lvgl_dir)
-    file(COPY "${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
-         DESTINATION "${lvgl_dir}")
-    message(STATUS "[xiaomiao-os] 已把 lvgl_conf.h 复制到 ${lvgl_dir}/lv_conf.h")
-else()
-    message(FATAL_ERROR "[xiaomiao-os] 无法获取 lvgl 组件目录")
+# 注意: component manager 拉取的组件名是 lvgl__lvgl (vendor__package).
+# 如果找不到, 回退到 managed_components/lvgl__lvgl 目录.
+idf_component_get_property(lvgl_dir lvgl__lvgl COMPONENT_DIR)
+if(NOT lvgl_dir)
+    # 尝试用短名 (IDF 5.5 可能用别名解析)
+    idf_component_get_property(lvgl_dir lvgl COMPONENT_DIR)
 endif()
+if(NOT lvgl_dir)
+    # 最后回退: 在项目根目录下找 managed_components/lvgl__lvgl
+    get_filename_component(proj_root "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+    set(lvgl_dir "${proj_root}/managed_components/lvgl__lvgl")
+    if(NOT EXISTS "${lvgl_dir}")
+        message(FATAL_ERROR "[xiaomiao-os] 无法定位 lvgl 组件目录 (尝试了 lvgl__lvgl, lvgl, 和 ${lvgl_dir})")
+    endif()
+endif()
+file(COPY "${CMAKE_CURRENT_LIST_DIR}/lvgl_conf.h"
+     DESTINATION "${lvgl_dir}")
+message(STATUS "[xiaomiao-os] 已把 lvgl_conf.h 复制到 ${lvgl_dir}/lv_conf.h")
